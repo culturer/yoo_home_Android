@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.armour8.yooplus.yooplus">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 允许程序打开网络套接字 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 允许程序设置内置sd卡的写权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 允许程序获取网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:name="com.culturer.yoo_home.base.BaseApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name="com.culturer.yoo_home.function.login.login.LoginActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/FullScreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.culturer.yoo_home.test.TestActivity"></activity>
+        <activity android:name="com.culturer.yoo_home.function.login.guide.GuideActivity" />
+        <activity android:name="com.culturer.yoo_home.function.login.welcome.WelcomeActivity" />
+        <activity
+            android:name="com.culturer.yoo_home.function.main.MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name="com.culturer.yoo_home.function.login.register.RegisterActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/FullScreenTheme" />
+        <activity android:name="com.culturer.yoo_home.function.home.home_album.HomeAlbumActivity" />
+        <activity android:name="com.culturer.yoo_home.function.home.home_arrangement.HomeArrangementActivity" />
+        <activity android:name="com.culturer.yoo_home.function.home.home_activity.HomeActiviesActivity" />
+        <activity android:name="com.culturer.yoo_home.function.home.family_activity.FamilyActivityActivity" />
+        <activity android:name="com.culturer.yoo_home.function.home.home_activity.HomeActivitesAddActivity" />
+        <activity android:name="com.culturer.yoo_home.function.home.home_album_detail.HomeAlbumDetailActivity" />
+        <activity android:name="com.culturer.yoo_home.function.chat.ChatActivity" />
+        <!-- Mqtt Service -->
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
+        <service android:name="com.culturer.yoo_home.service.MQTT.MQTTService" />
+
+        <activity android:name="com.culturer.yoo_home.function.login.forget.ForgetActivity" />
+        <activity
+            android:name="com.culturer.yoo_home.function.login.load.LoadActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/FullScreenTheme"
+            tools:targetApi="n" />
+        <activity android:name="com.culturer.yoo_home.test.Test2Activity" />
+        <activity android:name="com.culturer.yoo_home.test.Test3Activity" />
+        <activity android:name="com.culturer.yoo_home.test.Test4Activity" />
+        <activity android:name="com.culturer.yoo_home.function.world.recommend.DetailActivity" />
+        <activity android:name="com.culturer.yoo_home.function.mine.MineActivity" />
+        <activity android:name="com.culturer.yoo_home.function.world.shows.show.ShowActivity" >
+
+        </activity>
+        <activity android:name="com.culturer.yoo_home.function.mine.UserActivity"></activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/homealbum_alert_add_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="30dp"
+    android:textSize="15sp"
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/homearrangement_alert_name"
+        android:padding="@dimen/divider"
+        android:background="@drawable/circle_shape"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:gravity="center"
+        android:hint="输入日程"
+        android:maxLines="1"
+        android:textColorHint="@color/grey"
+        android:textSize="@dimen/content_textSize" />
+
+    <TextView
+        android:layout_marginTop="@dimen/text_margin"
+        android:id="@+id/homearrangement_alert_time"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

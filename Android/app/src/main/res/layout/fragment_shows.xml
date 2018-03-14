@@ -1,0 +1,18 @@
+<com.scwang.smartrefresh.layout.SmartRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.culturer.yoo_home.function.world.shows.ShowsFragment">
+    <com.scwang.smartrefresh.layout.header.FalsifyHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <!-- TODO: Update blank fragment layout -->
+    <ListView
+        android:id="@+id/list_shows"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <com.scwang.smartrefresh.layout.footer.FalsifyFooter
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

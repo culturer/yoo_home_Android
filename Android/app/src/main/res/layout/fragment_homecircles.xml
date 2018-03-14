@@ -1,0 +1,96 @@
+<com.scwang.smartrefresh.layout.SmartRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.culturer.yoo_home.function.home.home_circle.HomeCirclesFragment">
+
+    <com.scwang.smartrefresh.layout.header.FalsifyHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/grey"/>
+        <TextView
+            android:text="亲友圈"
+            android:id="@+id/circle"
+            android:drawableLeft="@mipmap/ic_launcher_round"
+            android:gravity="center_vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:drawablePadding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/grey"/>
+        <TextView
+            android:text="斗地主"
+            android:drawableLeft="@mipmap/ic_launcher_round"
+            android:gravity="center_vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:drawablePadding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/grey"/>
+        <TextView
+            android:text="麻将"
+            android:drawableLeft="@mipmap/ic_launcher_round"
+            android:gravity="center_vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:drawablePadding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/grey"/>
+        <TextView
+            android:text="象棋"
+            android:drawableLeft="@mipmap/ic_launcher_round"
+            android:gravity="center_vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:drawablePadding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/grey"/>
+        <TextView
+            android:text="添加小游戏"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/grey"/>
+    </LinearLayout>
+
+    <com.scwang.smartrefresh.layout.footer.FalsifyFooter
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>
