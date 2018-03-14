@@ -1,0 +1,77 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
+
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion '27.0.2'
+    defaultConfig {
+        applicationId "com.culturer.yoo_home"
+        minSdkVersion 24
+        //noinspection GradleCompatible
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+        // ... and any other excludes go here
+    }
+
+//    导入MVVM框架,DataBinding
+    dataBinding {
+        enabled = false
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    //noinspection GradleCompatible
+    compile 'com.android.support:appcompat-v7:27.0.2'
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    //noinspection GradleCompatible
+    compile 'com.android.support:design:27.0.2'
+    //noinspection GradleCompatible
+    compile 'com.android.support:support-v4:27.0.2'
+    //noinspection GradleCompatible
+    compile 'com.android.support:recyclerview-v7:27.0.2'
+
+    //添加Gson依赖
+    compile 'com.google.code.gson:gson:2.8.2'
+    //添加greenDao依赖
+    compile 'org.greenrobot:greendao:3.2.2'
+    // add library
+    compile 'net.zetetic:android-database-sqlcipher:3.5.7'
+    //添加Mqtt依赖
+    compile 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.1'
+    compile 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
+    //引入EventBus
+    compile 'org.greenrobot:eventbus:3.1.0-RC'
+    //导入glide
+    compile 'com.github.bumptech.glide:glide:4.2.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
+    compile "com.github.bumptech.glide:okhttp3-integration:4.2.0"
+    //添加相册插件
+    compile 'com.yanzhenjie:album:2.0.1'
+    //下拉刷新插件
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7'//没有使用特殊Header，可以不加这行
+    //列表页面
+    implementation files('libs/SQLiteStudioRemote.jar')
+    compile project(path: ':shimmer')
+    compile project(path: ':rxvolley')
+    compile project(path: ':okhttp3')
+    compile project(path: ':floatwindow')
+    compile project(path: ':okhttp')
+}

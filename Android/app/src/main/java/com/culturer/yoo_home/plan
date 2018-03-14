@@ -1,0 +1,13 @@
+2018.01.10 notify
+don't forget to update bean file and entity file . because these datas have been modified if don't update these these file it is possiable to cause some data disable.
+
+2018.01.16 problem
+find a problem that how to make the message sent by mqtt be same to the message sent by http ?
+whether there are those problem the msg have been sent successful but it have'nt been sent by http or occur a problem when sent it ?
+how to promiss it ?
+
+2018.01.16 plan
+now there are those task need to do .
+a. the label on the screen corner need to be made more beautiful
+b. the chat view have mange task todo . such as texting notify , the message sent successful or fail flag and so on .
+ 

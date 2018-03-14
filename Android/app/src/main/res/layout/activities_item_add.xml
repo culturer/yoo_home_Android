@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/homealbum_alert_add_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="30dp"
+    android:textSize="15sp"
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/homealbum_alert_albumname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="活动项内容"
+        android:maxLines="1"
+        android:gravity="center"
+        android:textColorHint="@color/grey"
+        android:textSize="@dimen/content_textSize" />
+
+    <TextView
+        android:text="2018.03.13 13:36"
+        android:layout_marginTop="@dimen/text_margin"
+        android:id="@+id/homealbum_alert_time"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

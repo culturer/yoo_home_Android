@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/homealbum_alert_add_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="30dp"
+    android:textSize="15sp"
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/homealbum_alert_albumname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入相册名称"
+        android:maxLines="1"
+        android:gravity="center"
+        android:textColorHint="@color/grey"
+        android:textSize="@dimen/content_textSize" />
+
+    <RadioGroup
+        android:layout_marginTop="@dimen/text_margin"
+        android:id="@+id/homealbum_alert_type"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RadioButton
+            android:id="@+id/homealbum_alert_type_persional"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_weight="1"
+            android:text="个人相册" />
+
+        <RadioButton
+            android:id="@+id/homealbum_alert_type_family"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="家庭相册" />
+
+
+    </RadioGroup>
+
+    <TextView
+        android:layout_marginTop="@dimen/text_margin"
+        android:id="@+id/homealbum_alert_time"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

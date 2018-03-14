@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/container"
+    android:background="@color/white"
+    tools:context="com.culturer.yoo_home.function.chat.ChatActivity">
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/chat_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <com.scwang.smartrefresh.header.PhoenixHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/chat_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <com.scwang.smartrefresh.layout.footer.FalsifyFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/blue"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <EditText
+                android:id="@+id/chat_edit"
+                android:hint="出来聊天啦~"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:id="@+id/chat_bottom_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end|center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/chat_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_photo_camera_black_24dp" />
+
+                <ImageButton
+                    android:id="@+id/chat_file"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_folder_black_24dp" />
+
+                <ImageButton
+                    android:id="@+id/chat_emoji"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_home_mine_24dp" />
+
+                <ImageButton
+                    android:id="@+id/chat_tel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_call_black_24dp" />
+
+                <TextView
+                    android:id="@+id/chat_send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:background="@drawable/circle_shape"
+                    android:text="发送"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <ImageButton
+            android:visibility="gone"
+            android:id="@+id/chat_audio"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_mic_black_24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

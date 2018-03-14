@@ -1,0 +1,206 @@
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/refreshLayout"
+    android:orientation="vertical"
+    tools:context="com.culturer.yoo_home.function.home.home_main.HomeMainFragment">
+    <!--android:background="@mipmap/home_main_1_bg"-->
+
+    <!--srlAccentColor srlPrimaryColor 将会改变 Header 和 Footer 的主题颜色-->
+    <!--srlEnablePreviewInEditMode 可以开启和关闭预览功能-->
+    <!--<com.scwang.smartrefresh.header.FunGameHitBlockHeader-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"/>-->
+    <!--<android.support.constraint.ConstraintLayout-->
+        <!--android:id="@+id/home_main"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+        <!--中间圆形菜单-->
+        <com.culturer.yoo_home.widget.circleMenu.CircleMenu
+            android:id="@+id/homemain_circleview"
+            android:layout_width="480dp"
+            android:layout_height="480dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:background="@drawable/circle_bg3"
+            app:layout_constraintTop_toBottomOf="@+id/top_ll"
+            app:layout_constraintBottom_toTopOf="@+id/btm_ll"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+        <ImageView
+            android:id="@+id/homemain_center_btn"
+            android:src="@mipmap/ic_launcher_round"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintTop_toBottomOf="@+id/homemain_circleview"
+            app:layout_constraintBottom_toTopOf="@+id/homemain_circleview"
+            app:layout_constraintLeft_toLeftOf="@+id/homemain_circleview"
+            app:layout_constraintRight_toRightOf="@+id/homemain_circleview"/>
+        <!--顶部标签-->
+        <RelativeLayout
+                    android:id="@+id/top_ll"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent">
+                    <TextView
+                        android:text="晚上去楼下的小饭店吃晚饭"
+                        android:id="@+id/homemain_notify"
+                        android:layout_margin="10dp"
+                        android:padding="5dp"
+                        android:maxEms="10"
+                        android:maxLines="2"
+                        android:textSize="@dimen/content_textSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:text="周六去爬山"
+                        android:id="@+id/homemain_activity"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxEms="10"
+                        android:maxLines="2"
+                        android:layout_margin="10dp"
+                        android:padding="5dp"
+                        android:textSize="@dimen/content_textSize" />
+        </RelativeLayout>
+
+        <!--底部标签-->
+        <RelativeLayout
+                    android:id="@+id/btm_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/bottom_menu">
+                    <TextView
+                        android:layout_alignParentStart="true"
+                        android:id="@+id/homemain_familyactivity"
+                        android:text="大表哥结婚了"
+                        android:layout_margin="10dp"
+                        android:padding="5dp"
+                        android:maxEms="10"
+                        android:maxLines="2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/content_textSize" />
+                    <TextView
+                        android:text="下班记得打卡"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/homemain_arrangement"
+                        android:layout_margin="10dp"
+                        android:padding="5dp"
+                        android:maxEms="10"
+                        android:maxLines="2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/content_textSize" />
+                </RelativeLayout>
+        <!--底部菜单-->
+        <LinearLayout
+            android:id="@+id/bottom_menu"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/homamain_album_icon"
+                    android:src="@drawable/ic_home_album"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="家庭相册"
+                    android:textSize="@dimen/content_little_textSize"
+                    android:textColor="@color/black"
+                    android:id="@+id/homamain_album_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/pading" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/homamain_arrange_icon"
+                    android:src="@drawable/ic_arrangement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="日程安排"
+                    android:textSize="@dimen/content_little_textSize"
+                    android:textColor="@color/black"
+                    android:id="@+id/homamain_arrange_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/pading" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/homamain_activity_icon"
+                    android:src="@drawable/ic_home_activity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="家庭活动"
+                    android:textSize="@dimen/content_little_textSize"
+                    android:textColor="@color/black"
+                    android:id="@+id/homamain_activity_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/pading" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/homamain_familyactivity_icon"
+                    android:src="@drawable/ic_family_activity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="家族活动"
+                    android:textSize="@dimen/content_little_textSize"
+                    android:textColor="@color/black"
+                    android:id="@+id/homamain_familyactivity_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/pading" />
+            </LinearLayout>
+        </LinearLayout>
+    <!--</android.support.constraint.ConstraintLayout>-->
+    <!--<com.scwang.smartrefresh.layout.footer.FalsifyFooter-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"/>-->
+</android.support.constraint.ConstraintLayout>

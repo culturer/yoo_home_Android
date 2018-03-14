@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="@dimen/pading"
+    android:layout_marginHorizontal="@dimen/margin"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/homealbum_item_icon"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/point" />
+        <View
+            android:background="@color/black"
+            android:layout_width="2px"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/homealbum_item_title"
+                android:text="出发"
+                android:textSize="@dimen/content_textSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/text_margin"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <TextView
+                android:id="@+id/homealbum_item_time"
+                android:text="2017.11.27 19:13"
+                android:textSize="@dimen/content_little_textSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic" />
+        </LinearLayout>
+        <TextView
+            android:paddingTop="@dimen/pading"
+            android:text="乘坐大巴抵达目的地点,天气有点凉记得多带衣物，以及准备好户外用品"
+            android:textSize="@dimen/content_textSize"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

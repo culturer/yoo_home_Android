@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/show_one_page"
+        android:icon="@drawable/ic_page_one_black_24dp"
+        android:title="@string/show_one_page" />
+
+    <item
+        android:id="@+id/show_two_page"
+        android:icon="@drawable/ic_page_two_black_24dp"
+        android:title="@string/show_two_page" />
+
+    <item
+        android:id="@+id/show_three_page"
+        android:icon="@drawable/ic_page_three_black_24dp"
+        android:title="@string/show_three_page" />
+</menu>
