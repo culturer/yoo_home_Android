@@ -70,7 +70,6 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
 
     private AlertDialog dialog;
 
-
     //用来加载页面的布局
     private View contentView;
 
@@ -151,6 +150,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
 
     //初始化四个角的标签的数据
     private void initTabData(){
+
         //初始化home_activity标签
         if (CacheData.homeActivities !=null && CacheData.homeActivities.size()>0 ){
             homeActivity = CacheData.homeActivities.get(CacheData.homeActivities.size()-1);
@@ -252,6 +252,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
 
     //四个角标签的弹窗显示
     private void showDialog(int popType){
+
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         //日程安排弹框
         if (popType == HomeMainConfig.HOMEMAIN_POP_ARRANGEMENT){

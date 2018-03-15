@@ -12,6 +12,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -59,16 +60,17 @@ dependencies {
     //引入EventBus
     compile 'org.greenrobot:eventbus:3.1.0-RC'
     //导入glide
-    compile 'com.github.bumptech.glide:glide:4.2.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
-    compile "com.github.bumptech.glide:okhttp3-integration:4.2.0"
+    compile 'com.github.bumptech.glide:glide:4.6.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    compile "com.github.bumptech.glide:okhttp3-integration:4.6.1"
     //添加相册插件
     compile 'com.yanzhenjie:album:2.0.1'
     //下拉刷新插件
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7'//没有使用特殊Header，可以不加这行
-    //列表页面
+
     implementation files('libs/SQLiteStudioRemote.jar')
+
     compile project(path: ':shimmer')
     compile project(path: ':rxvolley')
     compile project(path: ':okhttp3')
