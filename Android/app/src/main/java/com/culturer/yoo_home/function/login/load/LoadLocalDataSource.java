@@ -62,12 +62,12 @@ public class LoadLocalDataSource extends BaseLocalDataSource {
     }
 
     public void saveActivityItem(ActivityItem activityItem){
-        TActivityItem tActivityItem = activityItem.str2TActivityItem();
-        Log.i(TAG, "saveActivityItem: "+tActivityItem.toString());
-        synchronized (lock){
-            DaoSession daoSession = DatabaseUtil.getDaoSession();
-            daoSession.insertOrReplace(tActivityItem);
-        }
+//        TActivityItem tActivityItem = activityItem.str2TActivityItem();
+//        Log.i(TAG, "saveActivityItem: "+tActivityItem.toString());
+//        synchronized (lock){
+//            DaoSession daoSession = DatabaseUtil.getDaoSession();
+//            daoSession.insertOrReplace(tActivityItem);
+//        }
     }
 
     public void saveArrangement(Arrangement arrangement){

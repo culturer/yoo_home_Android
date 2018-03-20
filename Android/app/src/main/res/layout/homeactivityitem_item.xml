@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/pading"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:padding="@dimen/pading">
+
+        <TextView
+            android:id="@+id/home_activityitem_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:maxLines="3"
+            android:text="出发" />
+        <TextView
+            android:id="@+id/home_activityitem_time"
+            android:text="早上8:00"
+            android:textSize="@dimen/content_little_textSize"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/home_activityitem_desc"
+        android:text="乘坐地铁1号线后步行到xx电影院"
+        android:gravity="center_horizontal"
+        android:maxLines="3"
+        android:padding="@dimen/pading"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

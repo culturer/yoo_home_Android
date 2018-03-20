@@ -133,7 +133,7 @@ public class HomeActiviesActivity extends AppCompatActivity {
     private void initDetailData(){
         List<ActivityItem> activityItems = new ArrayList<>();
         for (int i=0;i<10;i++){
-            activityItems.add(new ActivityItem(-1l,-2l,-1l));
+            activityItems.add(new ActivityItem());
         }
         detailAdapter = new HomeActivitiesDetailAdapter(activityItems,this);
     }

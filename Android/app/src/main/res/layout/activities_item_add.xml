@@ -10,21 +10,33 @@
     android:padding="10dp">
 
     <EditText
-        android:id="@+id/homealbum_alert_albumname"
+        android:id="@+id/homeacty_alert_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="活动项内容"
+        android:hint="活动项标题"
+        android:text="出发"
         android:maxLines="1"
         android:gravity="center"
         android:textColorHint="@color/grey"
         android:textSize="@dimen/content_textSize" />
-
-    <TextView
-        android:text="2018.03.13 13:36"
-        android:layout_marginTop="@dimen/text_margin"
-        android:id="@+id/homealbum_alert_time"
-        android:gravity="center_horizontal"
+    <EditText
+        android:id="@+id/homeacty_alert_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:hint="活动项内容"
+        android:text="乘坐地铁1号线前往深大站后步行前往xx电影院"
+        android:maxLines="1"
+        android:gravity="center"
+        android:textColorHint="@color/grey"
+        android:textSize="@dimen/content_textSize" />
+    <EditText
+        android:id="@+id/homeacty_alert_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="早上8:00"
+        android:maxLines="1"
+        android:gravity="center"
+        android:textColorHint="@color/grey"
+        android:textSize="@dimen/content_textSize" />
 
 </LinearLayout>

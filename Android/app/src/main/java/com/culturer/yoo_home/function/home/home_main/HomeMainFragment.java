@@ -311,7 +311,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             homemain_activity_poptitle.setText(homeActivity.getDesc());
             //此处设置activityItem
             for (int i=0;i<10;i++){
-                activityItems.add(new ActivityItem(-1l,-1l,-1l));
+                activityItems.add(new ActivityItem());
             }
             HomeActivitiesDetailAdapter home_adapter = new HomeActivitiesDetailAdapter(activityItems,getContext());
             homeactivity_detail_list.setAdapter(home_adapter);
@@ -325,6 +325,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
                     dialog.dismiss();
                 }
             });
+
         }
 
         //家族活动弹框

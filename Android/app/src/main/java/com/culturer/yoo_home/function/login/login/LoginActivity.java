@@ -33,7 +33,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     private Button login_register;
     private TextView login_forget;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
