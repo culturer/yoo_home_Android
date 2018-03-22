@@ -13,6 +13,7 @@ import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.config.CaptchaConfig;
 import com.culturer.yoo_home.config.ParamConfig;
 
+import com.culturer.yoo_home.util.MD5Util;
 import com.culturer.yoo_home.util.StringUtil;
 import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.client.HttpCallback;
@@ -116,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         HttpParams params = new HttpParams();
         params.put(ParamConfig.PHONE,register_phone.getText().toString());
-        params.put(ParamConfig.PASSWORD,register_password.getText().toString());
+        params.put(ParamConfig.PASSWORD, MD5Util.encrypt(register_password.getText().toString().trim()));
 
         new RxVolley.Builder()
                 .url(REGISTER_URL)

@@ -31,4 +31,9 @@
     <color name="textSecondaryGrid">@color/colorAccentGrid</color>
     <color name="textTertiaryGrid">#737373</color>
 
-  </resources>
+    <color name="_6">#666666</color>
+    <color name="_9">#999999</color>
+    <color name="e">#EEEEEE</color>
+
+
+</resources>

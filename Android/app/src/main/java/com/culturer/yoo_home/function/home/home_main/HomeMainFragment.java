@@ -138,7 +138,6 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
 
     //初始化UI组件
     private void initView(){
-//        initRefresh();
         //初始化基本UI组件
         initBaseView();
         //初始化中间转盘
@@ -179,7 +178,6 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             listeners.add(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context,"click"+ finalI,Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getContext(), ChatActivity.class);
                     Bundle datas = new Bundle();
                     intent.putExtra("datas",datas);
@@ -188,25 +186,6 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             });
             mStrs.add("song"+i);
         }
-//        for (int i=0 ;i<mStrs.size();i++){
-//            final int finalI = i;
-//            listeners.add( new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Toast.makeText(context,"click"+ finalI,Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(getContext(), ChatActivity.class);
-//                    Bundle datas = new Bundle();
-//                    intent.putExtra("datas",datas);
-//                    startActivity(intent);
-//                }
-//            });
-//        }
-//
-//        for (int i=0 ;i<CacheData.familyUsers.size();i++){
-//            if (CacheData.familyUsers.get(i) != null){
-//                mStrs.add(CacheData.familyUsers.get(i).getUsername());
-//            }
-//        }
 
     }
 
@@ -222,7 +201,10 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         homemain_center_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),"family~",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getContext(), ChatActivity.class);
+                Bundle datas = new Bundle();
+                intent.putExtra("datas",datas);
+                startActivity(intent);
             }
         });
         //初始化四角的标签

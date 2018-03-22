@@ -9,6 +9,7 @@
     android:id="@+id/container"
     tools:context="com.culturer.yoo_home.function.home.home_activity.HomeActivitesAddActivity">
     <EditText
+        android:id="@+id/add_title"
         android:hint="活动标题"
         android:padding="@dimen/pading"
         android:layout_margin="@dimen/margin"

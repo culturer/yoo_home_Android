@@ -19,7 +19,6 @@ package com.kymjs.rxvolley.client;
 import android.text.TextUtils;
 import android.util.Log;
 
-
 import com.kymjs.common.FileUtils;
 import com.kymjs.rxvolley.toolbox.HttpParamsEntry;
 
@@ -188,7 +187,6 @@ public class HttpParams {
 
     private byte[] getContentDispositionBytes(String paramName, String fileName) {
         StringBuilder stringBuilder = new StringBuilder();
-//        stringBuilder.append("--").append(mBoundary).append("\r\n");
         stringBuilder.append(CONTENT_DISPOSITION).append("form-data; name=\"").append(paramName).append("\"");
         if (!TextUtils.isEmpty(fileName)) {
             stringBuilder.append("; filename=\"").append(fileName).append("\"");

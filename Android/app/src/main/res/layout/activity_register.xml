@@ -72,8 +72,7 @@
             android:drawablePadding="10dp"
             android:letterSpacing="0.1"
             android:hint="验证码"
-            android:ems="16"
-            android:inputType="textPassword" />
+            android:ems="16" />
 
         <ImageView
             android:id="@+id/register_indicate_img"

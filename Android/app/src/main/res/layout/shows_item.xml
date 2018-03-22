@@ -8,7 +8,7 @@
     android:layout_margin="@dimen/margin">
 
     <ImageView
-        android:src="@drawable/logo"
+        android:src="@drawable/logo_black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <LinearLayout

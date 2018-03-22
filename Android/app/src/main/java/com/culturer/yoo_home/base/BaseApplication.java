@@ -20,6 +20,7 @@ import com.kymjs.okhttp.OkHttpStack;
 import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.http.RequestQueue;
 import com.squareup.okhttp.OkHttpClient;
+import com.vondear.rxtools.RxTool;
 import com.yanzhenjie.album.Album;
 import com.yanzhenjie.album.AlbumConfig;
 import com.yhao.floatwindow.FloatWindow;
@@ -95,7 +96,7 @@ public class BaseApplication extends Application {
         //初始化Album
         initAlbum();
         //初始化工具类
-//        RxTool.init(this);
+        RxTool.init(this);
     }
 
     //初始化可视化数据库管理工具
