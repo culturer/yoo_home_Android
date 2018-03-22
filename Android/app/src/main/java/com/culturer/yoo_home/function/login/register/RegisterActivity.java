@@ -118,7 +118,6 @@ public class RegisterActivity extends AppCompatActivity {
         HttpParams params = new HttpParams();
         params.put(ParamConfig.PHONE,register_phone.getText().toString());
         params.put(ParamConfig.PASSWORD, MD5Util.encrypt(register_password.getText().toString().trim()));
-
         new RxVolley.Builder()
                 .url(REGISTER_URL)
                 .httpMethod(RxVolley.Method.POST)
@@ -218,5 +217,6 @@ public class RegisterActivity extends AppCompatActivity {
                 .doTask();
 
     }
+
 }
 
