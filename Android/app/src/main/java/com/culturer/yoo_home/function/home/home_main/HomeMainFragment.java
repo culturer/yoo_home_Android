@@ -24,6 +24,8 @@ import com.culturer.yoo_home.bean.Arrangement;
 import com.culturer.yoo_home.bean.Family;
 import com.culturer.yoo_home.cahce.CacheData;
 import com.culturer.yoo_home.config.HomeMainConfig;
+import com.culturer.yoo_home.event.Activity_Event;
+import com.culturer.yoo_home.event.Arrangement_Event;
 import com.culturer.yoo_home.function.chat.ChatActivity;
 import com.culturer.yoo_home.function.home.family_activity.FamilyActivityActivity;
 import com.culturer.yoo_home.function.home.home_activity.HomeActiviesActivity;
@@ -34,6 +36,9 @@ import com.culturer.yoo_home.util.StringUtil;
 
 import com.culturer.yoo_home.widget.circleMenu.CircleMenu;
 
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +74,6 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
     private TextView homemain_arrangement;
 
     private AlertDialog dialog;
-
 
     //用来加载页面的布局
     private View contentView;
@@ -113,8 +117,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             contentView = inflater.inflate(R.layout.fragment_home_main, container, false);
             presenter = createPresenter();
             setPresenter(presenter);
-            initData();
-            initView();
+            init();
         }
         ViewGroup parent = (ViewGroup) contentView.getParent();
         if ( parent!=null ){
@@ -129,6 +132,43 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         presenter.start();
     }
 
+    private void init(){
+        initData();
+        initView();
+        EventBus.getDefault().register(this);
+
+    }
+
+    //接收Arrangement变更广播
+    @Subscribe
+    public void receiveMsg(Arrangement_Event event){
+        if ( event.type == Arrangement_Event.Arrangement_NEW || event.type == Arrangement_Event.Arrangement_DEL){
+            arrangement = event.arrangement;
+            String arg = "";
+            if (arrangement!=null && arrangement.getDesc()!=null){
+                arg = arrangement.getDesc();
+            }else {
+                homemain_arrangement.setVisibility(View.GONE);
+            }
+            homemain_arrangement.setText(arg);
+        }
+    }
+
+
+    @Subscribe
+    public void reveiveMsg(Activity_Event event){
+        if (event.type == Activity_Event.HomeActivity_NEW){
+            homeActivity = event.getActivity();
+            String desc = "";
+            if (homeActivity != null && homeActivity.getDesc() !=null){
+                desc =homeActivity.getDesc();
+            }else {
+                homemain_activity.setVisibility(View.GONE);
+            }
+            homemain_activity.setText(desc);
+        }
+    }
+
     //初始化数据
     private void initData(){
         //初始化四个角的标签的数据
@@ -139,7 +179,6 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
 
     //初始化UI组件
     private void initView(){
-//        initRefresh();
         //初始化基本UI组件
         initBaseView();
         //初始化中间转盘
@@ -151,6 +190,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
 
     //初始化四个角的标签的数据
     private void initTabData(){
+
         //初始化home_activity标签
         if (CacheData.homeActivities !=null && CacheData.homeActivities.size()>0 ){
             homeActivity = CacheData.homeActivities.get(CacheData.homeActivities.size()-1);
@@ -179,7 +219,6 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             listeners.add(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context,"click"+ finalI,Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getContext(), ChatActivity.class);
                     Bundle datas = new Bundle();
                     intent.putExtra("datas",datas);
@@ -188,25 +227,6 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             });
             mStrs.add("song"+i);
         }
-//        for (int i=0 ;i<mStrs.size();i++){
-//            final int finalI = i;
-//            listeners.add( new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Toast.makeText(context,"click"+ finalI,Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(getContext(), ChatActivity.class);
-//                    Bundle datas = new Bundle();
-//                    intent.putExtra("datas",datas);
-//                    startActivity(intent);
-//                }
-//            });
-//        }
-//
-//        for (int i=0 ;i<CacheData.familyUsers.size();i++){
-//            if (CacheData.familyUsers.get(i) != null){
-//                mStrs.add(CacheData.familyUsers.get(i).getUsername());
-//            }
-//        }
 
     }
 
@@ -222,7 +242,10 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         homemain_center_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),"family~",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getContext(), ChatActivity.class);
+                Bundle datas = new Bundle();
+                intent.putExtra("datas",datas);
+                startActivity(intent);
             }
         });
         //初始化四角的标签
@@ -252,6 +275,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
 
     //四个角标签的弹窗显示
     private void showDialog(int popType){
+
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         //日程安排弹框
         if (popType == HomeMainConfig.HOMEMAIN_POP_ARRANGEMENT){
@@ -303,14 +327,13 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         //家庭活动弹框
         else if (popType == HomeMainConfig.HOMEMAIN_POP_ACTIVITY){
             builder.setTitle("家庭活动");
-//            View homeActivityView = inflater.inflate(R.layout.homemain_popwindow_activity,null);
             View homeActivityView = inflater.inflate(R.layout.homeactivities_detail,null);
             TextView homemain_activity_poptitle = homeActivityView.findViewById(R.id.homemain_activity_poptitle);
             ListView homeactivity_detail_list = homeActivityView.findViewById(R.id.homeactivity_detail_list);
             homemain_activity_poptitle.setText(homeActivity.getDesc());
             //此处设置activityItem
             for (int i=0;i<10;i++){
-                activityItems.add(new ActivityItem(-1l,-1l,-1l));
+                activityItems.add(new ActivityItem());
             }
             HomeActivitiesDetailAdapter home_adapter = new HomeActivitiesDetailAdapter(activityItems,getContext());
             homeactivity_detail_list.setAdapter(home_adapter);
@@ -324,6 +347,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
                     dialog.dismiss();
                 }
             });
+
         }
 
         //家族活动弹框

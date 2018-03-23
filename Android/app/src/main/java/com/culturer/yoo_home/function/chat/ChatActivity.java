@@ -86,7 +86,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
     //初始化UI组件
     private void initView(){
         initBaseView();
-        initNavigation(contentViwe,"Yoo+ Home","心若向阳，无畏悲伤");
+        initNavigation(contentViwe,"Yoo+","心若向阳，无畏悲伤");
         initList();
     }
 
@@ -134,7 +134,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         chatMsgs.add(chatMsg);
         chatAdapter.setDataAndupdate(chatMsgs);
         String strChatMsg = new Gson().toJson(chatMsg,ChatMsg.class);
-        EventBus.getDefault().post(new MQTTMsg(true,strChatMsg));
+        EventBus.getDefault().post(new MQTTMsg(true,MQTTMsg.CHAT_MSG,strChatMsg));
     }
 
     //权限验证

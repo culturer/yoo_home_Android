@@ -12,12 +12,35 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
+            multiDexEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    output.outputFile = new File(
+//                            output.outputFile.parent,
+//                            output.outputFile.name.replace(output.outputFile.name,
+//                                    "yoo+" + "_v${variant.versionName}.apk")
+//                    )
+//                }
+//            }
+            // 不显示LogLOG_DEBUG,发布设置为false，测试时开启为true
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            //不记录log 发布设置为false,测试时开启
+            buildConfigField "boolean", "LOG_RECORD", "false"
+
+        }
+        debug {
+            //显示log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            //纪录日志
+            buildConfigField "boolean", "LOG_RECORD", "true"
         }
     }
     packagingOptions {
@@ -29,6 +52,7 @@ android {
     dataBinding {
         enabled = false
     }
+
 }
 
 dependencies {
@@ -59,16 +83,30 @@ dependencies {
     //引入EventBus
     compile 'org.greenrobot:eventbus:3.1.0-RC'
     //导入glide
-    compile 'com.github.bumptech.glide:glide:4.2.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
-    compile "com.github.bumptech.glide:okhttp3-integration:4.2.0"
+    compile 'com.github.bumptech.glide:glide:4.6.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    compile "com.github.bumptech.glide:okhttp3-integration:4.6.1"
     //添加相册插件
     compile 'com.yanzhenjie:album:2.0.1'
     //下拉刷新插件
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7'//没有使用特殊Header，可以不加这行
-    //列表页面
+    //RxTools
+    compile 'com.github.vondear:RxTools:v1.7.7.3'//请替换成上方 JitPack 最新的版本号
+    compile 'com.yalantis:ucrop:2.2.0'
+
+    //Picker
+//    compile('cn.qqtheme.framework:WheelPicker:版本号') {
+//        exclude group: 'com.android.support'
+//    }
+//    compile('cn.qqtheme.framework:FilePicker:版本号') {
+//        exclude group: 'com.android.support'
+//    }
+//    compile('cn.qqtheme.framework:ColorPicker:版本号') {
+//        exclude group: 'com.android.support'
+//    }
     implementation files('libs/SQLiteStudioRemote.jar')
+
     compile project(path: ':shimmer')
     compile project(path: ':rxvolley')
     compile project(path: ':okhttp3')

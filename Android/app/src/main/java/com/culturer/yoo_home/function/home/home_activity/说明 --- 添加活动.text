@@ -1,0 +1,30 @@
+添加活动说明文档
+
+1.入口 --- HomeActivitiesActivity 的 home_activities_add 按钮的点击事件进入
+2.页面 --- HomeActivitesAddActivity
+    该页面由
+        顶部的EditText add_title --- 活动标题
+        中间的ListView add_list --- 活动项列表
+        底部的Button add_btn --- 添加按钮
+                     ok_btn --- 提交按钮
+3.数据交互
+    点击 add_btn 输入活动项标题，内容，时间 点击确定
+    将输入的内容添加到 add_list 中，并刷新显示
+    点击 add_list 中的项可以修改内容
+    长按 add_list 中的某一项删除指定项内容
+    点击 ok_btn 1.向服务器提交数据并返回Id，活动数据以及活动项数据
+                2.将列表中的数据存入缓存队列
+                3.将临时活动内容存入缓存队列
+                4.将数据保存到数据库(暂时不做，后续做优化的时候再加上)
+                5.更新活动列表HomeActivitiesActivity中的活动列表 home_activities_list 显示
+                6.更新home_main/HomeMainFragment中标签homeActivity的显示(HomeActivitesAddActivity中使用EventBus发送数据，在HomeMainFragment中接收数据，并更新显示)
+
+4.更新主页显示的homeActivity:
+    将activity参数发送到主页并更新主页显示
+    EventBus.getDefault().post(new Activity_Event(Activity_Event.HomeActivity_NEW,activity));
+
+HomeActivity接口:
+    Urls.ACTIVITIES_URL
+
+    传入参数:
+    返回值:

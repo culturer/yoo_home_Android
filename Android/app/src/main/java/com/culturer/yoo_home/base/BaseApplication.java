@@ -9,7 +9,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.armour8.yooplus.yooplus.R;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
 import com.culturer.yoo_home.cahce.BaseMsg;
+import com.culturer.yoo_home.cahce.CacheData;
 import com.culturer.yoo_home.service.MQTT.MQTTMsg;
 import com.culturer.yoo_home.util.DatabaseUtil;
 import com.culturer.yoo_home.util.GlideAlbumLoader;
@@ -20,6 +23,7 @@ import com.kymjs.okhttp.OkHttpStack;
 import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.http.RequestQueue;
 import com.squareup.okhttp.OkHttpClient;
+import com.vondear.rxtools.RxTool;
 import com.yanzhenjie.album.Album;
 import com.yanzhenjie.album.AlbumConfig;
 import com.yhao.floatwindow.FloatWindow;
@@ -94,8 +98,10 @@ public class BaseApplication extends Application {
         initSqliteStudio();
         //初始化Album
         initAlbum();
+        //初始化缓存
+        CacheData.init();
         //初始化工具类
-//        RxTool.init(this);
+        RxTool.init(this);
     }
 
     //初始化可视化数据库管理工具
@@ -121,5 +127,6 @@ public class BaseApplication extends Application {
     public static Context getContext(){
         return context;
     }
+
 }
 

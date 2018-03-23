@@ -18,12 +18,14 @@ import com.culturer.yoo_home.bean.Arrangement;
 import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.cahce.CacheData;
 import com.culturer.yoo_home.config.HomeArrangementConfig;
+import com.culturer.yoo_home.event.Arrangement_Event;
 import com.culturer.yoo_home.util.TimeUtil;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
 import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.client.HttpCallback;
 import com.kymjs.rxvolley.client.HttpParams;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -49,10 +51,12 @@ public class HomeArrangementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         contenteView = getLayoutInflater().inflate(R.layout.activity_home_arrangement,null);
         setContentView(contenteView);
+        init();
+    }
 
+    private void init(){
         initData();
         initView();
-
     }
 
     private void initData(){
@@ -82,8 +86,8 @@ public class HomeArrangementActivity extends AppCompatActivity {
 
     //初始化基本的UI组件 
     private void initBaseView(){
-        home_arrangement_list = (ListView) findViewById(R.id.home_arrangement_list);
-        home_arrangement_Add = (TextView) findViewById(R.id.home_arrangement_Add);
+        home_arrangement_list = findViewById(R.id.home_arrangement_list);
+        home_arrangement_Add = findViewById(R.id.home_arrangement_Add);
     }
 
     //列表
@@ -135,8 +139,8 @@ public class HomeArrangementActivity extends AppCompatActivity {
 
         if (type == HomeArrangementConfig.ALERT_ADD){
             View contentView = this.getLayoutInflater().inflate(R.layout.homearrangement_alert_add,null);
-            final EditText homearrangement_alert_name = (EditText) contentView.findViewById(R.id.homearrangement_alert_name);
-            final TextView homearrangement_alert_time = (TextView) contentView.findViewById(R.id.homearrangement_alert_time);
+            final EditText homearrangement_alert_name = contentView.findViewById(R.id.homearrangement_alert_name);
+            final TextView homearrangement_alert_time = contentView.findViewById(R.id.homearrangement_alert_time);
 
             builder.setTitle("添加日程");
             builder.setView(contentView);
@@ -244,6 +248,8 @@ public class HomeArrangementActivity extends AppCompatActivity {
                 CacheData.arrangements.add(arrangement);
                 //更新显示
                 adapter.setDataAndrUpdate(datas);
+                //更新主页显示
+                EventBus.getDefault().post(new Arrangement_Event(Arrangement_Event.Arrangement_NEW,arrangement));
             }
         };
 
@@ -257,6 +263,7 @@ public class HomeArrangementActivity extends AppCompatActivity {
                 .callback(callback)
                 .encoding("UTF-8")
                 .doTask();
+
     }
 
     private void delArrangement(final long arrangementId){
@@ -271,6 +278,8 @@ public class HomeArrangementActivity extends AppCompatActivity {
 
         //3.更新显示
         adapter.setDataAndrUpdate(datas);
+        //更新首页标签显示
+        EventBus.getDefault().post(new Arrangement_Event(Arrangement_Event.Arrangement_DEL,CacheData.arrangements.get(CacheData.arrangements.size()-1)));
 
         //4.更新服务器数据
         HttpParams params = new HttpParams();

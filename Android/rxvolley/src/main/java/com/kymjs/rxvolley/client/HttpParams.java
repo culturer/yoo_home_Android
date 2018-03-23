@@ -279,4 +279,17 @@ public class HttpParams {
         mHeaders.add(new HttpParamsEntry("Accept-Encoding", "identity"));
         return mHeaders;
     }
+
+    @Override
+    public String toString() {
+        return "HttpParams{" +
+                "mBoundary='" + mBoundary + '\'' +
+                ", urlParams=" + urlParams +
+                ", mHeaders=" + mHeaders +
+                ", mOutputStream=" + mOutputStream +
+                ", hasFile=" + hasFile +
+                ", contentType='" + contentType + '\'' +
+                ", jsonParams='" + jsonParams + '\'' +
+                '}';
+    }
 }

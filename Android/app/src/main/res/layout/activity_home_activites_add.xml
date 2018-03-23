@@ -8,17 +8,40 @@
     android:orientation="vertical"
     android:id="@+id/container"
     tools:context="com.culturer.yoo_home.function.home.home_activity.HomeActivitesAddActivity">
-
+    <EditText
+        android:id="@+id/add_title"
+        android:hint="活动标题"
+        android:padding="@dimen/pading"
+        android:layout_margin="@dimen/margin"
+        android:gravity="center_horizontal"
+        android:background="@null"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/black"/>
     <ListView
         android:id="@+id/add_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
-
-    <Button
-        android:id="@+id/add_btn"
-        android:text="添加"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/add_btn"
+            android:text="添加"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/ok_btn"
+            android:text="确定"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 
 import com.armour8.yooplus.yooplus.R;
 
-
-
 public class Page2Fragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";

@@ -54,8 +54,10 @@ public class LoginLocalDataSource extends BaseLocalDataSource {
             Gson gson = new Gson();
             for (int i=0 ; i<jFamilyUsers.length() ; i++){
                 User user = gson.fromJson(jFamilyUsers.getString(i),User.class);
-                CacheData.familyUsers.add(user);
-                Log.i(TAG, "saveFamilyUsers: "+user.toString());
+                if (user!=null){
+                    CacheData.familyUsers.add(user);
+                    Log.i(TAG, "saveFamilyUsers: "+user.toString());
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -41,17 +41,15 @@ public class LoadActivity extends AppCompatActivity implements ILoadView {
     private void initBaseView(){
         //进度条
         TitanicTextView tv = findViewById(R.id.my_text_view);
-        // set fancy typeface
+        // 修改字体
         tv.setTypeface(Typefaces.get(this, "Satisfy-Regular.ttf"));
         logo = findViewById(R.id.logo);
         logo.setImageResource(R.drawable.logo_white);
         topic = findViewById(R.id.topic);
         loadCount = findViewById(R.id.loadCount);
-
         topic.setTypeface(Typefaces.get(this, "Satisfy-Regular.ttf"));
-
         titanic = new Titanic();
-        // start animation
+        // 启动加载动画
         titanic.start(tv);
     }
 
