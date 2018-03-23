@@ -206,7 +206,7 @@ public class MQTTService extends Service implements IMQTTService {
         public void messageArrived(String topic, MqttMessage message) throws Exception {
             String msg = new String(message.getPayload());
             Log.i(TAG, "messageArrived: "+msg);
-            EventBus.getDefault().post(new MQTTMsg(false,msg));
+            EventBus.getDefault().post(new MQTTMsg(false,MQTTMsg.CHAT_MSG,msg));
         }
 
         @Override
@@ -240,8 +240,9 @@ public class MQTTService extends Service implements IMQTTService {
 
     @Subscribe
     public void sendMessage(MQTTMsg msg){
-        if (msg.isSend())
+        if (msg.isSend()){
             publish(msg.getMsg());
+        }
     }
     //初始化EventBus
 

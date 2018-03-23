@@ -19,3 +19,12 @@
                 5.更新活动列表HomeActivitiesActivity中的活动列表 home_activities_list 显示
                 6.更新home_main/HomeMainFragment中标签homeActivity的显示(HomeActivitesAddActivity中使用EventBus发送数据，在HomeMainFragment中接收数据，并更新显示)
 
+4.更新主页显示的homeActivity:
+    将activity参数发送到主页并更新主页显示
+    EventBus.getDefault().post(new Activity_Event(Activity_Event.HomeActivity_NEW,activity));
+
+HomeActivity接口:
+    Urls.ACTIVITIES_URL
+
+    传入参数:
+    返回值:

@@ -6,7 +6,7 @@ import com.culturer.yoo_home.bean.Album;
  * Created by Administrator on 2018/1/28 0028.
  */
 
-public class Album_Add_Event {
+public class Album_Event {
 
     int album_type;
     Album album;
@@ -27,7 +27,7 @@ public class Album_Add_Event {
         this.album_type = album_type;
     }
 
-    public Album_Add_Event(int album_type, Album album) {
+    public Album_Event(int album_type, Album album) {
         this.album_type = album_type;
         this.album = album;
     }

@@ -36,7 +36,7 @@ public class Test4Activity extends AppCompatActivity {
     }
     private void send(){
         String tx = send.getText().toString();
-        EventBus.getDefault().post(new MQTTMsg(true,tx));
+        EventBus.getDefault().post(new MQTTMsg(true,MQTTMsg.CHAT_MSG,tx));
         resv.setText(tx);
     }
 

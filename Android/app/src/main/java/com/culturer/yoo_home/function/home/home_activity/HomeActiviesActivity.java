@@ -17,7 +17,10 @@ import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.bean.Activity;
 import com.culturer.yoo_home.bean.ActivityItem;
 import com.culturer.yoo_home.cahce.CacheData;
+import com.culturer.yoo_home.event.Activity_Event;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -149,7 +152,7 @@ public class HomeActiviesActivity extends AppCompatActivity {
     //1.删除服务器中的数据
     //2.删除缓存中的数据
     //3.删除页面数据,刷新显示。
-    private void delActivity(Activity activity){
+    private void delActivity(final Activity activity){
         new AlertDialog.Builder(this)
                        .setTitle("删除活动")
                        .setMessage(activity.getDesc())

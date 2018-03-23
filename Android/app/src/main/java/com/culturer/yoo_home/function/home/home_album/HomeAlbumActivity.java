@@ -21,7 +21,7 @@ import com.google.gson.Gson;
 import com.culturer.yoo_home.bean.Photo;
 import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.cahce.CacheData;
-import com.culturer.yoo_home.event.Album_Add_Event;
+import com.culturer.yoo_home.event.Album_Event;
 import com.culturer.yoo_home.function.home.HomePagerAdapter;
 import com.culturer.yoo_home.util.StringUtil;
 import com.culturer.yoo_home.util.ThreadUtil;
@@ -209,10 +209,10 @@ public class HomeAlbumActivity extends AppCompatActivity {
                 addPhotos(albumId);
                 Log.i(TAG, "addAlbumItem: "+album.toString());
                 if (albumType == ALBUM_TYPE_USER){
-                    Album_Add_Event event = new Album_Add_Event(ALBUM_TYPE_USER,album);
+                    Album_Event event = new Album_Event(ALBUM_TYPE_USER,album);
                     EventBus.getDefault().post(event);
                 }else if (albumType == ALBUM_TYPE_HOME){
-                    Album_Add_Event event = new Album_Add_Event(ALBUM_TYPE_HOME,album);
+                    Album_Event event = new Album_Event(ALBUM_TYPE_HOME,album);
                     EventBus.getDefault().post(event);
                 }
             }

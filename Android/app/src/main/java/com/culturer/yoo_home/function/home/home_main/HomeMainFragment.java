@@ -24,6 +24,8 @@ import com.culturer.yoo_home.bean.Arrangement;
 import com.culturer.yoo_home.bean.Family;
 import com.culturer.yoo_home.cahce.CacheData;
 import com.culturer.yoo_home.config.HomeMainConfig;
+import com.culturer.yoo_home.event.Activity_Event;
+import com.culturer.yoo_home.event.Arrangement_Event;
 import com.culturer.yoo_home.function.chat.ChatActivity;
 import com.culturer.yoo_home.function.home.family_activity.FamilyActivityActivity;
 import com.culturer.yoo_home.function.home.home_activity.HomeActiviesActivity;
@@ -34,6 +36,9 @@ import com.culturer.yoo_home.util.StringUtil;
 
 import com.culturer.yoo_home.widget.circleMenu.CircleMenu;
 
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,8 +117,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             contentView = inflater.inflate(R.layout.fragment_home_main, container, false);
             presenter = createPresenter();
             setPresenter(presenter);
-            initData();
-            initView();
+            init();
         }
         ViewGroup parent = (ViewGroup) contentView.getParent();
         if ( parent!=null ){
@@ -126,6 +130,43 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
     public void onResume() {
         super.onResume();
         presenter.start();
+    }
+
+    private void init(){
+        initData();
+        initView();
+        EventBus.getDefault().register(this);
+
+    }
+
+    //接收Arrangement变更广播
+    @Subscribe
+    public void receiveMsg(Arrangement_Event event){
+        if ( event.type == Arrangement_Event.Arrangement_NEW || event.type == Arrangement_Event.Arrangement_DEL){
+            arrangement = event.arrangement;
+            String arg = "";
+            if (arrangement!=null && arrangement.getDesc()!=null){
+                arg = arrangement.getDesc();
+            }else {
+                homemain_arrangement.setVisibility(View.GONE);
+            }
+            homemain_arrangement.setText(arg);
+        }
+    }
+
+
+    @Subscribe
+    public void reveiveMsg(Activity_Event event){
+        if (event.type == Activity_Event.HomeActivity_NEW){
+            homeActivity = event.getActivity();
+            String desc = "";
+            if (homeActivity != null && homeActivity.getDesc() !=null){
+                desc =homeActivity.getDesc();
+            }else {
+                homemain_activity.setVisibility(View.GONE);
+            }
+            homemain_activity.setText(desc);
+        }
     }
 
     //初始化数据
@@ -286,7 +327,6 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         //家庭活动弹框
         else if (popType == HomeMainConfig.HOMEMAIN_POP_ACTIVITY){
             builder.setTitle("家庭活动");
-//            View homeActivityView = inflater.inflate(R.layout.homemain_popwindow_activity,null);
             View homeActivityView = inflater.inflate(R.layout.homeactivities_detail,null);
             TextView homemain_activity_poptitle = homeActivityView.findViewById(R.id.homemain_activity_poptitle);
             ListView homeactivity_detail_list = homeActivityView.findViewById(R.id.homeactivity_detail_list);

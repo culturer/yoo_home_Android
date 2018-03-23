@@ -17,7 +17,7 @@ import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.bean.Album;
 import com.culturer.yoo_home.cahce.CacheData;
 import com.culturer.yoo_home.config.Config;
-import com.culturer.yoo_home.event.Album_Add_Event;
+import com.culturer.yoo_home.event.Album_Event;
 import com.yanzhenjie.album.Action;
 import com.yanzhenjie.album.api.widget.Widget;
 
@@ -276,7 +276,7 @@ public class HomeAlbumFragment extends Fragment implements IHomeAlbumView {
     }
 
     @Subscribe
-    public void updateAlbum(Album_Add_Event event){
+    public void updateAlbum(Album_Event event){
         Album album = event.getAlbum();
         int album_type = event.getAlbum_type();
         if (album_type == this.fragment_type){

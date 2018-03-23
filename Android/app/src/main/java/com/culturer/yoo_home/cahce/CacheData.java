@@ -95,6 +95,7 @@ public class CacheData {
 			put_tmp_activity(jTmp_activity);
 			put_tmp_activity_item(jTmp_activity_item);
 	}
+
 	//将本地缓存读入内存缓存
 	public static void getDatas() throws JSONException {
 		userAlbums = jsonArray2List(get_userAlbums(),Album.class);
