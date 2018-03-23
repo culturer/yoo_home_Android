@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.base.mvpbase.BasePresenter;
+import com.culturer.yoo_home.cahce.CacheData;
 import com.kymjs.rxvolley.client.HttpCallback;
 
 
@@ -23,6 +24,7 @@ public class LoadPresenter extends BasePresenter<ILoadView,LoadRespository> {
 
     public LoadPresenter(ILoadView view, LoadRespository respository, Context context) {
         super(view, respository, context);
+
     }
 
     /**

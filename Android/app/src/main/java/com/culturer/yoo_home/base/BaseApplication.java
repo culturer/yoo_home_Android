@@ -12,6 +12,7 @@ import com.armour8.yooplus.yooplus.R;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;
 import com.culturer.yoo_home.cahce.BaseMsg;
+import com.culturer.yoo_home.cahce.CacheData;
 import com.culturer.yoo_home.service.MQTT.MQTTMsg;
 import com.culturer.yoo_home.util.DatabaseUtil;
 import com.culturer.yoo_home.util.GlideAlbumLoader;
@@ -97,6 +98,8 @@ public class BaseApplication extends Application {
         initSqliteStudio();
         //初始化Album
         initAlbum();
+        //初始化缓存
+        CacheData.init();
         //初始化工具类
         RxTool.init(this);
     }
