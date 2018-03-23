@@ -128,6 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
                 .callback(callback)
                 .encoding("UTF-8")
                 .doTask();
+
     }
 
     //获取验证码

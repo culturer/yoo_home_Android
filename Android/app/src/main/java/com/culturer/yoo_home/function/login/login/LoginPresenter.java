@@ -20,8 +20,6 @@ public class LoginPresenter extends BasePresenter<ILoginView,LoginRespository> {
 
     private static final String TAG= "LoginPresenter";
 
-
-
     public LoginPresenter(ILoginView view, LoginRespository respository, Context context) {
         super(view, respository, context);
     }
@@ -48,6 +46,7 @@ public class LoginPresenter extends BasePresenter<ILoginView,LoginRespository> {
                     loginSuccess(t);
                 }else {
                     Toast.makeText(context,"账号或密码错误请重新登陆",Toast.LENGTH_LONG).show();
+                    view.loginFail();
                 }
             }
 
@@ -55,6 +54,7 @@ public class LoginPresenter extends BasePresenter<ILoginView,LoginRespository> {
             public void onFailure(int errorNo, String strMsg) {
                 Log.i(TAG, "onFailure: errNo"+errorNo+"||errMsg"+strMsg);
                 Toast.makeText(context,"网络连接异常，请检查网络后重新登陆",Toast.LENGTH_LONG).show();
+                view.loginFail();
             }
         };
         respository.login(tel,password,callback);

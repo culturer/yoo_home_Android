@@ -13,6 +13,11 @@
     <!-- 允许程序获取网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+
 
     <application
         android:name="com.culturer.yoo_home.base.BaseApplication"
@@ -56,7 +61,6 @@
         <!-- Mqtt Service -->
         <service android:name="org.eclipse.paho.android.service.MqttService" />
         <service android:name="com.culturer.yoo_home.service.MQTT.MQTTService" />
-
         <activity android:name="com.culturer.yoo_home.function.login.forget.ForgetActivity" />
         <activity
             android:name="com.culturer.yoo_home.function.login.load.LoadActivity"
@@ -68,10 +72,12 @@
         <activity android:name="com.culturer.yoo_home.test.Test4Activity" />
         <activity android:name="com.culturer.yoo_home.function.world.recommend.DetailActivity" />
         <activity android:name="com.culturer.yoo_home.function.mine.MineActivity" />
-        <activity android:name="com.culturer.yoo_home.function.world.shows.show.ShowActivity" >
-
-        </activity>
-        <activity android:name="com.culturer.yoo_home.function.mine.UserActivity"></activity>
+        <activity android:name="com.culturer.yoo_home.function.world.shows.show.ShowActivity" />
+        <activity android:name="com.culturer.yoo_home.function.mine.UserActivity"/>
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 
 </manifest>

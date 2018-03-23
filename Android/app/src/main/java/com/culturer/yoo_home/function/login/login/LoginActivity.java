@@ -250,6 +250,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mBtnLogin.setClickable(false);
                 RxKeyboardTool.hideSoftInput(LoginActivity.this);
                 String tel = mEtMobile.getText().toString();
                 String password = MD5Util.encrypt(mEtPassword.getText().toString().trim());
@@ -276,51 +277,18 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
                         new LoginRemoteDataSource(this),
                         this),
                 this);
-
         return presenter;
     }
-
-
-
-//    private void initBaseView(){
-//        login_largetitle = findViewById(R.id.login_large_title);
-//        login_littletitle = findViewById(R.id.login_littletitle);
-//        login_username = findViewById(R.id.login_username);
-//        login_password = findViewById(R.id.login_password);
-//        login_login = findViewById(R.id.login_login);
-//        login_register = findViewById(R.id.login_register);
-//        login_forget = findViewById(R.id.login_forget);
-//
-//        login_littletitle.setTypeface(Typefaces.get(this, "Satisfy-Regular.ttf"));
-//
-//        login_login.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String tel = login_username.getText().toString();
-//                String password = MD5Util.encrypt(login_password.getText().toString().trim());
-//                presenter.login(tel,password);
-//            }
-//        });
-//        login_register.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//        login_forget.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(LoginActivity.this,ForgetActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//    }
 
     @Override
     public void loginSuccess() {
         startActivityForResult(new Intent(LoginActivity.this,LoadActivity.class),LOGIN_ONSUCCESS);
         finish();
+    }
+
+    @Override
+    public void loginFail() {
+        mBtnLogin.setClickable(true);
     }
 
     //加载数据失败处理

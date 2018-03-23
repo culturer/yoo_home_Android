@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/user_icon"
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@drawable/logo_black"
         android:layout_marginTop="30dp"
         android:layout_width="150dp"
         android:layout_height="150dp" />

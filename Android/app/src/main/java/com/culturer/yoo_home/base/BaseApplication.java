@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.armour8.yooplus.yooplus.R;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
 import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.service.MQTT.MQTTMsg;
 import com.culturer.yoo_home.util.DatabaseUtil;
@@ -122,5 +124,6 @@ public class BaseApplication extends Application {
     public static Context getContext(){
         return context;
     }
+
 }
 
