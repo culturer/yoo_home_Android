@@ -87,7 +87,7 @@ public class BaseApplication extends Application {
     private void init(){
         EventBus.getDefault().register(this);
         //使用okhttp代替httpurlconnection
-        RxVolley.setRequestQueue(RequestQueue.newRequestQueue(RxVolley.CACHE_FOLDER, new OkHttpStack(new OkHttpClient())));
+//        RxVolley.setRequestQueue(RequestQueue.newRequestQueue(RxVolley.CACHE_FOLDER, new OkHttpStack(new OkHttpClient())));
         //初始化Preference工具
         PreferenceUtil.init(this);
         //初始化基础数据中心

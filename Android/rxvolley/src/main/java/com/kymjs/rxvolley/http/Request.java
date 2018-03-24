@@ -39,16 +39,13 @@ import java.util.Map;
  */
 public abstract class Request<T> implements Comparable<Request<T>> {
 
+    protected final HttpCallback mCallback;
     private final RequestConfig mConfig;
-
     public int mDefaultTrafficStatsTag; // 默认tag {@link TrafficStats}
     public boolean mResponseDelivered = false; // 是否再次分发本次响应
     public boolean mCanceled = false; // 是否取消本次请求
-
     public Object mTag;
     public Integer mSequence;
-
-    protected final HttpCallback mCallback;
     protected ProgressListener mProgressListener;
     protected RequestQueue mRequestQueue;
     private ICache.Entry mCacheEntry = null;
@@ -60,6 +57,22 @@ public abstract class Request<T> implements Comparable<Request<T>> {
         mConfig = config;
         mCallback = callback;
         mDefaultTrafficStatsTag = findDefaultTrafficStatsTag(config.mUrl);
+    }
+
+    /**
+     * @return The hashcode of the URL's host component, or 0 if there is none.
+     */
+    private static int findDefaultTrafficStatsTag(String url) {
+        if (!TextUtils.isEmpty(url)) {
+            Uri uri = Uri.parse(url);
+            if (uri != null) {
+                String host = uri.getHost();
+                if (host != null) {
+                    return host.hashCode();
+                }
+            }
+        }
+        return 0;
     }
 
     /**
@@ -102,22 +115,6 @@ public abstract class Request<T> implements Comparable<Request<T>> {
     }
 
     /**
-     * @return The hashcode of the URL's host component, or 0 if there is none.
-     */
-    private static int findDefaultTrafficStatsTag(String url) {
-        if (!TextUtils.isEmpty(url)) {
-            Uri uri = Uri.parse(url);
-            if (uri != null) {
-                String host = uri.getHost();
-                if (host != null) {
-                    return host.hashCode();
-                }
-            }
-        }
-        return 0;
-    }
-
-    /**
      * 通知请求队列，本次请求已经完成
      */
     public void finish(String log) {
@@ -150,13 +147,13 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 
     public abstract String getCacheKey();
 
+    public ICache.Entry getCacheEntry() {
+        return mCacheEntry;
+    }
+
     Request<?> setCacheEntry(ICache.Entry entry) {
         mCacheEntry = entry;
         return this;
-    }
-
-    public ICache.Entry getCacheEntry() {
-        return mCacheEntry;
     }
 
     public void cancel() {
@@ -216,13 +213,6 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 
     public boolean shouldCache() {
         return mConfig.mShouldCache == null ? false : mConfig.mShouldCache;
-    }
-
-    /**
-     * 本次请求的优先级，四种
-     */
-    public enum Priority {
-        LOW, NORMAL, HIGH, IMMEDIATE
     }
 
     public Priority getPriority() {
@@ -346,5 +336,12 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 
     public boolean getUseServerControl() {
         return mConfig.mUseServerControl;
+    }
+
+    /**
+     * 本次请求的优先级，四种
+     */
+    public enum Priority {
+        LOW, NORMAL, HIGH, IMMEDIATE
     }
 }

@@ -48,13 +48,6 @@ public class HttpConnectStack implements IHttpStack {
     private final UrlRewriter mUrlRewriter;
     private final SSLSocketFactory mSslSocketFactory;
 
-    public interface UrlRewriter {
-        /**
-         * 重写用于请求的URL
-         */
-        String rewriteUrl(String originalUrl);
-    }
-
     public HttpConnectStack() {
         this(null);
     }
@@ -76,6 +69,59 @@ public class HttpConnectStack implements IHttpStack {
             }
         } else {
             mSslSocketFactory = sslSocketFactory;
+        }
+    }
+
+    /* package */
+    static void setConnectionParametersForRequest(HttpURLConnection connection, Request<?> request)
+            throws IOException {
+        switch (request.getMethod()) {
+            case RxVolley.Method.GET:
+                connection.setRequestMethod("GET");
+                break;
+            case RxVolley.Method.DELETE:
+                connection.setRequestMethod("DELETE");
+                break;
+            case RxVolley.Method.POST:
+                connection.setRequestMethod("POST");
+                addBodyIfExists(connection, request);
+                break;
+            case RxVolley.Method.PUT:
+                connection.setRequestMethod("PUT");
+                addBodyIfExists(connection, request);
+                break;
+            case RxVolley.Method.HEAD:
+                connection.setRequestMethod("HEAD");
+                break;
+            case RxVolley.Method.OPTIONS:
+                connection.setRequestMethod("OPTIONS");
+                break;
+            case RxVolley.Method.TRACE:
+                connection.setRequestMethod("TRACE");
+                break;
+            case RxVolley.Method.PATCH:
+                connection.setRequestMethod("PATCH");
+                addBodyIfExists(connection, request);
+                break;
+            default:
+                throw new IllegalStateException("Unknown method type.");
+        }
+    }
+
+    /**
+     * 如果有body则添加
+     */
+    private static void addBodyIfExists(HttpURLConnection connection, Request<?> request)
+            throws IOException {
+        byte[] body = request.getBody();
+        if (body != null) {
+            connection.setDoOutput(true);
+            connection.addRequestProperty(HEADER_CONTENT_TYPE,
+                    request.getBodyContentType());
+            DataOutputStream out = new DataOutputStream(
+                    connection.getOutputStream());
+            out.write(body);
+            out.close();
         }
     }
 
@@ -166,56 +212,10 @@ public class HttpConnectStack implements IHttpStack {
         return connection;
     }
 
-    /* package */
-    static void setConnectionParametersForRequest(HttpURLConnection connection, Request<?> request)
-            throws IOException {
-        switch (request.getMethod()) {
-            case RxVolley.Method.GET:
-                connection.setRequestMethod("GET");
-                break;
-            case RxVolley.Method.DELETE:
-                connection.setRequestMethod("DELETE");
-                break;
-            case RxVolley.Method.POST:
-                connection.setRequestMethod("POST");
-                addBodyIfExists(connection, request);
-                break;
-            case RxVolley.Method.PUT:
-                connection.setRequestMethod("PUT");
-                addBodyIfExists(connection, request);
-                break;
-            case RxVolley.Method.HEAD:
-                connection.setRequestMethod("HEAD");
-                break;
-            case RxVolley.Method.OPTIONS:
-                connection.setRequestMethod("OPTIONS");
-                break;
-            case RxVolley.Method.TRACE:
-                connection.setRequestMethod("TRACE");
-                break;
-            case RxVolley.Method.PATCH:
-                connection.setRequestMethod("PATCH");
-                addBodyIfExists(connection, request);
-                break;
-            default:
-                throw new IllegalStateException("Unknown method type.");
-        }
-    }
-
-    /**
-     * 如果有body则添加
-     */
-    private static void addBodyIfExists(HttpURLConnection connection, Request<?> request)
-            throws IOException {
-        byte[] body = request.getBody();
-        if (body != null) {
-            connection.setDoOutput(true);
-            connection.addRequestProperty(HEADER_CONTENT_TYPE,
-                    request.getBodyContentType());
-            DataOutputStream out = new DataOutputStream(
-                    connection.getOutputStream());
-            out.write(body);
-            out.close();
-        }
+    public interface UrlRewriter {
+        /**
+         * 重写用于请求的URL
+         */
+        String rewriteUrl(String originalUrl);
     }
 }

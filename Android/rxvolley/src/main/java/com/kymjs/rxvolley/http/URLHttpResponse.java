@@ -30,21 +30,36 @@ import java.util.HashMap;
  */
 public class URLHttpResponse implements Parcelable {
 
+    public static final Parcelable.Creator<URLHttpResponse> CREATOR = new Parcelable
+            .Creator<URLHttpResponse>() {
+        public URLHttpResponse createFromParcel(Parcel source) {
+            return new URLHttpResponse(source);
+        }
+
+        public URLHttpResponse[] newArray(int size) {
+            return new URLHttpResponse[size];
+        }
+    };
     private static final long serialVersionUID = 1L;
-
     private HashMap<String, String> headers;
-
     private int responseCode;
-
     private String responseMessage;
-
     private InputStream contentStream;
-
     private String contentEncoding;
-
     private String contentType;
-
     private long contentLength;
+
+    public URLHttpResponse() {
+    }
+
+    protected URLHttpResponse(Parcel in) {
+        this.headers = (HashMap<String, String>) in.readSerializable();
+        this.responseCode = in.readInt();
+        this.responseMessage = in.readString();
+        this.contentEncoding = in.readString();
+        this.contentType = in.readString();
+        this.contentLength = in.readLong();
+    }
 
     public HashMap<String, String> getHeaders() {
         return headers;
@@ -116,27 +131,4 @@ public class URLHttpResponse implements Parcelable {
         dest.writeString(this.contentType);
         dest.writeLong(this.contentLength);
     }
-
-    public URLHttpResponse() {
-    }
-
-    protected URLHttpResponse(Parcel in) {
-        this.headers = (HashMap<String, String>) in.readSerializable();
-        this.responseCode = in.readInt();
-        this.responseMessage = in.readString();
-        this.contentEncoding = in.readString();
-        this.contentType = in.readString();
-        this.contentLength = in.readLong();
-    }
-
-    public static final Parcelable.Creator<URLHttpResponse> CREATOR = new Parcelable
-            .Creator<URLHttpResponse>() {
-        public URLHttpResponse createFromParcel(Parcel source) {
-            return new URLHttpResponse(source);
-        }
-
-        public URLHttpResponse[] newArray(int size) {
-            return new URLHttpResponse[size];
-        }
-    };
 }
