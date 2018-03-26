@@ -219,7 +219,7 @@ public class HomeAlbumActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(int errorNo, String strMsg) {
-                super.onFailure(errorNo, strMsg);
+                Log.i(TAG, "onFailure: errNo --- "+errorNo+" || errMsg"+strMsg);
             }
         };
 

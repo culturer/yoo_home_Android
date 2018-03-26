@@ -14,13 +14,22 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.bean.Activity;
 import com.culturer.yoo_home.bean.ActivityItem;
 import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.cahce.CacheData;
+import com.culturer.yoo_home.event.Activity_Event;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
+import com.kymjs.rxvolley.RxVolley;
+import com.kymjs.rxvolley.client.HttpCallback;
+import com.kymjs.rxvolley.client.HttpParams;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.culturer.yoo_home.config.Urls.REGISTER_URL;
 
 public class HomeActivitesAddActivity extends AppCompatActivity {
 
@@ -85,7 +94,7 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
         add_list.setAdapter(addAdapter);
         add_list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 ActivityItem item = items.get(position);
                 //删除指定项
                 new AlertDialog.Builder(HomeActivitesAddActivity.this)
@@ -95,6 +104,7 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //做出删除操作
+                                delItem(position);
                             }
                         })
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -186,9 +196,8 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
         //打包成ActivityItem
         ActivityItem activityItem = new ActivityItem(-1l, (long) BaseMsg.getFamily().getId(),CacheData.tmp_activity.getId(),-1l,item_title,item_time,item_content);
         Log.i(TAG, "addItem: "+activityItem.toString());
-        //存入缓存
-//        CacheData.tmp_activity_item.add(activityItem);
-        //存入缓存应该放在与服务器同步数据之后
+        //存入临时缓存
+        CacheData.tmp_activity_item.add(activityItem);
         //刷新显示
         items.add(activityItem);
         addAdapter.setDataAndrUpdate(items);
@@ -201,15 +210,103 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
         item.setDesc(content);
         item.setTitle(title);
         item.setTime(time);
-        items.set(position,item);
+        addAdapter.setDataAndrUpdate(items);
+        //刷新临时缓存
+        ActivityItem tmp_item = CacheData.tmp_activity_item.get(position);
+        tmp_item.setDesc(content);
+        tmp_item.setTitle(title);
+        tmp_item.setTime(time);
+    }
+
+    //删除活动项
+    private void delItem(int position){
+        items.remove(position);
+        CacheData.tmp_activity_item.remove(position);
         addAdapter.setDataAndrUpdate(items);
     }
 
     //确定提交操作
     private void addOption(){
         //将CacheData.tmp_activity 以及items中的数据同步到服务器
+
+        HttpParams params = new HttpParams();
+//        params.putHeaders();
+//        params.put();
+        HttpCallback callback = new HttpCallback() {
+            @Override
+            public void onSuccess(String t) {
+                Log.i(TAG, "onSuccess: "+t);
+            }
+
+            @Override
+            public void onFailure(int errorNo, String strMsg) {
+                Log.i(TAG, "onFailure: errNo --- "+errorNo+" || errMsg --- "+strMsg);
+            }
+        };
+        new RxVolley.Builder()
+                .url(REGISTER_URL)
+                .httpMethod(RxVolley.Method.POST)
+                .contentType(RxVolley.ContentType.FORM)
+                .params(params)
+                .cacheTime(0)
+                .shouldCache(false)
+                .callback(callback)
+                .encoding("UTF-8")
+                .doTask();
+
+        //存缓存
+        CacheData.homeActivities.add(CacheData.tmp_activity);
+        //存数据库
+        savw2DB(CacheData.tmp_activity);
+
+        HttpParams params1 = new HttpParams();
+//        params.putHeaders();
+//        params.put();
+        HttpCallback callback1 = new HttpCallback() {
+            @Override
+            public void onSuccess(String t) {
+                Log.i(TAG, "onSuccess: "+t);
+            }
+
+            @Override
+            public void onFailure(int errorNo, String strMsg) {
+                Log.i(TAG, "onFailure: errNo --- "+errorNo+" || errMsg --- "+strMsg);
+            }
+        };
+        new RxVolley.Builder()
+                .url(REGISTER_URL)
+                .httpMethod(RxVolley.Method.POST)
+                .contentType(RxVolley.ContentType.FORM)
+                .params(params1)
+                .cacheTime(0)
+                .shouldCache(false)
+                .callback(callback1)
+                .encoding("UTF-8")
+                .doTask();
+
         //将数据存到缓存以及本地数据库
+        for (int i= 0; i<CacheData.tmp_activity_item.size();i++){
+            ActivityItem item = CacheData.tmp_activity_item.get(i);
+            CacheData.tmp_activity_item.remove(i);
+            CacheData.homeActivityItems.add(item);
+            save2DB(item);
+        }
+
         //刷新显示
+        items.clear();
+        addAdapter.setDataAndrUpdate(items);
+
+        //发送广播
+        EventBus.getDefault().post(new Activity_Event(Activity_Event.HomeActivity_NEW,CacheData.tmp_activity));
+
+    }
+
+    private void save2DB(ActivityItem item){
+
+    }
+
+    private void savw2DB(Activity activity){
+
     }
 
 }

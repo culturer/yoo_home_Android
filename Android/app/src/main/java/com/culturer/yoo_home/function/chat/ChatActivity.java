@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.event.Activity_Event;
 import com.google.gson.Gson;
 import com.culturer.yoo_home.bean.ChatMsg;
 import com.culturer.yoo_home.cahce.BaseMsg;

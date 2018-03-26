@@ -136,8 +136,8 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         initData();
         initView();
         EventBus.getDefault().register(this);
-
     }
+
 
     //接收Arrangement变更广播
     @Subscribe
@@ -157,15 +157,17 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
 
     @Subscribe
     public void reveiveMsg(Activity_Event event){
-        if (event.type == Activity_Event.HomeActivity_NEW){
-            homeActivity = event.getActivity();
-            String desc = "";
-            if (homeActivity != null && homeActivity.getDesc() !=null){
-                desc =homeActivity.getDesc();
-            }else {
-                homemain_activity.setVisibility(View.GONE);
+        if (event.getActivity().getId()!=null && event.getActivity().getId()!=0){
+            if (event.type == Activity_Event.HomeActivity_NEW){
+                homeActivity = event.getActivity();
+                String desc = "";
+                if (homeActivity != null && homeActivity.getDesc() !=null){
+                    desc =homeActivity.getDesc();
+                }else {
+                    homemain_activity.setVisibility(View.GONE);
+                }
+                homemain_activity.setText(desc);
             }
-            homemain_activity.setText(desc);
         }
     }
 
