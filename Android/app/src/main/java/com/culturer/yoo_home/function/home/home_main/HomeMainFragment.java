@@ -33,6 +33,7 @@ import com.culturer.yoo_home.function.home.home_album.HomeAlbumActivity;
 import com.culturer.yoo_home.function.home.home_arrangement.HomeArrangementActivity;
 import com.culturer.yoo_home.util.StringUtil;
 
+import com.culturer.yoo_home.util.TimeUtil;
 import com.culturer.yoo_home.widget.circleMenu.CircleMenu;
 
 
@@ -194,6 +195,9 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         //初始化home_activity标签
         if (CacheData.homeActivities !=null && CacheData.homeActivities.size()>0 ){
             homeActivity = CacheData.homeActivities.get(CacheData.homeActivities.size()-1);
+        }else {
+            homeActivity = new Activity(0l,true, (long) BaseMsg.getFamily().getId(), TimeUtil.getCurrentTime(),"还没有活动安排，快来发起活动吧~",0l);
+            CacheData.homeActivities.add(homeActivity);
         }
 
         //初始化home_activity弹窗内部内容
@@ -209,6 +213,8 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         //初始化日程安排标签
         if ( CacheData.arrangements != null && CacheData.arrangements.size()>0 ){
             arrangement = CacheData.arrangements.get(CacheData.arrangements.size()-1);
+        }else {
+            arrangement = new Arrangement(0l, (long) BaseMsg.getUser().getId(),"近期还没有安排哟,快来写写近期的计划吧",TimeUtil.getCurrentTime());
         }
     }
 
@@ -366,12 +372,12 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
 
     //设置四个角标签数据
     private void setLabels(){
-        //四个角标签的点击事件
+        //家庭公告
         String ntfy = "";
         if (family!=null && family.getMsg()!=null){
             ntfy = family.getFamilyNotifyTitle();
         }else {
-            homemain_notify.setVisibility(View.GONE);
+            ntfy = "暂无新的家庭公告" ;
         }
         homemain_notify.setText(ntfy);
         homemain_notify.setOnClickListener(new View.OnClickListener() {
@@ -382,11 +388,12 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             }
         });
 
+        //家庭活动
         String desc = "";
         if (homeActivity != null && homeActivity.getDesc() !=null){
             desc =homeActivity.getDesc();
         }else {
-            homemain_activity.setVisibility(View.GONE);
+//            homemain_activity.setVisibility(View.GONE);
         }
         homemain_activity.setText(desc);
         homemain_activity.setOnClickListener(new View.OnClickListener() {
@@ -397,6 +404,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             }
         });
 
+        //家族活动
         homemain_familyactivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -405,6 +413,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             }
         });
 
+        //日程安排
         String arg = "";
         if (arrangement!=null && arrangement.getDesc()!=null){
             arg = arrangement.getDesc();

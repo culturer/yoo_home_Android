@@ -15,16 +15,14 @@ import com.kymjs.rxvolley.client.HttpCallback;
 
 public class LoadPresenter extends BasePresenter<ILoadView,LoadRespository> {
 
-    private static final String TAG= "LoginPresenter";
+    private static final String TAG= "LoadPresenter";
 
     //加载数据的条数,用于登陆进度条的控制
-    private static final int LOAD_SUCCESS = 6;
+    private static final int LOAD_SUCCESS = 7;
     private static volatile int loadMsgCount = 0 ;
-
 
     public LoadPresenter(ILoadView view, LoadRespository respository, Context context) {
         super(view, respository, context);
-
     }
 
     /**
@@ -54,15 +52,15 @@ public class LoadPresenter extends BasePresenter<ILoadView,LoadRespository> {
      *检查数据是否加载完毕
      * loadMsgCount 可以当进度条显示来用
      */
-    public synchronized void checkLoad(){
+    public synchronized void checkLoad(String tag){
         ++loadMsgCount;
-        Log.i(TAG, "checkLoad: "+loadMsgCount);
+        Log.i(TAG, "checkLoad: "+tag+" --- "+loadMsgCount);
+        view.setprogress(((float)loadMsgCount)/((float)LOAD_SUCCESS));
         if (loadMsgCount == LOAD_SUCCESS ){
             clear();
             view.loadSuccess();
         }
     }
-
 
     //加载用户相册信息
     private void loadUserAlbums(){
@@ -71,13 +69,12 @@ public class LoadPresenter extends BasePresenter<ILoadView,LoadRespository> {
             public void onSuccess(String t) {
                 Log.i(TAG, "loadUserAlbums: "+t);
                 respository.saveUserAlbums(t);
-                checkLoad();
+                checkLoad("UserAlbums");
             }
-
             @Override
             public void onFailure(int errorNo, String strMsg) {
                 Log.i(TAG, "onFailure: errorNo---"+errorNo+"  errMsg"+strMsg);
-                view.loadFail();
+                view.loadFail(strMsg);
             }
         };
         respository.loadUerAlbums(callback);
@@ -91,19 +88,18 @@ public class LoadPresenter extends BasePresenter<ILoadView,LoadRespository> {
                 public void onSuccess(String t) {
                     respository.saveFamilyAlbums(t);
                     Log.i(TAG, "loadFamilyAlbums: "+t);
-                    checkLoad();
+                    checkLoad("FamilyAlbums");
                 }
-
                 @Override
                 public void onFailure(int errorNo, String strMsg) {
                     Log.i(TAG, "onFailure: errorNo---"+errorNo+"  errMsg"+strMsg);
-                    view.loadFail();
+                    view.loadFail(strMsg);
                 }
             };
             respository.loadFamilyAlbums(callback);
         }else {
             Log.i(TAG, "loadFamilyAlbums: family is null !!!");
-            checkLoad();
+            checkLoad("FamilyAlbums");
         }
     }
 
@@ -114,13 +110,12 @@ public class LoadPresenter extends BasePresenter<ILoadView,LoadRespository> {
             public void onSuccess(String t) {
                 respository.savePhotos(t);
                 Log.i(TAG, "loadPhoto: "+t);
-                checkLoad();
+                checkLoad("Photo");
             }
-
             @Override
             public void onFailure(int errorNo, String strMsg) {
                 Log.i(TAG, "onFailure: errorNo---"+errorNo+"  errMsg"+strMsg);
-                view.loadFail();
+                view.loadFail(strMsg);
             }
         };
         respository.loadPhoto(callback);
@@ -133,19 +128,18 @@ public class LoadPresenter extends BasePresenter<ILoadView,LoadRespository> {
                 @Override
                 public void onSuccess(String t) {
                     respository.saveHomeActivities(t);
-                    checkLoad();
+                    checkLoad("HomeActivities");
                     Log.i(TAG, "loadHomeActivities: "+t);
                 }
-
                 @Override
                 public void onFailure(int errorNo, String strMsg) {
                     Log.i(TAG, "onFailure: errorNo---"+errorNo+"  errMsg"+strMsg);
-                    view.loadFail();
+                    view.loadFail(strMsg);
                 }
             };
             respository.loadHomeActivities(callback);
         }else {
-            checkLoad();
+            checkLoad("HomeActivities");
         }
 
     }
@@ -158,13 +152,12 @@ public class LoadPresenter extends BasePresenter<ILoadView,LoadRespository> {
             public void onSuccess(String t) {
                 Log.i(TAG, "loadActivityItems: "+t);
                 respository.saveActivityItems(t);
-                checkLoad();
+                checkLoad("ActivityItems");
             }
-
             @Override
             public void onFailure(int errorNo, String strMsg) {
                 Log.i(TAG, "onFailure: errorNo---"+errorNo+"  errMsg"+strMsg);
-                view.loadFail();
+                view.loadFail(strMsg);
             }
         };
         respository.loadActivityItems(callback,false);
@@ -177,14 +170,13 @@ public class LoadPresenter extends BasePresenter<ILoadView,LoadRespository> {
             public void onSuccess(String t) {
 
                 respository.saveArrangements(t);
-                checkLoad();
+                checkLoad("Arrangement");
                 Log.i(TAG, "loadArrangement: "+t);
             }
-
             @Override
             public void onFailure(int errorNo, String strMsg) {
                 Log.i(TAG, "onFailure: errorNo --- "+errorNo+" errMsg --- "+strMsg);
-                view.loadFail();
+                view.loadFail(strMsg);
             }
         };
         respository.loadArrangement(callback);
@@ -197,12 +189,12 @@ public class LoadPresenter extends BasePresenter<ILoadView,LoadRespository> {
             public void onSuccess(String t) {
                 Log.i(TAG, "loadArticles: "+t);
                 respository.saveArticles(t);
-                checkLoad();
+                checkLoad("Articles");
             }
             @Override
             public void onFailure(int errorNo, String strMsg) {
                 Log.i(TAG, "loadArticles err: errNo --- "+errorNo+" errMsg --- "+strMsg);
-                view.loadFail();
+                view.loadFail(strMsg);
             }
         };
         respository.loadArticles(callback);

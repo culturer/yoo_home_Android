@@ -9,4 +9,5 @@ import com.culturer.yoo_home.base.mvpbase.IView;
 public interface ILoginView extends IView<LoginPresenter> {
     void loginSuccess();
     void loginFail();
+    void logining();
 }

@@ -250,7 +250,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mBtnLogin.setClickable(false);
                 RxKeyboardTool.hideSoftInput(LoginActivity.this);
                 String tel = mEtMobile.getText().toString();
                 String password = MD5Util.encrypt(mEtPassword.getText().toString().trim());
@@ -288,7 +287,14 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
     @Override
     public void loginFail() {
-        mBtnLogin.setClickable(true);
+        mBtnLogin.setEnabled(true);
+        mEtMobile.setEnabled(true);
+        mIvCleanPhone.setEnabled(true);
+        mEtPassword.setEnabled(true);
+        mCleanPassword.setEnabled(true);
+        mIvShowPwd.setEnabled(true);
+        mRegist.setEnabled(true);
+        mForgetPassword.setEnabled(true);
     }
 
     //加载数据失败处理
@@ -296,9 +302,20 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == LOGIN_ONSUCCESS && resultCode == LOAD_FILE){
-            Toast.makeText(this,"加载数据失败",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"加载数据失败 "+data.getStringExtra("msg"),Toast.LENGTH_LONG).show();
             mBtnLogin.setClickable(true);
         }
     }
 
+    @Override
+    public void logining() {
+        mBtnLogin.setEnabled(false);
+        mEtMobile.setEnabled(false);
+        mIvCleanPhone.setEnabled(false);
+        mEtPassword.setEnabled(false);
+        mCleanPassword.setEnabled(false);
+        mIvShowPwd.setEnabled(false);
+        mRegist.setEnabled(false);
+        mForgetPassword.setEnabled(false);
+    }
 }

@@ -80,19 +80,24 @@ public class LoadActivity extends AppCompatActivity implements ILoadView {
         this.finish();
     }
 
-    @Override
-    public void loadFail() {
-        Intent intent = new Intent();
-        Bundle datas = new Bundle();
-        intent.putExtra("datas",datas);
-        setResult(LOAD_FILE,intent);
-        //关闭过渡动画
-        titanic.cancel();
-    }
-
     //初始化Service
     private void initService(){
         Intent intent = new Intent(this,MQTTService.class);
         startService(intent);
+    }
+
+    @Override
+    public void loadFail(String msg ) {
+        Intent intent = new Intent();
+        intent.putExtra("msg",msg);
+        setResult(LOAD_FILE,intent);
+        //关闭过渡动画
+        titanic.cancel();
+        this.finish();
+    }
+
+    @Override
+    public void setprogress(float num) {
+        loadCount.setText((num*100)+"%");
     }
 }
