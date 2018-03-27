@@ -13,6 +13,7 @@ import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.config.CaptchaConfig;
 import com.culturer.yoo_home.config.ParamConfig;
 
+import com.culturer.yoo_home.util.HttpUtil;
 import com.culturer.yoo_home.util.MD5Util;
 import com.culturer.yoo_home.util.StringUtil;
 import com.kymjs.rxvolley.RxVolley;
@@ -117,17 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
         HttpParams params = new HttpParams();
         params.put(ParamConfig.PHONE,register_phone.getText().toString());
         params.put(ParamConfig.PASSWORD, MD5Util.encrypt(register_password.getText().toString().trim()));
-        new RxVolley.Builder()
-                .url(REGISTER_URL)
-                .httpMethod(RxVolley.Method.POST)
-                .contentType(RxVolley.ContentType.FORM)
-                .params(params)
-                .cacheTime(0)
-                .shouldCache(false)
-                .callback(callback)
-                .encoding("UTF-8")
-                .doTask();
-
+        HttpUtil.send(callback,params,REGISTER_URL);
     }
 
     //获取验证码
@@ -158,16 +149,8 @@ public class RegisterActivity extends AppCompatActivity {
         params.put(HTTP_OPTIONS, CaptchaConfig.OPTIONS_CREATE);
         params.put(CaptchaConfig.TYPE,CaptchaConfig.TYPE_NUMBER);
 
-        new RxVolley.Builder()
-                .url(CAPTCHA_URL)
-                .httpMethod(RxVolley.Method.POST)
-                .contentType(RxVolley.ContentType.FORM)
-                .params(params)
-                .cacheTime(0)
-                .shouldCache(false)
-                .callback(callback)
-                .encoding("UTF-8")
-                .doTask();
+        HttpUtil.send(callback,params,CAPTCHA_URL);
+
     }
 
     //验证验证码
@@ -205,16 +188,7 @@ public class RegisterActivity extends AppCompatActivity {
         params.put(CaptchaConfig.KEY,key);
         params.put(CaptchaConfig.VALUE,register_indicate.getText().toString());
 
-        new RxVolley.Builder()
-                .url(CAPTCHA_URL)
-                .httpMethod(RxVolley.Method.POST)
-                .contentType(RxVolley.ContentType.FORM)
-                .params(params)
-                .cacheTime(0)
-                .shouldCache(false)
-                .callback(callback)
-                .encoding("UTF-8")
-                .doTask();
+        HttpUtil.send(callback,params,CAPTCHA_URL);
 
     }
 

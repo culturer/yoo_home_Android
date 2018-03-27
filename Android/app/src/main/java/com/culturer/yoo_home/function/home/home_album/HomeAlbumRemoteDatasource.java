@@ -3,6 +3,7 @@ package com.culturer.yoo_home.function.home.home_album;
 import android.content.Context;
 
 import com.culturer.yoo_home.base.mvpbase.BaseRemoteDataSource;
+import com.culturer.yoo_home.util.HttpUtil;
 import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.client.HttpCallback;
 import com.kymjs.rxvolley.client.HttpParams;
@@ -18,15 +19,6 @@ public class HomeAlbumRemoteDatasource extends BaseRemoteDataSource {
         super(context);
     }
     public void delAlbum(HttpParams params, HttpCallback callback){
-        new RxVolley.Builder()
-                .url(ALBUMS_URL)
-                .httpMethod(RxVolley.Method.POST)
-                .contentType(RxVolley.ContentType.FORM)
-                .params(params)
-                .cacheTime(0)
-                .shouldCache(false)         //取消页面缓存
-                .callback(callback)
-                .encoding("UTF-8")
-                .doTask();
+        HttpUtil.send(callback,params,ALBUMS_URL);
     }
 }

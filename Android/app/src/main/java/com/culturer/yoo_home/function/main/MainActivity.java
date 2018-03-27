@@ -1,5 +1,6 @@
 package com.culturer.yoo_home.function.main;
 
+import android.app.ActivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;

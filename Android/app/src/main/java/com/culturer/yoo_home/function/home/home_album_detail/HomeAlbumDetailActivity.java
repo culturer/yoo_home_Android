@@ -18,8 +18,6 @@ import java.util.List;
 
 public class HomeAlbumDetailActivity extends AppCompatActivity {
 
-    private static final String TAG = "HomeAlbumDetailActivity";
-
     private View contentView;
     ListView home_album_detail_list;
 
@@ -79,7 +77,7 @@ public class HomeAlbumDetailActivity extends AppCompatActivity {
     }
 
     private void initNavigation(View contentView) {
-        LinearLayout topNavigation = (LinearLayout) contentView.findViewById(R.id.home_album_detail_topNavigation);
+        LinearLayout topNavigation = contentView.findViewById(R.id.home_album_detail_topNavigation);
         HomeNavigation.Builder builder = new HomeNavigation.Builder(this, topNavigation);
         builder.setCenterHomeTopic("Yoo+")
                 .setCenterHomeTitle("心若向阳无畏悲伤")
@@ -88,6 +86,6 @@ public class HomeAlbumDetailActivity extends AppCompatActivity {
     }
 
     private void initListView(){
-        home_album_detail_list = (ListView) findViewById(R.id.home_album_detail_list);
+        home_album_detail_list = findViewById(R.id.home_album_detail_list);
     }
 }

@@ -39,11 +39,6 @@ public class HomeAlbumRespository extends BaseRespository<HomeAlbumLocalDatasour
             if (photos.get(i).getAlbumId() == albumId){
                 strPhotos.add("http://"+BASE_URL+"/"+photos.get(i).getFileUrl());
                 Log.i(TAG, "getPhotos: "+BASE_URL+"/"+photos.get(i).getFileUrl());
-
-//                拼出图片地址
-//                例:
-//                http://127.0.0.1:8080/photos/2/Screenshot_2018-02-01-16-24-42-856_com.hytera.pstsapp.png
-
             }
         }
         return strPhotos;

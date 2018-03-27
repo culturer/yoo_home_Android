@@ -19,17 +19,25 @@ import com.culturer.yoo_home.bean.ActivityItem;
 import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.cahce.CacheData;
 import com.culturer.yoo_home.event.Activity_Event;
+import com.culturer.yoo_home.util.HttpUtil;
+import com.culturer.yoo_home.util.TimeUtil;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
-import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.client.HttpCallback;
 import com.kymjs.rxvolley.client.HttpParams;
 
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.culturer.yoo_home.config.Urls.REGISTER_URL;
+import static com.culturer.yoo_home.config.ParamConfig.HTTP_OPTIONS;
+import static com.culturer.yoo_home.config.ParamConfig.HTTP_STATUS;
+import static com.culturer.yoo_home.config.ParamConfig.HTTP_STATUS_SUCCESS;
+import static com.culturer.yoo_home.config.Urls.ACTIVITIES_ITEM_URL;
+import static com.culturer.yoo_home.config.Urls.ACTIVITIES_URL;
+
 
 public class HomeActivitesAddActivity extends AppCompatActivity {
 
@@ -39,6 +47,7 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
     private Button add_btn;
     private Button ok_btn;
     private ListView add_list;
+    private EditText add_title;
 
     private HomeActivityItemAddAdapter addAdapter;
     private List<ActivityItem> items ;
@@ -88,6 +97,7 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
         add_list = contentView.findViewById(R.id.add_list);
         add_btn = contentView.findViewById(R.id.add_btn);
         ok_btn = contentView.findViewById(R.id.ok_btn);
+        add_title = contentView.findViewById(R.id.add_title);
     }
 
     private void initListView(){
@@ -134,19 +144,15 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
                                 EditText homeacty_alert_title = dialogView.findViewById(R.id.homeacty_alert_title);
                                 EditText homeacty_alert_content = dialogView.findViewById(R.id.homeacty_alert_content);
                                 EditText homeacty_alert_time = dialogView.findViewById(R.id.homeacty_alert_time);
                                 final String item_title = homeacty_alert_title.getText().toString();
                                 final String item_content = homeacty_alert_content.getText().toString();
                                 final String item_time = homeacty_alert_time.getText().toString();
-
                                 //进行修改操作
                                 changeItem(position,item_title,item_content,item_time);
-
                                 dialog.dismiss();
-
                             }
                         })
                         .create().show();
@@ -227,66 +233,36 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
 
     //确定提交操作
     private void addOption(){
-        //将CacheData.tmp_activity 以及items中的数据同步到服务器
 
-        HttpParams params = new HttpParams();
-//        params.putHeaders();
-//        params.put();
-        HttpCallback callback = new HttpCallback() {
-            @Override
-            public void onSuccess(String t) {
-                Log.i(TAG, "onSuccess: "+t);
-            }
+        CacheData.tmp_activity.setCreateTime(TimeUtil.getCurrentTime());
+        CacheData.tmp_activity.setActivityType(true);
+        CacheData.tmp_activity.setAddressId(-1l);
+        CacheData.tmp_activity.setDesc(add_title.getText().toString());
+        CacheData.tmp_activity.setFamilyId((long) BaseMsg.getFamily().getId());
 
-            @Override
-            public void onFailure(int errorNo, String strMsg) {
-                Log.i(TAG, "onFailure: errNo --- "+errorNo+" || errMsg --- "+strMsg);
-            }
-        };
-        new RxVolley.Builder()
-                .url(REGISTER_URL)
-                .httpMethod(RxVolley.Method.POST)
-                .contentType(RxVolley.ContentType.FORM)
-                .params(params)
-                .cacheTime(0)
-                .shouldCache(false)
-                .callback(callback)
-                .encoding("UTF-8")
-                .doTask();
+        Activity activity = new Activity();
+        activity.setFamilyId( CacheData.tmp_activity.getFamilyId());
+        activity.setActivityType( CacheData.tmp_activity.isActivityType());
+        activity.setAddressId( CacheData.tmp_activity.getAddressId());
+        activity.setDesc( CacheData.tmp_activity.getDesc());
+        activity.setCreateTime( CacheData.tmp_activity.getCreateTime());
 
+        sendActivity(activity);
         //存缓存
         CacheData.homeActivities.add(CacheData.tmp_activity);
         //存数据库
         savw2DB(CacheData.tmp_activity);
 
-        HttpParams params1 = new HttpParams();
-//        params.putHeaders();
-//        params.put();
-        HttpCallback callback1 = new HttpCallback() {
-            @Override
-            public void onSuccess(String t) {
-                Log.i(TAG, "onSuccess: "+t);
-            }
-
-            @Override
-            public void onFailure(int errorNo, String strMsg) {
-                Log.i(TAG, "onFailure: errNo --- "+errorNo+" || errMsg --- "+strMsg);
-            }
-        };
-        new RxVolley.Builder()
-                .url(REGISTER_URL)
-                .httpMethod(RxVolley.Method.POST)
-                .contentType(RxVolley.ContentType.FORM)
-                .params(params1)
-                .cacheTime(0)
-                .shouldCache(false)
-                .callback(callback1)
-                .encoding("UTF-8")
-                .doTask();
-
         //将数据存到缓存以及本地数据库
         for (int i= 0; i<CacheData.tmp_activity_item.size();i++){
-            ActivityItem item = CacheData.tmp_activity_item.get(i);
+            ActivityItem item = new ActivityItem();
+            item.setId(((long) i+3000));
+            item.setActivityId(CacheData.tmp_activity_item.get(i).getActivityId());
+            item.setCreateTime(CacheData.tmp_activity_item.get(i).getCreateTime());
+            item.setTitle(CacheData.tmp_activity_item.get(i).getTitle());
+            item.setDesc(CacheData.tmp_activity_item.get(i).getDesc());
+            item.setFamilyId(CacheData.tmp_activity_item.get(i).getFamilyId());
+
             CacheData.tmp_activity_item.remove(i);
             CacheData.homeActivityItems.add(item);
             save2DB(item);
@@ -295,9 +271,88 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
         //刷新显示
         items.clear();
         addAdapter.setDataAndrUpdate(items);
-
         //发送广播
         EventBus.getDefault().post(new Activity_Event(Activity_Event.HomeActivity_NEW,CacheData.tmp_activity));
+        HomeActivitesAddActivity.this.finish();
+    }
+
+    //将CacheData.tmp_activity 以及items中的数据同步到服务器
+    private void sendActivity(final Activity activity){
+
+        HttpParams params = new HttpParams();
+//        params.putHeaders();
+        params.put(HTTP_OPTIONS,1);
+        params.put("activityType","true");
+        params.put("familyId",BaseMsg.getFamily().getId());
+        params.put("desc","desc");
+        params.put("addressId",-1);
+
+        HttpCallback callback = new HttpCallback() {
+            @Override
+            public void onSuccess(String t) {
+                Log.i(TAG, "sendActivity: "+t);
+                try {
+                    JSONObject jsonObject = new JSONObject(t);
+                    if (jsonObject.getInt(HTTP_STATUS) == HTTP_STATUS_SUCCESS){
+                        int activityId = jsonObject.getInt("activityId");
+                        CacheData.tmp_activity.setId((long) activityId);
+                        activity.setId((long) activityId);
+                        CacheData.homeActivities.add(activity);
+                        sendItem(activity);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int errorNo, String strMsg) {
+                Log.i(TAG, "onFailure: errNo --- "+errorNo+" || errMsg --- "+strMsg);
+            }
+        };
+        HttpUtil.send(callback,params,ACTIVITIES_URL);
+    }
+
+    private void sendItem(Activity activity){
+
+        for (int i=0 ;i<CacheData.tmp_activity_item.size();i++){
+            CacheData.tmp_activity_item.get(i).setActivityId(activity.getId());
+            HttpParams params = new HttpParams();
+//       params.putHeaders();
+            params.put(HTTP_OPTIONS,1);
+            params.put("familyId",BaseMsg.getFamily().getId());
+            params.put("activityId", String.valueOf(CacheData.tmp_activity_item.get(i).getActivityId()));
+            params.put("title",CacheData.tmp_activity_item.get(i).getTitle());
+            params.put("desc",CacheData.tmp_activity_item.get(i).getDesc());
+
+            final int finalI = i;
+            HttpCallback callback = new HttpCallback() {
+                int count = finalI;
+                @Override
+                public void onSuccess(String t) {
+                    Log.i(TAG, "sendItem: "+t);
+                    Log.i(TAG, "sendItem: "+count);
+                    try {
+                        JSONObject jsonObject = new JSONObject(t);
+                        if (jsonObject.getInt(HTTP_STATUS )== HTTP_STATUS_SUCCESS){
+                            int activityItemId = jsonObject.getInt("activityItemId");
+//                            这里存在数组越界
+                            CacheData.tmp_activity_item.get(count).setId((long) activityItemId);
+                            CacheData.homeActivityItems.add( CacheData.tmp_activity_item.get(count));
+                            CacheData.tmp_activity_item.remove(count);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(int errorNo, String strMsg) {
+                    Log.i(TAG, "onFailure: errNo --- "+errorNo+" || errMsg --- "+strMsg);
+                }
+            };
+            HttpUtil.send(callback,params,ACTIVITIES_ITEM_URL);
+        }
 
     }
 
