@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import static com.culturer.yoo_home.config.Config.STATUS;
+import static com.culturer.yoo_home.config.ParamConfig.HTTP_STATUS_SUCCESS;
 
 /**
  * Created by Administrator on 2017/11/16.
@@ -21,7 +22,6 @@ import static com.culturer.yoo_home.config.Config.STATUS;
 public class HomeMainPresenter extends BasePresenter<IHomeMainView,HomeMainRespository> {
 
     private static final String TAG= "HomeMainPresenter";
-    private Gson gson = new Gson();
 
     public HomeMainPresenter(IHomeMainView view, HomeMainRespository respository, Context context) {
         super(view, respository, context);
@@ -35,11 +35,11 @@ public class HomeMainPresenter extends BasePresenter<IHomeMainView,HomeMainRespo
 
     }
 
-
     public void updateFamily(String notify,String time){
         final Family family = BaseMsg.getFamily();
         family.setFamilyNotifyTitle(notify);
         family.setFamilyNotifyContent(time);
+        Gson gson = new Gson();
         final String strFamily = gson.toJson(family,Family.class);
         HttpCallback callback = new HttpCallback() {
             @Override
@@ -53,8 +53,7 @@ public class HomeMainPresenter extends BasePresenter<IHomeMainView,HomeMainRespo
                 Log.i(TAG, "onSuccess: "+t);
                 try {
                     JSONObject jsonObject = new JSONObject(t);
-                    int status = jsonObject.getInt(STATUS);
-                    if ( status == 200 ){
+                    if ( jsonObject.getInt(STATUS) == HTTP_STATUS_SUCCESS ){
                         respository.saveFamily(family,strFamily);
                         view.loadSuccess(family);
                     }else {

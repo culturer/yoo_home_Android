@@ -64,7 +64,7 @@ public class HomeActivitiesAdapter extends BaseAdapter {
         return convertView;
     }
 
-    //用来更新日程列表
+
     public void setDataAndrUpdate(List<Activity> datas){
         if (datas != null && datas.size()>0){
             this.datas = datas;
@@ -72,11 +72,8 @@ public class HomeActivitiesAdapter extends BaseAdapter {
         }
     }
 
-    //用来更新指定日程内容
-    public void setItem(ViewHolder holder,Activity data){
+    private void setItem(ViewHolder holder,Activity data){
         if (data!=null){
-//            holder.home_arrangement_usericon.setImageResource(data.usericon);
-//            holder.home_arrangement_username.setText(data.username);
             holder.home_arrangement_desc.setText(data.getDesc());
             holder.home_arrangement_time.setText(data.getCreateTime());
         }else {
@@ -86,17 +83,15 @@ public class HomeActivitiesAdapter extends BaseAdapter {
 
     private class ViewHolder{
 
-        public ImageView home_arrangement_usericon;
-        public TextView home_arrangement_username;
-        public TextView home_arrangement_desc;
-        public TextView home_arrangement_time;
+        TextView home_arrangement_desc;
+        TextView home_arrangement_time;
 
 
-        public ViewHolder() {}
+        ViewHolder() {}
 
-        public void initViewHolder(View view){
-            home_arrangement_desc = (TextView) view.findViewById(R.id.home_arrangement_desc);
-            home_arrangement_time = (TextView) view.findViewById(R.id.home_arrangement_time);
+        void initViewHolder(View view){
+            home_arrangement_desc = view.findViewById(R.id.home_activity_desc);
+            home_arrangement_time = view.findViewById(R.id.home_activity_time);
         }
 
     }

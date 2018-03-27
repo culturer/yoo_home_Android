@@ -3,6 +3,7 @@ package com.culturer.yoo_home.function.login.load;
 import android.content.Context;
 
 import com.culturer.yoo_home.base.mvpbase.BaseRemoteDataSource;
+import com.culturer.yoo_home.util.HttpUtil;
 import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.client.HttpCallback;
 import com.kymjs.rxvolley.client.HttpParams;
@@ -26,116 +27,39 @@ public class LoadRemoteDataSource extends BaseRemoteDataSource {
         super(context);
     }
 
-    //发起登录请求
-
-    public void login(HttpCallback callback, HttpParams params){
-        new RxVolley.Builder()
-                .url(LOGIN_URL)
-                .httpMethod(RxVolley.Method.POST)
-                .contentType(RxVolley.ContentType.FORM)
-                .params(params)
-                .cacheTime(0)
-                .shouldCache(false)         //取消页面缓存
-                .callback(callback)
-                .encoding("UTF-8")
-                .doTask();
-    }
 
     //加载用户相册
     public void loadUerAlbums(HttpCallback callback , HttpParams params){
-        new RxVolley.Builder()
-                .url(ALBUMS_URL)
-                .httpMethod(RxVolley.Method.POST)
-                .contentType(RxVolley.ContentType.FORM)
-                .params(params)
-                .cacheTime(0)
-                .shouldCache(false)
-                .callback(callback)
-                .encoding("UTF-8")
-                .doTask();
+        HttpUtil.send(callback,params,ALBUMS_URL);
     }
 
     //加载家庭相册
     public void loadFamilyAlbums(HttpCallback callback , HttpParams params){
-        new RxVolley.Builder()
-                .url(ALBUMS_URL)
-                .httpMethod(RxVolley.Method.POST)
-                .contentType(RxVolley.ContentType.FORM)
-                .params(params)
-                .cacheTime(0)
-                .shouldCache(false)
-                .callback(callback)
-                .encoding("UTF-8")
-                .doTask();
+        HttpUtil.send(callback,params,ALBUMS_URL);
     }
 
     //加载家庭活动相册
     public void loadHomeActivities(HttpCallback callback , HttpParams params){
-        new RxVolley.Builder()
-                .url(ACTIVITIES_URL)
-                .httpMethod(RxVolley.Method.POST)
-                .contentType(RxVolley.ContentType.FORM)
-                .params(params)
-                .cacheTime(0)
-                .shouldCache(false)
-                .callback(callback)
-                .encoding("UTF-8")
-                .doTask();
+        HttpUtil.send(callback,params,ACTIVITIES_URL);
     }
 
     //加载日程安排
     public void loadArrangement(HttpCallback callback , HttpParams params){
-        new RxVolley.Builder()
-                .url(ARRANGEMENTS_URL)
-                .httpMethod(RxVolley.Method.POST)
-                .contentType(RxVolley.ContentType.FORM)
-                .params(params)
-                .cacheTime(0)
-                .shouldCache(false)
-                .callback(callback)
-                .encoding("UTF-8")
-                .doTask();
+        HttpUtil.send(callback,params,ARRANGEMENTS_URL);
     }
 
     //加载相片
     public void loadPhoto(HttpCallback callback , HttpParams params){
-        new RxVolley.Builder()
-                .url(PHOTOS_URL)
-                .httpMethod(RxVolley.Method.POST)
-                .contentType(RxVolley.ContentType.FORM)
-                .params(params)
-                .cacheTime(0)
-                .shouldCache(false)
-                .callback(callback)
-                .encoding("UTF-8")
-                .doTask();
+        HttpUtil.send(callback,params,PHOTOS_URL);
     }
 
     //加载活动详情
     public void loadActivityItems(HttpCallback callback , HttpParams params){
-        new RxVolley.Builder()
-                .url(ACTIVITIES_ITEM_URL)
-                .httpMethod(RxVolley.Method.POST)
-                .contentType(RxVolley.ContentType.FORM)
-                .params(params)
-                .cacheTime(0)
-                .shouldCache(false)
-                .callback(callback)
-                .encoding("UTF-8")
-                .doTask();
+        HttpUtil.send(callback,params,ACTIVITIES_ITEM_URL);
     }
 
     //加载亲友圈数据
     public void loadArticles(HttpCallback callback , HttpParams params){
-        new RxVolley.Builder()
-                .url(ARTICLE_URL)
-                .httpMethod(RxVolley.Method.POST)
-                .contentType(RxVolley.ContentType.FORM)
-                .params(params)
-                .cacheTime(0)
-                .shouldCache(false)
-                .callback(callback)
-                .encoding("UTF-8")
-                .doTask();
+        HttpUtil.send(callback,params,ARTICLE_URL);
     }
 }

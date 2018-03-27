@@ -136,7 +136,6 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         EventBus.getDefault().register(this);
     }
 
-
     //接收Arrangement变更广播
     @Subscribe
     public void receiveMsg(Arrangement_Event event){
@@ -389,11 +388,13 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         });
 
         //家庭活动
-        String desc = "";
+        String desc;
         if (homeActivity != null && homeActivity.getDesc() !=null){
             desc =homeActivity.getDesc();
         }else {
-//            homemain_activity.setVisibility(View.GONE);
+            homeActivity = new Activity(0l,true, (long) BaseMsg.getFamily().getId(), TimeUtil.getCurrentTime(),"还没有活动安排，快来发起活动吧~",0l);
+            CacheData.homeActivities.add(homeActivity);
+            desc =homeActivity.getDesc();
         }
         homemain_activity.setText(desc);
         homemain_activity.setOnClickListener(new View.OnClickListener() {
@@ -484,7 +485,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
     }
 
     @Override
-    public void loadSuccess(Family family) {
+    public void loadSuccess(Family family){
         this.family = family;
         //更新四个角标签显示
         setLabels();

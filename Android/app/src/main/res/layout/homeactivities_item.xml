@@ -8,14 +8,14 @@
 
 
     <TextView
-        android:id="@+id/home_arrangement_desc"
+        android:id="@+id/home_activity_desc"
         android:text="Song1"
         android:gravity="center"
         android:maxLines="3"
         android:layout_width="match_parent"
         android:layout_height="60dp" />
     <TextView
-        android:id="@+id/home_arrangement_time"
+        android:id="@+id/home_activity_time"
         android:text="2017.12.05 19:44"
         android:gravity="center"
         android:layout_width="match_parent"

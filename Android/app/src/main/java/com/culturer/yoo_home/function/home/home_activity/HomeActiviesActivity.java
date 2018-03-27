@@ -19,8 +19,8 @@ import com.culturer.yoo_home.bean.Activity;
 import com.culturer.yoo_home.bean.ActivityItem;
 import com.culturer.yoo_home.cahce.CacheData;
 import com.culturer.yoo_home.event.Activity_Event;
+import com.culturer.yoo_home.util.HttpUtil;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
-import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.client.HttpCallback;
 import com.kymjs.rxvolley.client.HttpParams;
 
@@ -30,7 +30,8 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.culturer.yoo_home.config.Urls.REGISTER_URL;
+import static com.culturer.yoo_home.config.ParamConfig.HTTP_OPTIONS;
+import static com.culturer.yoo_home.config.Urls.ACTIVITIES_URL;
 
 public class HomeActiviesActivity extends AppCompatActivity {
 
@@ -66,7 +67,7 @@ public class HomeActiviesActivity extends AppCompatActivity {
     @Subscribe
     public void receiveEvent(Activity_Event event){
         if (event.type == Activity_Event.HomeActivity_NEW && event.getActivity()!=null){
-            activities_data.add(event.getActivity());
+            activities_data = CacheData.homeActivities;
             adapter.setDataAndrUpdate(activities_data);
         }
     }
@@ -119,7 +120,7 @@ public class HomeActiviesActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (activities_data!=null &&activities_data.get(i)!=null){
-                    delActivity(activities_data.get(i));
+                    delActivity(i);
                 }
                 return true;
             }
@@ -159,19 +160,18 @@ public class HomeActiviesActivity extends AppCompatActivity {
     //初始化活动详情数据
     private void initDetailData(Activity activity){
         List<ActivityItem> activityItems = new ArrayList<>();
-
         //由于没有数据，先填充假数据
         for (int i=0;i<10;i++){
             activityItems.add(new ActivityItem());
         }
-
         //初始化数据
         for (int i=0;i<CacheData.homeActivityItems.size();i++ ){
-            if (CacheData.homeActivityItems.get(i).getActivityId() == activity.getId()){
+            if (CacheData.homeActivityItems.get(i).getActivityId() !=null
+                    && activity.getId() != null
+                    && CacheData.homeActivityItems.get(i).getActivityId() == activity.getId()){
                 activityItems.add(CacheData.homeActivityItems.get(i));
             }
         }
-
         detailAdapter = new HomeActivitiesDetailAdapter(activityItems,this);
     }
 
@@ -186,24 +186,27 @@ public class HomeActiviesActivity extends AppCompatActivity {
     //1.删除服务器中的数据
     //2.删除缓存中的数据
     //3.删除页面数据,刷新显示。
-    private void delActivity(final Activity activity){
+    private void delActivity(final int position){
         new AlertDialog.Builder(this)
                        .setTitle("删除活动")
-                       .setMessage(activity.getDesc())
+                       .setMessage(CacheData.homeActivities.get(position).getDesc())
                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i){
+                                long activityId = CacheData.homeActivities.get(position).getId();
                                 //缓存中删除数据
-                                int index = CacheData.homeActivities.indexOf(activity);
-                                CacheData.homeActivities.remove(index);
+                                if (position>0){
+                                    CacheData.homeActivities.remove(position);
+                                }
                                 //更新页面显示
-                                int index1 = CacheData.homeActivities.indexOf(activity);
-                                activities_data.remove(index1);
+                                activities_data = CacheData.homeActivities;
                                 adapter.setDataAndrUpdate(activities_data);
                                 //删除数据库中的记录
-                                removeFromDB(activity);
+                                removeFromDB(activityId);
                                 //同步到服务器
                                 HttpParams params = new HttpParams();
+                                params.put(HTTP_OPTIONS,2);
+                                params.put("activityId", (int) activityId);
                                 HttpCallback callback = new HttpCallback() {
                                     @Override
                                     public void onSuccess(String t) {
@@ -213,18 +216,10 @@ public class HomeActiviesActivity extends AppCompatActivity {
                                     @Override
                                     public void onFailure(int errorNo, String strMsg) {
                                         Log.i(TAG, "onFailure: errNo --- " + errorNo + " || errMsg --- " + strMsg);
+                                        Toast.makeText(HomeActiviesActivity.this,"删除活动失败，请检查网络后再尝试操作",Toast.LENGTH_LONG).show();
                                     }
                                 };
-                                new RxVolley.Builder()
-                                        .url(REGISTER_URL)
-                                        .httpMethod(RxVolley.Method.POST)
-                                        .contentType(RxVolley.ContentType.FORM)
-                                        .params(params)
-                                        .cacheTime(0)
-                                        .shouldCache(false)
-                                        .callback(callback)
-                                        .encoding("UTF-8")
-                                        .doTask();
+                                HttpUtil.send(callback,params,ACTIVITIES_URL);
                             }
                        })
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -236,7 +231,7 @@ public class HomeActiviesActivity extends AppCompatActivity {
                         .create().show();
     }
 
-    private void removeFromDB(Activity activity){
+    private void removeFromDB(long activityId){
 
     }
 
