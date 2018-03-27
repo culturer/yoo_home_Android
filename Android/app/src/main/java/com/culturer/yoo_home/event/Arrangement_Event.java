@@ -9,7 +9,7 @@ import com.culturer.yoo_home.bean.Arrangement;
 public class Arrangement_Event {
 
     public static final int Arrangement_NEW = 0 ;
-    public static final int Arrangement_DEL = 0 ;
+    public static final int Arrangement_DEL = 1 ;
 
     public int type;
 

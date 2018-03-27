@@ -1,7 +1,5 @@
 package com.culturer.yoo_home.bean;
 
-import com.culturer.yoo_home.database.TActivity;
-
 /**
  * Created by Administrator on 2017/12/30 0030.
  */
@@ -17,6 +15,7 @@ public class Activity {
      */
 
     private Long Id;
+    private boolean ActivityType;
     private Long FamilyId;
     private String CreateTime;
     private String Desc;
@@ -25,16 +24,13 @@ public class Activity {
     public Activity() {
     }
 
-    public Activity(Long id, Long familyId, String createTime, String desc, Long addressId) {
+    public Activity(Long id, boolean activityType, Long familyId, String createTime, String desc, Long addressId) {
         Id = id;
+        ActivityType = activityType;
         FamilyId = familyId;
         CreateTime = createTime;
         Desc = desc;
         AddressId = addressId;
-    }
-
-    public TActivity str2TActivity(){
-        return new TActivity(Id,FamilyId,CreateTime,Desc,AddressId);
     }
 
     public Long getId() {
@@ -43,6 +39,14 @@ public class Activity {
 
     public void setId(Long id) {
         Id = id;
+    }
+
+    public boolean isActivityType() {
+        return ActivityType;
+    }
+
+    public void setActivityType(boolean activityType) {
+        ActivityType = activityType;
     }
 
     public Long getFamilyId() {
@@ -77,12 +81,11 @@ public class Activity {
         AddressId = addressId;
     }
 
-
-
     @Override
     public String toString() {
         return "Activity{" +
                 "Id=" + Id +
+                ", ActivityType=" + ActivityType +
                 ", FamilyId=" + FamilyId +
                 ", CreateTime='" + CreateTime + '\'' +
                 ", Desc='" + Desc + '\'' +

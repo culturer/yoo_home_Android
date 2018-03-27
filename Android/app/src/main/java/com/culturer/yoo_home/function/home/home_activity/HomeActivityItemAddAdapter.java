@@ -78,7 +78,7 @@ public class HomeActivityItemAddAdapter extends BaseAdapter {
         if (data!=null){
             holder.home_activityitem_title.setText(data.getTitle());
             holder.home_activityitem_desc.setText(data.getDesc());
-            holder.home_activityitem_time.setText(data.getTime());
+            holder.home_activityitem_time.setText(data.getCreateTime());
         }else {
             Log.i(TAG, "setItem: data is null !!!");
         }

@@ -115,7 +115,7 @@ public class HomeAlbumActivity extends AppCompatActivity {
         LinearLayout topNavigation = (LinearLayout) contentView.findViewById(R.id.container);
         HomeNavigation.Builder builder = new HomeNavigation.Builder(this, topNavigation);
         builder.setCenterHomeTopic("Yoo+")
-                .setCenterHomeTitle("心若向阳无畏悲伤")
+                .setCenterHomeTitle("相册")
                 .create().
                 build();
     }

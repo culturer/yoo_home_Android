@@ -167,7 +167,7 @@ public class HomeActiviesActivity extends AppCompatActivity {
 
         //初始化数据
         for (int i=0;i<CacheData.homeActivityItems.size();i++ ){
-            if (CacheData.homeActivityItems.get(i).getHomeActivityId() == activity.getId()){
+            if (CacheData.homeActivityItems.get(i).getActivityId() == activity.getId()){
                 activityItems.add(CacheData.homeActivityItems.get(i));
             }
         }

@@ -57,7 +57,7 @@
         <activity android:name="com.culturer.yoo_home.function.home.family_activity.FamilyActivityActivity" />
         <activity android:name="com.culturer.yoo_home.function.home.home_activity.HomeActivitesAddActivity" />
         <activity android:name="com.culturer.yoo_home.function.home.home_album_detail.HomeAlbumDetailActivity" />
-        <activity android:name="com.culturer.yoo_home.function.chat.ChatActivity" />
+        <!--<activity android:nacom.culturer.yoo_home.function.chat.ChatActivity11vity" />-->
         <!-- Mqtt Service -->
         <service android:name="org.eclipse.paho.android.service.MqttService" />
         <service android:name="com.culturer.yoo_home.service.MQTT.MQTTService" />

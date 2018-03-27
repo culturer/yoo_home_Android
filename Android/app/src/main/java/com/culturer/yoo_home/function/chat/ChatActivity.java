@@ -21,12 +21,15 @@ import com.culturer.yoo_home.bean.ChatMsg;
 import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.service.MQTT.MQTTMsg;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
+import com.vondear.rxtools.RxPhotoTool;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_DATA;
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_RECEIVER;
@@ -105,10 +108,8 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
 
     //初始化列表数据
     private void initListData(){
-        chatMsgs = new LinkedList<>();
-        for (int i=0 ;i< 30;i++){
-//            chatMsgs.add(new ChatMsg("/src/ic_launcher",i*30l,"2018.1.2","快乐写代码","Song"));
-        }
+        chatMsgs = new ArrayList<>();
+
         chatAdapter = new ChatAdapter(chatMsgs,this);
     }
 
@@ -193,11 +194,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         chat_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //1.调用相机拍照
-                //2.将数据打包发送到HttpService
-                //3.HttpService将音频文件上传成功后返回信息
-                //4.收到返回信息后向mqttservice发送消息
-                //5.mqttservice将消息publish出去
+
             }
         });
 
@@ -205,11 +202,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         chat_file.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //1.打开文件管理器
-                //2.将数据打包发送到HttpService
-                //3.HttpService将音频文件上传成功后返回信息
-                //4.收到返回信息后向mqttservice发送消息
-                //5.mqttservice将消息publish出去
+
             }
         });
 
@@ -250,9 +243,11 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
             // 2.将打包的数据发送到MQTT
             //3.MQTT将打包的数据发送出去
             String strMsg  = chat_edit.getText().toString();
-            sendMsg(strMsg);
-            toLast();
-            clearText();
+            if (!strMsg.equals("")){
+                sendMsg(strMsg);
+                toLast();
+                clearText();
+            }
             }
         });
 

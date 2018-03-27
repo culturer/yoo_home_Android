@@ -127,7 +127,7 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
                 EditText homeacty_alert_time = dialogView.findViewById(R.id.homeacty_alert_time);
                 homeacty_alert_title.setText(item.getTitle());
                 homeacty_alert_content.setText(item.getDesc());
-                homeacty_alert_time.setText(item.getTime());
+                homeacty_alert_time.setText(item.getCreateTime());
                 new AlertDialog.Builder(HomeActivitesAddActivity.this)
                         .setTitle("修改活动项")
                         .setView(dialogView)
@@ -194,7 +194,7 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
     private void addItem(String item_title,String item_content,String item_time){
         //读取数据
         //打包成ActivityItem
-        ActivityItem activityItem = new ActivityItem(-1l, (long) BaseMsg.getFamily().getId(),CacheData.tmp_activity.getId(),-1l,item_title,item_time,item_content);
+        ActivityItem activityItem = new ActivityItem(-1l, (long) BaseMsg.getFamily().getId(),CacheData.tmp_activity.getId(),item_title,item_time,item_content);
         Log.i(TAG, "addItem: "+activityItem.toString());
         //存入临时缓存
         CacheData.tmp_activity_item.add(activityItem);
@@ -209,13 +209,13 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
         ActivityItem item = items.get(position);
         item.setDesc(content);
         item.setTitle(title);
-        item.setTime(time);
+        item.setCreateTime(time);
         addAdapter.setDataAndrUpdate(items);
         //刷新临时缓存
         ActivityItem tmp_item = CacheData.tmp_activity_item.get(position);
         tmp_item.setDesc(content);
         tmp_item.setTitle(title);
-        tmp_item.setTime(time);
+        tmp_item.setCreateTime(time);
     }
 
     //删除活动项

@@ -13,7 +13,7 @@ tools:context="com.culturer.yoo_home.function.mine.UserActivity">
     android:id="@+id/rl_avatar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary">
+    android:background="@color/grey">
 
     <TextView
         android:id="@+id/tv_bg"

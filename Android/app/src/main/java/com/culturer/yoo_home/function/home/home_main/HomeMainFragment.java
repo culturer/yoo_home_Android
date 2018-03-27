@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.cahce.BaseMsg;
@@ -72,8 +71,6 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
     private TextView homemain_activity;
     private TextView homemain_familyactivity;
     private TextView homemain_arrangement;
-
-    private AlertDialog dialog;
 
     //用来加载页面的布局
     private View contentView;
@@ -146,6 +143,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             arrangement = event.arrangement;
             String arg = "";
             if (arrangement!=null && arrangement.getDesc()!=null){
+                homemain_arrangement.setVisibility(View.VISIBLE);
                 arg = arrangement.getDesc();
             }else {
                 homemain_arrangement.setVisibility(View.GONE);
@@ -202,7 +200,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         if (CacheData.homeActivityItems!=null && CacheData.homeActivityItems.size()>0 ){
             for (int i=0 ;i<CacheData.homeActivityItems.size();i++){
                 ActivityItem activityItem = CacheData.homeActivityItems.get(i);
-                if (activityItem!=null && activityItem.getHomeActivityId() == homeActivity.getId()){
+                if (activityItem!=null && activityItem.getActivityId() == homeActivity.getId()){
                     activityItems.add(activityItem);
                 }
             }
@@ -229,7 +227,6 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             });
             mStrs.add("song"+i);
         }
-
     }
 
                                                                           //初始化UI组件//
@@ -364,9 +361,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
                 }
             });
         }
-
-        dialog = builder.create();
-        dialog.show();
+        builder.create().show();
     }
 
     //设置四个角标签数据

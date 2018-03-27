@@ -1,7 +1,5 @@
 package com.culturer.yoo_home.bean;
 
-import com.culturer.yoo_home.database.TArrangement;
-
 /**
  * Created by Administrator on 2017/12/30 0030.
  */
@@ -62,9 +60,9 @@ public class Arrangement {
         CreateTime = createTime;
     }
 
-    public TArrangement str2TArrangement(){
-        return new TArrangement(Id,UserId,Desc,CreateTime);
-    }
+//    public TArrangement str2TArrangement(){
+//        return new TArrangement(Id,UserId,Desc,CreateTime);
+//    }
 
     @Override
     public String toString() {
