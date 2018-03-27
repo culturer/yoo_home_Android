@@ -25,7 +25,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.culturer.yoo_home.config.ParamConfig.HTTP_MSG;
 import static com.culturer.yoo_home.config.ParamConfig.HTTP_OPTIONS;
+import static com.culturer.yoo_home.config.ParamConfig.HTTP_STATUS;
+import static com.culturer.yoo_home.config.ParamConfig.HTTP_STATUS_SUCCESS;
 
 /**
  * Created by Administrator on 2017/11/16.
@@ -110,8 +113,8 @@ public class LoadRespository extends BaseRespository<LoadLocalDataSource,LoadRem
         HttpParams params = new HttpParams();
         params.putHeaders("Authorization", PreferenceUtil.getString(ParamConfig.TOKEN,""));
         params.put(Config.USER_ID,BaseMsg.getUser().getId());
-        params.put(Config.ARTICLE_OPTIONS,Config.ARTICLE_OPTIONS_GETALL);
-
+        params.put(HTTP_OPTIONS,Config.ARTICLE_OPTIONS_GETALL);
+        remoteDataSource.loadArticles(callback,params);
     }
 
 
@@ -185,13 +188,17 @@ public class LoadRespository extends BaseRespository<LoadLocalDataSource,LoadRem
     public void saveActivityItems(String msg){
         try {
             JSONObject jsonObject = new JSONObject(msg);
-            JSONArray jActivityItems = jsonObject.getJSONArray("activityitems");
-            if (jActivityItems!=null){
-                for (int i=0 ;i<jActivityItems.length();i++){
-                    ActivityItem activityItem = gson.fromJson(jActivityItems.getString(i),ActivityItem.class);
-                    CacheData.homeActivityItems.add(activityItem);
-                    localDataSource.saveActivityItem(activityItem);
+            if (jsonObject.getInt(HTTP_STATUS) == HTTP_STATUS_SUCCESS){
+                JSONArray jActivityItems = jsonObject.getJSONArray("activityitems");
+                if (jActivityItems!=null){
+                    for (int i=0 ;i<jActivityItems.length();i++){
+                        ActivityItem activityItem = gson.fromJson(jActivityItems.getString(i),ActivityItem.class);
+                        CacheData.homeActivityItems.add(activityItem);
+                        localDataSource.saveActivityItem(activityItem);
+                    }
                 }
+            }else {
+                Log.i(TAG, "saveActivityItems: error "+jsonObject.getString(HTTP_MSG));
             }
 
         } catch (JSONException e) {

@@ -19,6 +19,7 @@ public interface ParamConfig {
     //HTTP 返回码
     String HTTP_STATUS = "status" ;
     String HTTP_OPTIONS = "options" ;
+    String HTTP_MSG = "message" ;
     int HTTP_STATUS_SUCCESS = 200 ;
     int HTTP_STATUS_FAIL = 400 ;
 

@@ -7,6 +7,7 @@ import com.culturer.yoo_home.base.mvpbase.IView;
  */
 
 public interface ILoadView extends IView<LoadPresenter> {
-    void loadFail();
+    void loadFail(String msg);
     void loadSuccess();
+    void setprogress(float num);
 }

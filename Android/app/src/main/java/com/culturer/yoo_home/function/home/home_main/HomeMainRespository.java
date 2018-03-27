@@ -26,11 +26,6 @@ public class HomeMainRespository extends BaseRespository<HomeMainLocalDataSource
         super(localDataSource, remoteDataSource, context);
     }
 
-    public void loadFamily(HttpCallback callback){
-        HttpParams params = new HttpParams();
-        remoteDataSource.loadFamily(callback,params);
-    }
-
     public void updateFamily(HttpCallback callback, String familyNotifyTitle){
         Log.i(TAG, "updateFamily: "+BaseMsg.getFamily().toString());
         HttpParams params = new HttpParams();

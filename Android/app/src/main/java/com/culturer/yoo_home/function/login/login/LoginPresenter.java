@@ -38,6 +38,7 @@ public class LoginPresenter extends BasePresenter<ILoginView,LoginRespository> {
      * @param password
      */
     public void login(final String tel , final String password){
+        view.logining();
         HttpCallback callback = new HttpCallback() {
             @Override
             public void onSuccess(String t) {
