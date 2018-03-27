@@ -55,44 +55,51 @@ import java.util.List;
  * cause the pool to exceed the limit, least-recently-used buffers are disposed.
  */
 public class ByteArrayPool {
-    /** The buffer pool, arranged both by last use and by buffer size */
-    private final List<byte[]> mBuffersByLastUse = new LinkedList<byte[]>();
-    private final List<byte[]> mBuffersBySize = new ArrayList<byte[]>(64);
-
-    /** The total size of the buffers in the pool */
-    private int mCurrentSize = 0;
-
     /**
-     * The maximum aggregate size of the buffers in the pool. Old buffers are
-     * discarded to stay under this limit.
+     * Compares buffers by size
      */
-    private final int mSizeLimit;
-
-    /** Compares buffers by size */
     protected static final Comparator<byte[]> BUF_COMPARATOR = new Comparator<byte[]>() {
         @Override
         public int compare(byte[] lhs, byte[] rhs) {
             return lhs.length - rhs.length;
         }
     };
+    /**
+     * Singleton for this class.
+     */
+    private static ByteArrayPool mPool = new ByteArrayPool(4096);
+    /**
+     * The buffer pool, arranged both by last use and by buffer size
+     */
+    private final List<byte[]> mBuffersByLastUse = new LinkedList<byte[]>();
+    private final List<byte[]> mBuffersBySize = new ArrayList<byte[]>(64);
+    /**
+     * The maximum aggregate size of the buffers in the pool. Old buffers are
+     * discarded to stay under this limit.
+     */
+    private final int mSizeLimit;
+    /**
+     * The total size of the buffers in the pool
+     */
+    private int mCurrentSize = 0;
 
     /**
-     * @param sizeLimit
-     *            the maximum size of the pool, in bytes
+     * @param sizeLimit the maximum size of the pool, in bytes
      */
     private ByteArrayPool(int sizeLimit) {
         mSizeLimit = sizeLimit;
     }
 
-    /** Singleton for this class. */
-    private static ByteArrayPool mPool = new ByteArrayPool(4096);
-
-    /** Get the singleton instance. */
+    /**
+     * Get the singleton instance.
+     */
     public static ByteArrayPool get() {
         return mPool;
     }
 
-    /** Init and persisting the singleton instance. */
+    /**
+     * Init and persisting the singleton instance.
+     */
     public static void init(int poolSize) {
         mPool = new ByteArrayPool(poolSize);
     }
@@ -100,9 +107,8 @@ public class ByteArrayPool {
     /**
      * Returns a buffer from the pool if one is available in the requested size,
      * or allocates a new one if a pooled one is not available.
-     * 
-     * @param len
-     *            the minimum size, in bytes, of the requested buffer. The
+     *
+     * @param len the minimum size, in bytes, of the requested buffer. The
      *            returned buffer may be larger.
      * @return a byte[] buffer is always returned.
      */
@@ -122,9 +128,8 @@ public class ByteArrayPool {
     /**
      * Returns a buffer to the pool, throwing away old buffers if the pool would
      * exceed its allotted size.
-     * 
-     * @param buf
-     *            the buffer to return to the pool.
+     *
+     * @param buf the buffer to return to the pool.
      */
     public synchronized void returnBuf(byte[] buf) {
         if (buf == null || buf.length > mSizeLimit) {

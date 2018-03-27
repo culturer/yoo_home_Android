@@ -157,13 +157,11 @@ public class UserActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     initUCrop(data.getData());
                 }
-
                 break;
             case RxPhotoTool.GET_IMAGE_BY_CAMERA://选择照相机之后的处理
                 if (resultCode == RESULT_OK) {
                     initUCrop(RxPhotoTool.imageUriFromCamera);
                 }
-
                 break;
             case RxPhotoTool.CROP_IMAGE://普通裁剪后的处理
 

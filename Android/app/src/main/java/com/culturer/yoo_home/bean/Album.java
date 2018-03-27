@@ -1,7 +1,5 @@
 package com.culturer.yoo_home.bean;
 
-import com.culturer.yoo_home.database.TAlbum;
-
 /**
  * Created by Administrator on 2017/12/30 0030.
  */
@@ -84,9 +82,9 @@ public class Album {
         CreateTime = createTime;
     }
 
-    public TAlbum str2TAlbum(){
-        return new TAlbum(Id,UserId,FamilyId,Name,Icon,CreateTime);
-    }
+//    public TAlbum str2TAlbum(){
+//        return new TAlbum(Id,UserId,FamilyId,Name,Icon,CreateTime);
+//    }
 
     @Override
     public String toString() {

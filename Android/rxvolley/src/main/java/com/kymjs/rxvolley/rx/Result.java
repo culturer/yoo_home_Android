@@ -33,10 +33,6 @@ public class Result {
     public Map<String, String> headers;
     public int errorCode;
 
-    public boolean isSuccess() {
-        return error == null;
-    }
-
     public Result(String url, Response<byte[]> response) {
         this.url = url;
         this.data = response.result;
@@ -62,5 +58,9 @@ public class Result {
         this.url = url;
         this.error = error;
         this.errorCode = errorCode;
+    }
+
+    public boolean isSuccess() {
+        return error == null;
     }
 }

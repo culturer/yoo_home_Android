@@ -27,10 +27,11 @@ import io.reactivex.subjects.PublishSubject;
  */
 public class RxBus {
 
+    private static volatile RxBus mInstance;
+    private final PublishSubject<Object> bus = PublishSubject.create();
+
     private RxBus() {
     }
-
-    private static volatile RxBus mInstance;
 
     public static RxBus getDefault() {
         if (mInstance == null) {
@@ -42,8 +43,6 @@ public class RxBus {
         }
         return mInstance;
     }
-
-    private final PublishSubject<Object> bus = PublishSubject.create();
 
     public void post(Object event) {
         if (event instanceof Result) {

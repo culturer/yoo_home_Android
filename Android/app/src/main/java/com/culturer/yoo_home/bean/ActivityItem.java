@@ -6,34 +6,22 @@ package com.culturer.yoo_home.bean;
 
 public class ActivityItem {
 
-    /**
-     * Id : 1
-     * FamilyId : 0
-     * HomeActivityId : 1
-     * FamilyActivityId : 0
-     * Title : 出发
-     * Time : 下午3:00
-     * Desc : 坐车前往目的地
-     */
-
     private Long Id;
     private Long FamilyId;
-    private Long HomeActivityId;
-    private Long FamilyActivityId;
+    private Long ActivityId;
     private String Title;
-    private String Time;
+    private String CreateTime;
     private String Desc;
 
     public ActivityItem() {
     }
 
-    public ActivityItem(Long id, Long familyId, Long homeActivityId, Long familyActivityId, String title, String time, String desc) {
+    public ActivityItem(Long id, Long familyId, Long activityId, String title, String createTime, String desc) {
         Id = id;
         FamilyId = familyId;
-        HomeActivityId = homeActivityId;
-        FamilyActivityId = familyActivityId;
+        ActivityId = activityId;
         Title = title;
-        Time = time;
+        CreateTime = createTime;
         Desc = desc;
     }
 
@@ -41,56 +29,48 @@ public class ActivityItem {
         return Id;
     }
 
-    public void setId(Long Id) {
-        this.Id = Id;
+    public void setId(Long id) {
+        Id = id;
     }
 
     public Long getFamilyId() {
         return FamilyId;
     }
 
-    public void setFamilyId(Long FamilyId) {
-        this.FamilyId = FamilyId;
+    public void setFamilyId(Long familyId) {
+        FamilyId = familyId;
     }
 
-    public Long getHomeActivityId() {
-        return HomeActivityId;
+    public Long getActivityId() {
+        return ActivityId;
     }
 
-    public void setHomeActivityId(Long HomeActivityId) {
-        this.HomeActivityId = HomeActivityId;
-    }
-
-    public Long getFamilyActivityId() {
-        return FamilyActivityId;
-    }
-
-    public void setFamilyActivityId(Long FamilyActivityId) {
-        this.FamilyActivityId = FamilyActivityId;
+    public void setActivityId(Long activityId) {
+        ActivityId = activityId;
     }
 
     public String getTitle() {
         return Title;
     }
 
-    public void setTitle(String Title) {
-        this.Title = Title;
+    public void setTitle(String title) {
+        Title = title;
     }
 
-    public String getTime() {
-        return Time;
+    public String getCreateTime() {
+        return CreateTime;
     }
 
-    public void setTime(String Time) {
-        this.Time = Time;
+    public void setCreateTime(String createTime) {
+        CreateTime = createTime;
     }
 
     public String getDesc() {
         return Desc;
     }
 
-    public void setDesc(String Desc) {
-        this.Desc = Desc;
+    public void setDesc(String desc) {
+        Desc = desc;
     }
 
     @Override
@@ -98,10 +78,9 @@ public class ActivityItem {
         return "ActivityItem{" +
                 "Id=" + Id +
                 ", FamilyId=" + FamilyId +
-                ", HomeActivityId=" + HomeActivityId +
-                ", FamilyActivityId=" + FamilyActivityId +
+                ", ActivityId=" + ActivityId +
                 ", Title='" + Title + '\'' +
-                ", Time='" + Time + '\'' +
+                ", CreateTime='" + CreateTime + '\'' +
                 ", Desc='" + Desc + '\'' +
                 '}';
     }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,13 +20,21 @@ import com.culturer.yoo_home.bean.ActivityItem;
 import com.culturer.yoo_home.cahce.CacheData;
 import com.culturer.yoo_home.event.Activity_Event;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
+import com.kymjs.rxvolley.RxVolley;
+import com.kymjs.rxvolley.client.HttpCallback;
+import com.kymjs.rxvolley.client.HttpParams;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.culturer.yoo_home.config.Urls.REGISTER_URL;
+
 public class HomeActiviesActivity extends AppCompatActivity {
+
+    private static final String TAG = "HomeActiviesActivity";
 
     View contentView;
     ListView home_activities_list;
@@ -41,10 +50,25 @@ public class HomeActiviesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         contentView = LayoutInflater.from(this).inflate(R.layout.activity_home_activies,null);
         setContentView(contentView);
+        init();
+    }
+
+    private void init(){
         //初始化数据
         initData();
         //初始化UI组件
         initView();
+        //初始化EventBus
+        EventBus.getDefault().register(this);
+    }
+
+    //接收消息
+    @Subscribe
+    public void receiveEvent(Activity_Event event){
+        if (event.type == Activity_Event.HomeActivity_NEW && event.getActivity()!=null){
+            activities_data.add(event.getActivity());
+            adapter.setDataAndrUpdate(activities_data);
+        }
     }
 
     //初始化数据
@@ -118,7 +142,7 @@ public class HomeActiviesActivity extends AppCompatActivity {
     private void showActivity(Activity activity){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View homeactivities_detai = LayoutInflater.from(this).inflate(R.layout.homeactivities_detail,null);
-        initDetailData();
+        initDetailData(activity);
         initDetailView(homeactivities_detai);
         builder.setTitle(activity.getDesc())
                 .setView(homeactivities_detai);
@@ -133,11 +157,21 @@ public class HomeActiviesActivity extends AppCompatActivity {
     }
 
     //初始化活动详情数据
-    private void initDetailData(){
+    private void initDetailData(Activity activity){
         List<ActivityItem> activityItems = new ArrayList<>();
+
+        //由于没有数据，先填充假数据
         for (int i=0;i<10;i++){
             activityItems.add(new ActivityItem());
         }
+
+        //初始化数据
+        for (int i=0;i<CacheData.homeActivityItems.size();i++ ){
+            if (CacheData.homeActivityItems.get(i).getActivityId() == activity.getId()){
+                activityItems.add(CacheData.homeActivityItems.get(i));
+            }
+        }
+
         detailAdapter = new HomeActivitiesDetailAdapter(activityItems,this);
     }
 
@@ -158,16 +192,52 @@ public class HomeActiviesActivity extends AppCompatActivity {
                        .setMessage(activity.getDesc())
                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                            public void onClick(DialogInterface dialogInterface, int i){
+                                //缓存中删除数据
+                                int index = CacheData.homeActivities.indexOf(activity);
+                                CacheData.homeActivities.remove(index);
+                                //更新页面显示
+                                int index1 = CacheData.homeActivities.indexOf(activity);
+                                activities_data.remove(index1);
+                                adapter.setDataAndrUpdate(activities_data);
+                                //删除数据库中的记录
+                                removeFromDB(activity);
+                                //同步到服务器
+                                HttpParams params = new HttpParams();
+                                HttpCallback callback = new HttpCallback() {
+                                    @Override
+                                    public void onSuccess(String t) {
+                                        Log.i(TAG, "onSuccess: "+t);
+                                    }
 
+                                    @Override
+                                    public void onFailure(int errorNo, String strMsg) {
+                                        Log.i(TAG, "onFailure: errNo --- " + errorNo + " || errMsg --- " + strMsg);
+                                    }
+                                };
+                                new RxVolley.Builder()
+                                        .url(REGISTER_URL)
+                                        .httpMethod(RxVolley.Method.POST)
+                                        .contentType(RxVolley.ContentType.FORM)
+                                        .params(params)
+                                        .cacheTime(0)
+                                        .shouldCache(false)
+                                        .callback(callback)
+                                        .encoding("UTF-8")
+                                        .doTask();
                             }
                        })
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-
+                            public void onClick(DialogInterface dialogInterface, int i){
+                                dialog.dismiss();
                             }
                         })
                         .create().show();
     }
+
+    private void removeFromDB(Activity activity){
+
+    }
+
 }

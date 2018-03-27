@@ -1,7 +1,5 @@
 package com.culturer.yoo_home.bean;
 
-import com.culturer.yoo_home.database.TPhoto;
-
 /**
  * Created by Administrator on 2017/12/30 0030.
  */
@@ -71,9 +69,9 @@ public class Photo {
         CreateTime = createTime;
     }
 
-    public TPhoto str2TPhoto(){
-        return new TPhoto(Id,AlbumId,FileName,FileUrl,CreateTime);
-    }
+//    public TPhoto str2TPhoto(){
+//        return new TPhoto(Id,AlbumId,FileName,FileUrl,CreateTime);
+//    }
 
     @Override
     public String toString() {

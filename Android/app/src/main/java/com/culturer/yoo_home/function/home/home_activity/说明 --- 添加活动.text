@@ -6,8 +6,7 @@
         顶部的EditText add_title --- 活动标题
         中间的ListView add_list --- 活动项列表
         底部的Button add_btn --- 添加按钮
-                     ok_btn --- 提交按钮
-3.数据交互
+                     ok_
     点击 add_btn 输入活动项标题，内容，时间 点击确定
     将输入的内容添加到 add_list 中，并刷新显示
     点击 add_list 中的项可以修改内容

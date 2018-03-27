@@ -26,9 +26,6 @@ import com.squareup.okhttp.OkHttpClient;
 import com.vondear.rxtools.RxTool;
 import com.yanzhenjie.album.Album;
 import com.yanzhenjie.album.AlbumConfig;
-import com.yhao.floatwindow.FloatWindow;
-import com.yhao.floatwindow.MoveType;
-import com.yhao.floatwindow.Screen;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -70,18 +67,6 @@ public class BaseApplication extends Application {
             }
         });
 
-        //效果图1
-        FloatWindow
-                .with(getApplicationContext())
-                .setView(imageView)
-                .setWidth(Screen.width,0.2f)
-                .setHeight(Screen.width,0.2f)
-                .setX(Screen.width,0.8f)
-                .setY(Screen.height,0.3f)
-                .setMoveType(MoveType.slide)
-                .setMoveStyle(500,new BounceInterpolator())
-                .setDesktopShow(true)
-                .build();
     }
 
     private void init(){
@@ -93,7 +78,7 @@ public class BaseApplication extends Application {
         //初始化基础数据中心
         BaseMsg.init();
         //初始化数据库
-        DatabaseUtil.init();
+//        DatabaseUtil.init();
         //初始化数据库调试工具
         initSqliteStudio();
         //初始化Album

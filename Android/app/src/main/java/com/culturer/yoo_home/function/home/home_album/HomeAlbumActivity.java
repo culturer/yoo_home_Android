@@ -28,6 +28,7 @@ import com.culturer.yoo_home.util.ThreadUtil;
 import com.culturer.yoo_home.util.TimeUtil;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
 import com.kymjs.rxvolley.RxVolley;
+
 import com.kymjs.rxvolley.client.HttpCallback;
 import com.kymjs.rxvolley.client.HttpParams;
 import com.yanzhenjie.album.Action;
@@ -114,7 +115,7 @@ public class HomeAlbumActivity extends AppCompatActivity {
         LinearLayout topNavigation = (LinearLayout) contentView.findViewById(R.id.container);
         HomeNavigation.Builder builder = new HomeNavigation.Builder(this, topNavigation);
         builder.setCenterHomeTopic("Yoo+")
-                .setCenterHomeTitle("心若向阳无畏悲伤")
+                .setCenterHomeTitle("相册")
                 .create().
                 build();
     }
@@ -218,7 +219,7 @@ public class HomeAlbumActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(int errorNo, String strMsg) {
-                super.onFailure(errorNo, strMsg);
+                Log.i(TAG, "onFailure: errNo --- "+errorNo+" || errMsg"+strMsg);
             }
         };
 
@@ -327,6 +328,7 @@ public class HomeAlbumActivity extends AppCompatActivity {
 
                                     new RxVolley.Builder()
                                             .url(FILES_URL)
+//                                            .url(FILES_URL)
                                             .httpMethod(RxVolley.Method.POST)
                                             .contentType(RxVolley.ContentType.FORM)
                                             .params(params)

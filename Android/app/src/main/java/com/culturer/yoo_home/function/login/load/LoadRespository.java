@@ -25,6 +25,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.culturer.yoo_home.config.ParamConfig.HTTP_OPTIONS;
+
 /**
  * Created by Administrator on 2017/11/16.
  */
@@ -84,12 +86,13 @@ public class LoadRespository extends BaseRespository<LoadLocalDataSource,LoadRem
     public void loadActivityItems(HttpCallback callback,boolean activityType){
         HttpParams params = new HttpParams();
         params.putHeaders("Authorization", PreferenceUtil.getString(ParamConfig.TOKEN,""));
+        params.put(HTTP_OPTIONS,0);
+        params.put("query_type ",1);
         if (BaseMsg.getFamily()!=null){
             params.put("familyId",BaseMsg.getFamily().getId()+"");
         }else {
             params.put("familyId","-1");
         }
-        params.put("activityType",activityType+"");
         remoteDataSource.loadActivityItems(callback,params);
 
     }

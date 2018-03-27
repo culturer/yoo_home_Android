@@ -46,12 +46,11 @@ import io.reactivex.Observable;
  */
 public class RxVolley {
 
+    public final static File CACHE_FOLDER = FileUtils.getExternalCacheDir("RxVolley");
+    private static RequestQueue sRequestQueue;
+
     private RxVolley() {
     }
-
-    public final static File CACHE_FOLDER = FileUtils.getExternalCacheDir("RxVolley");
-
-    private static RequestQueue sRequestQueue;
 
     /**
      * 获取一个请求队列(单例)
@@ -75,6 +74,72 @@ public class RxVolley {
         } else {
             return false;
         }
+    }
+
+    public static void get(String url, HttpCallback callback) {
+        new Builder().url(url).callback(callback).doTask();
+    }
+
+    public static void get(String url, HttpParams params, HttpCallback callback) {
+        new Builder().url(url).params(params).callback(callback).doTask();
+    }
+
+    public static void post(String url, HttpParams params, HttpCallback callback) {
+        new Builder().url(url).params(params).httpMethod(Method.POST).callback(callback).doTask();
+    }
+
+    public static void post(String url, HttpParams params, ProgressListener listener,
+                            HttpCallback callback) {
+        new Builder().url(url).params(params).progressListener(listener).httpMethod(Method.POST)
+                .callback(callback).doTask();
+    }
+
+    public static void jsonGet(String url, HttpParams params, HttpCallback callback) {
+        new Builder().url(url).params(params).contentType(ContentType.JSON)
+                .httpMethod(Method.GET).callback(callback).doTask();
+    }
+
+    public static void jsonPost(String url, HttpParams params, HttpCallback callback) {
+        new Builder().url(url).params(params).contentType(ContentType.JSON)
+                .httpMethod(Method.POST).callback(callback).doTask();
+    }
+
+    /**
+     * 获取到在本地的二进制缓存
+     *
+     * @param url 缓存的key
+     * @return 缓存内容
+     */
+    public static byte[] getCache(String url) {
+        ICache cache = getRequestQueue().getCache();
+        if (cache != null) {
+            ICache.Entry entry = cache.get(url);
+            if (entry != null) {
+                return entry.data;
+            }
+        }
+        return new byte[0];
+    }
+
+    /**
+     * 下载
+     *
+     * @param storeFilePath    本地存储绝对路径
+     * @param url              要下载的文件的url
+     * @param progressListener 下载进度回调
+     * @param callback         回调
+     */
+    public static FileRequest download(String storeFilePath, String url, ProgressListener
+            progressListener, HttpCallback callback) {
+        RequestConfig config = new RequestConfig();
+        config.mUrl = url;
+        config.mRetryPolicy = new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                20, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        FileRequest request = new FileRequest(storeFilePath, config, callback);
+        request.setTag(url);
+        request.setOnProgressListener(progressListener);
+        new Builder().setRequest(request).doTask();
+        return request;
     }
 
     /**
@@ -305,71 +370,5 @@ public class RxVolley {
             build();
             getRequestQueue().add(request);
         }
-    }
-
-    public static void get(String url, HttpCallback callback) {
-        new Builder().url(url).callback(callback).doTask();
-    }
-
-    public static void get(String url, HttpParams params, HttpCallback callback) {
-        new Builder().url(url).params(params).callback(callback).doTask();
-    }
-
-    public static void post(String url, HttpParams params, HttpCallback callback) {
-        new Builder().url(url).params(params).httpMethod(Method.POST).callback(callback).doTask();
-    }
-
-    public static void post(String url, HttpParams params, ProgressListener listener,
-                            HttpCallback callback) {
-        new Builder().url(url).params(params).progressListener(listener).httpMethod(Method.POST)
-                .callback(callback).doTask();
-    }
-
-    public static void jsonGet(String url, HttpParams params, HttpCallback callback) {
-        new Builder().url(url).params(params).contentType(ContentType.JSON)
-                .httpMethod(Method.GET).callback(callback).doTask();
-    }
-
-    public static void jsonPost(String url, HttpParams params, HttpCallback callback) {
-        new Builder().url(url).params(params).contentType(ContentType.JSON)
-                .httpMethod(Method.POST).callback(callback).doTask();
-    }
-
-    /**
-     * 获取到在本地的二进制缓存
-     *
-     * @param url 缓存的key
-     * @return 缓存内容
-     */
-    public static byte[] getCache(String url) {
-        ICache cache = getRequestQueue().getCache();
-        if (cache != null) {
-            ICache.Entry entry = cache.get(url);
-            if (entry != null) {
-                return entry.data;
-            }
-        }
-        return new byte[0];
-    }
-
-    /**
-     * 下载
-     *
-     * @param storeFilePath    本地存储绝对路径
-     * @param url              要下载的文件的url
-     * @param progressListener 下载进度回调
-     * @param callback         回调
-     */
-    public static FileRequest download(String storeFilePath, String url, ProgressListener
-            progressListener, HttpCallback callback) {
-        RequestConfig config = new RequestConfig();
-        config.mUrl = url;
-        config.mRetryPolicy = new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
-                20, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        FileRequest request = new FileRequest(storeFilePath, config, callback);
-        request.setTag(url);
-        request.setOnProgressListener(progressListener);
-        new Builder().setRequest(request).doTask();
-        return request;
     }
 }

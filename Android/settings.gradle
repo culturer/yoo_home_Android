@@ -1,1 +1,1 @@
-include ':app', ':shimmer', ':okhttp3', ':floatwindow', ':okhttp', ':rxvolley'
+include ':app', ':shimmer', ':okhttp3', ':okhttp', ':rxvolley'

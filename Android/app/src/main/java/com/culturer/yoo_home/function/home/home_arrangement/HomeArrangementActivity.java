@@ -117,7 +117,7 @@ public class HomeArrangementActivity extends AppCompatActivity {
         LinearLayout topNavigation = (LinearLayout) contentView.findViewById(R.id.home_arrangement_topNavigation);
         HomeNavigation.Builder builder = new HomeNavigation.Builder(this, topNavigation);
         builder.setCenterHomeTopic("Yoo+")
-                .setCenterHomeTitle("心若向阳无畏悲伤")
+                .setCenterHomeTitle("日程安排")
                 .create()
                 .build();
     }

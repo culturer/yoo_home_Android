@@ -19,7 +19,6 @@ package com.kymjs.rxvolley.client;
 import android.text.TextUtils;
 import android.util.Log;
 
-
 import com.kymjs.common.FileUtils;
 import com.kymjs.rxvolley.toolbox.HttpParamsEntry;
 
@@ -37,9 +36,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-//import com.kymjs.common.FileUtils;
-//import com.kymjs.common.Log;
-//import com.kymjs.rxvolley.toolbox.HttpParamsEntry;
+
 
 /**
  * Http请求的参数集合
@@ -48,32 +45,26 @@ import java.util.Random;
  */
 public class HttpParams {
 
+    public static final String CHARSET = "UTF-8";
     private final static char[] MULTIPART_CHARS =
             "-_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
-    private String mBoundary = null;
     private static final String NEW_LINE_STR = "\r\n";
     private static final String CONTENT_TYPE = "Content-Type: ";
     private static final String CONTENT_DISPOSITION = "Content-Disposition: ";
-
-    public static final String CHARSET = "UTF-8";
-
     //文本参数和字符集
     private static final String TYPE_TEXT_CHARSET = String.format("text/plain; charset=%s",
             CHARSET);
-
     //字节流参数
     private static final String TYPE_OCTET_STREAM = "application/octet-stream";
-
     //二进制参数
     private static final byte[] BINARY_ENCODING = "Content-Transfer-Encoding: binary\r\n\r\n"
             .getBytes();
     // 文本参数
     private static final byte[] BIT_ENCODING = "Content-Transfer-Encoding: 8bit\r\n\r\n".getBytes();
-
     private final ArrayList<HttpParamsEntry> urlParams = new ArrayList<>(8);
     private final ArrayList<HttpParamsEntry> mHeaders = new ArrayList<>(4);
-
     private final ByteArrayOutputStream mOutputStream = new ByteArrayOutputStream();
+    private String mBoundary = null;
     private boolean hasFile;
     private String contentType = null;
 
@@ -165,13 +156,13 @@ public class HttpParams {
                                      String type, byte[] encodingBytes, String fileName) {
         try {
             writeFirstBoundary();
-            mOutputStream.write(getContentDispositionBytes(paramName, fileName));
-            mOutputStream.write((CONTENT_TYPE + type).getBytes());
-            mOutputStream.write((";charset="+CHARSET).getBytes());
-            mOutputStream.write(NEW_LINE_STR.getBytes());
-            mOutputStream.write(encodingBytes);
-            mOutputStream.write(rawData);
-            mOutputStream.write(NEW_LINE_STR.getBytes());
+//            mOutputStream.write(getContentDispositionBytes(paramName, fileName));
+//            mOutputStream.write((CONTENT_TYPE + type).getBytes());
+//            mOutputStream.write((";charset=" + CHARSET).getBytes());
+//            mOutputStream.write(NEW_LINE_STR.getBytes());
+//            mOutputStream.write(encodingBytes);
+//            mOutputStream.write(rawData);
+//            mOutputStream.write(NEW_LINE_STR.getBytes());
         } catch (final IOException e) {
             e.printStackTrace();
         }
@@ -278,18 +269,5 @@ public class HttpParams {
     public ArrayList<HttpParamsEntry> getHeaders() {
         mHeaders.add(new HttpParamsEntry("Accept-Encoding", "identity"));
         return mHeaders;
-    }
-
-    @Override
-    public String toString() {
-        return "HttpParams{" +
-                "mBoundary='" + mBoundary + '\'' +
-                ", urlParams=" + urlParams +
-                ", mHeaders=" + mHeaders +
-                ", mOutputStream=" + mOutputStream +
-                ", hasFile=" + hasFile +
-                ", contentType='" + contentType + '\'' +
-                ", jsonParams='" + jsonParams + '\'' +
-                '}';
     }
 }

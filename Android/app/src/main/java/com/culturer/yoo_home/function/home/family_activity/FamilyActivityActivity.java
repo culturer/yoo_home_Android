@@ -18,15 +18,27 @@ public class FamilyActivityActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         contentView = LayoutInflater.from(this).inflate(R.layout.activity_family_activity,null);
         setContentView(contentView);
-        initNavigation(contentView);
+        init();
+    }
 
+    private void init(){
+        initData();
+        initView();
+    }
+
+    private void initData(){
+
+    }
+
+    private void initView(){
+        initNavigation(contentView);
     }
 
     private void initNavigation(View contentView) {
         LinearLayout topNavigation = (LinearLayout) contentView.findViewById(R.id.family_activities_topNavigation);
         HomeNavigation.Builder builder = new HomeNavigation.Builder(this, topNavigation);
         builder.setCenterHomeTopic("Yoo+")
-                .setCenterHomeTitle("心若向阳无畏悲伤")
+                .setCenterHomeTitle("家族活动")
                 .create()
                 .build();
     }

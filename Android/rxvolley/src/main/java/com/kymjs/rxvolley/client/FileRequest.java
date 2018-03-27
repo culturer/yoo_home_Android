@@ -69,6 +69,22 @@ public class FileRequest extends Request<byte[]> {
         mTemporaryFile = new File(storeFilePath + ".tmp");
     }
 
+    public static boolean isSupportRange(URLHttpResponse response) {
+        if (TextUtils.equals(getHeader(response, "Accept-Ranges"), "bytes")) {
+            return true;
+        }
+        String value = getHeader(response, "Content-Range");
+        return value != null && value.startsWith("bytes");
+    }
+
+    public static String getHeader(URLHttpResponse response, String key) {
+        return response.getHeaders().get(key);
+    }
+
+    public static boolean isGzipContent(URLHttpResponse response) {
+        return TextUtils.equals(getHeader(response, "Content-Encoding"), "gzip");
+    }
+
     public File getStoreFile() {
         return mStoreFile;
     }
@@ -129,22 +145,6 @@ public class FileRequest extends Request<byte[]> {
     public ArrayList<HttpParamsEntry> putHeader(String k, String v) {
         mHeaders.add(new HttpParamsEntry(k, v));
         return mHeaders;
-    }
-
-    public static boolean isSupportRange(URLHttpResponse response) {
-        if (TextUtils.equals(getHeader(response, "Accept-Ranges"), "bytes")) {
-            return true;
-        }
-        String value = getHeader(response, "Content-Range");
-        return value != null && value.startsWith("bytes");
-    }
-
-    public static String getHeader(URLHttpResponse response, String key) {
-        return response.getHeaders().get(key);
-    }
-
-    public static boolean isGzipContent(URLHttpResponse response) {
-        return TextUtils.equals(getHeader(response, "Content-Encoding"), "gzip");
     }
 
     public byte[] handleResponse(URLHttpResponse response) throws IOException {
