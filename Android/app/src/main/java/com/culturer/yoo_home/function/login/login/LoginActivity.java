@@ -271,8 +271,10 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     @Override
     public LoginPresenter createPresenter() {
 
-        LoginPresenter presenter = new LoginPresenter(this,
-                new LoginRespository(new LoginLocalDataSource(this),
+        LoginPresenter presenter = new LoginPresenter(
+                this,
+                new LoginRespository(
+                        new LoginLocalDataSource(this),
                         new LoginRemoteDataSource(this),
                         this),
                 this);

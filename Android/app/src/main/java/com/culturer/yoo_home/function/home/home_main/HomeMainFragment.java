@@ -156,7 +156,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
     @Subscribe
     public void reveiveMsg(Activity_Event event){
         if (event.getActivity().getId()!=null && event.getActivity().getId()!=0){
-            if (event.type == Activity_Event.HomeActivity_NEW){
+            if (event.type == Activity_Event.NEW){
                 homeActivity = event.getActivity();
                 String desc = "";
                 if (homeActivity != null && homeActivity.getDesc() !=null){
@@ -433,28 +433,32 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
 
     //设置底部标签点击事件
     private void setButtomBtn(){
-        homamain_album_icon.setOnClickListener(new View.OnClickListener() {
+        View btn_album = contentView.findViewById(R.id.btn_album);
+        btn_album.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), HomeAlbumActivity.class);
                 startActivity(intent);
             }
         });
-        homamain_arrange_icon.setOnClickListener(new View.OnClickListener() {
+        View btn_arrangement = contentView.findViewById(R.id.btn_arrangement);
+        btn_arrangement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), HomeArrangementActivity.class);
                 startActivity(intent);
             }
         });
-        homamain_activity_icon.setOnClickListener(new View.OnClickListener() {
+        View btn_homeActivity = contentView.findViewById(R.id.btn_homeActivity);
+        btn_homeActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), HomeActiviesActivity.class);
                 startActivity(intent);
             }
         });
-        homamain_familyactivity_icon.setOnClickListener(new View.OnClickListener() {
+        View btn_familyActivity = contentView.findViewById(R.id.btn_familyActivity);
+        btn_familyActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), FamilyActivityActivity.class);

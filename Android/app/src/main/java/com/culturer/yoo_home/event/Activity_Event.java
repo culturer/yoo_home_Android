@@ -8,7 +8,8 @@ import com.culturer.yoo_home.bean.Activity;
 
 public class Activity_Event {
 
-    public static final int HomeActivity_NEW = 0;
+    public static final int NEW = 0;
+    public static final int DEL = 1;
 
     public int type ;
     public Activity activity;

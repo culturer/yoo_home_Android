@@ -27,6 +27,9 @@ public class HomeActivitiesAdapter extends BaseAdapter {
     private Context context;
 
     public HomeActivitiesAdapter(List<Activity> datas, Context context) {
+        for(int i= 0;i<datas.size();i++){
+            Log.i(TAG, "datas: --- "+i+" "+datas.get(i).getDesc());
+        }
         this.datas = datas;
         this.context = context;
     }
@@ -48,9 +51,7 @@ public class HomeActivitiesAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         ViewHolder viewHolder;
-
         if (convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.homeactivities_item, null);
             viewHolder = new ViewHolder();
@@ -59,7 +60,6 @@ public class HomeActivitiesAdapter extends BaseAdapter {
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
         setItem(viewHolder,datas.get(position));
         return convertView;
     }
@@ -82,18 +82,13 @@ public class HomeActivitiesAdapter extends BaseAdapter {
     }
 
     private class ViewHolder{
-
         TextView home_arrangement_desc;
         TextView home_arrangement_time;
-
-
         ViewHolder() {}
-
         void initViewHolder(View view){
             home_arrangement_desc = view.findViewById(R.id.home_activity_desc);
             home_arrangement_time = view.findViewById(R.id.home_activity_time);
         }
-
     }
 
 }

@@ -6,18 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
-import com.culturer.yoo_home.bean.Activity;
 import com.culturer.yoo_home.bean.ActivityItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/12/5.
+ * 新增活动项的ActivityItem
  */
 
 public class HomeActivityItemAddAdapter extends BaseAdapter {
@@ -80,7 +78,7 @@ public class HomeActivityItemAddAdapter extends BaseAdapter {
             holder.home_activityitem_desc.setText(data.getDesc());
             holder.home_activityitem_time.setText(data.getCreateTime());
         }else {
-            Log.i(TAG, "setItem: data is null !!!");
+            Log.i(TAG, "setItem: data is null !");
         }
     }
 
