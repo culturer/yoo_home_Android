@@ -236,7 +236,7 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
 
         CacheData.tmp_activity.setCreateTime(TimeUtil.getCurrentTime());
         CacheData.tmp_activity.setActivityType(true);
-        CacheData.tmp_activity.setAddressId(-1l);
+        CacheData.tmp_activity.setAddressId(-1L);
         CacheData.tmp_activity.setDesc(add_title.getText().toString());
         CacheData.tmp_activity.setFamilyId((long) BaseMsg.getFamily().getId());
 
@@ -251,7 +251,7 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
         //存缓存
         CacheData.homeActivities.add(CacheData.tmp_activity);
         //存数据库
-        savw2DB(CacheData.tmp_activity);
+        save2DB(CacheData.tmp_activity);
 
         //将数据存到缓存以及本地数据库
         for (int i= 0; i<CacheData.tmp_activity_item.size();i++){
@@ -262,7 +262,6 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
             item.setTitle(CacheData.tmp_activity_item.get(i).getTitle());
             item.setDesc(CacheData.tmp_activity_item.get(i).getDesc());
             item.setFamilyId(CacheData.tmp_activity_item.get(i).getFamilyId());
-
             CacheData.tmp_activity_item.remove(i);
             CacheData.homeActivityItems.add(item);
             save2DB(item);
@@ -272,7 +271,7 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
         items.clear();
         addAdapter.setDataAndrUpdate(items);
         //发送广播
-        EventBus.getDefault().post(new Activity_Event(Activity_Event.HomeActivity_NEW,CacheData.tmp_activity));
+        EventBus.getDefault().post(new Activity_Event(Activity_Event.NEW,CacheData.tmp_activity));
         HomeActivitesAddActivity.this.finish();
     }
 
@@ -280,11 +279,10 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
     private void sendActivity(final Activity activity){
 
         HttpParams params = new HttpParams();
-//        params.putHeaders();
         params.put(HTTP_OPTIONS,1);
         params.put("activityType","true");
         params.put("familyId",BaseMsg.getFamily().getId());
-        params.put("desc","desc");
+        params.put("desc",activity.getDesc());
         params.put("addressId",-1);
 
         HttpCallback callback = new HttpCallback() {
@@ -304,7 +302,6 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(int errorNo, String strMsg) {
                 Log.i(TAG, "onFailure: errNo --- "+errorNo+" || errMsg --- "+strMsg);
@@ -318,34 +315,32 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
         for (int i=0 ;i<CacheData.tmp_activity_item.size();i++){
             CacheData.tmp_activity_item.get(i).setActivityId(activity.getId());
             HttpParams params = new HttpParams();
-//       params.putHeaders();
             params.put(HTTP_OPTIONS,1);
             params.put("familyId",BaseMsg.getFamily().getId());
             params.put("activityId", String.valueOf(CacheData.tmp_activity_item.get(i).getActivityId()));
             params.put("title",CacheData.tmp_activity_item.get(i).getTitle());
             params.put("desc",CacheData.tmp_activity_item.get(i).getDesc());
-
             final int finalI = i;
             HttpCallback callback = new HttpCallback() {
                 int count = finalI;
                 @Override
                 public void onSuccess(String t) {
-                    Log.i(TAG, "sendItem: "+t);
-                    Log.i(TAG, "sendItem: "+count);
+                    Log.i(TAG, "callbackItem: count --- "+count+"，callback --- "+t);
                     try {
                         JSONObject jsonObject = new JSONObject(t);
                         if (jsonObject.getInt(HTTP_STATUS )== HTTP_STATUS_SUCCESS){
                             int activityItemId = jsonObject.getInt("activityItemId");
-//                            这里存在数组越界
                             CacheData.tmp_activity_item.get(count).setId((long) activityItemId);
                             CacheData.homeActivityItems.add( CacheData.tmp_activity_item.get(count));
-                            CacheData.tmp_activity_item.remove(count);
+                            if (count >= CacheData.tmp_activity_item.size()){
+                                Log.i(TAG, "activity send finished ! now start clear cache data ! ");
+                                CacheData.tmp_activity_item.clear();
+                            }
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-
                 @Override
                 public void onFailure(int errorNo, String strMsg) {
                     Log.i(TAG, "onFailure: errNo --- "+errorNo+" || errMsg --- "+strMsg);
@@ -356,11 +351,11 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
     }
 
     private void save2DB(ActivityItem item){
-
+        Log.i(TAG, "save2DB(ActivityItem): id --- "+item.getId()+",desc --- "+item.getDesc());
     }
 
-    private void savw2DB(Activity activity){
-
+    private void save2DB(Activity activity){
+        Log.i(TAG, "savw2DB(Activity): id --- "+activity.getId()+",desc --- "+activity.getDesc());
     }
 
 }

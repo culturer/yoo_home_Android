@@ -90,10 +90,11 @@ public class LoadRespository extends BaseRespository<LoadLocalDataSource,LoadRem
         HttpParams params = new HttpParams();
         params.putHeaders("Authorization", PreferenceUtil.getString(ParamConfig.TOKEN,""));
         params.put(HTTP_OPTIONS,0);
-        params.put("query_type ",1);
+        params.put("query_type",1);
         if (BaseMsg.getFamily()!=null){
             params.put("familyId",BaseMsg.getFamily().getId()+"");
         }else {
+            Log.i(TAG, "loadActivityItems: family is null !");
             params.put("familyId","-1");
         }
         remoteDataSource.loadActivityItems(callback,params);
@@ -189,7 +190,7 @@ public class LoadRespository extends BaseRespository<LoadLocalDataSource,LoadRem
         try {
             JSONObject jsonObject = new JSONObject(msg);
             if (jsonObject.getInt(HTTP_STATUS) == HTTP_STATUS_SUCCESS){
-                JSONArray jActivityItems = jsonObject.getJSONArray("activityitems");
+                JSONArray jActivityItems = jsonObject.getJSONArray("activityItems");
                 if (jActivityItems!=null){
                     for (int i=0 ;i<jActivityItems.length();i++){
                         ActivityItem activityItem = gson.fromJson(jActivityItems.getString(i),ActivityItem.class);

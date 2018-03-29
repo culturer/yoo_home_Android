@@ -17,15 +17,13 @@ import static com.culturer.yoo_home.config.Urls.LOGIN_URL;
 public class LoginRemoteDataSource extends BaseRemoteDataSource {
 
     //初始化
-    public LoginRemoteDataSource(Context context) {
+    LoginRemoteDataSource(Context context) {
         super(context);
     }
 
     //发起登录请求
-
     public void login(HttpCallback callback, HttpParams params){
         HttpUtil.send(callback,params,LOGIN_URL);
     }
-
 
 }

@@ -7,20 +7,8 @@
     android:id="@+id/refreshLayout"
     android:orientation="vertical"
     tools:context="com.culturer.yoo_home.function.home.home_main.HomeMainFragment">
-    <!--android:background="@mipmap/home_main_1_bg"-->
 
-    <!--srlAccentColor srlPrimaryColor 将会改变 Header 和 Footer 的主题颜色-->
-    <!--srlEnablePreviewInEditMode 可以开启和关闭预览功能-->
-    <!--<com.scwang.smartrefresh.header.FunGameHitBlockHeader-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"/>-->
-    <!--<android.support.constraint.ConstraintLayout-->
-        <!--android:id="@+id/home_main"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-        <!--中间圆形菜单-->
-
-        <com.culturer.yoo_home.widget.circleMenu.CircleMenu
+    <com.culturer.yoo_home.widget.circleMenu.CircleMenu
             android:id="@+id/homemain_circleview"
             android:layout_width="300dp"
             android:layout_height="300dp"
@@ -119,6 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
+                android:id="@+id/btn_album"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:layout_width="0dp"
@@ -140,6 +129,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/btn_arrangement"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:layout_width="0dp"
@@ -162,6 +152,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/btn_homeActivity"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:layout_width="0dp"
@@ -184,6 +175,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/btn_familyActivity"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:orientation="vertical"
