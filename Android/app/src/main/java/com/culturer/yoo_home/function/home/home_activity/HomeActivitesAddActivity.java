@@ -353,7 +353,6 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
             };
             HttpUtil.send(callback,params,ACTIVITIES_ITEM_URL);
         }
-
     }
 
     private void save2DB(ActivityItem item){

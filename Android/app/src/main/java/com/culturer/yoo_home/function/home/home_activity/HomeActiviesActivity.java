@@ -82,6 +82,7 @@ public class HomeActiviesActivity extends AppCompatActivity {
         activities_data = CacheData.homeActivities;
         adapter = new HomeActivitiesAdapter(activities_data,this);
     }
+
     //初始化视图
     private void initView(){
         initNavigation(contentView);
@@ -128,7 +129,7 @@ public class HomeActiviesActivity extends AppCompatActivity {
     }
 
     //初始化导航条
-    private void initNavigation(View contentView) {
+    private void initNavigation(View contentView){
         LinearLayout topNavigation = contentView.findViewById(R.id.home_activities_topNavigation);
         HomeNavigation.Builder builder = new HomeNavigation.Builder(this, topNavigation);
         builder.setCenterHomeTopic("Yoo+")
@@ -185,7 +186,7 @@ public class HomeActiviesActivity extends AppCompatActivity {
     //删除活动
     //1.删除服务器中的数据
     //2.删除缓存中的数据
-    //3.删除页面数据,刷新显示。
+    //3.删除页面数据,刷新显示
     private void delActivity(final int position){
         new AlertDialog.Builder(this)
                        .setTitle("删除活动")
@@ -212,7 +213,6 @@ public class HomeActiviesActivity extends AppCompatActivity {
                                     public void onSuccess(String t) {
                                         Log.i(TAG, "onSuccess: "+t);
                                     }
-
                                     @Override
                                     public void onFailure(int errorNo, String strMsg) {
                                         Log.i(TAG, "onFailure: errNo --- " + errorNo + " || errMsg --- " + strMsg);

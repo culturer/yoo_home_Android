@@ -46,7 +46,6 @@ public class HomeFragment extends Fragment {
         if ( parent!=null ){
             parent.removeView(contentView);
         }
-
         return contentView;
     }
 
