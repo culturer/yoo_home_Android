@@ -2,8 +2,8 @@ package com.culturer.yoo_home.function.home.home_activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +50,7 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
     private EditText add_title;
 
     private HomeActivityItemAddAdapter addAdapter;
-    private List<ActivityItem> items ;
+    private List<ActivityItem> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,17 +211,11 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
 
     //修改活动项
     private void changeItem(int position , String title , String content , String time){
-        //刷新列表显示
-        ActivityItem item = items.get(position);
-        item.setDesc(content);
-        item.setTitle(title);
-        item.setCreateTime(time);
+        CacheData.tmp_activity_item.get(position).setDesc(content);
+        CacheData.tmp_activity_item.get(position).setTitle(title);
+        CacheData.tmp_activity_item.get(position).setCreateTime(time);
+        items =  CacheData.tmp_activity_item;
         addAdapter.setDataAndrUpdate(items);
-        //刷新临时缓存
-        ActivityItem tmp_item = CacheData.tmp_activity_item.get(position);
-        tmp_item.setDesc(content);
-        tmp_item.setTitle(title);
-        tmp_item.setCreateTime(time);
     }
 
     //删除活动项
@@ -233,45 +227,26 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
 
     //确定提交操作
     private void addOption(){
-
+        //将数据备份进缓存
         CacheData.tmp_activity.setCreateTime(TimeUtil.getCurrentTime());
         CacheData.tmp_activity.setActivityType(true);
         CacheData.tmp_activity.setAddressId(-1L);
         CacheData.tmp_activity.setDesc(add_title.getText().toString());
         CacheData.tmp_activity.setFamilyId((long) BaseMsg.getFamily().getId());
-
+        //从缓存中读出临时数据并打包
         Activity activity = new Activity();
         activity.setFamilyId( CacheData.tmp_activity.getFamilyId());
         activity.setActivityType( CacheData.tmp_activity.isActivityType());
         activity.setAddressId( CacheData.tmp_activity.getAddressId());
         activity.setDesc( CacheData.tmp_activity.getDesc());
         activity.setCreateTime( CacheData.tmp_activity.getCreateTime());
-
+        //发送活动数据
         sendActivity(activity);
-        //存缓存
-        CacheData.homeActivities.add(CacheData.tmp_activity);
         //存数据库
         save2DB(CacheData.tmp_activity);
-
-        //将数据存到缓存以及本地数据库
-        for (int i= 0; i<CacheData.tmp_activity_item.size();i++){
-            ActivityItem item = new ActivityItem();
-            item.setId(((long) i+3000));
-            item.setActivityId(CacheData.tmp_activity_item.get(i).getActivityId());
-            item.setCreateTime(CacheData.tmp_activity_item.get(i).getCreateTime());
-            item.setTitle(CacheData.tmp_activity_item.get(i).getTitle());
-            item.setDesc(CacheData.tmp_activity_item.get(i).getDesc());
-            item.setFamilyId(CacheData.tmp_activity_item.get(i).getFamilyId());
-            CacheData.tmp_activity_item.remove(i);
-            CacheData.homeActivityItems.add(item);
-            save2DB(item);
-        }
-
         //刷新显示
         items.clear();
         addAdapter.setDataAndrUpdate(items);
-        //发送广播
-        EventBus.getDefault().post(new Activity_Event(Activity_Event.NEW,CacheData.tmp_activity));
         HomeActivitesAddActivity.this.finish();
     }
 
@@ -296,6 +271,9 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
                         CacheData.tmp_activity.setId((long) activityId);
                         activity.setId((long) activityId);
                         CacheData.homeActivities.add(activity);
+                        //发送广播
+                        EventBus.getDefault().post(new Activity_Event(Activity_Event.NEW,CacheData.tmp_activity));
+                        //发送具体的活动项
                         sendItem(activity);
                     }
                 } catch (JSONException e) {
@@ -309,8 +287,16 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
         };
         HttpUtil.send(callback,params,ACTIVITIES_URL);
     }
-
+    
+    //发送活动项
     private void sendItem(Activity activity){
+        
+        //--------------------------------打印一下内存中的数据，调试用-----------------------------------------//
+        for (int i=0; i<CacheData.tmp_activity_item.size();i++){
+            Log.i(TAG, "CacheData.tmp_activity_item: ["+i+"] --- "+CacheData.tmp_activity_item.get(i).toString());
+        }
+        //用完记得删掉
+        //--------------------------------打印一下内存中的数据，调试用-----------------------------------------//
 
         for (int i=0 ;i<CacheData.tmp_activity_item.size();i++){
             CacheData.tmp_activity_item.get(i).setActivityId(activity.getId());
@@ -325,7 +311,14 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
                 int count = finalI;
                 @Override
                 public void onSuccess(String t) {
+                    
+                    //--------------------------------打印一下内存中的数据，调试用-----------------------------------------//
+    
                     Log.i(TAG, "callbackItem: count --- "+count+"，callback --- "+t);
+                    
+                    //用完记得删掉
+                    //--------------------------------打印一下内存中的数据，调试用-----------------------------------------//
+                    
                     try {
                         JSONObject jsonObject = new JSONObject(t);
                         if (jsonObject.getInt(HTTP_STATUS )== HTTP_STATUS_SUCCESS){

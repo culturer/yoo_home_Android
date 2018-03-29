@@ -1,19 +1,18 @@
 package com.culturer.yoo_home.function.login.load;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.function.login.login.LoginActivity;
 import com.culturer.yoo_home.function.main.MainActivity;
 import com.culturer.yoo_home.service.MQTT.MQTTService;
 import com.culturer.yoo_home.util.Typefaces;
 import com.culturer.yoo_home.widget.loading_anim.Titanic;
 import com.culturer.yoo_home.widget.loading_anim.TitanicTextView;
-
-import static com.culturer.yoo_home.config.Config.LOAD_FILE;
 
 public class LoadActivity extends AppCompatActivity implements ILoadView {
 
@@ -88,9 +87,9 @@ public class LoadActivity extends AppCompatActivity implements ILoadView {
 
     @Override
     public void loadFail(String msg ) {
-        Intent intent = new Intent();
+        Intent intent = new Intent(this, LoginActivity.class);
         intent.putExtra("msg",msg);
-        setResult(LOAD_FILE,intent);
+        startActivity(intent);
         //关闭过渡动画
         titanic.cancel();
         this.finish();
