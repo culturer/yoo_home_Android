@@ -13,11 +13,6 @@ public interface Config {
     String MSG_STATE = "msg_state";
     int MSG_STATE_SUCCESS = 200 ;
     int MSG_STATE_FAIL = 400 ;
-
-    //用在登陆后数据加载的成功失败判断
-    int LOGIN_ONSUCCESS = 0x01 ;
-    int LOAD_FILE = 0x02 ;
-
     String FAMILY_OPTIONS = "options";
     int FAMILY_OPTIONS_GET = 0;
     int FAMILY_OPTIONS_ADD = 1;

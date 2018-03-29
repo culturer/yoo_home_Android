@@ -4,9 +4,9 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -31,16 +31,11 @@ import android.widget.Toast;
 import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.function.login.forget.ForgetActivity;
 import com.culturer.yoo_home.function.login.load.LoadActivity;
-import com.culturer.yoo_home.test.TestActivity;
-import com.culturer.yoo_home.util.MD5Util;
-import com.culturer.yoo_home.util.Typefaces;
 import com.culturer.yoo_home.function.login.register.RegisterActivity;
+import com.culturer.yoo_home.util.MD5Util;
 import com.vondear.rxtools.RxAnimationTool;
 import com.vondear.rxtools.RxKeyboardTool;
 import com.vondear.rxtools.activity.AndroidBug5497Workaround;
-
-import static com.culturer.yoo_home.config.Config.LOAD_FILE;
-import static com.culturer.yoo_home.config.Config.LOGIN_ONSUCCESS;
 
 public class LoginActivity extends AppCompatActivity implements ILoginView {
 
@@ -88,6 +83,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         initData();
         initView();
         initEvent();
+        initResult();
     }
 
     private void initData(){
@@ -283,8 +279,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
     @Override
     public void loginSuccess() {
-        startActivityForResult(new Intent(LoginActivity.this,LoadActivity.class),LOGIN_ONSUCCESS);
-        finish();
+        startActivity(new Intent(LoginActivity.this,LoadActivity.class));
     }
 
     @Override
@@ -298,15 +293,14 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         mRegist.setEnabled(true);
         mForgetPassword.setEnabled(true);
     }
-
-    //加载数据失败处理
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == LOGIN_ONSUCCESS && resultCode == LOAD_FILE){
-            Toast.makeText(this,"加载数据失败 "+data.getStringExtra("msg"),Toast.LENGTH_LONG).show();
-            mBtnLogin.setClickable(true);
+    
+    private void initResult() {
+        Intent data = this.getIntent();
+        String msg = data.getStringExtra("msg");
+        if ( !(msg == null || msg.equals("")) ){
+            Toast.makeText(this,"加载数据失败 "+msg,Toast.LENGTH_LONG).show();
         }
+        mBtnLogin.setClickable(true);
     }
 
     @Override

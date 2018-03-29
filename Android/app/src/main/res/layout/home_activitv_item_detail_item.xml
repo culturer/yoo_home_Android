@@ -51,6 +51,7 @@
                 android:textStyle="italic" />
         </LinearLayout>
         <TextView
+            android:id="@+id/homealbum_item_desc"
             android:paddingTop="@dimen/pading"
             android:text="乘坐大巴抵达目的地点,天气有点凉记得多带衣物，以及准备好户外用品"
             android:textSize="@dimen/content_textSize"

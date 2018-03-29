@@ -200,7 +200,9 @@ public class HomeActiviesActivity extends AppCompatActivity {
                                 }
                                 //更新页面显示
                                 activities_data = CacheData.homeActivities;
-                                adapter.setDataAndrUpdate(activities_data);
+                                if (activities_data!=null){
+                                    adapter.setDataAndrUpdate(activities_data);
+                                }
                                 //删除数据库中的记录
                                 removeFromDB(activityId);
                                 //同步到服务器
