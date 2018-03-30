@@ -7,10 +7,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Process;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,20 +20,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.culturer.yoo_home.base.GlideApp;
-import com.vondear.rxtools.RxActivityTool;
-import com.vondear.rxtools.RxImageTool;
+import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
 import com.vondear.rxtools.RxPhotoTool;
 import com.vondear.rxtools.RxSPTool;
-import com.vondear.rxtools.view.RxTitle;
 import com.vondear.rxtools.view.dialog.RxDialogChooseImage;
 import com.vondear.rxtools.view.dialog.RxDialogScaleView;
-import com.vondear.rxtools.view.dialog.RxDialogSureCancel;
 import com.yalantis.ucrop.UCrop;
 import com.yalantis.ucrop.UCropActivity;
 
@@ -45,6 +42,7 @@ import static com.vondear.rxtools.view.dialog.RxDialogChooseImage.LayoutType.TIT
 
 public class UserActivity extends AppCompatActivity {
 
+    View contentView;
     TextView mTvBg;
     ImageView mIvAvatar;
     LinearLayout mLlAnchorLeft;
@@ -65,7 +63,8 @@ public class UserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        contentView = LayoutInflater.from(this).inflate(R.layout.activity_user,null);
+        setContentView(contentView);
         init();
     }
 
@@ -80,6 +79,7 @@ public class UserActivity extends AppCompatActivity {
 
     private void initView(){
         initBaseView();
+        initNavigation(contentView);
     }
 
     private void initBaseView() {
@@ -90,19 +90,19 @@ public class UserActivity extends AppCompatActivity {
                 + r.getResourceTypeName(R.drawable.logo_black) + "/"
                 + r.getResourceEntryName(R.drawable.logo_black));
 
-        mTvBg = findViewById(R.id.tv_bg);
-        mIvAvatar = findViewById(R.id.iv_avatar);
-        mLlAnchorLeft = findViewById(R.id.ll_anchor_left);
-        mRlAvatar = findViewById(R.id.rl_avatar);
-        mTvName = findViewById(R.id.tv_name);
-        mTvConstellation = findViewById(R.id.tv_constellation);
-        mTvBirthday = findViewById(R.id.tv_birthday);
-        mTvAddress = findViewById(R.id.tv_address);
-        mTvLables = findViewById(R.id.tv_lables);
-        mTextView2 = findViewById(R.id.textView2);
-        mEditText2 = findViewById(R.id.editText2);
-        mBtnExit = findViewById(R.id.btn_exit);
-        mActivityUser = findViewById(R.id.activity_user);
+        mTvBg = contentView.findViewById(R.id.tv_bg);
+        mIvAvatar = contentView.findViewById(R.id.iv_avatar);
+        mLlAnchorLeft = contentView.findViewById(R.id.ll_anchor_left);
+        mRlAvatar = contentView.findViewById(R.id.rl_avatar);
+        mTvName = contentView.findViewById(R.id.tv_name);
+        mTvConstellation = contentView.findViewById(R.id.tv_constellation);
+        mTvBirthday = contentView.findViewById(R.id.tv_birthday);
+        mTvAddress = contentView.findViewById(R.id.tv_address);
+        mTvLables = contentView.findViewById(R.id.tv_lables);
+        mTextView2 = contentView.findViewById(R.id.textView2);
+        mEditText2 = contentView.findViewById(R.id.editText2);
+        mBtnExit = contentView.findViewById(R.id.btn_exit);
+        mActivityUser = contentView.findViewById(R.id.activity_user);
 
         mIvAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +113,7 @@ public class UserActivity extends AppCompatActivity {
         mIvAvatar.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                RxImageTool.showBigImageView(context, resultUri);
+//                RxImageTool.showBigImageView(context, resultUri);
                 RxDialogScaleView rxDialogScaleView = new RxDialogScaleView(context);
                 rxDialogScaleView.setImageUri(resultUri);
                 rxDialogScaleView.show();
@@ -144,7 +144,16 @@ public class UserActivity extends AppCompatActivity {
             }
         });
     }
-
+    
+    private void initNavigation(View contentView) {
+        LinearLayout topNavigation = contentView.findViewById(R.id.activity_user);
+        HomeNavigation.Builder builder = new HomeNavigation.Builder(this, topNavigation);
+        builder.setCenterHomeTopic("Yoo+")
+                .setCenterHomeTitle("个人中心")
+                .create().
+                build();
+    }
+    
     private void initDialogChooseImage() {
         RxDialogChooseImage dialogChooseImage = new RxDialogChooseImage(UserActivity.this, TITLE);
         dialogChooseImage.show();

@@ -14,13 +14,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.armour8.yooplus.yooplus.R;
-import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.bean.Activity;
 import com.culturer.yoo_home.bean.ActivityItem;
 import com.culturer.yoo_home.bean.Arrangement;
 import com.culturer.yoo_home.bean.Family;
+import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.cahce.CacheData;
 import com.culturer.yoo_home.config.HomeMainConfig;
 import com.culturer.yoo_home.event.Activity_Event;
@@ -32,15 +33,14 @@ import com.culturer.yoo_home.function.home.home_activity.HomeActivitiesDetailAda
 import com.culturer.yoo_home.function.home.home_album.HomeAlbumActivity;
 import com.culturer.yoo_home.function.home.home_arrangement.HomeArrangementActivity;
 import com.culturer.yoo_home.util.StringUtil;
-
 import com.culturer.yoo_home.util.TimeUtil;
 import com.culturer.yoo_home.widget.circleMenu.CircleMenu;
-
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -206,6 +206,15 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
                 if (activityItem!=null && activityItem.getActivityId() == homeActivity.getId()){
                     activityItems.add(activityItem);
                 }
+                activityItems.sort(new Comparator<ActivityItem>() {
+                    @Override
+                    public int compare(ActivityItem o1, ActivityItem o2) {
+                        if (o1.getNum()<=o2.getNum()){
+                            return 1;
+                        }
+                        return 0;
+                    }
+                });
             }
         }
 
@@ -302,7 +311,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         else if (popType == HomeMainConfig.HOMEMAIN_POP_NOTIFY){
             builder.setTitle("家庭公告");
             View familyView = inflater.inflate(R.layout.homemain_popwindow_notify,null);
-            final EditText homemain_notify_title = (EditText) familyView.findViewById(R.id.homemain_notify_title);
+            final EditText homemain_notify_title = familyView.findViewById(R.id.homemain_notify_title);
             homemain_notify_title.setText(family.getFamilyNotifyTitle());
             builder.setView(familyView);
             builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -335,10 +344,6 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             TextView homemain_activity_poptitle = homeActivityView.findViewById(R.id.homemain_activity_poptitle);
             ListView homeactivity_detail_list = homeActivityView.findViewById(R.id.homeactivity_detail_list);
             homemain_activity_poptitle.setText(homeActivity.getDesc());
-            //此处设置activityItem
-            for (int i=0;i<10;i++){
-                activityItems.add(new ActivityItem());
-            }
             HomeActivitiesDetailAdapter home_adapter = new HomeActivitiesDetailAdapter(activityItems,getContext());
             homeactivity_detail_list.setAdapter(home_adapter);
             homeactivity_detail_list.setDivider(null);
@@ -432,6 +437,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
     }
 
     //设置底部标签点击事件
+    //可以在点击事件后执行标签动画
     private void setButtomBtn(){
         View btn_album = contentView.findViewById(R.id.btn_album);
         btn_album.setOnClickListener(new View.OnClickListener() {
@@ -485,7 +491,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
 
     @Override
     public void loadFail() {
-
+        Toast.makeText(getContext(),"刷新家庭信息失败，请检查网络后重新尝试！",Toast.LENGTH_LONG).show();
     }
 
     @Override

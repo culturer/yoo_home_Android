@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.bean.Activity;
@@ -52,6 +53,8 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
     private HomeActivityItemAddAdapter addAdapter;
     private List<ActivityItem> items;
 
+    private int num;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +70,10 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
 
     private void initData(){
         items = new ArrayList<>();
+        //初始化临时数据
+        CacheData.tmp_activity = new Activity();
+        CacheData.tmp_activity_item.clear();
+        num = 0;
         addAdapter = new HomeActivityItemAddAdapter(items,this);
     }
 
@@ -200,7 +207,7 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
     private void addItem(String item_title,String item_content,String item_time){
         //读取数据
         //打包成ActivityItem
-        ActivityItem activityItem = new ActivityItem(-1l, (long) BaseMsg.getFamily().getId(),CacheData.tmp_activity.getId(),item_title,item_time,item_content);
+        ActivityItem activityItem = new ActivityItem(-1l, (long) BaseMsg.getFamily().getId(),CacheData.tmp_activity.getId(),item_title,item_time,item_content,num++);
         Log.i(TAG, "addItem: "+activityItem.toString());
         //存入临时缓存
         CacheData.tmp_activity_item.add(activityItem);
@@ -240,52 +247,62 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
         activity.setAddressId( CacheData.tmp_activity.getAddressId());
         activity.setDesc( CacheData.tmp_activity.getDesc());
         activity.setCreateTime( CacheData.tmp_activity.getCreateTime());
-        //发送活动数据
-        sendActivity(activity);
-        //存数据库
-        save2DB(CacheData.tmp_activity);
         //刷新显示
         items.clear();
         addAdapter.setDataAndrUpdate(items);
-        HomeActivitesAddActivity.this.finish();
+        //发送活动数据
+        sendActivity(activity);
     }
 
     //将CacheData.tmp_activity 以及items中的数据同步到服务器
     private void sendActivity(final Activity activity){
 
-        HttpParams params = new HttpParams();
-        params.put(HTTP_OPTIONS,1);
-        params.put("activityType","true");
-        params.put("familyId",BaseMsg.getFamily().getId());
-        params.put("desc",activity.getDesc());
-        params.put("addressId",-1);
-
-        HttpCallback callback = new HttpCallback() {
-            @Override
-            public void onSuccess(String t) {
-                Log.i(TAG, "sendActivity: "+t);
-                try {
-                    JSONObject jsonObject = new JSONObject(t);
-                    if (jsonObject.getInt(HTTP_STATUS) == HTTP_STATUS_SUCCESS){
-                        int activityId = jsonObject.getInt("activityId");
-                        CacheData.tmp_activity.setId((long) activityId);
-                        activity.setId((long) activityId);
-                        CacheData.homeActivities.add(activity);
-                        //发送广播
-                        EventBus.getDefault().post(new Activity_Event(Activity_Event.NEW,CacheData.tmp_activity));
-                        //发送具体的活动项
-                        sendItem(activity);
+        if ( activity.getDesc() == null ){
+            Toast.makeText(this,"活动标题为空，请输入活动标题！",Toast.LENGTH_LONG).show();
+        }
+        else if (activity.getFamilyId() == null || activity.getFamilyId() == 0){
+            Toast.makeText(this,"家庭信息为空，请完善家庭信息后再发起活动！",Toast.LENGTH_LONG).show();
+            //在此跳转到完善家庭信息的页面
+            
+        }
+        else {
+            HttpParams params = new HttpParams();
+            params.put(HTTP_OPTIONS,1);
+            params.put("activityType","true");
+            params.put("familyId",BaseMsg.getFamily().getId());
+            params.put("desc",activity.getDesc());
+            params.put("addressId",-1);
+    
+            HttpCallback callback = new HttpCallback() {
+                @Override
+                public void onSuccess(String t) {
+                    Log.i(TAG, "sendActivity: "+t);
+                    try {
+                        JSONObject jsonObject = new JSONObject(t);
+                        if (jsonObject.getInt(HTTP_STATUS) == HTTP_STATUS_SUCCESS){
+                            int activityId = jsonObject.getInt("activityId");
+                            CacheData.tmp_activity.setId((long) activityId);
+                            activity.setId((long) activityId);
+                            CacheData.homeActivities.add(activity);
+                            //发送广播
+                            EventBus.getDefault().post(new Activity_Event(Activity_Event.NEW,CacheData.tmp_activity));
+                            //发送具体的活动项
+                            sendItem(activity);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-            }
-            @Override
-            public void onFailure(int errorNo, String strMsg) {
-                Log.i(TAG, "onFailure: errNo --- "+errorNo+" || errMsg --- "+strMsg);
-            }
-        };
-        HttpUtil.send(callback,params,ACTIVITIES_URL);
+                @Override
+                public void onFailure(int errorNo, String strMsg) {
+                    Log.i(TAG, "onFailure: errNo --- "+errorNo+" || errMsg --- "+strMsg);
+                }
+            };
+            HttpUtil.send(callback,params,ACTIVITIES_URL);
+            //存数据库
+            save2DB(CacheData.tmp_activity);
+            HomeActivitesAddActivity.this.finish();
+        }
     }
     
     //发送活动项
@@ -297,7 +314,7 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
         }
         //用完记得删掉
         //--------------------------------打印一下内存中的数据，调试用-----------------------------------------//
-
+        
         for (int i=0 ;i<CacheData.tmp_activity_item.size();i++){
             CacheData.tmp_activity_item.get(i).setActivityId(activity.getId());
             HttpParams params = new HttpParams();
@@ -306,6 +323,8 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
             params.put("activityId", String.valueOf(CacheData.tmp_activity_item.get(i).getActivityId()));
             params.put("title",CacheData.tmp_activity_item.get(i).getTitle());
             params.put("desc",CacheData.tmp_activity_item.get(i).getDesc());
+            params.put("num",CacheData.tmp_activity_item.get(i).getNum());
+            params.put("createTime",CacheData.tmp_activity_item.get(i).getCreateTime());
             final int finalI = i;
             HttpCallback callback = new HttpCallback() {
                 int count = finalI;
@@ -325,7 +344,7 @@ public class HomeActivitesAddActivity extends AppCompatActivity {
                             int activityItemId = jsonObject.getInt("activityItemId");
                             CacheData.tmp_activity_item.get(count).setId((long) activityItemId);
                             CacheData.homeActivityItems.add( CacheData.tmp_activity_item.get(count));
-                            if (count >= CacheData.tmp_activity_item.size()){
+                            if (count >= CacheData.tmp_activity_item.size()-1){
                                 Log.i(TAG, "activity send finished ! now start clear cache data ! ");
                                 CacheData.tmp_activity_item.clear();
                             }

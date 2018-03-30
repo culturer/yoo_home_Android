@@ -1,8 +1,8 @@
 package com.culturer.yoo_home.function.chat;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,13 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
-import com.culturer.yoo_home.event.Activity_Event;
-import com.google.gson.Gson;
 import com.culturer.yoo_home.bean.ChatMsg;
 import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.service.MQTT.MQTTMsg;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
-import com.vondear.rxtools.RxPhotoTool;
+import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -29,7 +27,6 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_DATA;
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_RECEIVER;
@@ -38,9 +35,8 @@ import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_TYPE;
 public class ChatActivity extends AppCompatActivity implements IChatView {
 
     private static final String TAG = "ChatActivity";
-
+    
     ChatPresenter presenter;
-
     boolean chat_type;
     String username;
     int userId;
@@ -55,7 +51,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
     private ImageButton chat_tel;
     private TextView chat_send;
     private ImageButton chat_audio;
-
     private LinearLayout chat_bottom_view;
 
     private List<ChatMsg> chatMsgs = new LinkedList<>();

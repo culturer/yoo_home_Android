@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
@@ -28,11 +29,16 @@ public class HomeActivitiesDetailAdapter extends BaseAdapter {
     }
 
     //填充数据
-    private void setData( ActivityItem data,ViewHolder holder){
+    private void setData( ActivityItem data,ViewHolder holder,boolean isEnd){
         if (data !=null && holder!=null){
             holder.homealbum_item_title.setText(data.getTitle());
             holder.homealbum_item_desc.setText(data.getDesc());
             holder.homealbum_item_time.setText(data.getCreateTime());
+            if (isEnd){
+                holder.homealbum_item_finish_icon.setVisibility(View.VISIBLE);
+            }else {
+                holder.homealbum_item_finish_icon.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -69,7 +75,8 @@ public class HomeActivitiesDetailAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         if ( items!=null ){
-            setData(items.get(position),viewHolder);
+            boolean isEnd = (position == items.size() - 1);
+            setData(items.get(position),viewHolder,isEnd);
         }
         return convertView;
     }
@@ -78,11 +85,12 @@ public class HomeActivitiesDetailAdapter extends BaseAdapter {
         TextView homealbum_item_title;
         TextView homealbum_item_time;
         TextView homealbum_item_desc;
-        
+        ImageView homealbum_item_finish_icon;
         void initViewHolder(View convertView){
             homealbum_item_title = convertView.findViewById(R.id.homealbum_item_title);
             homealbum_item_time = convertView.findViewById(R.id.homealbum_item_time);
             homealbum_item_desc = convertView.findViewById(R.id.homealbum_item_desc);
+            homealbum_item_finish_icon = convertView.findViewById(R.id.homealbum_item_finish_icon);
         }
 
     }
