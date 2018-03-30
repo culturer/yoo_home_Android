@@ -29,6 +29,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.culturer.yoo_home.config.ParamConfig.HTTP_OPTIONS;
@@ -86,6 +87,7 @@ public class HomeActiviesActivity extends AppCompatActivity {
     }
 
     //更新活动详情数据
+    //注:显示时需要根据num对ActivityItem进行排序
     private HomeActivitiesDetailAdapter initDetailData(Activity activity){
         List<ActivityItem> activityItems = new ArrayList<>();
         //初始化数据
@@ -103,6 +105,16 @@ public class HomeActiviesActivity extends AppCompatActivity {
                 activityItems.add(item);
             }
         }
+        //根据Id排序好像并没有卵用，还是需要根据num来排序
+        activityItems.sort(new Comparator<ActivityItem>(){
+            @Override
+            public int compare(ActivityItem o1, ActivityItem o2) {
+                if (o1.getNum()<=o2.getNum()){
+                    return 1;
+                }
+                return 0;
+            }
+        });
         return new HomeActivitiesDetailAdapter(activityItems, this);
     }
 
@@ -164,6 +176,7 @@ public class HomeActiviesActivity extends AppCompatActivity {
     //显示活动详情
     //1.从缓存读取ActivityItem显示
     //2.如果缓存中数据为空,则刷新缓存再获取
+    //注:由于新增的活动接收到的回调不一定按原来的顺序排序，所以增加一个字段num用于保证一个activity下的activityItem顺序，
     private void showActivity(Activity activity){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View homeactivities_detai = LayoutInflater.from(this).inflate(R.layout.homeactivities_detail,null);
@@ -218,8 +231,9 @@ public class HomeActiviesActivity extends AppCompatActivity {
                         .create().show();
     }
 
+    //1.删除服务器上的Activity
+    //2.删除服务器上的ActivityItem
     private void removeFromServer(int activityId){
-
         //删除服务器上的activity
         HttpParams params = new HttpParams();
         params.put(HTTP_OPTIONS,2);
@@ -236,18 +250,21 @@ public class HomeActiviesActivity extends AppCompatActivity {
             }
         };
         HttpUtil.send(callback,params,ACTIVITIES_URL);
-
         //删除服务器上相应的activityItem
         for (int i=0;i<CacheData.homeActivityItems.size();i++){
             if (CacheData.homeActivityItems.get(i).getActivityId() == activityId){
                 HttpParams params1 = new HttpParams();
+                params1.put(HTTP_OPTIONS,2);
+                params1.put("activityItemId", String.valueOf(CacheData.homeActivityItems.get(i).getId()));
                 final int finalI = i;
                 HttpCallback callback1 = new HttpCallback() {
                     int count = finalI;
                     @Override
                     public void onSuccess(String t) {
                         Log.i(TAG, "onSuccess: "+t);
-                        CacheData.homeActivityItems.remove(count);
+                        if ( count<CacheData.homeActivityItems.size() ){
+                            CacheData.homeActivityItems.remove(count);
+                        }
                     }
                     @Override
                     public void onFailure(VolleyError error) {
@@ -259,8 +276,8 @@ public class HomeActiviesActivity extends AppCompatActivity {
         }
     }
 
+    //从数据库移除Activity
     private void removeFromDB(long activityId){
 
     }
-
 }
