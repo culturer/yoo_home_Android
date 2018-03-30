@@ -8,7 +8,10 @@ android:layout_height="match_parent"
 android:background="#F0F0F0"
 android:orientation="vertical"
 tools:context="com.culturer.yoo_home.function.mine.UserActivity">
-
+<View
+    android:layout_width="match_parent"
+    android:layout_height="2px"
+    android:background="@color/white"/>
 <RelativeLayout
     android:id="@+id/rl_avatar"
     android:layout_width="match_parent"
