@@ -11,6 +11,8 @@
         android:text="上传附件"
         android:id="@+id/test"
         android:gravity="center"
+        android:background="@color/white"
+        style="@style/ButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

@@ -222,10 +222,11 @@ tools:context="com.culturer.yoo_home.function.mine.UserActivity">
 
     <Button
         android:id="@+id/btn_exit"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="@drawable/shape_round_hot_pink"
+        android:background="@drawable/bg_btn_login_selected"
         android:text="退出登录"/>
 </LinearLayout>
 

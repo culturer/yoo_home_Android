@@ -9,8 +9,7 @@ import com.culturer.yoo_home.bean.Article;
 import com.culturer.yoo_home.bean.Comment;
 import com.culturer.yoo_home.bean.Photo;
 import com.culturer.yoo_home.bean.User;
-
-import org.json.JSONException;
+import com.culturer.yoo_home.service.handler.chat_handler.ChatMsg;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,9 @@ public class CacheData {
 	/**
 	 *  内存缓存
 	 */
-
+	
+	//聊天消息缓存
+	public static List<ChatMsg> chatMsgs;
 	//用户相册缓存
 	public static List<Album> userAlbums;
 	//家庭相册缓存
@@ -49,6 +50,7 @@ public class CacheData {
 
 	//初始化缓存
 	public static void init(){
+		chatMsgs = new ArrayList<>();
 		userAlbums = new ArrayList<>();
 		familyAlbums = new ArrayList<>();
 		photos = new ArrayList<>();

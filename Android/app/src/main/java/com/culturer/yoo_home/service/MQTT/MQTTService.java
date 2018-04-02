@@ -10,7 +10,6 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-
 import com.culturer.yoo_home.cahce.BaseMsg;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
@@ -26,11 +25,9 @@ import org.greenrobot.eventbus.Subscribe;
 
 import static com.culturer.yoo_home.config.Urls.MQ_URL;
 
-
 /**
- * Created by Administrator on 2017/9/10.
+ *  MQTT协议做推送服务
  */
-
 public class MQTTService extends Service implements IMQTTService {
 
     private static final String TAG = "MQTTService";
@@ -43,8 +40,8 @@ public class MQTTService extends Service implements IMQTTService {
     private String host = MQ_URL;
     private String userName = BaseMsg.getUser().getUsername();
     private String passWord = BaseMsg.getUser().getUsername();
-    private static String myTopic = "family --- "+BaseMsg.getFamily().getId();
-    private String clientId = "";
+    private String myTopic = "yoo_home_"+BaseMsg.getFamily().getId();
+    private String clientId = "yoo_home_" + BaseMsg.getUser().getId();
 
     @Override
     public void onCreate() {
@@ -79,8 +76,7 @@ public class MQTTService extends Service implements IMQTTService {
 
     private void initMQ() {
         // 服务器地址（协议+地址+端口号）
-        String uri = host;
-        client = new MqttAndroidClient(this, uri, clientId);
+        client = new MqttAndroidClient(this, host, clientId);
         // 设置MQTT监听并且接受消息
         client.setCallback(mqttCallback);
 
@@ -153,7 +149,7 @@ public class MQTTService extends Service implements IMQTTService {
         return false;
     }
 
-    public static void publish(String msg){
+    public void publish(String msg){
         //数据是否保存在服务器
         Log.i(TAG, "publish: "+msg);
         try {
@@ -206,7 +202,7 @@ public class MQTTService extends Service implements IMQTTService {
         public void messageArrived(String topic, MqttMessage message) throws Exception {
             String msg = new String(message.getPayload());
             Log.i(TAG, "messageArrived: "+msg);
-            EventBus.getDefault().post(new MQTTMsg(false,MQTTMsg.CHAT_MSG,msg));
+            handler.handle(msg);
         }
 
         @Override
@@ -224,10 +220,10 @@ public class MQTTService extends Service implements IMQTTService {
     //初始化handler
     @Override
     public void initHandler() {
-        handler = new MQTTHandler(this);
-        handler.initHandler();
+        handler = new MQTTHandler();
     }
 
+    //初始化EventBus
     private void initEventBus() {
         EventBus.getDefault().register(this);
     }
@@ -244,6 +240,5 @@ public class MQTTService extends Service implements IMQTTService {
             publish(msg.getMsg());
         }
     }
-    //初始化EventBus
 
 }

@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -15,9 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
-import com.culturer.yoo_home.bean.ChatMsg;
 import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.service.MQTT.MQTTMsg;
+import com.culturer.yoo_home.service.handler.chat_handler.ChatMsg;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
 import com.google.gson.Gson;
 
@@ -46,7 +45,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
     private RecyclerView chat_list;
     private EditText chat_edit;
     private ImageButton chat_camera;
-    private ImageButton chat_file;
     private ImageButton chat_emoji;
     private ImageButton chat_tel;
     private TextView chat_send;
@@ -104,7 +102,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
     //初始化列表数据
     private void initListData(){
         chatMsgs = new ArrayList<>();
-
         chatAdapter = new ChatAdapter(chatMsgs,this);
     }
 
@@ -113,33 +110,27 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
 
     //接收消息
     @Subscribe
-    public void receiveMsg(MQTTMsg msg){
-        if (!msg.isSend()){
-            Log.i(TAG, "receiveMsg: "+msg.getMsg());
-            Gson gson = new Gson();
-            ChatMsg chatMsg = gson.fromJson(msg.getMsg(),ChatMsg.class);
-            if (indicate(chatMsg)){
-                chatMsgs.add(chatMsg);
-                chatAdapter.setDataAndupdate(chatMsgs);
-            }
+    public void receiveMsg(ChatMsg msg){
+        if (indicate(msg)){
+            chatMsgs.add(msg);
+            chatAdapter.setDataAndupdate(chatMsgs);
         }
     }
 
     //发送消息
     private void sendMsg(String strMsg){
-        ChatMsg chatMsg = new ChatMsg( BaseMsg.getUser().getId(), BaseMsg.getUser().getUsername(),BaseMsg.getUser().getIcon(),strMsg,"",null);
+        ChatMsg chatMsg = new ChatMsg(ChatMsg.Chat_Msg_Sending,ChatMsg.Chat_Msg_Text,BaseMsg.getUser().getId(), BaseMsg.getUser().getUsername(),BaseMsg.getUser().getIcon(),strMsg,"",null);
         chatMsgs.add(chatMsg);
         chatAdapter.setDataAndupdate(chatMsgs);
         String strChatMsg = new Gson().toJson(chatMsg,ChatMsg.class);
-        EventBus.getDefault().post(new MQTTMsg(true,MQTTMsg.CHAT_MSG,strChatMsg));
+        EventBus.getDefault().post(new MQTTMsg(true,MQTTMsg.CHAT_MSG_New,strChatMsg));
     }
 
     //权限验证
     private boolean indicate(ChatMsg chatMsg){
         boolean flag = false;
         //验证消息是不是自己发的
-        if (chatMsg.getUserId()!=BaseMsg.getUser().getId())
-            flag = true;
+        if (chatMsg.getUserId()!=BaseMsg.getUser().getId()) flag = true;
         Log.i(TAG, "indicate: the msg is sent by myself --- "+chatMsg.toString());
         //验证消息是不是发给自己的
         List<Integer> users = chatMsg.getUsers();
@@ -164,37 +155,13 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         chat_list = findViewById(R.id.chat_list);
         chat_edit = findViewById(R.id.chat_edit);
         chat_camera = findViewById(R.id.chat_camera);
-        chat_file = findViewById(R.id.chat_file);
         chat_emoji = findViewById(R.id.chat_emoji);
         chat_tel = findViewById(R.id.chat_tel);
         chat_audio = findViewById(R.id.chat_audio);
         chat_send = findViewById(R.id.chat_send);
 
-        chat_edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (b){
-                    //获取焦点,显示底部栏
-                    chat_bottom_view.setVisibility(View.VISIBLE);
-                    chat_audio.setVisibility(View.GONE);
-                }else {
-                    //隐藏底部栏
-                    chat_bottom_view.setVisibility(View.GONE);
-                    chat_audio.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
         //打开相机拍照
         chat_camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        //发送文件
-        chat_file.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -262,19 +229,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
                 .setCenterHomeTitle(title)
                 .create().
                 build();
-    }
-
-    //修改点击事件
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            //处理返回键
-            //如果底部栏显示，则隐藏掉底部栏，事件处理结束
-            //如果底部栏已经隐藏,则不做处理，事件继续传递
-            return super.onKeyDown(keyCode, event);
-        }else {
-            return super.onKeyDown(keyCode, event);
-        }
     }
 
     @Override

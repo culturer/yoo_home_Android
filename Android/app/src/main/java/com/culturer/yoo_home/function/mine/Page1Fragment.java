@@ -10,6 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
+import com.culturer.yoo_home.base.GlideApp;
+import com.vondear.rxtools.RxPhotoTool;
 
 public class Page1Fragment extends Fragment {
 
@@ -51,7 +57,6 @@ public class Page1Fragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         contentView = inflater.inflate(R.layout.fragment_page1, container, false);
         init();
         return contentView;
@@ -72,6 +77,18 @@ public class Page1Fragment extends Fragment {
         user_name = contentView.findViewById(R.id.user_name);
         //用户名
         user_icon = contentView.findViewById(R.id.user_icon);
+        //加载用户头像
+        GlideApp.with(this).
+                load(RxPhotoTool.cropImageUri).
+                diskCacheStrategy(DiskCacheStrategy.RESOURCE).
+                apply(RequestOptions.bitmapTransform(new CircleCrop())).
+//                        bitmapTransform(new CropCircleTransformation(mContext)).
+                thumbnail(0.5f).
+                placeholder(R.drawable.logo_black).
+                priority(Priority.LOW).
+                error(R.drawable.logo_black).
+                fallback(R.drawable.logo_black).
+                into(user_icon);
         //点击用户头像,切换到用户信息页面
         user_icon.setOnClickListener(new View.OnClickListener() {
             @Override

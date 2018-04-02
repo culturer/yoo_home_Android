@@ -1,16 +1,21 @@
 package com.culturer.yoo_home.service.MQTT;
 
-import com.culturer.yoo_home.base.handlerbase.BaseHandleMsg;
+import com.culturer.yoo_home.service.handler.base_handler.BaseHandleMsg;
 
-/**
- * Created by Administrator on 2018/1/17 0017.
- */
-
+/*{
+    "type":0
+    "msg":{
+        "key":"value"
+        "key1":"value1"
+        "key2":"value2"
+        "key3":"value3"
+        }
+}*/
 public class MQTTMsg extends BaseHandleMsg {
-
-    public static final int CHAT_MSG = 0;
-
-
+    
+    public static final int CHAT_MSG_New = 0;
+    public static final int CHAT_MSG_Status = 0;
+    
     //标志位，代表该消息是否是自己向服务器发出
     boolean isSend;
     //信息的种类
