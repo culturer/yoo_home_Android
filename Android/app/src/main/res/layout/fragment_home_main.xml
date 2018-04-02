@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content">
                 <ImageView
                     android:id="@+id/homamain_album_icon"
-                    android:src="@drawable/ic_home_album"
+                    android:src="@drawable/main_album"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -138,7 +138,7 @@
 
                 <ImageView
                     android:id="@+id/homamain_arrange_icon"
-                    android:src="@drawable/ic_arrangement"
+                    android:src="@drawable/main_arrangement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -161,7 +161,7 @@
 
                 <ImageView
                     android:id="@+id/homamain_activity_icon"
-                    android:src="@drawable/ic_home_activity"
+                    android:src="@drawable/main_home_acitivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -196,8 +196,5 @@
                     android:padding="@dimen/pading" />
             </LinearLayout>
         </LinearLayout>
-    <!--</android.support.constraint.ConstraintLayout>-->
-    <!--<com.scwang.smartrefresh.layout.footer.FalsifyFooter-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"/>-->
+
 </android.support.constraint.ConstraintLayout>

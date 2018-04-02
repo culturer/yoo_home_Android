@@ -20,4 +20,7 @@
 
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!--按钮水波纹效果-->
+    <style name="ButtonStyle" parent="ThemeOverlay.AppCompat"/>
+
 </resources>

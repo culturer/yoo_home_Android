@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.cahce.BaseMsg;
-import com.culturer.yoo_home.bean.ChatMsg;
+import com.culturer.yoo_home.service.handler.chat_handler.ChatMsg;
 
 import java.util.LinkedList;
 import java.util.List;

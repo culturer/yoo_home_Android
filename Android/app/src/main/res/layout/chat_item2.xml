@@ -34,7 +34,6 @@
                 android:textSize="@dimen/content_textSize" />
             <TextView
                 android:layout_gravity="end"
-                android:background="@drawable/chat_shape"
                 android:gravity="end"
                 android:id="@+id/chat_item_desc"
                 android:text="元旦不加班，美滋滋~"

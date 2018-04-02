@@ -113,7 +113,6 @@ public class UserActivity extends AppCompatActivity {
         mIvAvatar.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-//                RxImageTool.showBigImageView(context, resultUri);
                 RxDialogScaleView rxDialogScaleView = new RxDialogScaleView(context);
                 rxDialogScaleView.setImageUri(resultUri);
                 rxDialogScaleView.show();
@@ -211,8 +210,6 @@ public class UserActivity extends AppCompatActivity {
                 load(uri).
                 diskCacheStrategy(DiskCacheStrategy.RESOURCE).
                 apply(RequestOptions.bitmapTransform(new CircleCrop())).
-
-//                bitmapTransform(new CropCircleTransformation(mContext)).
                 thumbnail(0.5f).
                 placeholder(R.drawable.logo_black).
                 priority(Priority.LOW).
