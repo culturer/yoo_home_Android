@@ -112,7 +112,7 @@ public class HomeAlbumActivity extends AppCompatActivity {
 
     //初始化导航条
     private void initNavigation(View contentView) {
-        LinearLayout topNavigation = (LinearLayout) contentView.findViewById(R.id.container);
+        LinearLayout topNavigation = contentView.findViewById(R.id.container);
         HomeNavigation.Builder builder = new HomeNavigation.Builder(this, topNavigation);
         builder.setCenterHomeTopic("Yoo+")
                 .setCenterHomeTitle("相册")
@@ -123,8 +123,8 @@ public class HomeAlbumActivity extends AppCompatActivity {
     //初始化ViewPager 滑动页面
     private void initPager(){
 
-        TabLayout home_tab = (TabLayout) findViewById(R.id.homealbum_tab);
-        ViewPager home_pager = (ViewPager) findViewById(R.id.homealbum_pager);
+        TabLayout home_tab = findViewById(R.id.homealbum_tab);
+        ViewPager home_pager = findViewById(R.id.homealbum_pager);
 
         //MODE_SCROLLABLE可滑动的展示
         //MODE_FIXED固定展示
@@ -144,7 +144,7 @@ public class HomeAlbumActivity extends AppCompatActivity {
 
     //底部添加相册按钮
     private void initBottomButton(){
-        RelativeLayout bottomButton = (RelativeLayout) contentView.findViewById(R.id.bottomButton);
+        RelativeLayout bottomButton = contentView.findViewById(R.id.bottomButton);
         View bottomButtonView = getLayoutInflater().inflate(R.layout.homealbum_buttombtn,null);
         bottomButton.addView(bottomButtonView);
         (bottomButton).setOnClickListener(new View.OnClickListener() {

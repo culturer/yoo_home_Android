@@ -41,6 +41,10 @@ public class Response<T> {
 
     public final Map<String, String> headers;
 
+    public boolean isSuccess() {
+        return error == null;
+    }
+
     private Response(T result, Map<String, String> headers,
                      ICache.Entry cacheEntry) {
         this.result = result;
@@ -74,9 +78,5 @@ public class Response<T> {
      */
     public static <T> Response<T> error(VolleyError error) {
         return new Response<T>(error);
-    }
-
-    public boolean isSuccess() {
-        return error == null;
     }
 }

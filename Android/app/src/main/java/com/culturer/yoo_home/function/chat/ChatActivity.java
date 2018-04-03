@@ -15,10 +15,9 @@ import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.cahce.BaseMsg;
-import com.culturer.yoo_home.service.MQTT.MQTTMsg;
 import com.culturer.yoo_home.service.handler.chat_handler.ChatMsg;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
-import com.google.gson.Gson;
+import com.vondear.rxtools.view.dialog.RxDialogChooseImage;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -30,6 +29,7 @@ import java.util.List;
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_DATA;
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_RECEIVER;
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_TYPE;
+import static com.vondear.rxtools.view.dialog.RxDialogChooseImage.LayoutType.TITLE;
 
 public class ChatActivity extends AppCompatActivity implements IChatView {
 
@@ -119,11 +119,9 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
 
     //发送消息
     private void sendMsg(String strMsg){
-        ChatMsg chatMsg = new ChatMsg(ChatMsg.Chat_Msg_Sending,ChatMsg.Chat_Msg_Text,BaseMsg.getUser().getId(), BaseMsg.getUser().getUsername(),BaseMsg.getUser().getIcon(),strMsg,"",null);
+        ChatMsg chatMsg = presenter.sendTextMsg(strMsg);
         chatMsgs.add(chatMsg);
         chatAdapter.setDataAndupdate(chatMsgs);
-        String strChatMsg = new Gson().toJson(chatMsg,ChatMsg.class);
-        EventBus.getDefault().post(new MQTTMsg(true,MQTTMsg.CHAT_MSG_New,strChatMsg));
     }
 
     //权限验证
@@ -164,7 +162,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         chat_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                initDialogChooseImage();
             }
         });
 
@@ -223,7 +221,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
 
     //初始化导航条
     private void initNavigation(View contentView,String topic,String title) {
-        LinearLayout topNavigation = (LinearLayout) contentView.findViewById(R.id.container);
+        LinearLayout topNavigation = contentView.findViewById(R.id.container);
         HomeNavigation.Builder builder = new HomeNavigation.Builder(this, topNavigation);
         builder.setCenterHomeTopic(topic)
                 .setCenterHomeTitle(title)
@@ -245,7 +243,14 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         chat_edit.setText("");
         chat_edit.setHint("出来聊天啦");
     }
-
+    
+    private void initDialogChooseImage() {
+        RxDialogChooseImage dialogChooseImage = new RxDialogChooseImage(this, TITLE);
+        dialogChooseImage.show();
+    }
+    
+    
+    
     @Override
     public void setPresenter(ChatPresenter presenter) {
         this.presenter = presenter;

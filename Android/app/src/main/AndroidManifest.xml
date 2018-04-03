@@ -31,11 +31,7 @@
             android:name="com.culturer.yoo_home.function.login.login.LoginActivity"
             android:resizeableActivity="true"
             android:theme="@style/FullScreenTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.culturer.yoo_home.test.TestActivity">
 
@@ -57,7 +53,13 @@
         <activity android:name="com.culturer.yoo_home.function.home.family_activity.FamilyActivityActivity" />
         <activity android:name="com.culturer.yoo_home.function.home.home_activity.HomeActivitesAddActivity" />
         <activity android:name="com.culturer.yoo_home.function.home.home_album_detail.HomeAlbumDetailActivity" />
-        <activity android:name = "com.culturer.yoo_home.function.chat.ChatActivity" />
+        <activity android:name = "com.culturer.yoo_home.function.chat.ChatActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <!-- Mqtt Service -->
         <service android:name="org.eclipse.paho.android.service.MqttService" />
         <service android:name="com.culturer.yoo_home.service.MQTT.MQTTService" />
@@ -67,9 +69,6 @@
             android:resizeableActivity="true"
             android:theme="@style/FullScreenTheme"
             tools:targetApi="n" />
-        <activity android:name="com.culturer.yoo_home.test.Test2Activity" />
-        <activity android:name="com.culturer.yoo_home.test.Test3Activity" />
-        <activity android:name="com.culturer.yoo_home.test.Test4Activity" />
         <activity android:name="com.culturer.yoo_home.function.world.recommend.DetailActivity" />
         <activity android:name="com.culturer.yoo_home.function.mine.MineActivity" />
         <activity android:name="com.culturer.yoo_home.function.world.shows.show.ShowActivity" />

@@ -31,16 +31,15 @@ import static com.culturer.yoo_home.config.Urls.MQ_URL;
 public class MQTTService extends Service implements IMQTTService {
 
     private static final String TAG = "MQTTService";
-
-    private static MqttAndroidClient client;
+    private MqttAndroidClient client;
+    
     private MqttConnectOptions conOpt;
-
     private MQTTHandler handler;
 
     private String host = MQ_URL;
     private String userName = BaseMsg.getUser().getUsername();
     private String passWord = BaseMsg.getUser().getUsername();
-    private String myTopic = "yoo_home_"+BaseMsg.getFamily().getId();
+    private String myTopic = "yoo_home/family"+BaseMsg.getFamily().getId();
     private String clientId = "yoo_home_" + BaseMsg.getUser().getId();
 
     @Override

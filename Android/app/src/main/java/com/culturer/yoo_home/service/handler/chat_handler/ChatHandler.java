@@ -35,13 +35,11 @@ public class ChatHandler {
 	//处理消息的状态如发送成功，失败，已读，未读
 	public void handleStatus(ChatMsg msg){
 		//接收到消息反馈后更新UI显示
-		if (msg.getStatus() == ChatMsg.Chat_Msg_Success){
-			for (int i=0 ; i< CacheData.chatMsgs.size(); i++){
-			
+		for (int i=0 ; i< CacheData.chatMsgs.size(); i++){
+			if (CacheData.chatMsgs.get(i).getId().equals(msg.getId())){
+				CacheData.chatMsgs.get(i).setStatus(msg.getStatus());
+				EventBus.getDefault().post(msg);
 			}
-		}
-		if (msg.getStatus() == ChatMsg.Chat_Msg_Fail){
-
 		}
 	}
 }

@@ -54,9 +54,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class RequestQueue {
 
     /**
-     * Number of network request dispatcher threads to start.
+     * Used for generating monotonically-increasing sequence numbers for requests.
      */
-    private static final int DEFAULT_NETWORK_THREAD_POOL_SIZE = 4;
+    private AtomicInteger mSequenceGenerator = new AtomicInteger();
+
     /**
      * Staging area for requests that already have a duplicate request in flight.
      * <p/>
@@ -85,22 +86,27 @@ public class RequestQueue {
      * The queue of requests that are actually going out to the network.
      */
     private final PriorityBlockingQueue<Request<?>> mNetworkQueue = new PriorityBlockingQueue<>();
+
+    /**
+     * Number of network request dispatcher threads to start.
+     */
+    private static final int DEFAULT_NETWORK_THREAD_POOL_SIZE = 4;
+
     /**
      * Cache interface for retrieving and storing responses.
      */
     private final ICache mCache;
+
     /**
      * Network interface for performing requests.
      */
     private final INetwork mNetwork;
+
     /**
      * Response delivery mechanism.
      */
     private final IDelivery mDelivery;
-    /**
-     * Used for generating monotonically-increasing sequence numbers for requests.
-     */
-    private AtomicInteger mSequenceGenerator = new AtomicInteger();
+
     /**
      * The network dispatchers.
      */
@@ -146,21 +152,6 @@ public class RequestQueue {
      */
     public RequestQueue(ICache cache, INetwork network) {
         this(cache, network, DEFAULT_NETWORK_THREAD_POOL_SIZE);
-    }
-
-    public synchronized static RequestQueue newRequestQueue(File cacheFolder) {
-        return newRequestQueue(cacheFolder, new HttpConnectStack());
-    }
-
-    public synchronized static RequestQueue newRequestQueue(File cacheFolder, IHttpStack
-            httpStack) {
-        if (cacheFolder == null || !cacheFolder.exists() || !cacheFolder.isDirectory()) {
-            throw new RuntimeException("RequestQueue-> DiskBasedCache cache dir error");
-        }
-        INetwork network = new Network(httpStack);
-        RequestQueue queue = new RequestQueue(new DiskBasedCache(cacheFolder), network);
-        queue.start();
-        return queue;
     }
 
     /**
@@ -211,6 +202,14 @@ public class RequestQueue {
 
     public IDelivery getDelivery() {
         return mDelivery;
+    }
+
+    /**
+     * A simple predicate or filter interface for Requests, for use by
+     * {@link RequestQueue#cancelAll(RequestFilter)}.
+     */
+    public interface RequestFilter {
+        boolean apply(Request<?> request);
     }
 
     /**
@@ -317,12 +316,19 @@ public class RequestQueue {
         }
     }
 
-    /**
-     * A simple predicate or filter interface for Requests, for use by
-     * {@link RequestQueue#cancelAll(RequestFilter)}.
-     */
-    public interface RequestFilter {
-        boolean apply(Request<?> request);
+    public synchronized static RequestQueue newRequestQueue(File cacheFolder) {
+        return newRequestQueue(cacheFolder, new HttpConnectStack());
+    }
+
+    public synchronized static RequestQueue newRequestQueue(File cacheFolder, IHttpStack
+            httpStack) {
+        if (cacheFolder == null || !cacheFolder.exists() || !cacheFolder.isDirectory()) {
+            throw new RuntimeException("RequestQueue-> DiskBasedCache cache dir error");
+        }
+        INetwork network = new Network(httpStack);
+        RequestQueue queue = new RequestQueue(new DiskBasedCache(cacheFolder), network);
+        queue.start();
+        return queue;
     }
 
 

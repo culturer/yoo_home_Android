@@ -1,13 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
+    buildToolsVersion '27.0.2'
     resourcePrefix "okhttp_"
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 23
+        minSdkVersion 24
+        targetSdkVersion 27
         versionCode 1
         versionName version
     }
@@ -28,8 +28,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     androidTestCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test:runner:0.4'
-    compile 'com.kymjs.rxvolley:rxvolley:2.0.0'
     compile 'com.squareup.okhttp:okhttp:2.7.0'
+    compile project(path: ':rxvolley')
 }
-
-

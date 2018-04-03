@@ -17,8 +17,6 @@ import java.util.Map;
  */
 public class DownloadTest extends AndroidTestCase {
 
-    public static final String URL = "https://www.oschina.net/uploads/osc-android-app-2.4.apk";
-    public static final String SAVE_PATH = FileUtils.getSDCardPath() + "/a.apk";
     HttpCallback callback;
 
     @Before
@@ -76,6 +74,9 @@ public class DownloadTest extends AndroidTestCase {
             }
         };
     }
+
+    public static final String URL = "https://www.oschina.net/uploads/osc-android-app-2.4.apk";
+    public static final String SAVE_PATH = FileUtils.getSDCardPath() + "/a.apk";
 
     @Test
     public void testDownload() throws Exception {
