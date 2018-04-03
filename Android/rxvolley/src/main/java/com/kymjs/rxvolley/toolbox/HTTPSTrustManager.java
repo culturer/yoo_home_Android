@@ -36,33 +36,8 @@ import javax.net.ssl.X509TrustManager;
 @Deprecated
 public class HTTPSTrustManager implements X509TrustManager {
 
-    private static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
     private static TrustManager[] trustManagers;
-
-    @Deprecated
-    public static void allowAllSSL() {
-        HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
-            @Override
-            public boolean verify(String arg0, SSLSession arg1) {
-                return true;
-            }
-        });
-
-        SSLContext sslContext = null;
-        if (trustManagers == null) {
-            trustManagers = new TrustManager[]{new HTTPSTrustManager()};
-        }
-
-        try {
-            sslContext = SSLContext.getInstance("TLS");
-            sslContext.init(null, trustManagers, new SecureRandom());
-        } catch (NoSuchAlgorithmException | KeyManagementException e) {
-            e.printStackTrace();
-        }
-        if (sslContext != null) {
-            HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
-        }
-    }
+    private static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
 
     @Override
     public void checkClientTrusted(
@@ -91,6 +66,31 @@ public class HTTPSTrustManager implements X509TrustManager {
     @Override
     public X509Certificate[] getAcceptedIssuers() {
         return _AcceptedIssuers;
+    }
+
+    @Deprecated
+    public static void allowAllSSL() {
+        HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+            @Override
+            public boolean verify(String arg0, SSLSession arg1) {
+                return true;
+            }
+        });
+
+        SSLContext sslContext = null;
+        if (trustManagers == null) {
+            trustManagers = new TrustManager[]{new HTTPSTrustManager()};
+        }
+
+        try {
+            sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, trustManagers, new SecureRandom());
+        } catch (NoSuchAlgorithmException | KeyManagementException e) {
+            e.printStackTrace();
+        }
+        if (sslContext != null) {
+            HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
+        }
     }
 
 }

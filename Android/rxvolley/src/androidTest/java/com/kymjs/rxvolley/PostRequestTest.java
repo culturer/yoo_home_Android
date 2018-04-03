@@ -3,6 +3,7 @@ package com.kymjs.rxvolley;
 import android.os.Looper;
 import android.test.AndroidTestCase;
 
+import com.kymjs.common.FileUtils;
 import com.kymjs.rxvolley.client.HttpCallback;
 import com.kymjs.rxvolley.client.HttpParams;
 
@@ -24,28 +25,28 @@ public class PostRequestTest extends AndroidTestCase {
         callback = new HttpCallback() {
             @Override
             public void onPreStart() {
-                Loger.debug("=====onPreStart");
+//                Loger.debug("=====onPreStart");
                 // 测试类是运行在异步的,所以此处断言会异常
                 // assertTrue(Thread.currentThread() == Looper.getMainLooper().getThread());
             }
 
             @Override
             public void onPreHttp() {
-                Loger.debug("=====onPreHttp");
+//                Loger.debug("=====onPreHttp");
                 assertTrue(Thread.currentThread() == Looper.getMainLooper().getThread());
             }
 
             @Override
             public void onSuccessInAsync(byte[] t) {
                 assertNotNull(t);
-                Loger.debug("=====onSuccessInAsync" + new String(t));
+//                Loger.debug("=====onSuccessInAsync" + new String(t));
                 //onSuccessInAsync 一定是运行在异步
                 assertFalse(Thread.currentThread() == Looper.getMainLooper().getThread());
             }
 
             @Override
             public void onSuccess(String t) {
-                Loger.debug("=====onSuccess" + t);
+//                Loger.debug("=====onSuccess" + t);
                 assertNotNull(t);
                 assertTrue(Thread.currentThread() == Looper.getMainLooper().getThread());
             }
@@ -53,21 +54,21 @@ public class PostRequestTest extends AndroidTestCase {
             @Override
             public void onSuccess(Map<String, String> headers, byte[] t) {
                 assertNotNull(t);
-                Loger.debug("=====onSuccessWithHeader" + headers.size() + new String(t));
+//                Loger.debug("=====onSuccessWithHeader" + headers.size() + new String(t));
                 assertTrue(Thread.currentThread() == Looper.getMainLooper().getThread());
             }
 
             @Override
             public void onFailure(int errorNo, String strMsg) {
                 super.onFailure(errorNo, strMsg);
-                Loger.debug("=====onFailure" + strMsg);
+//                Loger.debug("=====onFailure" + strMsg);
                 assertTrue(Thread.currentThread() == Looper.getMainLooper().getThread());
             }
 
             @Override
             public void onFinish() {
                 super.onFinish();
-                Loger.debug("=====onFinish");
+//                Loger.debug("=====onFinish");
                 assertTrue(Thread.currentThread() == Looper.getMainLooper().getThread());
             }
         };

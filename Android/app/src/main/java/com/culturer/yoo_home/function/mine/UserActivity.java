@@ -177,7 +177,6 @@ public class UserActivity extends AppCompatActivity {
                         load(RxPhotoTool.cropImageUri).
                         diskCacheStrategy(DiskCacheStrategy.RESOURCE).
                         apply(RequestOptions.bitmapTransform(new CircleCrop())).
-//                        bitmapTransform(new CropCircleTransformation(mContext)).
                         thumbnail(0.5f).
                         placeholder(R.drawable.logo_black).
                         priority(Priority.LOW).
@@ -221,7 +220,6 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void initUCrop(Uri uri){
-        //Uri destinationUri = RxPhotoTool.createImagePathUri(this);
 
         SimpleDateFormat timeFormatter = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINA);
         long time = System.currentTimeMillis();

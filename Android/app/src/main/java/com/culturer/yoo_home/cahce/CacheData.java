@@ -60,7 +60,7 @@ public class CacheData {
 		articles = new ArrayList<>();
 		comments = new ArrayList<>();
 		familyUsers = new ArrayList<>();
-		tmp_activity = new Activity(-1l, true,(long) BaseMsg.getFamily().getId(),"","活动开始啦",-1l);
+		tmp_activity = new Activity(-1l, true,-1l,"","活动开始啦",-1l);
 		tmp_activity_item = new ArrayList<>();
 	}
 

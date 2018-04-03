@@ -1,19 +1,14 @@
 package com.culturer.yoo_home.function.chat;
 
-import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
-import android.support.v4.app.ActivityCompat;
 
-import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.base.mvpbase.BasePresenter;
-import com.yalantis.ucrop.UCrop;
-import com.yalantis.ucrop.UCropActivity;
+import com.culturer.yoo_home.cahce.BaseMsg;
+import com.culturer.yoo_home.service.MQTT.MQTTMsg;
+import com.culturer.yoo_home.service.handler.chat_handler.ChatMsg;
+import com.google.gson.Gson;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by Administrator on 2018/2/24 0024.
@@ -29,4 +24,10 @@ public class ChatPresenter extends BasePresenter<IChatView,ChatRespository> {
 
     }
 
+    ChatMsg sendTextMsg(String strMsg){
+        ChatMsg chatMsg = new ChatMsg(ChatMsg.Chat_Msg_Sending,ChatMsg.Chat_Msg_Text, BaseMsg.getUser().getId(), BaseMsg.getUser().getUsername(),BaseMsg.getUser().getIcon(),strMsg,"",null);
+        String strChatMsg = new Gson().toJson(chatMsg,ChatMsg.class);
+        EventBus.getDefault().post(new MQTTMsg(true,MQTTMsg.CHAT_MSG_New,strChatMsg));
+        return chatMsg;
+    }
 }

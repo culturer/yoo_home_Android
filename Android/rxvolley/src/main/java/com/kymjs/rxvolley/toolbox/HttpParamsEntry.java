@@ -26,11 +26,6 @@ public class HttpParamsEntry implements Comparable<HttpParamsEntry> {
     public String k;
     public String v;
 
-    public HttpParamsEntry(String key, String value) {
-        k = key;
-        v = value;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o instanceof HttpParamsEntry) {
@@ -43,6 +38,11 @@ public class HttpParamsEntry implements Comparable<HttpParamsEntry> {
     @Override
     public int hashCode() {
         return k.hashCode();
+    }
+
+    public HttpParamsEntry(String key, String value) {
+        k = key;
+        v = value;
     }
 
     @Override

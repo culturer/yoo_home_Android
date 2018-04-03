@@ -55,7 +55,7 @@ public class HomeAlbumFragment extends Fragment implements IHomeAlbumView {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
+    public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
         contentView = inflater.inflate(R.layout.fragment_homealbum_list, container, false);
@@ -64,12 +64,6 @@ public class HomeAlbumFragment extends Fragment implements IHomeAlbumView {
         initView();
         EventBus.getDefault().register(this);
         return contentView;
-    }
-
-    @Override
-    public void onDestroy() {
-        EventBus.getDefault().unregister(this);
-        super.onDestroy();
     }
 
     //初始化数据
@@ -249,8 +243,6 @@ public class HomeAlbumFragment extends Fragment implements IHomeAlbumView {
                                     .title("yoo+")
                                     .statusBarColor(Color.WHITE)
                                     .toolBarColor(Color.WHITE)
-//                                .mediaItemCheckSelector(Color.BLUE, Color.GREEN)
-//                                .bucketItemCheckSelector(Color.RED, Color.YELLOW)
                                     .buttonStyle(
                                             Widget.ButtonStyle.newLightBuilder(getContext())
                                                     .setButtonSelector(Color.WHITE, Color.WHITE)
@@ -290,5 +282,10 @@ public class HomeAlbumFragment extends Fragment implements IHomeAlbumView {
             adapter.setDataAndUpdate(homeAlbumItems);
         }
     }
-
+    
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
 }

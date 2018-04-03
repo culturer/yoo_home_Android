@@ -26,7 +26,7 @@ public class ChatAdapter extends   RecyclerView.Adapter<RecyclerView.ViewHolder>
     Context context;
     LayoutInflater inflater;
 
-    public ChatAdapter(List<ChatMsg> items, Context context) {
+    ChatAdapter(List<ChatMsg> items, Context context) {
         this.items = items;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -92,11 +92,11 @@ public class ChatAdapter extends   RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     class ViewHolder1 extends RecyclerView.ViewHolder{
 
-        public View itemView ;
-        public ImageView chat_item_icon;
-        public TextView chat_item_desc;
+        View itemView ;
+        ImageView chat_item_icon;
+        TextView chat_item_desc;
 
-        public ViewHolder1(View itemView) {
+        ViewHolder1(View itemView) {
             super(itemView);
             this.itemView = itemView;
             init();
