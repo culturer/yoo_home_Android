@@ -268,8 +268,23 @@
                 android:layout_height="10dp"
                 android:background="@color/grey" />
             <TextView
-                android:id="@+id/setting_manage_family"
+                android:id="@+id/setting_manage_home"
                 android:text="管理家庭"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_large_textSize"
+                android:gravity="center_vertical"
+                android:layout_margin="@dimen/margin"
+                android:padding="@dimen/padding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_navigate_next_black_24dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider"
+                android:background="@color/grey"/>
+            <TextView
+                android:id="@+id/setting_manage_family"
+                android:text="管理家族"
                 android:textColor="@color/black"
                 android:textSize="@dimen/content_large_textSize"
                 android:gravity="center_vertical"

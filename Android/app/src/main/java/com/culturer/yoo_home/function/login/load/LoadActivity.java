@@ -3,6 +3,7 @@ package com.culturer.yoo_home.function.login.load;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,8 @@ import com.culturer.yoo_home.widget.loading_anim.TitanicTextView;
 
 public class LoadActivity extends AppCompatActivity implements ILoadView {
 
+    private static final String TAG = "LoadActivity";
+    
     LoadPresenter presenter;
 
     Titanic titanic;
@@ -88,7 +91,8 @@ public class LoadActivity extends AppCompatActivity implements ILoadView {
     @Override
     public void loadFail(String msg ) {
         Intent intent = new Intent(this, LoginActivity.class);
-        intent.putExtra("msg",msg);
+        Log.i(TAG, "loadFail: ");
+        intent.putExtra("msg","加载数据异常,请检查网络后重试。");
         startActivity(intent);
         //关闭过渡动画
         titanic.cancel();

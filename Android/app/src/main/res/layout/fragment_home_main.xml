@@ -5,13 +5,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/refreshLayout"
+    android:background="@mipmap/home_main_bg"
     android:orientation="vertical"
     tools:context="com.culturer.yoo_home.function.home.home_main.HomeMainFragment">
 
     <com.culturer.yoo_home.widget.circleMenu.CircleMenu
             android:id="@+id/homemain_circleview"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="360dp"
+            android:layout_height="360dp"
             android:layout_centerInParent="true"
             android:gravity="center"
             android:background="@drawable/circle_bg3"
@@ -19,15 +20,16 @@
             app:layout_constraintBottom_toTopOf="@+id/btm_ll"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
-        <ImageView
-            android:id="@+id/homemain_center_btn"
-            android:src="@mipmap/ic_launcher_round"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            app:layout_constraintTop_toBottomOf="@+id/homemain_circleview"
-            app:layout_constraintBottom_toTopOf="@+id/homemain_circleview"
-            app:layout_constraintLeft_toLeftOf="@+id/homemain_circleview"
-            app:layout_constraintRight_toRightOf="@+id/homemain_circleview"/>
+    <ImageView
+        android:id="@+id/homemain_family"
+        android:src="@drawable/logo_black"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintTop_toTopOf="@+id/homemain_circleview"
+        app:layout_constraintBottom_toBottomOf="@+id/homemain_circleview"
+        app:layout_constraintLeft_toLeftOf="@+id/homemain_circleview"
+        app:layout_constraintRight_toRightOf="@+id/homemain_circleview"/>
+
         <!--顶部标签-->
         <RelativeLayout
                     android:id="@+id/top_ll"
@@ -183,7 +185,7 @@
                 android:layout_height="wrap_content">
                 <ImageView
                     android:id="@+id/homamain_familyactivity_icon"
-                    android:src="@drawable/ic_family_activity"
+                    android:src="@drawable/homemain_familyactivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView

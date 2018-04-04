@@ -55,13 +55,13 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
     private Context context;
     private LayoutInflater inflater;
     private HomeMainPresenter presenter;
-    //下拉刷新
-
-    //中间转盘组件
+    
+    //用来加载页面的布局
+    private View contentView;
+    //中间圆盘
     private CircleMenu homemain_circleview;
-    //中间按钮
-    private ImageView homemain_center_btn;
-
+    //中间转盘中的家庭按钮
+    private ImageView homemain_family;
     //底部的标签
     private ImageView homamain_album_icon;
     private ImageView homamain_arrange_icon;
@@ -72,32 +72,24 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
     private TextView homemain_activity;
     private TextView homemain_familyactivity;
     private TextView homemain_arrangement;
-
-    //用来加载页面的布局
-    private View contentView;
-
-    //初始化中间转盘的资源
-    //图片资源数组
-    private int[] homemain_imgs_src = new int[]{
-            R.mipmap.ic_launcher_round,
-            R.mipmap.ic_launcher_round,
-            R.mipmap.ic_launcher_round,
-            R.mipmap.ic_launcher_round,
-    };
-
-    /**
-     * 中间圆形布局文字
-     */
-    private List<String> mStrs = new ArrayList<>();
-
-    private List<View.OnClickListener> listeners = new ArrayList<>();
-
+    
     //初始化四个角标签数据
     Activity homeActivity = new Activity();
     List<ActivityItem> activityItems = new ArrayList<>();
     Arrangement arrangement = new Arrangement();
     Family family = BaseMsg.getFamily();
-
+    
+    private int[] icons = new int[]{
+            R.drawable.logo_black,
+            R.drawable.logo_black,
+            R.drawable.logo_black,
+            R.drawable.logo_black,
+            R.drawable.logo_black,
+            R.drawable.logo_black
+    };
+    private List<String> mStrs = new ArrayList<>();
+    private List<View.OnClickListener> listeners = new ArrayList<>();
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -228,18 +220,15 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
 
     //初始化中间转盘的数据
     private void initCircleData(){
-        for (int i=0 ;i<homemain_imgs_src.length;i++){
-            final int finalI = i;
+        for (int i=0 ;i<icons.length;i++){
+            mStrs.add("用户["+i+"]");
             listeners.add(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getContext(), ChatActivity.class);
-                    Bundle datas = new Bundle();
-                    intent.putExtra("datas",datas);
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(),ChatActivity.class);
                     startActivity(intent);
                 }
             });
-            mStrs.add("song"+i);
         }
     }
 
@@ -247,20 +236,10 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //初始化布局
     private void initBaseView(){
-
         //初始化转盘
         homemain_circleview = contentView.findViewById(R.id.homemain_circleview);
-        //初始化中间按钮
-        homemain_center_btn = contentView.findViewById(R.id.homemain_center_btn);
-        homemain_center_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ChatActivity.class);
-                Bundle datas = new Bundle();
-                intent.putExtra("datas",datas);
-                startActivity(intent);
-            }
-        });
+        //初始化转盘中间图标
+        homemain_family = contentView.findViewById(R.id.homemain_family);
         //初始化四角的标签
         homemain_notify = contentView.findViewById(R.id.homemain_notify);
         homemain_activity = contentView.findViewById(R.id.homemain_activity);
@@ -283,7 +262,14 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
 
     //初始化中间转盘
     private void initCircleView(){
-        homemain_circleview.setDatas(homemain_imgs_src,mStrs,listeners);
+        homemain_circleview.setDatas(icons,mStrs,listeners);
+        homemain_family.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),ChatActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //四个角标签的弹窗显示
@@ -437,7 +423,6 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
     }
 
     //设置底部标签点击事件
-    //可以在点击事件后执行标签动画
     private void setButtomBtn(){
         View btn_album = contentView.findViewById(R.id.btn_album);
         btn_album.setOnClickListener(new View.OnClickListener() {
