@@ -49,14 +49,14 @@ public class HomeFragment extends Fragment {
         return contentView;
     }
 
-//    初始化ViewPager 滑动页面
+    //初始化ViewPager 滑动页面
     private void initPager(){
         TabLayout home_tab = (TabLayout) findViewById(R.id.home_tab);
         ViewPager home_pager = (ViewPager) findViewById(R.id.home_pager);
         //MODE_SCROLLABLE可滑动的展示
         //MODE_FIXED固定展示
         home_tab.setTabMode(TabLayout.MODE_FIXED);
-        home_tab.setSelectedTabIndicatorColor(getResources().getColor(R.color.black));
+        home_tab.setSelectedTabIndicatorColor(getContext().getColor(R.color.black));
         for (int i=0 ;i<pagerList.size() ;i++ ){
             home_tab.addTab(home_tab.newTab().setText(pagerList.get(i)));
         }

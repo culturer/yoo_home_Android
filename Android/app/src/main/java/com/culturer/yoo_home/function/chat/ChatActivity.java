@@ -76,6 +76,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
     }
 
     //初始化录音工具
+    //由于AudioUtil可能每次调用结束就会清理缓存，所以在录音时进行初始化
     private void initAudio(){
         audioUtil = new AudioUtil();
         //录音回调

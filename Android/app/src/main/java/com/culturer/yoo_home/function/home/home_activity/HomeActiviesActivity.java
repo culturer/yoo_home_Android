@@ -132,7 +132,6 @@ public class HomeActiviesActivity extends AppCompatActivity {
         home_activities_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActiviesActivity.this,"click",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(HomeActiviesActivity.this,HomeActivitesAddActivity.class);
                 startActivity(intent);
             }
@@ -280,4 +279,5 @@ public class HomeActiviesActivity extends AppCompatActivity {
     private void removeFromDB(long activityId){
 
     }
+    
 }

@@ -38,6 +38,8 @@ public class SettingActivity extends AppCompatActivity {
 	//邮箱显示
 	private TextView setting_tv_email;
 	//家庭管理
+	private TextView setting_manage_home;
+	//家族管理
 	private TextView setting_manage_family;
 	//更换伴侣
 	private TextView setting_manage_mate;
@@ -107,6 +109,8 @@ public class SettingActivity extends AppCompatActivity {
 		//邮箱显示
 		setting_tv_email = contentView.findViewById(R.id.setting_tv_email);
 		//家庭管理
+		setting_manage_home = contentView.findViewById(R.id.setting_manage_home);
+		//家族管理
 		setting_manage_family = contentView.findViewById(R.id.setting_manage_family);
 		//更换伴侣
 		setting_manage_mate = contentView.findViewById(R.id.setting_manage_mate);

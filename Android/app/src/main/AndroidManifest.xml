@@ -38,14 +38,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.culturer.yoo_home.test.TestActivity">
-
-        </activity>
+        <activity android:name="com.culturer.yoo_home.test.TestActivity" />
         <activity android:name="com.culturer.yoo_home.function.login.guide.GuideActivity" />
         <activity android:name="com.culturer.yoo_home.function.login.welcome.WelcomeActivity" />
         <activity
             android:name="com.culturer.yoo_home.function.main.MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name="com.culturer.yoo_home.function.login.register.RegisterActivity"
             android:resizeableActivity="true"
@@ -56,7 +54,9 @@
         <activity android:name="com.culturer.yoo_home.function.home.family_activity.FamilyActivityActivity" />
         <activity android:name="com.culturer.yoo_home.function.home.home_activity.HomeActivitesAddActivity" />
         <activity android:name="com.culturer.yoo_home.function.home.home_album_detail.HomeAlbumDetailActivity" />
-        <activity android:name="com.culturer.yoo_home.function.chat.ChatActivity"/>
+        <activity android:name="com.culturer.yoo_home.function.chat.ChatActivity" >
+
+        </activity>
         <!-- Mqtt Service -->
         <service android:name="org.eclipse.paho.android.service.MqttService" />
         <service android:name="com.culturer.yoo_home.service.MQTT.MQTTService" />
@@ -70,16 +70,13 @@
         <activity android:name="com.culturer.yoo_home.function.world.recommend.DetailActivity" />
         <activity android:name="com.culturer.yoo_home.function.mine.MineActivity" />
         <activity android:name="com.culturer.yoo_home.function.world.shows.show.ShowActivity" />
-        <activity android:name="com.culturer.yoo_home.function.mine.UserActivity">
-
-        </activity>
+        <activity android:name="com.culturer.yoo_home.function.mine.UserActivity" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name="com.culturer.yoo_home.function.mine.SettingActivity">
-
-        </activity>
+        <activity android:name="com.culturer.yoo_home.function.mine.SettingActivity" />
+        <activity android:name="com.culturer.yoo_home.test.TestEmojiActivity"></activity>
     </application>
 
 </manifest>
