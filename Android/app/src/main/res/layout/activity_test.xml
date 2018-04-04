@@ -7,9 +7,18 @@
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
+    <ImageView
+        android:id="@+id/iv_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:hint="请输入二维码链接"
+        android:id="@+id/et_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <Button
-        android:text="上传附件"
-        android:id="@+id/test"
+        android:text="生成二维码"
+        android:id="@+id/bt_test"
         android:gravity="center"
         android:background="@color/white"
         style="@style/ButtonStyle"

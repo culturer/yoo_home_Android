@@ -4,15 +4,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.armour8.yooplus.yooplus.R;
+import com.vondear.rxtools.view.RxQRCode;
 
 public class TestActivity extends AppCompatActivity{
 
     private static final String TAG = "TestActivity";
     private View contentView;
-    Button btn;
-
+    ImageView iv_test;
+    EditText et_test;
+    Button bt_test;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,23 +27,19 @@ public class TestActivity extends AppCompatActivity{
     }
 
     private void init(){
-// 浏览一般的String路径：
-//        Album.gallery(this)
-//                .requestCode(0x01) // 请求码，会在listener中返回。
-//                .checkedList() // 要浏览的图片列表：ArrayList<String>。
-//                .navigationAlpha() // Android5.0+的虚拟导航栏的透明度。
-//                .checkable(false) // 是否有浏览时的选择功能。
-//                .onResult(new Action<ArrayList<String>>() { // 如果checkable(false)，那么action不用传。
-//                    @Override
-//                    public void onAction(int requestCode, @NonNull ArrayList<String> result) {
-//                    }
-//                })
-//                .onCancel(new Action<String>() {
-//                    @Override
-//                    public void onAction(int requestCode, @NonNull String result) {
-//                    }
-//                })
-//                .start(); // 千万不要忘记调用start()方法。
+        iv_test = contentView.findViewById(R.id.iv_test);
+        et_test = contentView.findViewById(R.id.et_test);
+        bt_test = contentView.findViewById(R.id.bt_test);
+        bt_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RxQRCode.builder(et_test.getText().toString()).
+                        backColor(getResources().getColor(com.vondear.rxtools.R.color.white)).
+                        codeColor(getResources().getColor(com.vondear.rxtools.R.color.black)).
+                        codeSide(600).
+                        into(iv_test);
+            }
+        });
     }
 
 }

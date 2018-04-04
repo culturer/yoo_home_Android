@@ -61,7 +61,6 @@ dependencies {
     compile 'com.android.support:support-v4:27.0.2'
     //noinspection GradleCompatible
     compile 'com.android.support:recyclerview-v7:27.0.2'
-
     //添加Gson依赖
     compile 'com.google.code.gson:gson:2.8.2'
     //添加greenDao依赖
@@ -81,9 +80,11 @@ dependencies {
     compile 'com.yanzhenjie:album:2.0.2'
     //下拉刷新插件
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
-    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7'//没有使用特殊Header，可以不加这行
-    //RxTools
-    compile 'com.github.vondear:RxTools:v1.7.7.3'//请替换成上方 JitPack 最新的版本号
+    //没有使用特殊Header，可以不加这行
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7'
+    //RxTools工具集
+    compile 'com.github.vondear:RxTools:v1.7.7.3'
+    //图片剪切工具
     compile 'com.yalantis:ucrop:2.2.0'
 
     //数据库调试工具

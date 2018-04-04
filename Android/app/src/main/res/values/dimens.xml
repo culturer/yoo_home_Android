@@ -10,7 +10,7 @@
     <dimen name="little_margin">3dp</dimen>
     <dimen name="margin">5dp</dimen>
     <dimen name="pading">5dp</dimen>
-    <dimen name="divider">2dp</dimen>
+    <dimen name="divider">2px</dimen>
     <dimen name="padding">2dp</dimen>
     <dimen name="little_weidget_margin">10dp</dimen>
 
@@ -19,6 +19,7 @@
     <dimen name="large_title_textSize">50sp</dimen>
     <dimen name="little_title_textSize">24sp</dimen>
     <dimen name="content_textSize">12sp</dimen>
+    <dimen name="content_large_textSize">14sp</dimen>
     <dimen name="content_little_textSize">8sp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
