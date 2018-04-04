@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -25,6 +26,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.culturer.yoo_home.base.GlideApp;
+import com.culturer.yoo_home.bean.User;
+import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
 import com.vondear.rxtools.RxPhotoTool;
 import com.vondear.rxtools.RxSPTool;
@@ -54,11 +57,15 @@ public class UserActivity extends AppCompatActivity {
     TextView mTvLables;
     TextView mTextView2;
     TextView mEditText2;
+    TextView tv_family;
+    ImageButton ib_setting;
     Button mBtnExit;
     LinearLayout mActivityUser;
 
     private Uri resultUri;
     private Context context;
+    
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +82,7 @@ public class UserActivity extends AppCompatActivity {
 
     private void initData(){
         context = UserActivity.this;
+        user = BaseMsg.getUser();
     }
 
     private void initView(){
@@ -103,13 +111,42 @@ public class UserActivity extends AppCompatActivity {
         mEditText2 = contentView.findViewById(R.id.editText2);
         mBtnExit = contentView.findViewById(R.id.btn_exit);
         mActivityUser = contentView.findViewById(R.id.activity_user);
-
+        tv_family = contentView.findViewById(R.id.tv_family);
+        ib_setting = contentView.findViewById(R.id.ib_setting);
+        
+        if (user!=null){
+            //设置用户名
+            mTvName.setText(user.getUsername());
+            //设置家庭
+            tv_family.setText(user.getFamilyName());
+            //设置星座
+            mTvConstellation.setText("处女座");
+            //设置生日
+            mTvBirthday.setText(user.getBirth());
+            //设置地址
+            mTvAddress.setText("中国");
+            //设置标签
+            mTvLables.setText("二货少年");
+            //设置签名
+            mEditText2.setText(user.getNMsg());
+        }
+    
+        //进入设置页面
+        ib_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserActivity.this,SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+        //单击选择头像
         mIvAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 initDialogChooseImage();
             }
         });
+        //长按显示头像大图
         mIvAvatar.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -119,7 +156,7 @@ public class UserActivity extends AppCompatActivity {
                 return false;
             }
         });
-
+        //退出应用
         mBtnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -21,4 +21,11 @@ public class TimeUtil {
         SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd  HH:mm:ss");
         return format.format(date);
     }
+    
+    //获取时间戳
+    public static String getTime(){
+        long time=System.currentTimeMillis();
+        String  str=String.valueOf(time);
+        return str;
+    }
 }

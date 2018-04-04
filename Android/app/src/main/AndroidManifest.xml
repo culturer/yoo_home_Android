@@ -13,11 +13,12 @@
     <!-- 允许程序获取网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 录音权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name="com.culturer.yoo_home.base.BaseApplication"
@@ -31,7 +32,11 @@
             android:name="com.culturer.yoo_home.function.login.login.LoginActivity"
             android:resizeableActivity="true"
             android:theme="@style/FullScreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name="com.culturer.yoo_home.test.TestActivity">
 
@@ -40,9 +45,7 @@
         <activity android:name="com.culturer.yoo_home.function.login.welcome.WelcomeActivity" />
         <activity
             android:name="com.culturer.yoo_home.function.main.MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
             android:name="com.culturer.yoo_home.function.login.register.RegisterActivity"
             android:resizeableActivity="true"
@@ -53,16 +56,11 @@
         <activity android:name="com.culturer.yoo_home.function.home.family_activity.FamilyActivityActivity" />
         <activity android:name="com.culturer.yoo_home.function.home.home_activity.HomeActivitesAddActivity" />
         <activity android:name="com.culturer.yoo_home.function.home.home_album_detail.HomeAlbumDetailActivity" />
-        <activity android:name = "com.culturer.yoo_home.function.chat.ChatActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="com.culturer.yoo_home.function.chat.ChatActivity"/>
         <!-- Mqtt Service -->
         <service android:name="org.eclipse.paho.android.service.MqttService" />
         <service android:name="com.culturer.yoo_home.service.MQTT.MQTTService" />
+
         <activity android:name="com.culturer.yoo_home.function.login.forget.ForgetActivity" />
         <activity
             android:name="com.culturer.yoo_home.function.login.load.LoadActivity"
@@ -72,11 +70,16 @@
         <activity android:name="com.culturer.yoo_home.function.world.recommend.DetailActivity" />
         <activity android:name="com.culturer.yoo_home.function.mine.MineActivity" />
         <activity android:name="com.culturer.yoo_home.function.world.shows.show.ShowActivity" />
-        <activity android:name="com.culturer.yoo_home.function.mine.UserActivity"/>
+        <activity android:name="com.culturer.yoo_home.function.mine.UserActivity">
+
+        </activity>
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name="com.culturer.yoo_home.function.mine.SettingActivity">
+
+        </activity>
     </application>
 
 </manifest>

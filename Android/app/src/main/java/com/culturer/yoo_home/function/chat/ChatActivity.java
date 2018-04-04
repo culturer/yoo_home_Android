@@ -1,5 +1,6 @@
 package com.culturer.yoo_home.function.chat;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.service.handler.chat_handler.ChatMsg;
+import com.culturer.yoo_home.util.AudioUtil;
+import com.culturer.yoo_home.util.TimeUtil;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
 import com.vondear.rxtools.view.dialog.RxDialogChooseImage;
 
@@ -36,6 +39,9 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
     private static final String TAG = "ChatActivity";
     
     ChatPresenter presenter;
+    
+    AudioUtil audioUtil;
+    
     boolean chat_type;
     String username;
     int userId;
@@ -69,6 +75,29 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         initView();
     }
 
+    //初始化录音工具
+    private void initAudio(){
+        audioUtil = new AudioUtil();
+        //录音回调
+       audioUtil.setOnAudioStatusUpdateListener(new AudioUtil.OnAudioStatusUpdateListener() {
+           @Override
+           public void onUpdate(double db, long time) {
+//               根据分贝值来设置录音时话筒图标的上下波动
+//               mImageView.getDrawable().setLevel((int) (3000 + 6000 * db / 100));
+//               mTextView.setText(TimeUtils.long2String(time));
+               Log.i(TAG, "Audio --- onUpdate: time["+ TimeUtil.getDataToString(time)+"]"+" , db["+db+"]");
+           }
+    
+           @Override
+           public void onStop(String filePath) {
+           
+//               Toast.makeText(MainActivity.this, "录音保存在：" + filePath, Toast.LENGTH_SHORT).show();
+//               mTextView.setText(TimeUtils.long2String(0));
+               Log.i(TAG, "Audio --- onStop: filePath["+filePath+"]");
+           }
+       });
+       
+    }
     //初始化EventBus
     private void initEventBus(){
         EventBus.getDefault().register(this);
@@ -147,6 +176,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //初始化基础UI组件
+    @SuppressLint("ClickableViewAccessibility")
     private void initBaseView(){
 
         chat_bottom_view  = findViewById(R.id.chat_bottom_view);
@@ -178,36 +208,45 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         chat_tel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+            
             }
         });
 
         //发送语音，预留接口，暂时屏蔽
-        chat_audio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //1.修改UI界面，显示开始录音
-                //2.录音完将数据打包发送到HttpService
-                //3.HttpService将音频文件上传成功后返回信息
-                //4.收到返回信息后向mqttservice发送消息
-                //5.mqttservice将消息publish出去
-
-            }
-        });
+//        chat_audio.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//
+//                switch (event.getAction()){
+//
+//                    case MotionEvent.ACTION_DOWN:
+//                        //初始化录音设置
+//                        initAudio();
+//                        //开始录音
+//                        audioUtil.startRecord();
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        //结束录音（保存录音文件）
+//                        audioUtil.stopRecord();
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
 
         //发送聊天信息
         chat_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            //1.打包数据
-            // 2.将打包的数据发送到MQTT
-            //3.MQTT将打包的数据发送出去
-            String strMsg  = chat_edit.getText().toString();
-            if (!strMsg.equals("")){
-                sendMsg(strMsg);
-                toLast();
-                clearText();
-            }
+                //1.打包数据
+                // 2.将打包的数据发送到MQTT
+                //3.MQTT将打包的数据发送出去
+                String strMsg  = chat_edit.getText().toString();
+                if (!strMsg.equals("")){
+                    sendMsg(strMsg);
+                    toLast();
+                    clearText();
+                }
             }
         });
 
