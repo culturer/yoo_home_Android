@@ -84,7 +84,6 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             R.drawable.logo_black,
             R.drawable.logo_black,
             R.drawable.logo_black,
-            R.drawable.logo_black,
             R.drawable.logo_black
     };
     private List<String> mStrs = new ArrayList<>();
