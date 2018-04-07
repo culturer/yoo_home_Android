@@ -1,6 +1,7 @@
 package com.culturer.yoo_home.function.home.home_circle;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.function.home.home_circle.homecircle_list.HomecircleListActivity;
 
 
 public class HomeCirclesFragment extends Fragment {
@@ -73,11 +75,11 @@ public class HomeCirclesFragment extends Fragment {
         circle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), HomecircleListActivity.class);
+                startActivity(intent);
             }
         });
-
-
+        
     }
 
     // TODO: Rename method, update argument and hook method into UI event

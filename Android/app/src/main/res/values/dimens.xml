@@ -19,7 +19,8 @@
     <dimen name="large_title_textSize">50sp</dimen>
     <dimen name="little_title_textSize">24sp</dimen>
     <dimen name="content_textSize">12sp</dimen>
-    <dimen name="content_large_textSize">14sp</dimen>
+    <dimen name="textSize">14sp</dimen>
+    <dimen name="content_large_textSize">16sp</dimen>
     <dimen name="content_little_textSize">8sp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>

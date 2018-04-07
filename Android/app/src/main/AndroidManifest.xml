@@ -54,9 +54,7 @@
         <activity android:name="com.culturer.yoo_home.function.home.family_activity.FamilyActivityActivity" />
         <activity android:name="com.culturer.yoo_home.function.home.home_activity.HomeActivitesAddActivity" />
         <activity android:name="com.culturer.yoo_home.function.home.home_album_detail.HomeAlbumDetailActivity" />
-        <activity android:name="com.culturer.yoo_home.function.chat.ChatActivity" >
-
-        </activity>
+        <activity android:name="com.culturer.yoo_home.function.chat.ChatActivity"></activity>
         <!-- Mqtt Service -->
         <service android:name="org.eclipse.paho.android.service.MqttService" />
         <service android:name="com.culturer.yoo_home.service.MQTT.MQTTService" />
@@ -76,7 +74,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name="com.culturer.yoo_home.function.mine.SettingActivity" />
-        <activity android:name="com.culturer.yoo_home.test.TestEmojiActivity"></activity>
+        <activity android:name="com.culturer.yoo_home.test.TestEmojiActivity" />
+        <activity android:name="com.culturer.yoo_home.function.home.home_circle.homecircle_list.HomecircleListActivity">
+
+        </activity>
     </application>
 
 </manifest>

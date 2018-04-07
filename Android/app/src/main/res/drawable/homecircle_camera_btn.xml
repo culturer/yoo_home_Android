@@ -7,6 +7,6 @@
 
     <item
         android:state_pressed="false"
-        android:drawable="@drawable/ic_camera_alt_blue_24dp"/>
+        android:drawable="@drawable/ic_camera_alt_black_24dp"/>
 
 </selector>

@@ -3,6 +3,7 @@ package com.culturer.yoo_home.widget.navigation.impl;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
@@ -44,7 +45,7 @@ public class HomeNavigation extends DefaultNavigation<HomeNavigation.HomeNavigat
     @Override
     public void initCenterLayout(View view) {
 
-        TextView HomeTopic = (TextView) view.findViewById(R.id.HomeTopic);
+        TextView HomeTopic = view.findViewById(R.id.HomeTopic);
         TextView HomeTitle = (TextView) findViewById(R.id.HomeTitle);
         HomeTopic.setText(getParams().homeTopic);
         HomeTitle.setText(getParams().homeTitle);
@@ -53,13 +54,21 @@ public class HomeNavigation extends DefaultNavigation<HomeNavigation.HomeNavigat
 
     @Override
     public void initRightLayout(View view) {
-
+        ImageView Right_Img = view.findViewById(R.id.Right_Img);
+        if (getParams().rightImg!=0){
+            Right_Img.setImageResource(getParams().rightImg);
+            view.setOnClickListener(getParams().rightListener);
+            Right_Img.setVisibility(View.VISIBLE);
+        }
+        
     }
 
     public static class HomeNavigationParams extends AbsNavigation.NavigationParams {
 
         public String homeTopic;
         public String homeTitle;
+        public int rightImg;
+        public View.OnClickListener rightListener;
 
         public HomeNavigationParams(Context context, ViewGroup parent){
             super(context,parent);
@@ -87,8 +96,16 @@ public class HomeNavigation extends DefaultNavigation<HomeNavigation.HomeNavigat
             return this;
         }
 
-
-
+        public Builder setRightImg(int rightImg){
+            this.p.rightImg = rightImg;
+            return this;
+        }
+    
+        public Builder setRightListener( View.OnClickListener listener){
+            this.p.rightListener = listener;
+            return this;
+        }
+        
         @Override
         public INavigation create() {
             return new HomeNavigation(this.p);

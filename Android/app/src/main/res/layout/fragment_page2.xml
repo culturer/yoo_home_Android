@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@mipmap/home_main_3_bg"
+    android:background="@mipmap/mine_page2_bg"
     tools:context="com.culturer.yoo_home.function.mine.Page2Fragment">
 
     <TextView

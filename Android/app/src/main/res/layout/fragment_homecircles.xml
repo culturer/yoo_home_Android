@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/home_main_1_bg"
     tools:context="com.culturer.yoo_home.function.home.home_circle.HomeCirclesFragment">
 
     <com.scwang.smartrefresh.layout.header.FalsifyHeader
@@ -12,6 +11,9 @@
 
     <LinearLayout
         android:orientation="vertical"
+        android:background="@mipmap/homecircle_bg"
+        android:padding="@dimen/padding"
+        android:layout_margin="@dimen/margin"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <View
@@ -27,6 +29,7 @@
             android:paddingBottom="10dp"
             android:paddingLeft="20dp"
             android:drawablePadding="10dp"
+            android:background="@drawable/btn_selected"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <View
