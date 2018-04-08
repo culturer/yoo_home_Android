@@ -11,6 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.bean.Article;
+import com.culturer.yoo_home.bean.Comment;
+import com.culturer.yoo_home.bean.Photo;
+import com.culturer.yoo_home.bean.User;
+import com.culturer.yoo_home.cahce.CacheData;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
 
 import java.util.ArrayList;
@@ -23,7 +28,11 @@ public class HomecircleListActivity extends AppCompatActivity {
 	private ImageView homecircle_add;
 	private RecyclerView homecircle_list;
 	
-	private List<String> datas = new ArrayList<>();
+	private List<Article> articles = new ArrayList<>();
+	private List<Comment> comments = new ArrayList<>();
+	private List<User> familyUsers = new ArrayList<>();
+	private List<Photo> photos = new ArrayList<>();
+	
 	HomecircleAdapter adapter ;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +47,11 @@ public class HomecircleListActivity extends AppCompatActivity {
 	}
 	
 	private void initData(){
-		for (int i=0 ;i<20;i++){
-			datas.add("第["+i+"]个隔壁老宋宋啊！");
-		}
-		adapter = new HomecircleAdapter(datas,this);
+		articles = CacheData.articles;
+		comments = CacheData.comments;
+		familyUsers = CacheData.familyUsers;
+		photos = CacheData.photos;
+		adapter = new HomecircleAdapter(articles,comments,photos,familyUsers,this);
 	}
 	
 	private void initView(){
