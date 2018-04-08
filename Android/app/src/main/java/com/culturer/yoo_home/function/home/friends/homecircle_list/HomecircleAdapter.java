@@ -1,4 +1,4 @@
-package com.culturer.yoo_home.function.home.home_circle.homecircle_list;
+package com.culturer.yoo_home.function.home.friends.homecircle_list;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -36,12 +36,12 @@ import java.util.Map;
 
 public class HomecircleAdapter extends   RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
-    List<Article> articles  = new ArrayList<>();
-    List<Comment> comments = new ArrayList<>();
-    List<Photo> photos = new ArrayList<>();
-    List<User> familyUsers = new ArrayList<>();
-    Context context;
-    LayoutInflater inflater;
+    private List<Article> articles  = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
+    private List<Photo> photos = new ArrayList<>();
+    private List<User> familyUsers = new ArrayList<>();
+    private Context context;
+    private LayoutInflater inflater;
 
     HomecircleAdapter(List<Article> articles,List<Comment> comments ,List<Photo> photos ,List<User> familyUsers, Context context) {
         this.articles = articles;
@@ -52,11 +52,10 @@ public class HomecircleAdapter extends   RecyclerView.Adapter<RecyclerView.ViewH
         inflater = LayoutInflater.from(context);
     }
 
-    //viewType---0,自己发送的信息；1他人发送的信息
     @Override
     public int getItemViewType(int position) {
-//        String chatMsg = items.get(position);
         return 0;
+//        String chatMsg = items.get(position);
 //        if (chatMsg!=null && chatMsg.getUserId()!=0 && BaseMsg.getUser()!=null){
 //            if (chatMsg.getUserId() == BaseMsg.getUser().getId()){
 //                return 0;
@@ -156,7 +155,7 @@ public class HomecircleAdapter extends   RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder1) holder).comment_ok.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Comment myComment = new Comment(-1l,article.getId(),0l, (long)BaseMsg.getUser().getId(), ((ViewHolder1) holder).comment_et.getText().toString(), TimeUtil.getCurrentTime());
+                    Comment myComment = new Comment(0l,article.getId(),0l, (long)BaseMsg.getUser().getId(), ((ViewHolder1) holder).comment_et.getText().toString(), TimeUtil.getCurrentTime());
                     //发送评论
                 }
             });

@@ -75,7 +75,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name="com.culturer.yoo_home.function.mine.SettingActivity" />
         <activity android:name="com.culturer.yoo_home.test.TestEmojiActivity" />
-        <activity android:name="com.culturer.yoo_home.function.home.home_circle.homecircle_list.HomecircleListActivity">
+        <activity android:name="com.culturer.yoo_home.function.home.friends.homecircle_list.HomecircleListActivity">
 
         </activity>
     </application>

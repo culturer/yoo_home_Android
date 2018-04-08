@@ -1,4 +1,4 @@
-package com.culturer.yoo_home.function.home.home_circle.homecircle_list;
+package com.culturer.yoo_home.function.home.friends.homecircle_list;
 
 import android.view.View;
 import android.view.ViewGroup;
