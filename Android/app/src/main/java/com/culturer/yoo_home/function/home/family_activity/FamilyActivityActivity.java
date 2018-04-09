@@ -35,7 +35,7 @@ public class FamilyActivityActivity extends AppCompatActivity {
     }
 
     private void initNavigation(View contentView) {
-        LinearLayout topNavigation = (LinearLayout) contentView.findViewById(R.id.family_activities_topNavigation);
+        LinearLayout topNavigation = contentView.findViewById(R.id.family_activities_topNavigation);
         HomeNavigation.Builder builder = new HomeNavigation.Builder(this, topNavigation);
         builder.setCenterHomeTopic("Yoo+")
                 .setCenterHomeTitle("家族活动")

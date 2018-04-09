@@ -3,13 +3,13 @@ apply plugin: 'org.greenrobot.greendao' // apply plugin
 
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.2'
+    compileSdkVersion 26
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.culturer.yoo_home"
         minSdkVersion 24
         //noinspection GradleCompatible
-        targetSdkVersion 27
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -44,6 +44,10 @@ android {
         enabled = false
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -75,7 +79,7 @@ dependencies {
     //导入glide
     compile 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
-    compile "com.github.bumptech.glide:okhttp3-integration:4.6.1"
+    compile 'com.github.bumptech.glide:okhttp3-integration:4.6.1'
     //添加相册插件
     compile 'com.yanzhenjie:album:2.0.2'
     //下拉刷新插件
@@ -86,10 +90,8 @@ dependencies {
     compile 'com.github.vondear:RxTools:v1.7.7.3'
     //图片剪切工具
     compile 'com.yalantis:ucrop:2.2.0'
-
     //数据库调试工具
     implementation files('libs/SQLiteStudioRemote.jar')
-
     compile project(path: ':shimmer')
     compile project(path: ':rxvolley')
     compile project(path: ':okhttp3')
