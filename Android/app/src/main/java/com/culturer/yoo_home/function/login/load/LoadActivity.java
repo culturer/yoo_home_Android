@@ -90,7 +90,7 @@ public class LoadActivity extends AppCompatActivity implements ILoadView {
         startService(intentMQTT);
         //启动IM服务
         Intent intentIM = new Intent(this, IMService.class);
-        startActivity(intentIM);
+        startService(intentIM);
     }
 
     @Override

@@ -28,6 +28,8 @@ import com.tim.packet.TimTime;
 import java.util.Date;
 import java.util.List;
 
+import static com.culturer.yoo_home.config.Urls.HOST;
+
 public class IMService extends Service{
 	
 	private static  final String TAG = "IMService";
@@ -55,7 +57,6 @@ public class IMService extends Service{
 	private void init(){
 		initBaseData();
 		initIM();
-		login(username,password);
 	}
 	
 	//初始化基础参数
@@ -76,7 +77,7 @@ public class IMService extends Service{
 		//设置心跳
 		config.setHeartbeat(40);
 		//设置IP地址
-		config.setIp("127.0.0.1");
+		config.setIp(HOST);
 		//设置端口号
 		config.setPort(3737);
 		//设备信息
@@ -89,12 +90,13 @@ public class IMService extends Service{
 		TPClient<Client> tp = TPClient.newInstance(config);
 		try {
 			client = tp.getClient(ClientFactory.getClient(config));
+			client.addMessageListener(new MessageListenerImpl());
+			client.addAckListener(new AckListenerImpl(client));
+			client.addPresenceListener(new PresenceListenerImpl());
+			login(username,password);
 		} catch (TimException e) {
 			e.printStackTrace();
 		}
-		client.addMessageListener(new MessageListenerImpl());
-		client.addAckListener(new AckListenerImpl(client));
-		client.addPresenceListener(new PresenceListenerImpl());
 	}
 	
 	private void login(String username,String password){
@@ -131,8 +133,6 @@ public class IMService extends Service{
 		
 		@Override
 		public void processAck(TimAckBean ab) {
-//			logger.info(ab == null ? "": ab.toString());
-//			android.util.Log.i(TAG, "ab:"+ab.toString());
 //			android.util.Log.i(TAG, "processAck: ");
 			if (ab!=null){
 				TimType ackType = TimType.getTimType(ab.getAckType());
