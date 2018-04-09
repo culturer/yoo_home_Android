@@ -95,4 +95,5 @@ dependencies {
     compile project(path: ':shimmer')
     compile project(path: ':rxvolley')
     compile project(path: ':okhttp3')
+    implementation files('libs/atim1.0.1.jar')
 }
