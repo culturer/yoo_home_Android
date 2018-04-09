@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.culturer.yoo_home.function.home.home_circle.HomeCirclesFragment">
+    tools:context="com.culturer.yoo_home.function.home.friends.HomeCirclesFragment">
 
     <com.scwang.smartrefresh.layout.header.FalsifyHeader
         android:layout_width="match_parent"
@@ -11,7 +11,6 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:background="@mipmap/homecircle_bg"
         android:padding="@dimen/padding"
         android:layout_margin="@dimen/margin"
         android:layout_width="match_parent"
@@ -19,81 +18,32 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"
-            android:background="@color/grey"/>
+            android:background="@color/grey"
+            android:layout_marginBottom="5dp"/>
+
         <TextView
             android:text="亲友圈"
             android:id="@+id/circle"
-            android:drawableLeft="@mipmap/ic_launcher_round"
             android:gravity="center_vertical"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="20dp"
+            android:layout_margin="@dimen/margin"
+            android:padding="10dp"
             android:drawablePadding="10dp"
             android:background="@drawable/btn_selected"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <View
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_edit_black_24dp"
+            android:drawableStart="@drawable/ic_filter_tilt_shift_black_24dp"/>
+
+        <ExpandableListView
+            android:id="@+id/friends"
+            android:padding="10dp"
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@color/grey"/>
-        <TextView
-            android:text="斗地主"
-            android:drawableLeft="@mipmap/ic_launcher_round"
-            android:gravity="center_vertical"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="20dp"
-            android:drawablePadding="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/grey"/>
-        <TextView
-            android:text="麻将"
-            android:drawableLeft="@mipmap/ic_launcher_round"
-            android:gravity="center_vertical"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="20dp"
-            android:drawablePadding="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/grey"/>
-        <TextView
-            android:text="象棋"
-            android:drawableLeft="@mipmap/ic_launcher_round"
-            android:gravity="center_vertical"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="20dp"
-            android:drawablePadding="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@color/grey"/>
-        <TextView
-            android:text="添加小游戏"
-            android:gravity="center"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@color/grey"/>
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
     <com.scwang.smartrefresh.layout.footer.FalsifyFooter
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
 
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

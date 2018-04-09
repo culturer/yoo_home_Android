@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.armour8.yooplus.yooplus.R;
-import com.culturer.yoo_home.function.home.home_circle.HomeCirclesFragment;
+import com.culturer.yoo_home.function.home.friends.HomeCirclesFragment;
 import com.culturer.yoo_home.function.home.home_main.HomeMainFragment;
 import com.culturer.yoo_home.function.home.home_family.FamilyFragment;
 import com.culturer.yoo_home.function.home.home_smart.SmartFragment;
@@ -71,13 +71,13 @@ public class HomeFragment extends Fragment {
 
     private void initPagerData(){
         fragmentList.add( new HomeMainFragment() );
+        fragmentList.add(FamilyFragment.newInstance("",""));
         fragmentList.add(HomeCirclesFragment.newInstance("",""));
         fragmentList.add(SmartFragment.newInstance("",""));
-        fragmentList.add(FamilyFragment.newInstance("",""));
         pagerList.add("家庭");
-        pagerList.add("娱乐");
-        pagerList.add("智能");
         pagerList.add("家族");
+        pagerList.add("好友");
+        pagerList.add("智能");
     }
 
     private View findViewById(int id){
