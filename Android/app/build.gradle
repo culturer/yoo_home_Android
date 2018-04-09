@@ -96,4 +96,10 @@ dependencies {
     compile project(path: ':rxvolley')
     compile project(path: ':okhttp3')
     implementation files('libs/atim1.0.1.jar')
+    implementation files('libs/httpclient-4.2.5.jar')
+    implementation files('libs/httpcore-4.2.4.jar')
+    implementation files('libs/javax.jar')
+    implementation files('libs/log4j-1.2.13.jar')
+    implementation files('libs/slf4j-api-1.5.6.jar')
+    implementation files('libs/slf4j-log4j12.jar')
 }

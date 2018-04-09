@@ -44,7 +44,7 @@ public class ITim {
      * 
      * @param param
      */
-    public void timStream(TimParam param) throws org.apache.thrift.TException;
+    public void timStream(com.tim.packet.TimParam param) throws org.apache.thrift.TException;
 
     /**
      * tls协议
@@ -57,28 +57,28 @@ public class ITim {
      * @param tid
      * @param pwd
      */
-    public void timLogin(Tid tid, String pwd) throws org.apache.thrift.TException;
+    public void timLogin(com.tim.packet.Tid tid, String pwd) throws org.apache.thrift.TException;
 
     /**
      * 回执信息
      * 
      * @param ab
      */
-    public void timAck(TimAckBean ab) throws org.apache.thrift.TException;
+    public void timAck(com.tim.packet.TimAckBean ab) throws org.apache.thrift.TException;
 
     /**
      * 广播出席协议或接收广播协议
      * 
      * @param pbean
      */
-    public void timPresence(TimPBean pbean) throws org.apache.thrift.TException;
+    public void timPresence(com.tim.packet.TimPBean pbean) throws org.apache.thrift.TException;
 
     /**
      * 发送信息或接收信息
      * 
      * @param mbean
      */
-    public void timMessage(TimMBean mbean) throws org.apache.thrift.TException;
+    public void timMessage(com.tim.packet.TimMBean mbean) throws org.apache.thrift.TException;
 
     /**
      * ping 心跳协议
@@ -92,7 +92,7 @@ public class ITim {
      * 
      * @param e
      */
-    public void timError(TimError e) throws org.apache.thrift.TException;
+    public void timError(com.tim.packet.TimError e) throws org.apache.thrift.TException;
 
     /**
      * 登出协议
@@ -105,28 +105,28 @@ public class ITim {
      * @param tid
      * @param auth
      */
-    public void timRegist(Tid tid, String auth) throws org.apache.thrift.TException;
+    public void timRegist(com.tim.packet.Tid tid, String auth) throws org.apache.thrift.TException;
 
     /**
      * 花名册
      * 
      * @param roster
      */
-    public void timRoser(TimRoster roster) throws org.apache.thrift.TException;
+    public void timRoser(com.tim.packet.TimRoster roster) throws org.apache.thrift.TException;
 
     /**
      * 发送信息或接收信息列表（合流）
      * 
      * @param mbeanList
      */
-    public void timMessageList(TimMBeanList mbeanList) throws org.apache.thrift.TException;
+    public void timMessageList(com.tim.packet.TimMBeanList mbeanList) throws org.apache.thrift.TException;
 
     /**
      * 发送状态信息列表（合流）
      * 
      * @param pbeanList
      */
-    public void timPresenceList(TimPBeanList pbeanList) throws org.apache.thrift.TException;
+    public void timPresenceList(com.tim.packet.TimPBeanList pbeanList) throws org.apache.thrift.TException;
 
     /**
      * 信息请求 get请求数据 del删除
@@ -134,21 +134,21 @@ public class ITim {
      * @param timMsgIq
      * @param iqType
      */
-    public void timMessageIq(TimMessageIq timMsgIq, String iqType) throws org.apache.thrift.TException;
+    public void timMessageIq(com.tim.packet.TimMessageIq timMsgIq, String iqType) throws org.apache.thrift.TException;
 
     /**
      * 信息请求
      * 
      * @param mbean
      */
-    public void timMessageResult(TimMBean mbean) throws org.apache.thrift.TException;
+    public void timMessageResult(com.tim.packet.TimMBean mbean) throws org.apache.thrift.TException;
 
     /**
      * 用户协议属性请求
      * 
      * @param tpb
      */
-    public void timProperty(TimPropertyBean tpb) throws org.apache.thrift.TException;
+    public void timProperty(com.tim.packet.TimPropertyBean tpb) throws org.apache.thrift.TException;
 
     /**
      * 请求远程验证信息
@@ -157,7 +157,7 @@ public class ITim {
      * @param pwd
      * @param auth
      */
-    public TimRemoteUserBean timRemoteUserAuth(Tid tid, String pwd, TimAuth auth) throws org.apache.thrift.TException;
+    public com.tim.packet.TimRemoteUserBean timRemoteUserAuth(com.tim.packet.Tid tid, String pwd, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException;
 
     /**
      * 请求远程用户信息
@@ -165,7 +165,7 @@ public class ITim {
      * @param tid
      * @param auth
      */
-    public TimRemoteUserBean timRemoteUserGet(Tid tid, TimAuth auth) throws org.apache.thrift.TException;
+    public com.tim.packet.TimRemoteUserBean timRemoteUserGet(com.tim.packet.Tid tid, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException;
 
     /**
      * 编辑远程用户信息
@@ -174,7 +174,7 @@ public class ITim {
      * @param ub
      * @param auth
      */
-    public TimRemoteUserBean timRemoteUserEdit(Tid tid, TimUserBean ub, TimAuth auth) throws org.apache.thrift.TException;
+    public com.tim.packet.TimRemoteUserBean timRemoteUserEdit(com.tim.packet.Tid tid, com.tim.packet.TimUserBean ub, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException;
 
     /**
      * 广播出席协议或接收广播协议
@@ -182,7 +182,7 @@ public class ITim {
      * @param pbean
      * @param auth
      */
-    public TimResponseBean timResponsePresence(TimPBean pbean, TimAuth auth) throws org.apache.thrift.TException;
+    public com.tim.packet.TimResponseBean timResponsePresence(com.tim.packet.TimPBean pbean, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException;
 
     /**
      * 发送信息或接收信息
@@ -190,7 +190,7 @@ public class ITim {
      * @param mbean
      * @param auth
      */
-    public TimResponseBean timResponseMessage(TimMBean mbean, TimAuth auth) throws org.apache.thrift.TException;
+    public com.tim.packet.TimResponseBean timResponseMessage(com.tim.packet.TimMBean mbean, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException;
 
     /**
      * 信息请求 get请求数据 del删除（辅助接口）
@@ -199,7 +199,7 @@ public class ITim {
      * @param iqType
      * @param auth
      */
-    public TimMBeanList timResponseMessageIq(TimMessageIq timMsgIq, String iqType, TimAuth auth) throws org.apache.thrift.TException;
+    public com.tim.packet.TimMBeanList timResponseMessageIq(com.tim.packet.TimMessageIq timMsgIq, String iqType, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException;
 
     /**
      * 广播出席协议或接收广播协议
@@ -207,7 +207,7 @@ public class ITim {
      * @param pbeanList
      * @param auth
      */
-    public TimResponseBean timResponsePresenceList(TimPBeanList pbeanList, TimAuth auth) throws org.apache.thrift.TException;
+    public com.tim.packet.TimResponseBean timResponsePresenceList(com.tim.packet.TimPBeanList pbeanList, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException;
 
     /**
      * 发送信息或接收信息
@@ -215,59 +215,59 @@ public class ITim {
      * @param mbeanList
      * @param auth
      */
-    public TimResponseBean timResponseMessageList(TimMBeanList mbeanList, TimAuth auth) throws org.apache.thrift.TException;
+    public com.tim.packet.TimResponseBean timResponseMessageList(com.tim.packet.TimMBeanList mbeanList, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException;
 
   }
 
   public interface AsyncIface {
 
-    public void timStream(TimParam param, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timStream(com.tim.packet.TimParam param, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void timStarttls(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timLogin(Tid tid, String pwd, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timLogin(com.tim.packet.Tid tid, String pwd, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timAck(TimAckBean ab, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timAck(com.tim.packet.TimAckBean ab, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timPresence(TimPBean pbean, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timPresence(com.tim.packet.TimPBean pbean, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timMessage(TimMBean mbean, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timMessage(com.tim.packet.TimMBean mbean, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void timPing(String threadId, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timError(TimError e, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timError(com.tim.packet.TimError e, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void timLogout(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timRegist(Tid tid, String auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timRegist(com.tim.packet.Tid tid, String auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timRoser(TimRoster roster, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timRoser(com.tim.packet.TimRoster roster, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timMessageList(TimMBeanList mbeanList, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timMessageList(com.tim.packet.TimMBeanList mbeanList, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timPresenceList(TimPBeanList pbeanList, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timPresenceList(com.tim.packet.TimPBeanList pbeanList, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timMessageIq(TimMessageIq timMsgIq, String iqType, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timMessageIq(com.tim.packet.TimMessageIq timMsgIq, String iqType, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timMessageResult(TimMBean mbean, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timMessageResult(com.tim.packet.TimMBean mbean, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timProperty(TimPropertyBean tpb, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timProperty(com.tim.packet.TimPropertyBean tpb, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timRemoteUserAuth(Tid tid, String pwd, TimAuth auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timRemoteUserAuth(com.tim.packet.Tid tid, String pwd, com.tim.packet.TimAuth auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timRemoteUserGet(Tid tid, TimAuth auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timRemoteUserGet(com.tim.packet.Tid tid, com.tim.packet.TimAuth auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timRemoteUserEdit(Tid tid, TimUserBean ub, TimAuth auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timRemoteUserEdit(com.tim.packet.Tid tid, com.tim.packet.TimUserBean ub, com.tim.packet.TimAuth auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timResponsePresence(TimPBean pbean, TimAuth auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timResponsePresence(com.tim.packet.TimPBean pbean, com.tim.packet.TimAuth auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timResponseMessage(TimMBean mbean, TimAuth auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timResponseMessage(com.tim.packet.TimMBean mbean, com.tim.packet.TimAuth auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timResponseMessageIq(TimMessageIq timMsgIq, String iqType, TimAuth auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timResponseMessageIq(com.tim.packet.TimMessageIq timMsgIq, String iqType, com.tim.packet.TimAuth auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timResponsePresenceList(TimPBeanList pbeanList, TimAuth auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timResponsePresenceList(com.tim.packet.TimPBeanList pbeanList, com.tim.packet.TimAuth auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void timResponseMessageList(TimMBeanList mbeanList, TimAuth auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void timResponseMessageList(com.tim.packet.TimMBeanList mbeanList, com.tim.packet.TimAuth auth, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -291,12 +291,12 @@ public class ITim {
       super(iprot, oprot);
     }
 
-    public void timStream(TimParam param) throws org.apache.thrift.TException
+    public void timStream(com.tim.packet.TimParam param) throws org.apache.thrift.TException
     {
       send_timStream(param);
     }
 
-    public void send_timStream(TimParam param) throws org.apache.thrift.TException
+    public void send_timStream(com.tim.packet.TimParam param) throws org.apache.thrift.TException
     {
       timStream_args args = new timStream_args();
       args.setParam(param);
@@ -314,12 +314,12 @@ public class ITim {
       sendBaseOneway("timStarttls", args);
     }
 
-    public void timLogin(Tid tid, String pwd) throws org.apache.thrift.TException
+    public void timLogin(com.tim.packet.Tid tid, String pwd) throws org.apache.thrift.TException
     {
       send_timLogin(tid, pwd);
     }
 
-    public void send_timLogin(Tid tid, String pwd) throws org.apache.thrift.TException
+    public void send_timLogin(com.tim.packet.Tid tid, String pwd) throws org.apache.thrift.TException
     {
       timLogin_args args = new timLogin_args();
       args.setTid(tid);
@@ -327,36 +327,36 @@ public class ITim {
       sendBaseOneway("timLogin", args);
     }
 
-    public void timAck(TimAckBean ab) throws org.apache.thrift.TException
+    public void timAck(com.tim.packet.TimAckBean ab) throws org.apache.thrift.TException
     {
       send_timAck(ab);
     }
 
-    public void send_timAck(TimAckBean ab) throws org.apache.thrift.TException
+    public void send_timAck(com.tim.packet.TimAckBean ab) throws org.apache.thrift.TException
     {
       timAck_args args = new timAck_args();
       args.setAb(ab);
       sendBaseOneway("timAck", args);
     }
 
-    public void timPresence(TimPBean pbean) throws org.apache.thrift.TException
+    public void timPresence(com.tim.packet.TimPBean pbean) throws org.apache.thrift.TException
     {
       send_timPresence(pbean);
     }
 
-    public void send_timPresence(TimPBean pbean) throws org.apache.thrift.TException
+    public void send_timPresence(com.tim.packet.TimPBean pbean) throws org.apache.thrift.TException
     {
       timPresence_args args = new timPresence_args();
       args.setPbean(pbean);
       sendBaseOneway("timPresence", args);
     }
 
-    public void timMessage(TimMBean mbean) throws org.apache.thrift.TException
+    public void timMessage(com.tim.packet.TimMBean mbean) throws org.apache.thrift.TException
     {
       send_timMessage(mbean);
     }
 
-    public void send_timMessage(TimMBean mbean) throws org.apache.thrift.TException
+    public void send_timMessage(com.tim.packet.TimMBean mbean) throws org.apache.thrift.TException
     {
       timMessage_args args = new timMessage_args();
       args.setMbean(mbean);
@@ -375,12 +375,12 @@ public class ITim {
       sendBaseOneway("timPing", args);
     }
 
-    public void timError(TimError e) throws org.apache.thrift.TException
+    public void timError(com.tim.packet.TimError e) throws org.apache.thrift.TException
     {
       send_timError(e);
     }
 
-    public void send_timError(TimError e) throws org.apache.thrift.TException
+    public void send_timError(com.tim.packet.TimError e) throws org.apache.thrift.TException
     {
       timError_args args = new timError_args();
       args.setE(e);
@@ -398,12 +398,12 @@ public class ITim {
       sendBaseOneway("timLogout", args);
     }
 
-    public void timRegist(Tid tid, String auth) throws org.apache.thrift.TException
+    public void timRegist(com.tim.packet.Tid tid, String auth) throws org.apache.thrift.TException
     {
       send_timRegist(tid, auth);
     }
 
-    public void send_timRegist(Tid tid, String auth) throws org.apache.thrift.TException
+    public void send_timRegist(com.tim.packet.Tid tid, String auth) throws org.apache.thrift.TException
     {
       timRegist_args args = new timRegist_args();
       args.setTid(tid);
@@ -411,48 +411,48 @@ public class ITim {
       sendBaseOneway("timRegist", args);
     }
 
-    public void timRoser(TimRoster roster) throws org.apache.thrift.TException
+    public void timRoser(com.tim.packet.TimRoster roster) throws org.apache.thrift.TException
     {
       send_timRoser(roster);
     }
 
-    public void send_timRoser(TimRoster roster) throws org.apache.thrift.TException
+    public void send_timRoser(com.tim.packet.TimRoster roster) throws org.apache.thrift.TException
     {
       timRoser_args args = new timRoser_args();
       args.setRoster(roster);
       sendBaseOneway("timRoser", args);
     }
 
-    public void timMessageList(TimMBeanList mbeanList) throws org.apache.thrift.TException
+    public void timMessageList(com.tim.packet.TimMBeanList mbeanList) throws org.apache.thrift.TException
     {
       send_timMessageList(mbeanList);
     }
 
-    public void send_timMessageList(TimMBeanList mbeanList) throws org.apache.thrift.TException
+    public void send_timMessageList(com.tim.packet.TimMBeanList mbeanList) throws org.apache.thrift.TException
     {
       timMessageList_args args = new timMessageList_args();
       args.setMbeanList(mbeanList);
       sendBaseOneway("timMessageList", args);
     }
 
-    public void timPresenceList(TimPBeanList pbeanList) throws org.apache.thrift.TException
+    public void timPresenceList(com.tim.packet.TimPBeanList pbeanList) throws org.apache.thrift.TException
     {
       send_timPresenceList(pbeanList);
     }
 
-    public void send_timPresenceList(TimPBeanList pbeanList) throws org.apache.thrift.TException
+    public void send_timPresenceList(com.tim.packet.TimPBeanList pbeanList) throws org.apache.thrift.TException
     {
       timPresenceList_args args = new timPresenceList_args();
       args.setPbeanList(pbeanList);
       sendBaseOneway("timPresenceList", args);
     }
 
-    public void timMessageIq(TimMessageIq timMsgIq, String iqType) throws org.apache.thrift.TException
+    public void timMessageIq(com.tim.packet.TimMessageIq timMsgIq, String iqType) throws org.apache.thrift.TException
     {
       send_timMessageIq(timMsgIq, iqType);
     }
 
-    public void send_timMessageIq(TimMessageIq timMsgIq, String iqType) throws org.apache.thrift.TException
+    public void send_timMessageIq(com.tim.packet.TimMessageIq timMsgIq, String iqType) throws org.apache.thrift.TException
     {
       timMessageIq_args args = new timMessageIq_args();
       args.setTimMsgIq(timMsgIq);
@@ -460,37 +460,37 @@ public class ITim {
       sendBaseOneway("timMessageIq", args);
     }
 
-    public void timMessageResult(TimMBean mbean) throws org.apache.thrift.TException
+    public void timMessageResult(com.tim.packet.TimMBean mbean) throws org.apache.thrift.TException
     {
       send_timMessageResult(mbean);
     }
 
-    public void send_timMessageResult(TimMBean mbean) throws org.apache.thrift.TException
+    public void send_timMessageResult(com.tim.packet.TimMBean mbean) throws org.apache.thrift.TException
     {
       timMessageResult_args args = new timMessageResult_args();
       args.setMbean(mbean);
       sendBaseOneway("timMessageResult", args);
     }
 
-    public void timProperty(TimPropertyBean tpb) throws org.apache.thrift.TException
+    public void timProperty(com.tim.packet.TimPropertyBean tpb) throws org.apache.thrift.TException
     {
       send_timProperty(tpb);
     }
 
-    public void send_timProperty(TimPropertyBean tpb) throws org.apache.thrift.TException
+    public void send_timProperty(com.tim.packet.TimPropertyBean tpb) throws org.apache.thrift.TException
     {
       timProperty_args args = new timProperty_args();
       args.setTpb(tpb);
       sendBaseOneway("timProperty", args);
     }
 
-    public TimRemoteUserBean timRemoteUserAuth(Tid tid, String pwd, TimAuth auth) throws org.apache.thrift.TException
+    public com.tim.packet.TimRemoteUserBean timRemoteUserAuth(com.tim.packet.Tid tid, String pwd, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException
     {
       send_timRemoteUserAuth(tid, pwd, auth);
       return recv_timRemoteUserAuth();
     }
 
-    public void send_timRemoteUserAuth(Tid tid, String pwd, TimAuth auth) throws org.apache.thrift.TException
+    public void send_timRemoteUserAuth(com.tim.packet.Tid tid, String pwd, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException
     {
       timRemoteUserAuth_args args = new timRemoteUserAuth_args();
       args.setTid(tid);
@@ -499,7 +499,7 @@ public class ITim {
       sendBase("timRemoteUserAuth", args);
     }
 
-    public TimRemoteUserBean recv_timRemoteUserAuth() throws org.apache.thrift.TException
+    public com.tim.packet.TimRemoteUserBean recv_timRemoteUserAuth() throws org.apache.thrift.TException
     {
       timRemoteUserAuth_result result = new timRemoteUserAuth_result();
       receiveBase(result, "timRemoteUserAuth");
@@ -509,13 +509,13 @@ public class ITim {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "timRemoteUserAuth failed: unknown result");
     }
 
-    public TimRemoteUserBean timRemoteUserGet(Tid tid, TimAuth auth) throws org.apache.thrift.TException
+    public com.tim.packet.TimRemoteUserBean timRemoteUserGet(com.tim.packet.Tid tid, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException
     {
       send_timRemoteUserGet(tid, auth);
       return recv_timRemoteUserGet();
     }
 
-    public void send_timRemoteUserGet(Tid tid, TimAuth auth) throws org.apache.thrift.TException
+    public void send_timRemoteUserGet(com.tim.packet.Tid tid, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException
     {
       timRemoteUserGet_args args = new timRemoteUserGet_args();
       args.setTid(tid);
@@ -523,7 +523,7 @@ public class ITim {
       sendBase("timRemoteUserGet", args);
     }
 
-    public TimRemoteUserBean recv_timRemoteUserGet() throws org.apache.thrift.TException
+    public com.tim.packet.TimRemoteUserBean recv_timRemoteUserGet() throws org.apache.thrift.TException
     {
       timRemoteUserGet_result result = new timRemoteUserGet_result();
       receiveBase(result, "timRemoteUserGet");
@@ -533,13 +533,13 @@ public class ITim {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "timRemoteUserGet failed: unknown result");
     }
 
-    public TimRemoteUserBean timRemoteUserEdit(Tid tid, TimUserBean ub, TimAuth auth) throws org.apache.thrift.TException
+    public com.tim.packet.TimRemoteUserBean timRemoteUserEdit(com.tim.packet.Tid tid, com.tim.packet.TimUserBean ub, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException
     {
       send_timRemoteUserEdit(tid, ub, auth);
       return recv_timRemoteUserEdit();
     }
 
-    public void send_timRemoteUserEdit(Tid tid, TimUserBean ub, TimAuth auth) throws org.apache.thrift.TException
+    public void send_timRemoteUserEdit(com.tim.packet.Tid tid, com.tim.packet.TimUserBean ub, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException
     {
       timRemoteUserEdit_args args = new timRemoteUserEdit_args();
       args.setTid(tid);
@@ -548,7 +548,7 @@ public class ITim {
       sendBase("timRemoteUserEdit", args);
     }
 
-    public TimRemoteUserBean recv_timRemoteUserEdit() throws org.apache.thrift.TException
+    public com.tim.packet.TimRemoteUserBean recv_timRemoteUserEdit() throws org.apache.thrift.TException
     {
       timRemoteUserEdit_result result = new timRemoteUserEdit_result();
       receiveBase(result, "timRemoteUserEdit");
@@ -558,13 +558,13 @@ public class ITim {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "timRemoteUserEdit failed: unknown result");
     }
 
-    public TimResponseBean timResponsePresence(TimPBean pbean, TimAuth auth) throws org.apache.thrift.TException
+    public com.tim.packet.TimResponseBean timResponsePresence(com.tim.packet.TimPBean pbean, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException
     {
       send_timResponsePresence(pbean, auth);
       return recv_timResponsePresence();
     }
 
-    public void send_timResponsePresence(TimPBean pbean, TimAuth auth) throws org.apache.thrift.TException
+    public void send_timResponsePresence(com.tim.packet.TimPBean pbean, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException
     {
       timResponsePresence_args args = new timResponsePresence_args();
       args.setPbean(pbean);
@@ -572,7 +572,7 @@ public class ITim {
       sendBase("timResponsePresence", args);
     }
 
-    public TimResponseBean recv_timResponsePresence() throws org.apache.thrift.TException
+    public com.tim.packet.TimResponseBean recv_timResponsePresence() throws org.apache.thrift.TException
     {
       timResponsePresence_result result = new timResponsePresence_result();
       receiveBase(result, "timResponsePresence");
@@ -582,13 +582,13 @@ public class ITim {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "timResponsePresence failed: unknown result");
     }
 
-    public TimResponseBean timResponseMessage(TimMBean mbean, TimAuth auth) throws org.apache.thrift.TException
+    public com.tim.packet.TimResponseBean timResponseMessage(com.tim.packet.TimMBean mbean, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException
     {
       send_timResponseMessage(mbean, auth);
       return recv_timResponseMessage();
     }
 
-    public void send_timResponseMessage(TimMBean mbean, TimAuth auth) throws org.apache.thrift.TException
+    public void send_timResponseMessage(com.tim.packet.TimMBean mbean, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException
     {
       timResponseMessage_args args = new timResponseMessage_args();
       args.setMbean(mbean);
@@ -596,7 +596,7 @@ public class ITim {
       sendBase("timResponseMessage", args);
     }
 
-    public TimResponseBean recv_timResponseMessage() throws org.apache.thrift.TException
+    public com.tim.packet.TimResponseBean recv_timResponseMessage() throws org.apache.thrift.TException
     {
       timResponseMessage_result result = new timResponseMessage_result();
       receiveBase(result, "timResponseMessage");
@@ -606,13 +606,13 @@ public class ITim {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "timResponseMessage failed: unknown result");
     }
 
-    public TimMBeanList timResponseMessageIq(TimMessageIq timMsgIq, String iqType, TimAuth auth) throws org.apache.thrift.TException
+    public com.tim.packet.TimMBeanList timResponseMessageIq(com.tim.packet.TimMessageIq timMsgIq, String iqType, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException
     {
       send_timResponseMessageIq(timMsgIq, iqType, auth);
       return recv_timResponseMessageIq();
     }
 
-    public void send_timResponseMessageIq(TimMessageIq timMsgIq, String iqType, TimAuth auth) throws org.apache.thrift.TException
+    public void send_timResponseMessageIq(com.tim.packet.TimMessageIq timMsgIq, String iqType, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException
     {
       timResponseMessageIq_args args = new timResponseMessageIq_args();
       args.setTimMsgIq(timMsgIq);
@@ -621,7 +621,7 @@ public class ITim {
       sendBase("timResponseMessageIq", args);
     }
 
-    public TimMBeanList recv_timResponseMessageIq() throws org.apache.thrift.TException
+    public com.tim.packet.TimMBeanList recv_timResponseMessageIq() throws org.apache.thrift.TException
     {
       timResponseMessageIq_result result = new timResponseMessageIq_result();
       receiveBase(result, "timResponseMessageIq");
@@ -631,13 +631,13 @@ public class ITim {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "timResponseMessageIq failed: unknown result");
     }
 
-    public TimResponseBean timResponsePresenceList(TimPBeanList pbeanList, TimAuth auth) throws org.apache.thrift.TException
+    public com.tim.packet.TimResponseBean timResponsePresenceList(com.tim.packet.TimPBeanList pbeanList, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException
     {
       send_timResponsePresenceList(pbeanList, auth);
       return recv_timResponsePresenceList();
     }
 
-    public void send_timResponsePresenceList(TimPBeanList pbeanList, TimAuth auth) throws org.apache.thrift.TException
+    public void send_timResponsePresenceList(com.tim.packet.TimPBeanList pbeanList, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException
     {
       timResponsePresenceList_args args = new timResponsePresenceList_args();
       args.setPbeanList(pbeanList);
@@ -645,7 +645,7 @@ public class ITim {
       sendBase("timResponsePresenceList", args);
     }
 
-    public TimResponseBean recv_timResponsePresenceList() throws org.apache.thrift.TException
+    public com.tim.packet.TimResponseBean recv_timResponsePresenceList() throws org.apache.thrift.TException
     {
       timResponsePresenceList_result result = new timResponsePresenceList_result();
       receiveBase(result, "timResponsePresenceList");
@@ -655,13 +655,13 @@ public class ITim {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "timResponsePresenceList failed: unknown result");
     }
 
-    public TimResponseBean timResponseMessageList(TimMBeanList mbeanList, TimAuth auth) throws org.apache.thrift.TException
+    public com.tim.packet.TimResponseBean timResponseMessageList(com.tim.packet.TimMBeanList mbeanList, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException
     {
       send_timResponseMessageList(mbeanList, auth);
       return recv_timResponseMessageList();
     }
 
-    public void send_timResponseMessageList(TimMBeanList mbeanList, TimAuth auth) throws org.apache.thrift.TException
+    public void send_timResponseMessageList(com.tim.packet.TimMBeanList mbeanList, com.tim.packet.TimAuth auth) throws org.apache.thrift.TException
     {
       timResponseMessageList_args args = new timResponseMessageList_args();
       args.setMbeanList(mbeanList);
@@ -669,7 +669,7 @@ public class ITim {
       sendBase("timResponseMessageList", args);
     }
 
-    public TimResponseBean recv_timResponseMessageList() throws org.apache.thrift.TException
+    public com.tim.packet.TimResponseBean recv_timResponseMessageList() throws org.apache.thrift.TException
     {
       timResponseMessageList_result result = new timResponseMessageList_result();
       receiveBase(result, "timResponseMessageList");
@@ -697,7 +697,7 @@ public class ITim {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void timStream(TimParam param, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void timStream(com.tim.packet.TimParam param, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
       timStream_call method_call = new timStream_call(param, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -705,8 +705,8 @@ public class ITim {
     }
 
     public static class timStream_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private TimParam param;
-      public timStream_call(TimParam param, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private com.tim.packet.TimParam param;
+      public timStream_call(com.tim.packet.TimParam param, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, true);
         this.param = param;
       }
@@ -756,7 +756,7 @@ public class ITim {
       }
     }
 
-    public void timLogin(Tid tid, String pwd, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void timLogin(com.tim.packet.Tid tid, String pwd, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
       timLogin_call method_call = new timLogin_call(tid, pwd, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -764,9 +764,9 @@ public class ITim {
     }
 
     public static class timLogin_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private Tid tid;
+      private com.tim.packet.Tid tid;
       private String pwd;
-      public timLogin_call(Tid tid, String pwd, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public timLogin_call(com.tim.packet.Tid tid, String pwd, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, true);
         this.tid = tid;
         this.pwd = pwd;
@@ -790,7 +790,7 @@ public class ITim {
       }
     }
 
-    public void timAck(TimAckBean ab, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void timAck(com.tim.packet.TimAckBean ab, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
       timAck_call method_call = new timAck_call(ab, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -798,8 +798,8 @@ public class ITim {
     }
 
     public static class timAck_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private TimAckBean ab;
-      public timAck_call(TimAckBean ab, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private com.tim.packet.TimAckBean ab;
+      public timAck_call(com.tim.packet.TimAckBean ab, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, true);
         this.ab = ab;
       }
@@ -2477,7 +2477,7 @@ public class ITim {
       }
     }
 
-    public static class timRemoteUserAuth<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, timRemoteUserAuth_args, TimRemoteUserBean> {
+    public static class timRemoteUserAuth<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, timRemoteUserAuth_args, com.tim.packet.TimRemoteUserBean> {
       public timRemoteUserAuth() {
         super("timRemoteUserAuth");
       }
@@ -2486,10 +2486,10 @@ public class ITim {
         return new timRemoteUserAuth_args();
       }
 
-      public AsyncMethodCallback<TimRemoteUserBean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<com.tim.packet.TimRemoteUserBean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<TimRemoteUserBean>() { 
-          public void onComplete(TimRemoteUserBean o) {
+        return new AsyncMethodCallback<com.tim.packet.TimRemoteUserBean>() {
+          public void onComplete(com.tim.packet.TimRemoteUserBean o) {
             timRemoteUserAuth_result result = new timRemoteUserAuth_result();
             result.success = o;
             try {
@@ -2523,12 +2523,12 @@ public class ITim {
         return false;
       }
 
-      public void start(I iface, timRemoteUserAuth_args args, org.apache.thrift.async.AsyncMethodCallback<TimRemoteUserBean> resultHandler) throws TException {
+      public void start(I iface, timRemoteUserAuth_args args, org.apache.thrift.async.AsyncMethodCallback<com.tim.packet.TimRemoteUserBean> resultHandler) throws TException {
         iface.timRemoteUserAuth(args.tid, args.pwd, args.auth,resultHandler);
       }
     }
 
-    public static class timRemoteUserGet<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, timRemoteUserGet_args, TimRemoteUserBean> {
+    public static class timRemoteUserGet<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, timRemoteUserGet_args, com.tim.packet.TimRemoteUserBean> {
       public timRemoteUserGet() {
         super("timRemoteUserGet");
       }
@@ -2537,10 +2537,10 @@ public class ITim {
         return new timRemoteUserGet_args();
       }
 
-      public AsyncMethodCallback<TimRemoteUserBean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<com.tim.packet.TimRemoteUserBean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<TimRemoteUserBean>() { 
-          public void onComplete(TimRemoteUserBean o) {
+        return new AsyncMethodCallback<com.tim.packet.TimRemoteUserBean>() {
+          public void onComplete(com.tim.packet.TimRemoteUserBean o) {
             timRemoteUserGet_result result = new timRemoteUserGet_result();
             result.success = o;
             try {
@@ -2574,12 +2574,12 @@ public class ITim {
         return false;
       }
 
-      public void start(I iface, timRemoteUserGet_args args, org.apache.thrift.async.AsyncMethodCallback<TimRemoteUserBean> resultHandler) throws TException {
+      public void start(I iface, timRemoteUserGet_args args, org.apache.thrift.async.AsyncMethodCallback<com.tim.packet.TimRemoteUserBean> resultHandler) throws TException {
         iface.timRemoteUserGet(args.tid, args.auth,resultHandler);
       }
     }
 
-    public static class timRemoteUserEdit<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, timRemoteUserEdit_args, TimRemoteUserBean> {
+    public static class timRemoteUserEdit<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, timRemoteUserEdit_args, com.tim.packet.TimRemoteUserBean> {
       public timRemoteUserEdit() {
         super("timRemoteUserEdit");
       }
@@ -2588,10 +2588,10 @@ public class ITim {
         return new timRemoteUserEdit_args();
       }
 
-      public AsyncMethodCallback<TimRemoteUserBean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<com.tim.packet.TimRemoteUserBean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<TimRemoteUserBean>() { 
-          public void onComplete(TimRemoteUserBean o) {
+        return new AsyncMethodCallback<com.tim.packet.TimRemoteUserBean>() {
+          public void onComplete(com.tim.packet.TimRemoteUserBean o) {
             timRemoteUserEdit_result result = new timRemoteUserEdit_result();
             result.success = o;
             try {
@@ -2625,12 +2625,12 @@ public class ITim {
         return false;
       }
 
-      public void start(I iface, timRemoteUserEdit_args args, org.apache.thrift.async.AsyncMethodCallback<TimRemoteUserBean> resultHandler) throws TException {
+      public void start(I iface, timRemoteUserEdit_args args, org.apache.thrift.async.AsyncMethodCallback<com.tim.packet.TimRemoteUserBean> resultHandler) throws TException {
         iface.timRemoteUserEdit(args.tid, args.ub, args.auth,resultHandler);
       }
     }
 
-    public static class timResponsePresence<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, timResponsePresence_args, TimResponseBean> {
+    public static class timResponsePresence<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, timResponsePresence_args, com.tim.packet.TimResponseBean> {
       public timResponsePresence() {
         super("timResponsePresence");
       }
@@ -2639,10 +2639,10 @@ public class ITim {
         return new timResponsePresence_args();
       }
 
-      public AsyncMethodCallback<TimResponseBean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<com.tim.packet.TimResponseBean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<TimResponseBean>() { 
-          public void onComplete(TimResponseBean o) {
+        return new AsyncMethodCallback<com.tim.packet.TimResponseBean>() {
+          public void onComplete(com.tim.packet.TimResponseBean o) {
             timResponsePresence_result result = new timResponsePresence_result();
             result.success = o;
             try {
@@ -2676,12 +2676,12 @@ public class ITim {
         return false;
       }
 
-      public void start(I iface, timResponsePresence_args args, org.apache.thrift.async.AsyncMethodCallback<TimResponseBean> resultHandler) throws TException {
+      public void start(I iface, timResponsePresence_args args, org.apache.thrift.async.AsyncMethodCallback<com.tim.packet.TimResponseBean> resultHandler) throws TException {
         iface.timResponsePresence(args.pbean, args.auth,resultHandler);
       }
     }
 
-    public static class timResponseMessage<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, timResponseMessage_args, TimResponseBean> {
+    public static class timResponseMessage<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, timResponseMessage_args, com.tim.packet.TimResponseBean> {
       public timResponseMessage() {
         super("timResponseMessage");
       }
@@ -2690,10 +2690,10 @@ public class ITim {
         return new timResponseMessage_args();
       }
 
-      public AsyncMethodCallback<TimResponseBean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<com.tim.packet.TimResponseBean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<TimResponseBean>() { 
-          public void onComplete(TimResponseBean o) {
+        return new AsyncMethodCallback<com.tim.packet.TimResponseBean>() {
+          public void onComplete(com.tim.packet.TimResponseBean o) {
             timResponseMessage_result result = new timResponseMessage_result();
             result.success = o;
             try {
@@ -2727,12 +2727,12 @@ public class ITim {
         return false;
       }
 
-      public void start(I iface, timResponseMessage_args args, org.apache.thrift.async.AsyncMethodCallback<TimResponseBean> resultHandler) throws TException {
+      public void start(I iface, timResponseMessage_args args, org.apache.thrift.async.AsyncMethodCallback<com.tim.packet.TimResponseBean> resultHandler) throws TException {
         iface.timResponseMessage(args.mbean, args.auth,resultHandler);
       }
     }
 
-    public static class timResponseMessageIq<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, timResponseMessageIq_args, TimMBeanList> {
+    public static class timResponseMessageIq<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, timResponseMessageIq_args, com.tim.packet.TimMBeanList> {
       public timResponseMessageIq() {
         super("timResponseMessageIq");
       }
@@ -2741,10 +2741,10 @@ public class ITim {
         return new timResponseMessageIq_args();
       }
 
-      public AsyncMethodCallback<TimMBeanList> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<com.tim.packet.TimMBeanList> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<TimMBeanList>() { 
-          public void onComplete(TimMBeanList o) {
+        return new AsyncMethodCallback<com.tim.packet.TimMBeanList>() {
+          public void onComplete(com.tim.packet.TimMBeanList o) {
             timResponseMessageIq_result result = new timResponseMessageIq_result();
             result.success = o;
             try {
@@ -2778,12 +2778,12 @@ public class ITim {
         return false;
       }
 
-      public void start(I iface, timResponseMessageIq_args args, org.apache.thrift.async.AsyncMethodCallback<TimMBeanList> resultHandler) throws TException {
+      public void start(I iface, timResponseMessageIq_args args, org.apache.thrift.async.AsyncMethodCallback<com.tim.packet.TimMBeanList> resultHandler) throws TException {
         iface.timResponseMessageIq(args.timMsgIq, args.iqType, args.auth,resultHandler);
       }
     }
 
-    public static class timResponsePresenceList<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, timResponsePresenceList_args, TimResponseBean> {
+    public static class timResponsePresenceList<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, timResponsePresenceList_args, com.tim.packet.TimResponseBean> {
       public timResponsePresenceList() {
         super("timResponsePresenceList");
       }
@@ -2792,10 +2792,10 @@ public class ITim {
         return new timResponsePresenceList_args();
       }
 
-      public AsyncMethodCallback<TimResponseBean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<com.tim.packet.TimResponseBean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<TimResponseBean>() { 
-          public void onComplete(TimResponseBean o) {
+        return new AsyncMethodCallback<com.tim.packet.TimResponseBean>() {
+          public void onComplete(com.tim.packet.TimResponseBean o) {
             timResponsePresenceList_result result = new timResponsePresenceList_result();
             result.success = o;
             try {
@@ -2829,12 +2829,12 @@ public class ITim {
         return false;
       }
 
-      public void start(I iface, timResponsePresenceList_args args, org.apache.thrift.async.AsyncMethodCallback<TimResponseBean> resultHandler) throws TException {
+      public void start(I iface, timResponsePresenceList_args args, org.apache.thrift.async.AsyncMethodCallback<com.tim.packet.TimResponseBean> resultHandler) throws TException {
         iface.timResponsePresenceList(args.pbeanList, args.auth,resultHandler);
       }
     }
 
-    public static class timResponseMessageList<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, timResponseMessageList_args, TimResponseBean> {
+    public static class timResponseMessageList<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, timResponseMessageList_args, com.tim.packet.TimResponseBean> {
       public timResponseMessageList() {
         super("timResponseMessageList");
       }
@@ -2843,10 +2843,10 @@ public class ITim {
         return new timResponseMessageList_args();
       }
 
-      public AsyncMethodCallback<TimResponseBean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<com.tim.packet.TimResponseBean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<TimResponseBean>() { 
-          public void onComplete(TimResponseBean o) {
+        return new AsyncMethodCallback<com.tim.packet.TimResponseBean>() {
+          public void onComplete(com.tim.packet.TimResponseBean o) {
             timResponseMessageList_result result = new timResponseMessageList_result();
             result.success = o;
             try {
@@ -2880,7 +2880,7 @@ public class ITim {
         return false;
       }
 
-      public void start(I iface, timResponseMessageList_args args, org.apache.thrift.async.AsyncMethodCallback<TimResponseBean> resultHandler) throws TException {
+      public void start(I iface, timResponseMessageList_args args, org.apache.thrift.async.AsyncMethodCallback<com.tim.packet.TimResponseBean> resultHandler) throws TException {
         iface.timResponseMessageList(args.mbeanList, args.auth,resultHandler);
       }
     }
@@ -2898,7 +2898,7 @@ public class ITim {
       schemes.put(TupleScheme.class, new timStream_argsTupleSchemeFactory());
     }
 
-    public TimParam param; // required
+    public com.tim.packet.TimParam param; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -2963,7 +2963,7 @@ public class ITim {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.PARAM, new org.apache.thrift.meta_data.FieldMetaData("param", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TimParam.class)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.tim.packet.TimParam.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(timStream_args.class, metaDataMap);
     }
@@ -2972,7 +2972,7 @@ public class ITim {
     }
 
     public timStream_args(
-      TimParam param)
+      com.tim.packet.TimParam param)
     {
       this();
       this.param = param;
@@ -2983,7 +2983,7 @@ public class ITim {
      */
     public timStream_args(timStream_args other) {
       if (other.isSetParam()) {
-        this.param = new TimParam(other.param);
+        this.param = new com.tim.packet.TimParam(other.param);
       }
     }
 
@@ -2996,11 +2996,11 @@ public class ITim {
       this.param = null;
     }
 
-    public TimParam getParam() {
+    public com.tim.packet.TimParam getParam() {
       return this.param;
     }
 
-    public timStream_args setParam(TimParam param) {
+    public timStream_args setParam(com.tim.packet.TimParam param) {
       this.param = param;
       return this;
     }
@@ -3026,7 +3026,7 @@ public class ITim {
         if (value == null) {
           unsetParam();
         } else {
-          setParam((TimParam)value);
+          setParam((com.tim.packet.TimParam)value);
         }
         break;
 
@@ -3185,7 +3185,7 @@ public class ITim {
           switch (schemeField.id) {
             case 1: // PARAM
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.param = new TimParam();
+                struct.param = new com.tim.packet.TimParam();
                 struct.param.read(iprot);
                 struct.setParamIsSet(true);
               } else { 

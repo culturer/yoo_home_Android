@@ -7,7 +7,7 @@
  *
  */
 
-package com.tim;
+package com.culturer.tim.test.com.tim;
 
 import java.util.Date;
 import java.util.List;
