@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.culturer.yoo_home.function.home.friends.HomeCirclesFragment">
+    tools:context="com.culturer.yoo_home.function.home.friends.FriendsFragment">
 
     <com.scwang.smartrefresh.layout.header.FalsifyHeader
         android:layout_width="match_parent"
@@ -15,6 +15,7 @@
         android:layout_margin="@dimen/margin"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"
@@ -37,6 +38,7 @@
         <ExpandableListView
             android:id="@+id/friends"
             android:padding="10dp"
+            android:groupIndicator="@null"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>
@@ -44,6 +46,5 @@
     <com.scwang.smartrefresh.layout.footer.FalsifyFooter
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
 
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>
