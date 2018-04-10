@@ -41,7 +41,7 @@
     </LinearLayout>
     <TextView
         android:id="@+id/content"
-        android:text="影视排行榜 1 王牌对王牌 第3季 163.8万 2 南方有乔木 97.9万 3 歌手2018 93.2万 4 老男孩 92.8万 5 快乐大本营 85.8万 6 斗罗大陆 第1..."
+        android:text="该项目是个人研究性项目，以学习新技术为目的。它的应用场景是将家庭关系从复杂的社会关系中抽离出来，大大简化家人，亲友间的通信困难，拉近亲人之间的距离，巩固逐渐淡化的亲戚关系。并有向物联网，人工智能，大数据方向扩展的潜力。并计划开发官方网站。"
         android:textSize="@dimen/textSize"
         android:textColor="@color/black"
         android:layout_marginLeft="@dimen/margin"
@@ -54,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:stretchMode="spacingWidth"/>
+        android:stretchMode="none"/>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_margin="@dimen/margin"
