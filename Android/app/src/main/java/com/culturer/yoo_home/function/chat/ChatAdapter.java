@@ -68,7 +68,6 @@ public class ChatAdapter extends   RecyclerView.Adapter<RecyclerView.ViewHolder>
         Log.i("adapter", "onBindViewHolder: "+items.get(position).toString());
 //        if (holder instanceof ViewHolder1 ){
             ((ViewHolder1) holder).chat_item_desc.setText(items.get(position).getMsg());
-
 //            ((ViewHolder1) holder).chat_item_icon.setImageResource(items.get(position).getUserIcon());
 //        }
     }

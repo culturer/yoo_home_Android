@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.function.login.login.LoginActivity;
 import com.culturer.yoo_home.function.main.MainActivity;
-import com.culturer.yoo_home.service.IM.IMService;
 import com.culturer.yoo_home.service.MQTT.MQTTService;
 import com.culturer.yoo_home.util.Typefaces;
 import com.culturer.yoo_home.widget.loading_anim.Titanic;
@@ -89,8 +88,8 @@ public class LoadActivity extends AppCompatActivity implements ILoadView {
         Intent intentMQTT = new Intent(this,MQTTService.class);
         startService(intentMQTT);
         //启动IM服务
-        Intent intentIM = new Intent(this, IMService.class);
-        startService(intentIM);
+//        Intent intentIM = new Intent(this, IMService.class);
+//        startService(intentIM);
     }
 
     @Override

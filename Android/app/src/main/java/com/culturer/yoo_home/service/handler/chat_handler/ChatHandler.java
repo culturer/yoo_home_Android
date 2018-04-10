@@ -21,25 +21,27 @@ public class ChatHandler {
 	
 	//处理接收到的新消息
 	public void handle(ChatMsg msg) {
-		//更新UI显示
-		msg.setStatus(ChatMsg.Chat_Msg_Success);
-		CacheData.chatMsgs.add(msg);
-		EventBus.getDefault().post(msg);
-		//发送消息反馈，改变发送方消息状态
-		ChatMsg statusMsg = new ChatMsg(msg.getId(),msg.getStatus());
-		String strMsg = gson.toJson(statusMsg);
-		MQTTMsg mqttMsg = new MQTTMsg(true,MQTTMsg.CHAT_MSG_Status,strMsg);
-		EventBus.getDefault().post(mqttMsg);
-	}
-	
-	//处理消息的状态如发送成功，失败，已读，未读
-	public void handleStatus(ChatMsg msg){
-		//接收到消息反馈后更新UI显示
-		for (int i=0 ; i< CacheData.chatMsgs.size(); i++){
-			if (CacheData.chatMsgs.get(i).getId().equals(msg.getId())){
-				CacheData.chatMsgs.get(i).setStatus(msg.getStatus());
-				EventBus.getDefault().post(msg);
+		//处理新的聊天消息
+		if (msg.getStatus() == ChatMsg.Chat_Msg_Sending){
+			//更新UI显示
+			CacheData.chatMsgs.add(msg);
+			EventBus.getDefault().post(msg);
+			//发送消息反馈，改变发送方消息状态
+			ChatMsg statusMsg = new ChatMsg(msg.getId(),ChatMsg.Chat_Msg_Success);
+			String strMsg = gson.toJson(statusMsg);
+			MQTTMsg mqttMsg = new MQTTMsg(true,MQTTMsg.CHAT_MSG,strMsg);
+			EventBus.getDefault().post(mqttMsg);
+		}
+		//处理聊天消息已接收状态变化
+		if(msg.getStatus() == ChatMsg.Chat_Msg_Success){
+			for (int i=0;i<CacheData.chatMsgs.size();i++){
+				if (CacheData.chatMsgs.get(i).getId() == msg.getId()){
+					CacheData.chatMsgs.get(i).setStatus(ChatMsg.Chat_Msg_Success);
+					EventBus.getDefault().post(msg);
+					break;
+				}
 			}
 		}
 	}
+	
 }

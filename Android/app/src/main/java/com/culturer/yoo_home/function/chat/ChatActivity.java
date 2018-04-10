@@ -74,31 +74,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         initData();
         initView();
     }
-
-    //初始化录音工具
-    //由于AudioUtil可能每次调用结束就会清理缓存，所以在录音时进行初始化
-    private void initAudio(){
-        audioUtil = new AudioUtil();
-        //录音回调
-       audioUtil.setOnAudioStatusUpdateListener(new AudioUtil.OnAudioStatusUpdateListener() {
-           @Override
-           public void onUpdate(double db, long time) {
-//               根据分贝值来设置录音时话筒图标的上下波动
-//               mImageView.getDrawable().setLevel((int) (3000 + 6000 * db / 100));
-//               mTextView.setText(TimeUtils.long2String(time));
-               Log.i(TAG, "Audio --- onUpdate: time["+ TimeUtil.getDataToString(time)+"]"+" , db["+db+"]");
-           }
     
-           @Override
-           public void onStop(String filePath) {
-           
-//               Toast.makeText(MainActivity.this, "录音保存在：" + filePath, Toast.LENGTH_SHORT).show();
-//               mTextView.setText(TimeUtils.long2String(0));
-               Log.i(TAG, "Audio --- onStop: filePath["+filePath+"]");
-           }
-       });
-       
-    }
     //初始化EventBus
     private void initEventBus(){
         EventBus.getDefault().register(this);
@@ -142,8 +118,20 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
     @Subscribe
     public void receiveMsg(ChatMsg msg){
         if (indicate(msg)){
-            chatMsgs.add(msg);
-            chatAdapter.setDataAndupdate(chatMsgs);
+            if (msg.getStatus() == ChatMsg.Chat_Msg_Sending){
+                chatMsgs.add(msg);
+                chatAdapter.setDataAndupdate(chatMsgs);
+                chat_list.scrollToPosition(chatAdapter.getItemCount()-1);
+            }
+            if (msg.getStatus() == ChatMsg.Chat_Msg_Success){
+                for (int i=0 ;i<chatMsgs.size();i++){
+                    if (chatMsgs.get(i).getId() == msg.getId()){
+                        chatMsgs.get(i).setStatus(ChatMsg.Chat_Msg_Success);
+                        chatAdapter.setDataAndupdate(chatMsgs);
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -190,12 +178,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         chat_send = findViewById(R.id.chat_send);
 
         //打开相机拍照
-        chat_camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                initDialogChooseImage();
-            }
-        });
+        chat_camera.setOnClickListener(view -> initDialogChooseImage());
 
         //表情包
         chat_emoji.setOnClickListener(new View.OnClickListener() {
@@ -289,7 +272,30 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         dialogChooseImage.show();
     }
     
-    
+    //初始化录音工具
+    //由于AudioUtil可能每次调用结束就会清理缓存，所以在录音时进行初始化
+    private void initAudio(){
+        audioUtil = new AudioUtil();
+        //录音回调
+        audioUtil.setOnAudioStatusUpdateListener(new AudioUtil.OnAudioStatusUpdateListener() {
+            @Override
+            public void onUpdate(double db, long time) {
+//               根据分贝值来设置录音时话筒图标的上下波动
+//               mImageView.getDrawable().setLevel((int) (3000 + 6000 * db / 100));
+//               mTextView.setText(TimeUtils.long2String(time));
+                Log.i(TAG, "Audio --- onUpdate: time["+ TimeUtil.getDataToString(time)+"]"+" , db["+db+"]");
+            }
+            
+            @Override
+            public void onStop(String filePath) {
+
+//               Toast.makeText(MainActivity.this, "录音保存在：" + filePath, Toast.LENGTH_SHORT).show();
+//               mTextView.setText(TimeUtils.long2String(0));
+                Log.i(TAG, "Audio --- onStop: filePath["+filePath+"]");
+            }
+        });
+        
+    }
     
     @Override
     public void setPresenter(ChatPresenter presenter) {

@@ -13,8 +13,7 @@ import com.culturer.yoo_home.service.handler.base_handler.BaseHandleMsg;
 }*/
 public class MQTTMsg extends BaseHandleMsg {
     
-    public static final int CHAT_MSG_New = 0;
-    public static final int CHAT_MSG_Status = 0;
+    public static final int CHAT_MSG = 0;
     
     //标志位，代表该消息是否是自己向服务器发出
     boolean isSend;

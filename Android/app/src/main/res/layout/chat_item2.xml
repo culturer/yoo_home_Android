@@ -7,6 +7,7 @@
     android:layout_marginRight="10dp"
     android:layout_marginTop="15dp"
     android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,6 +15,7 @@
         android:text="下午3:43"
         android:textSize="@dimen/content_little_textSize"
         android:textColor="@color/text_grey"/>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -24,13 +26,26 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingRight="2dp"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:gravity="end"
-                android:text="宋啊啊"
-                android:textSize="@dimen/content_textSize" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="已读"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/content_little_textSize"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="宋宋"
+                    android:textSize="@dimen/content_textSize"/>
+            </LinearLayout>
             <TextView
                 android:layout_gravity="end"
                 android:gravity="end"
@@ -51,5 +66,6 @@
         android:src="@mipmap/ic_launcher_round"
         android:layout_width="35dp"
         android:layout_height="35dp" />
+
     </LinearLayout>
 </LinearLayout>

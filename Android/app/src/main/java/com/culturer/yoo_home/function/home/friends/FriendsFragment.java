@@ -93,7 +93,9 @@ public class FriendsFragment extends Fragment {
             }
             persons.add(items);
         }
+        
         friendsAdapter = new FriendsAdapter(gruop,persons,getContext());
+        
     }
     
     private void initBaseView(){
@@ -106,7 +108,6 @@ public class FriendsFragment extends Fragment {
     }
     
     private void initListView(){
-        
         friends.setAdapter(friendsAdapter);
         friends.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
@@ -115,7 +116,6 @@ public class FriendsFragment extends Fragment {
                 return false;
             }
         });
-        
         //互斥展开
         friends.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
