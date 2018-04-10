@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.culturer.yoo_home.cahce.BaseMsg;
+import com.google.gson.Gson;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -35,11 +36,14 @@ public class MQTTService extends Service implements IMQTTService {
     
     private MqttConnectOptions conOpt;
     private MQTTHandler handler;
+    
+    private Gson gson;
 
     private String host = MQ_URL;
     private String userName = BaseMsg.getUser().getUsername();
     private String passWord = BaseMsg.getUser().getUsername();
-    private String myTopic = "yoo_home/family"+BaseMsg.getFamily().getId();
+//    private String myTopic = "yoo_home/family"+BaseMsg.getFamily().getId();
+    private String myTopic = "test";
     private String clientId = "yoo_home_" + BaseMsg.getUser().getId();
 
     @Override
@@ -62,6 +66,7 @@ public class MQTTService extends Service implements IMQTTService {
     }
 
     private void initBaseData(){
+        gson = new Gson();
         Log.i(TAG, "initBaseData: user---"+BaseMsg.getUser().toString());
         if ( BaseMsg.getUser()!=null ){
             userName = BaseMsg.getUser().getId()+"";
@@ -236,8 +241,11 @@ public class MQTTService extends Service implements IMQTTService {
     @Subscribe
     public void sendMessage(MQTTMsg msg){
         if (msg.isSend()){
-            publish(msg.getMsg());
+            msg.isSend = false;
+            String strMsg = gson.toJson(msg,MQTTMsg.class);
+            publish(strMsg);
         }
     }
-
+    
 }
+

@@ -30,13 +30,9 @@ public class MQTTHandler {
 		JSONObject jMsg = new JSONObject(msg);
 		int type = jMsg.getInt("type");
 		String mMsg = jMsg.getString("msg");
-		if (type == MQTTMsg.CHAT_MSG_New) {
+		if (type == MQTTMsg.CHAT_MSG) {
 			ChatMsg chatMsg = gson.fromJson(mMsg, ChatMsg.class);
 			chatHandler.handle(chatMsg);
-		}
-		if (type == MQTTMsg.CHAT_MSG_Status){
-			ChatMsg chatMsg = gson.fromJson(mMsg, ChatMsg.class);
-			chatHandler.handleStatus(chatMsg);
 		}
 	}
 	

@@ -27,7 +27,7 @@ public class ChatPresenter extends BasePresenter<IChatView,ChatRespository> {
     ChatMsg sendTextMsg(String strMsg){
         ChatMsg chatMsg = new ChatMsg(ChatMsg.Chat_Msg_Sending,ChatMsg.Chat_Msg_Text, BaseMsg.getUser().getId(), BaseMsg.getUser().getUsername(),BaseMsg.getUser().getIcon(),strMsg,"",null);
         String strChatMsg = new Gson().toJson(chatMsg,ChatMsg.class);
-        EventBus.getDefault().post(new MQTTMsg(true,MQTTMsg.CHAT_MSG_New,strChatMsg));
+        EventBus.getDefault().post(new MQTTMsg(true,MQTTMsg.CHAT_MSG,strChatMsg));
         return chatMsg;
     }
 }

@@ -1,20 +1,12 @@
-<com.scwang.smartrefresh.layout.SmartRefreshLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/padding"
+    android:layout_margin="@dimen/margin"
     tools:context="com.culturer.yoo_home.function.home.friends.FriendsFragment">
-
-    <com.scwang.smartrefresh.layout.header.FalsifyHeader
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:padding="@dimen/padding"
-        android:layout_margin="@dimen/margin"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <View
             android:layout_width="match_parent"
@@ -38,13 +30,7 @@
         <ExpandableListView
             android:id="@+id/friends"
             android:padding="10dp"
-            android:groupIndicator="@null"
+            android:divider="@null"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-    </LinearLayout>
-
-    <com.scwang.smartrefresh.layout.footer.FalsifyFooter
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-</com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>
