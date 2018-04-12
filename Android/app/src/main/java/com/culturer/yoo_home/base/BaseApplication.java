@@ -77,7 +77,7 @@ public class BaseApplication extends Application {
     
     @Subscribe
     public void NewMsg(MQTTMsg msg){
-        Log.i(TAG, "NewMsg: "+msg.getMsg());
+//        Log.i(TAG, "NewMsg: "+msg.getMsg());
     }
 
     public static Context getContext(){

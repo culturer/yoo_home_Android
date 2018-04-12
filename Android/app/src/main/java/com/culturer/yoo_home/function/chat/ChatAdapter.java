@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.cahce.BaseMsg;
-import com.culturer.yoo_home.service.handler.chat_handler.ChatMsg;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -66,23 +65,19 @@ public class ChatAdapter extends   RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Log.i("adapter", "onBindViewHolder: "+items.get(position).toString());
-//        if (holder instanceof ViewHolder1 ){
+        if (holder instanceof ViewHolder1 ){
             ((ViewHolder1) holder).chat_item_desc.setText(items.get(position).getMsg());
+            ((ViewHolder1) holder).chat_item_status.setText(ChatMsg.getRelStatus(items.get(position)));
+            
 //            ((ViewHolder1) holder).chat_item_icon.setImageResource(items.get(position).getUserIcon());
-//        }
+        }
     }
 
     @Override
     public int getItemCount() {
         return items.size();
     }
-
-
-    //增加单条数据
-    public void addData(ChatMsg chatMsg){
-        items.add(chatMsg);
-        notifyItemInserted(items.size());
-    }
+    
     //更新数据源
     public void setDataAndupdate(List<ChatMsg> datas){
         this.items = datas;
@@ -94,6 +89,7 @@ public class ChatAdapter extends   RecyclerView.Adapter<RecyclerView.ViewHolder>
         View itemView ;
         ImageView chat_item_icon;
         TextView chat_item_desc;
+        TextView chat_item_status;
 
         ViewHolder1(View itemView) {
             super(itemView);
@@ -104,6 +100,7 @@ public class ChatAdapter extends   RecyclerView.Adapter<RecyclerView.ViewHolder>
         private void init(){
             chat_item_icon = itemView.findViewById(R.id.chat_item_icon);
             chat_item_desc = itemView.findViewById(R.id.chat_item_desc);
+            chat_item_status = itemView.findViewById(R.id.chat_item_status);
         }
 
     }

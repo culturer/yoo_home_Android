@@ -40,6 +40,7 @@
                     android:text="宋宋"
                     android:textSize="@dimen/content_textSize"/>
                 <TextView
+                    android:id="@+id/chat_item_status"
                     android:text="已读"
                     android:textColor="@color/black"
                     android:textSize="@dimen/content_little_textSize"

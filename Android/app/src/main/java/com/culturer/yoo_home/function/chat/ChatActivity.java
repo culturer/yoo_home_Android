@@ -16,14 +16,16 @@ import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.cahce.BaseMsg;
-import com.culturer.yoo_home.service.handler.chat_handler.ChatMsg;
+import com.culturer.yoo_home.service.MQTT.MQTTMsg;
 import com.culturer.yoo_home.util.AudioUtil;
 import com.culturer.yoo_home.util.TimeUtil;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
+import com.google.gson.Gson;
 import com.vondear.rxtools.view.dialog.RxDialogChooseImage;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -113,26 +115,48 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
 
                                                                     //收发聊天数据//
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     //接收消息
     @Subscribe
     public void receiveMsg(ChatMsg msg){
-        if (indicate(msg)){
-            if (msg.getStatus() == ChatMsg.Chat_Msg_Sending){
-                chatMsgs.add(msg);
-                chatAdapter.setDataAndupdate(chatMsgs);
-                chat_list.scrollToPosition(chatAdapter.getItemCount()-1);
-            }
-            if (msg.getStatus() == ChatMsg.Chat_Msg_Success){
-                for (int i=0 ;i<chatMsgs.size();i++){
-                    if (chatMsgs.get(i).getId() == msg.getId()){
-                        chatMsgs.get(i).setStatus(ChatMsg.Chat_Msg_Success);
-                        chatAdapter.setDataAndupdate(chatMsgs);
-                        break;
-                    }
+        Log.i(TAG, "handle: "+msg.toString());
+        if (msg.getStatus() == ChatMsg.Chat_Msg_Sending){
+            Log.i(TAG, "receiveMsg: 更新新消息显示");
+            //更新显示
+            chatMsgs.add(msg);
+            chatAdapter.setDataAndupdate(chatMsgs);
+            chat_list.scrollToPosition(chatAdapter.getItemCount()-1);
+            //发送已读信息
+            Log.i(TAG, "receiveMsg: 发送已读信息");
+            ChatMsg statusMsg = new ChatMsg(msg.getId(),ChatMsg.Chat_Msg_Read);
+            Gson gson = new Gson();
+            String strMsg = gson.toJson(statusMsg);
+            MQTTMsg mqttMsg = new MQTTMsg(true,MQTTMsg.CHAT_MSG,strMsg);
+            EventBus.getDefault().post(mqttMsg);
+        }
+        if (msg.getStatus() == ChatMsg.Chat_Msg_Success){
+            Log.i(TAG, "receiveMsg: change Status"+msg.toString());
+            for (int i=0 ;i<chatMsgs.size();i++){
+                if (chatMsgs.get(i).getId().equals( msg.getId())){
+                    Log.i(TAG, "change Status: chat["+i+"] --- "+chatMsgs.get(i).getId()+" , chatMsg --- "+msg.getId());
+                    Log.i(TAG, "receiveMsg: 更新消息已读状态");
+                    chatMsgs.get(i).setStatus(ChatMsg.Chat_Msg_Success);
+                    chatAdapter.setDataAndupdate(chatMsgs);
+                    break;
                 }
             }
         }
+        if (msg.getStatus() == ChatMsg.Chat_Msg_Read){
+            Log.i(TAG, "receiveMsg: change Status"+msg.toString());
+            for (int i=0 ;i<chatMsgs.size();i++){
+                if (chatMsgs.get(i).getId().equals( msg.getId())){
+                    Log.i(TAG, "change Status: chat["+i+"] --- "+chatMsgs.get(i).getId()+" , chatMsg --- "+msg.getId());
+                    chatMsgs.get(i).setStatus(ChatMsg.Chat_Msg_Read);
+                    chatAdapter.setDataAndupdate(chatMsgs);
+                    break;
+                }
+            }
+        }
+        
     }
 
     //发送消息
@@ -141,25 +165,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         chatMsgs.add(chatMsg);
         chatAdapter.setDataAndupdate(chatMsgs);
     }
-
-    //权限验证
-    private boolean indicate(ChatMsg chatMsg){
-        boolean flag = false;
-        //验证消息是不是自己发的
-        if (chatMsg.getUserId()!=BaseMsg.getUser().getId()) flag = true;
-        Log.i(TAG, "indicate: the msg is sent by myself --- "+chatMsg.toString());
-        //验证消息是不是发给自己的
-        List<Integer> users = chatMsg.getUsers();
-        if (users!=null){
-            for (int i=0;i<users.size();i++){
-                if (users.get(i) == BaseMsg.getUser().getId()){
-                    flag = true;
-                    break;
-                }
-            }
-        }
-        return flag;
-    }
+    
 
                                                                     //初始UI组件//
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -219,18 +225,15 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
 //        });
 
         //发送聊天信息
-        chat_send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //1.打包数据
-                // 2.将打包的数据发送到MQTT
-                //3.MQTT将打包的数据发送出去
-                String strMsg  = chat_edit.getText().toString();
-                if (!strMsg.equals("")){
-                    sendMsg(strMsg);
-                    toLast();
-                    clearText();
-                }
+        chat_send.setOnClickListener(view -> {
+            //1.打包数据
+            // 2.将打包的数据发送到MQTT
+            //3.MQTT将打包的数据发送出去
+            String strMsg  = chat_edit.getText().toString();
+            if (!strMsg.equals("")){
+                sendMsg(strMsg);
+                toLast();
+                clearText();
             }
         });
 
