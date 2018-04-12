@@ -1,5 +1,7 @@
 package com.culturer.yoo_home.function.chat;
 
+import com.armour8.yooplus.yooplus.R;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -36,10 +38,10 @@ public class ChatMsg {
 	private int status;
 	//聊天信息种类 --- 文本，图片，音频，视频
 	private int Chat_Type;
-	//是否是群消息
-	private boolean isGroup;
-	//群消息已读人数
-	private int readCount;
+//	//是否是群消息
+//	private boolean isGroup;
+//	//群消息已读人数
+//	private int readCount;
 	//消息发送方Id
 	private int userId;
 	//用户名
@@ -150,7 +152,7 @@ public class ChatMsg {
 		this.users = users;
 	}
 	
-	public static String getRelStatus(ChatMsg msg){
+	static String getRelStatus(ChatMsg msg){
 		String strMsg = "";
 		if (msg.getStatus() == Chat_Msg_Fail){
 			strMsg = "失败";
@@ -165,6 +167,22 @@ public class ChatMsg {
 			strMsg = "已读";
 		}
 		return strMsg;
+	}
+	
+	static int getBackground(ChatMsg msg){
+		if (msg.getStatus() == Chat_Msg_Sending){
+			return R.drawable.chat_status_sending_bg;
+		}
+		if (msg.getStatus() == Chat_Msg_Success){
+			return R.drawable.chat_status_success_bg;
+		}
+		if (msg.getStatus() == Chat_Msg_Read){
+			return R.drawable.chat_status_read_bg;
+		}
+		if (msg.getStatus() == Chat_Msg_Fail){
+			return R.drawable.chat_status_fail_bg;
+		}
+		return 0;
 	}
 	
 	@Override

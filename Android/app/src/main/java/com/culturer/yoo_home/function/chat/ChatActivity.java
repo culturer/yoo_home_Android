@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.cahce.BaseMsg;
+import com.culturer.yoo_home.cahce.CacheData;
 import com.culturer.yoo_home.service.MQTT.MQTTMsg;
 import com.culturer.yoo_home.util.AudioUtil;
 import com.culturer.yoo_home.util.TimeUtil;
@@ -110,6 +111,17 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
     //初始化列表数据
     private void initListData(){
         chatMsgs = new ArrayList<>();
+        for (int i=0 ;i<CacheData.chatMsgs.size();i++){
+            ChatMsg chatMsg = CacheData.chatMsgs.get(i);
+            if (chatMsg.getStatus()!=ChatMsg.Chat_Msg_Read){
+                ChatMsg statusMsg = new ChatMsg(chatMsg.getId(),ChatMsg.Chat_Msg_Read);
+                Gson gson = new Gson();
+                String strMsg = gson.toJson(statusMsg);
+                MQTTMsg mqttMsg = new MQTTMsg(true,MQTTMsg.CHAT_MSG,strMsg);
+                EventBus.getDefault().post(mqttMsg);
+            }
+            chatMsgs.add(chatMsg);
+        }
         chatAdapter = new ChatAdapter(chatMsgs,this);
     }
 
@@ -122,6 +134,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         if (msg.getStatus() == ChatMsg.Chat_Msg_Sending){
             Log.i(TAG, "receiveMsg: 更新新消息显示");
             //更新显示
+            msg.setStatus(ChatMsg.Chat_Msg_Read);
             chatMsgs.add(msg);
             chatAdapter.setDataAndupdate(chatMsgs);
             chat_list.scrollToPosition(chatAdapter.getItemCount()-1);
@@ -162,6 +175,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
     //发送消息
     private void sendMsg(String strMsg){
         ChatMsg chatMsg = presenter.sendTextMsg(strMsg);
+        CacheData.chatMsgs.add(chatMsg);
         chatMsgs.add(chatMsg);
         chatAdapter.setDataAndupdate(chatMsgs);
     }
