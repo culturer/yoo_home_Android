@@ -18,9 +18,9 @@ public class MQTTMsg extends BaseHandleMsg {
     //标志位，代表该消息是否是自己向服务器发出
     boolean isSend;
     //信息的种类
-    int type;
+    private int type;
     //发送的信息
-    String msg;
+    private String msg;
 
     public MQTTMsg() {
     }

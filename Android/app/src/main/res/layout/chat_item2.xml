@@ -7,14 +7,30 @@
     android:layout_marginRight="10dp"
     android:layout_marginTop="15dp"
     android:orientation="vertical">
-
-    <TextView
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="下午3:43"
-        android:textSize="@dimen/content_little_textSize"
-        android:textColor="@color/text_grey"/>
+        android:layout_height="wrap_content">
+        <TextView
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下午3:43"
+            android:textSize="@dimen/content_little_textSize"
+            android:textColor="@color/text_grey"/>
+        <TextView
+            android:id="@+id/chat_item_status"
+            android:text="已读"
+            android:textSize="@dimen/content_little_textSize"
+            android:textColor="@color/text_grey"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/margin"
+            android:paddingLeft="@dimen/padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:orientation="horizontal"
@@ -32,14 +48,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/chat_item_status"
-                    android:text="已读"
+                    android:id="@+id/chat_item_label"
+                    android:text="爷爷"
                     android:textColor="@color/white"
                     android:textSize="@dimen/content_little_textSize"
                     android:layout_marginStart="@dimen/margin"
                     android:padding="@dimen/padding"
-                    android:gravity="center_vertical"
                     android:background="@drawable/chat_status_sending_bg"
+                    android:gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
@@ -51,11 +67,13 @@
             </LinearLayout>
             <TextView
                 android:layout_gravity="end"
-                android:gravity="end"
+                android:padding="5dp"
+                android:layout_marginLeft="100dp"
                 android:id="@+id/chat_item_desc"
                 android:text="元旦不加班，美滋滋~"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
         </LinearLayout>
 
     <ImageView

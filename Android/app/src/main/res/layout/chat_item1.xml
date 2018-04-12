@@ -6,13 +6,28 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:paddingTop="15dp">
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="下午3:43"
-        android:textSize="@dimen/content_little_textSize"
-        android:textColor="@color/text_grey"/>
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="下午3:43"
+            android:textSize="@dimen/content_little_textSize"
+            android:textColor="@color/text_grey"/>
+        <TextView
+            android:id="@+id/chat_item_status"
+            android:text="已读"
+            android:textSize="@dimen/content_little_textSize"
+            android:textColor="@color/text_grey"
+            android:paddingLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -40,8 +55,8 @@
                     android:text="宋宋"
                     android:textSize="@dimen/content_textSize"/>
                 <TextView
-                    android:id="@+id/chat_item_status"
-                    android:text="已读"
+                    android:id="@+id/chat_item_label"
+                    android:text="爷爷"
                     android:textColor="@color/white"
                     android:textSize="@dimen/content_little_textSize"
                     android:layout_marginStart="@dimen/margin"
@@ -55,9 +70,11 @@
             <TextView
                 android:padding="5dp"
                 android:id="@+id/chat_item_desc"
+                android:layout_marginRight="100dp"
                 android:text="元旦不加班，美滋滋~"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
