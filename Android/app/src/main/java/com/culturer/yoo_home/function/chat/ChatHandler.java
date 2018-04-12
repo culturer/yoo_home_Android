@@ -15,7 +15,6 @@ public class ChatHandler {
 	
 	private static final String TAG = "ChatHandler";
 	
-	
 	public ChatHandler() {
 		initHandler();
 	}
@@ -71,7 +70,7 @@ public class ChatHandler {
 	private boolean indicate(ChatMsg chatMsg){
 		boolean flag = false;
 		//验证消息是不是自己发的
-		if (chatMsg.getUserId()!= BaseMsg.getUser().getId()) flag = true;
+		if (chatMsg.getUserId()!= BaseMsg.getUser().getId()) flag = false;
 		Log.i(TAG, "indicate: the msg is sent by myself --- "+chatMsg.toString());
 		//验证消息是不是发给自己的
 		List<Integer> users = chatMsg.getUsers();
