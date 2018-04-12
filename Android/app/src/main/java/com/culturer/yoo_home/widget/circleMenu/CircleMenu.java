@@ -109,12 +109,12 @@ public class CircleMenu extends ViewGroup {
 		}
 	}
 
-	public void setDatas(final int[] resIds, List<String> texts, List<View.OnClickListener> listeners) {
-		for (int i = 0; i < resIds.length; i++) {
+	public void setDatas(final List<Integer> resIds, List<String> texts, List<View.OnClickListener> listeners) {
+		for (int i = 0; i < resIds.size(); i++) {
 			View view = View.inflate(getContext(), R.layout.circle_item, null);
 			ImageView iv = view.findViewById(R.id.iv);
 			TextView tv = view.findViewById(R.id.tv);
-			iv.setImageResource(resIds[i]);
+			iv.setImageResource(resIds.get(i));
 			if (texts!=null && texts.size()>i){
 				tv.setText(texts.get(i));
 			}

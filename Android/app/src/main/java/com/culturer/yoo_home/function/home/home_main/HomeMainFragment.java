@@ -21,6 +21,7 @@ import com.culturer.yoo_home.bean.Activity;
 import com.culturer.yoo_home.bean.ActivityItem;
 import com.culturer.yoo_home.bean.Arrangement;
 import com.culturer.yoo_home.bean.Family;
+import com.culturer.yoo_home.bean.User;
 import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.cahce.CacheData;
 import com.culturer.yoo_home.config.HomeMainConfig;
@@ -79,15 +80,10 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
     Arrangement arrangement = new Arrangement();
     Family family = BaseMsg.getFamily();
     
-    private int[] icons = new int[]{
-            R.drawable.logo_black,
-            R.drawable.logo_black,
-            R.drawable.logo_black,
-            R.drawable.logo_black,
-            R.drawable.logo_black
-    };
+    private List<Integer> icons = new ArrayList<>();
     private List<String> mStrs = new ArrayList<>();
     private List<View.OnClickListener> listeners = new ArrayList<>();
+    private List<User> familyUsers = new ArrayList<>();
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -186,7 +182,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         if (CacheData.homeActivities !=null && CacheData.homeActivities.size()>0 ){
             homeActivity = CacheData.homeActivities.get(CacheData.homeActivities.size()-1);
         }else {
-            homeActivity = new Activity(0l,true, (long) BaseMsg.getFamily().getId(), TimeUtil.getCurrentTime(),"还没有活动安排，快来发起活动吧~",0l);
+            homeActivity = new Activity(0L,true, (long) BaseMsg.getFamily().getId(), TimeUtil.getCurrentTime(),"还没有活动安排，快来发起活动吧~", 0L);
             CacheData.homeActivities.add(homeActivity);
         }
 
@@ -197,14 +193,11 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
                 if (activityItem!=null && activityItem.getActivityId() == homeActivity.getId()){
                     activityItems.add(activityItem);
                 }
-                activityItems.sort(new Comparator<ActivityItem>() {
-                    @Override
-                    public int compare(ActivityItem o1, ActivityItem o2) {
-                        if (o1.getNum()<=o2.getNum()){
-                            return 1;
-                        }
-                        return 0;
+                activityItems.sort((o1, o2) -> {
+                    if (o1.getNum()<=o2.getNum()){
+                        return 1;
                     }
+                    return 0;
                 });
             }
         }
@@ -213,20 +206,19 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         if ( CacheData.arrangements != null && CacheData.arrangements.size()>0 ){
             arrangement = CacheData.arrangements.get(CacheData.arrangements.size()-1);
         }else {
-            arrangement = new Arrangement(0l, (long) BaseMsg.getUser().getId(),"近期还没有安排哟,快来写写近期的计划吧",TimeUtil.getCurrentTime());
+            arrangement = new Arrangement(0L, (long) BaseMsg.getUser().getId(),"近期还没有安排哟,快来写写近期的计划吧",TimeUtil.getCurrentTime());
         }
     }
 
     //初始化中间转盘的数据
     private void initCircleData(){
-        for (int i=0 ;i<icons.length;i++){
-            mStrs.add("用户["+i+"]");
-            listeners.add(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getContext(),ChatActivity.class);
-                    startActivity(intent);
-                }
+        familyUsers = CacheData.familyUsers;
+        for (int i=0;i<familyUsers.size();i++){
+            icons.add(R.drawable.logo_black);
+            mStrs.add(familyUsers.get(i).getUsername());
+            listeners.add(v -> {
+                Intent intent = new Intent(getContext(),ChatActivity.class);
+                startActivity(intent);
             });
         }
     }
@@ -256,18 +248,14 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
 
         //设置底部按钮点击事件，发送页面跳转
         setButtomBtn();
-
     }
 
     //初始化中间转盘
     private void initCircleView(){
         homemain_circleview.setDatas(icons,mStrs,listeners);
-        homemain_family.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(),ChatActivity.class);
-                startActivity(intent);
-            }
+        homemain_family.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(),ChatActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -284,12 +272,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             arrangement_pop_desc.setText(arrangement.getDesc());
             arrangement_pop_time.setText(arrangement.getCreateTime());
             builder.setView(arrangementView);
-            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
+            builder.setPositiveButton("确定", (dialog, which) -> dialog.dismiss());
         }
 
         //家庭公告弹框
@@ -299,26 +282,20 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             final EditText homemain_notify_title = familyView.findViewById(R.id.homemain_notify_title);
             homemain_notify_title.setText(family.getFamilyNotifyTitle());
             builder.setView(familyView);
-            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Log.i(TAG, "onClick: 取消");
-                    dialog.dismiss();
-                }
+            builder.setNegativeButton("取消", (dialog, which) -> {
+                Log.i(TAG, "onClick: 取消");
+                dialog.dismiss();
             });
-            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Log.i(TAG, "onClick: 确定");
-                    //在此修改公告
-                    //1.从布局中获取数据
-                    //2.同步到服务器
-                    //3.更新主界面标签显示
-                    String notify =  homemain_notify_title.getText().toString();
-                    Log.i(TAG, "onClick: notify---"+notify);
-                    presenter.updateFamily(notify, StringUtil.getDateEN());
-                    dialog.dismiss();
-                }
+            builder.setPositiveButton("确定", (dialog, which) -> {
+                Log.i(TAG, "onClick: 确定");
+                //在此修改公告
+                //1.从布局中获取数据
+                //2.同步到服务器
+                //3.更新主界面标签显示
+                String notify =  homemain_notify_title.getText().toString();
+                Log.i(TAG, "onClick: notify---"+notify);
+                presenter.updateFamily(notify, StringUtil.getDateEN());
+                dialog.dismiss();
             });
         }
 
@@ -334,12 +311,9 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             homeactivity_detail_list.setDivider(null);
 
             builder.setView(homeActivityView);
-            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Log.i(TAG, "onClick: 确定");
-                    dialog.dismiss();
-                }
+            builder.setPositiveButton("确定", (dialog, which) -> {
+                Log.i(TAG, "onClick: 确定");
+                dialog.dismiss();
             });
 
         }
@@ -348,12 +322,9 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         else if (popType == HomeMainConfig.HOMEMAIN_POP_FAMILYACTIVITY){
             builder.setTitle("家族活动");
             builder.setView(R.layout.homemain_popwindow_familyactivity);
-            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Log.i(TAG, "onClick: 确定");
-                    dialog.dismiss();
-                }
+            builder.setPositiveButton("确定", (dialog, which) -> {
+                Log.i(TAG, "onClick: 确定");
+                dialog.dismiss();
             });
         }
         builder.create().show();
@@ -362,19 +333,16 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
     //设置四个角标签数据
     private void setLabels(){
         //家庭公告
-        String ntfy = "";
+        String ntfy;
         if (family!=null && family.getMsg()!=null){
             ntfy = family.getFamilyNotifyTitle();
         }else {
             ntfy = "暂无新的家庭公告" ;
         }
         homemain_notify.setText(ntfy);
-        homemain_notify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "onClick: homemain_notify");
-                showDialog(HomeMainConfig.HOMEMAIN_POP_NOTIFY);
-            }
+        homemain_notify.setOnClickListener(v -> {
+            Log.i(TAG, "onClick: homemain_notify");
+            showDialog(HomeMainConfig.HOMEMAIN_POP_NOTIFY);
         });
 
         //家庭活动
@@ -382,26 +350,20 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         if (homeActivity != null && homeActivity.getDesc() !=null){
             desc =homeActivity.getDesc();
         }else {
-            homeActivity = new Activity(0l,true, (long) BaseMsg.getFamily().getId(), TimeUtil.getCurrentTime(),"还没有活动安排，快来发起活动吧~",0l);
+            homeActivity = new Activity(0L,true, (long) BaseMsg.getFamily().getId(), TimeUtil.getCurrentTime(),"还没有活动安排，快来发起活动吧~", 0L);
             CacheData.homeActivities.add(homeActivity);
             desc =homeActivity.getDesc();
         }
         homemain_activity.setText(desc);
-        homemain_activity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "onClick: homemain_activity");
-                showDialog(HomeMainConfig.HOMEMAIN_POP_ACTIVITY);
-            }
+        homemain_activity.setOnClickListener(v -> {
+            Log.i(TAG, "onClick: homemain_activity");
+            showDialog(HomeMainConfig.HOMEMAIN_POP_ACTIVITY);
         });
 
         //家族活动
-        homemain_familyactivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "onClick: homemain_familyactivity");
-                showDialog(HomeMainConfig.HOMEMAIN_POP_FAMILYACTIVITY);
-            }
+        homemain_familyactivity.setOnClickListener(v -> {
+            Log.i(TAG, "onClick: homemain_familyactivity");
+            showDialog(HomeMainConfig.HOMEMAIN_POP_FAMILYACTIVITY);
         });
 
         //日程安排
@@ -412,48 +374,33 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             homemain_arrangement.setVisibility(View.GONE);
         }
         homemain_arrangement.setText(arg);
-        homemain_arrangement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "onClick: homemain_arrangement");
-                showDialog(HomeMainConfig.HOMEMAIN_POP_ARRANGEMENT);
-            }
+        homemain_arrangement.setOnClickListener(v -> {
+            Log.i(TAG, "onClick: homemain_arrangement");
+            showDialog(HomeMainConfig.HOMEMAIN_POP_ARRANGEMENT);
         });
     }
 
     //设置底部标签点击事件
     private void setButtomBtn(){
         View btn_album = contentView.findViewById(R.id.btn_album);
-        btn_album.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), HomeAlbumActivity.class);
-                startActivity(intent);
-            }
+        btn_album.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), HomeAlbumActivity.class);
+            startActivity(intent);
         });
         View btn_arrangement = contentView.findViewById(R.id.btn_arrangement);
-        btn_arrangement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), HomeArrangementActivity.class);
-                startActivity(intent);
-            }
+        btn_arrangement.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), HomeArrangementActivity.class);
+            startActivity(intent);
         });
         View btn_homeActivity = contentView.findViewById(R.id.btn_homeActivity);
-        btn_homeActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), HomeActiviesActivity.class);
-                startActivity(intent);
-            }
+        btn_homeActivity.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), HomeActiviesActivity.class);
+            startActivity(intent);
         });
         View btn_familyActivity = contentView.findViewById(R.id.btn_familyActivity);
-        btn_familyActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), FamilyActivityActivity.class);
-                startActivity(intent);
-            }
+        btn_familyActivity.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), FamilyActivityActivity.class);
+            startActivity(intent);
         });
     }
 
