@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.culturer.yoo_home.cahce.BaseMsg;
+import com.culturer.yoo_home.util.ThreadUtil;
 import com.google.gson.Gson;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
@@ -26,9 +27,8 @@ import org.greenrobot.eventbus.Subscribe;
 
 import static com.culturer.yoo_home.config.Urls.MQ_URL;
 
-/**
- *  MQTT协议做推送服务
- */
+
+//MQTT协议做推送服务
 public class MQTTService extends Service implements IMQTTService {
 
     private static final String TAG = "MQTTService";
@@ -62,7 +62,9 @@ public class MQTTService extends Service implements IMQTTService {
         initEventBus();
         initBaseData();
         initMQ();
-        initHandler();
+        ThreadUtil.startThread(() ->
+                initHandler()
+        );
     }
 
     private void initBaseData(){
@@ -78,12 +80,12 @@ public class MQTTService extends Service implements IMQTTService {
         }
     }
 
+    //初始化MQ服务
     private void initMQ() {
         // 服务器地址（协议+地址+端口号）
         client = new MqttAndroidClient(this, host, clientId);
         // 设置MQTT监听并且接受消息
         client.setCallback(mqttCallback);
-
         conOpt = new MqttConnectOptions();
         // 清除缓存
         conOpt.setCleanSession(false);
@@ -95,7 +97,6 @@ public class MQTTService extends Service implements IMQTTService {
         conOpt.setUserName(userName);
         // 密码
         conOpt.setPassword(passWord.toCharArray());
-
         // last will message
         boolean doConnect = true;
         String message = "{\"terminal_uid\":\"" + clientId + "\"}";
@@ -113,14 +114,12 @@ public class MQTTService extends Service implements IMQTTService {
                 iMqttActionListener.onFailure(null, e);
             }
         }
-
         if (doConnect) {
             doClientConnection();
         }
-
     }
 
-    /** 连接MQTT服务器 */
+    // 连接MQTT服务器
     private void doClientConnection() {
         if (!client.isConnected() || !isConnectIsNomarl()) {
             try {
@@ -130,14 +129,11 @@ public class MQTTService extends Service implements IMQTTService {
                 e.printStackTrace();
             }
         }
-
     }
 
-    /** 判断网络是否连接 */
+    // 判断网络是否连接
     private boolean isConnectIsNomarl() {
-
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-
         if (connectivityManager.getActiveNetworkInfo() != null){
             NetworkInfo info = connectivityManager.getActiveNetworkInfo();
             if (info != null && info.isAvailable()) {
@@ -149,18 +145,20 @@ public class MQTTService extends Service implements IMQTTService {
                 return false;
             }
         }
-
         return false;
     }
 
+    //发送信息
     public void publish(String msg){
-        //数据是否保存在服务器
-        Log.i(TAG, "publish: "+msg);
-        try {
-            client.publish(myTopic, msg.getBytes(), 0, false);
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
+        ThreadUtil.startThreadInPool(() -> {
+            //数据是否保存在服务器
+            Log.i(TAG, "publish: "+msg);
+            try {
+                client.publish(myTopic, msg.getBytes(), 0, false);
+            } catch (MqttException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @Override
@@ -174,8 +172,7 @@ public class MQTTService extends Service implements IMQTTService {
         }
         super.onDestroy();
     }
-
-
+    
     // MQTT是否连接成功
     private IMqttActionListener iMqttActionListener = new IMqttActionListener() {
 
@@ -193,7 +190,6 @@ public class MQTTService extends Service implements IMQTTService {
         @Override
         public void onFailure(IMqttToken arg0, Throwable arg1) {
             Log.i(TAG, "onFailure: "+arg1.getMessage());
-            arg1.printStackTrace();
         }
 
     };
@@ -246,6 +242,5 @@ public class MQTTService extends Service implements IMQTTService {
             publish(strMsg);
         }
     }
-    
 }
 

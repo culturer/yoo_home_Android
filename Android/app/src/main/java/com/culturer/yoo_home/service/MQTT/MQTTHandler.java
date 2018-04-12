@@ -1,17 +1,18 @@
 package com.culturer.yoo_home.service.MQTT;
 
-import com.culturer.yoo_home.service.handler.chat_handler.ChatHandler;
-import com.culturer.yoo_home.service.handler.chat_handler.ChatMsg;
+import android.util.Log;
+
+import com.culturer.yoo_home.function.chat.ChatHandler;
+import com.culturer.yoo_home.function.chat.ChatMsg;
+import com.culturer.yoo_home.util.ThreadUtil;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by Administrator on 2018/4/2 0002.
- */
-
-public class MQTTHandler {
+class MQTTHandler {
+	
+	private static final String TAG = "MQTTHandler" ;
 	
 	private Gson gson;
 	private ChatHandler chatHandler;
@@ -27,6 +28,7 @@ public class MQTTHandler {
 	
 	//将消息分类处理
 	void handle(String msg) throws JSONException {
+		Log.i(TAG, "handle: "+msg);
 		JSONObject jMsg = new JSONObject(msg);
 		int type = jMsg.getInt("type");
 		String mMsg = jMsg.getString("msg");

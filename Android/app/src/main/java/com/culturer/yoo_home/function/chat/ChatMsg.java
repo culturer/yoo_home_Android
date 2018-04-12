@@ -1,4 +1,4 @@
-package com.culturer.yoo_home.service.handler.chat_handler;
+package com.culturer.yoo_home.function.chat;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,6 +15,8 @@ public class ChatMsg {
 	public static final int Chat_Msg_Success = 1;
 	//消息发送失败
 	public static final int Chat_Msg_Fail = 2;
+	//消息已读
+	public static final int Chat_Msg_Read = 3;
 	//文本
 	public static final int Chat_Msg_Text = 0;
 	//图片
@@ -32,8 +34,12 @@ public class ChatMsg {
 	private String id;
 	//消息状态
 	private int status;
-	//聊天信息种类
+	//聊天信息种类 --- 文本，图片，音频，视频
 	private int Chat_Type;
+	//是否是群消息
+	private boolean isGroup;
+	//群消息已读人数
+	private int readCount;
 	//消息发送方Id
 	private int userId;
 	//用户名
@@ -142,6 +148,23 @@ public class ChatMsg {
 	
 	public void setUsers(List<Integer> users) {
 		this.users = users;
+	}
+	
+	public static String getRelStatus(ChatMsg msg){
+		String strMsg = "";
+		if (msg.getStatus() == Chat_Msg_Fail){
+			strMsg = "失败";
+		}
+		if (msg.getStatus() == Chat_Msg_Success){
+			strMsg = "送达";
+		}
+		if (msg.getStatus() == Chat_Msg_Sending){
+			strMsg = "发送中";
+		}
+		if (msg.getStatus() == Chat_Msg_Read){
+			strMsg = "已读";
+		}
+		return strMsg;
 	}
 	
 	@Override

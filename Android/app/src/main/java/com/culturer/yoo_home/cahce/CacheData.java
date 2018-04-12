@@ -9,7 +9,7 @@ import com.culturer.yoo_home.bean.Article;
 import com.culturer.yoo_home.bean.Comment;
 import com.culturer.yoo_home.bean.Photo;
 import com.culturer.yoo_home.bean.User;
-import com.culturer.yoo_home.service.handler.chat_handler.ChatMsg;
+import com.culturer.yoo_home.function.chat.ChatMsg;
 
 import java.util.ArrayList;
 import java.util.List;

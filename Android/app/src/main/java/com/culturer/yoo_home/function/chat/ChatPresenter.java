@@ -5,7 +5,6 @@ import android.content.Context;
 import com.culturer.yoo_home.base.mvpbase.BasePresenter;
 import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.service.MQTT.MQTTMsg;
-import com.culturer.yoo_home.service.handler.chat_handler.ChatMsg;
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
