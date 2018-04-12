@@ -34,10 +34,12 @@
                 <TextView
                     android:id="@+id/chat_item_status"
                     android:text="已读"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/content_little_textSize"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="@dimen/margin"
+                    android:padding="@dimen/padding"
                     android:gravity="center_vertical"
+                    android:background="@drawable/chat_status_sending_bg"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 <TextView
