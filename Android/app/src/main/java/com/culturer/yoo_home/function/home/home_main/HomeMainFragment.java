@@ -212,10 +212,14 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
 
     //初始化中间转盘的数据
     private void initCircleData(){
-        familyUsers = CacheData.familyUsers;
+//        familyUsers = CacheData.familyUsers;
+        for (int i=0 ;i<5;i++){
+            familyUsers.add(new User());
+        }
         for (int i=0;i<familyUsers.size();i++){
             icons.add(R.drawable.logo_black);
-            mStrs.add(familyUsers.get(i).getUsername());
+//            mStrs.add(familyUsers.get(i).getUsername());
+            mStrs.add("测试用户["+i+"]");
             listeners.add(v -> {
                 Intent intent = new Intent(getContext(),ChatActivity.class);
                 startActivity(intent);

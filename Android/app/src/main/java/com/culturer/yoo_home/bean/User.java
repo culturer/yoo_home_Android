@@ -45,7 +45,10 @@ public class User {
     private String LoginTime;
     private String Msg;
     private Long Permission;
-
+    
+    public User() {
+    }
+    
     public User(int id, String username, String password, String realName, boolean sex, String uid, String birth, String tel, String email, String icon, String NMsg, Long relationId, Long familyId, String familyName, String createdTime, String loginTime, String msg, Long permission) {
         Id = id;
         Username = username;

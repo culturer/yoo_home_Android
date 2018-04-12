@@ -69,23 +69,20 @@ public class ShowActivity extends AppCompatActivity {
 
     private void initBottomNavigation(){
          BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-                = new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.show_one_page:
-                        fragment_container.setCurrentItem(0);
-                        return true;
-                    case R.id.show_two_page:
-                        fragment_container.setCurrentItem(1);
-                        return true;
-                    case R.id.show_three_page:
-                        fragment_container.setCurrentItem(2);
-                        return true;
-                }
-                return false;
-            }
-        };
+                = item -> {
+                    switch (item.getItemId()) {
+                        case R.id.show_one_page:
+                            fragment_container.setCurrentItem(0);
+                            return true;
+                        case R.id.show_two_page:
+                            fragment_container.setCurrentItem(1);
+                            return true;
+                        case R.id.show_three_page:
+                            fragment_container.setCurrentItem(2);
+                            return true;
+                    }
+                    return false;
+                };
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
     }
