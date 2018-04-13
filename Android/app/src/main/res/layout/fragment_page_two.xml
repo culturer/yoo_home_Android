@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.culturer.yoo_home.function.world.shows.show.pages.PageTwoFragment">
+    tools:context="com.culturer.yoo_home.function.world.shows.show.pages.pageTwo.PageTwoFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

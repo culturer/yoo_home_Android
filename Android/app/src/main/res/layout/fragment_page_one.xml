@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:id="@+id/activity_web_view"
-    tools:context="com.culturer.yoo_home.function.world.shows.show.pages.PageOneFragment">
+    tools:context="com.culturer.yoo_home.function.world.shows.show.pages.pageOne.PageOneFragment">
 
     <include layout="@layout/include_webview" />
 

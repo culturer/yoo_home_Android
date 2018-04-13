@@ -1,4 +1,4 @@
-package com.culturer.yoo_home.function.world.shows.show.pages;
+package com.culturer.yoo_home.function.world.shows.show.pages.pageOne;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,27 +13,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.armour8.yooplus.yooplus.R;
-import com.vondear.rxtools.RxBarTool;
 import com.vondear.rxtools.RxConstants;
-import com.vondear.rxtools.RxImageTool;
-import com.vondear.rxtools.RxKeyboardTool;
-import com.vondear.rxtools.view.RxTextAutoZoom;
 
 
-public class PageOneFragment extends Fragment {
+public class PageOneFragment extends Fragment implements FragmentBackHandler {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -186,13 +177,11 @@ public class PageOneFragment extends Fragment {
                 return true;
             }
         });
-        webBase.setDownloadListener(new DownloadListener() {
-            public void onDownloadStart(String paramAnonymousString1, String paramAnonymousString2, String paramAnonymousString3, String paramAnonymousString4, long paramAnonymousLong) {
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.VIEW");
-                intent.setData(Uri.parse(paramAnonymousString1));
-                startActivity(intent);
-            }
+        webBase.setDownloadListener((paramAnonymousString1, paramAnonymousString2, paramAnonymousString3, paramAnonymousString4, paramAnonymousLong) -> {
+            Intent intent = new Intent();
+            intent.setAction("android.intent.action.VIEW");
+            intent.setData(Uri.parse(paramAnonymousString1));
+            startActivity(intent);
         });
     
         webBase.loadUrl(webPath);
@@ -213,7 +202,25 @@ public class PageOneFragment extends Fragment {
                 Log.v("Himi", "onConfigurationChanged_ORIENTATION_PORTRAIT");
             }
         } catch (Exception ex) {
+        
         }
     }
-
+    
+    @Override
+    public boolean onBackPressed() {
+        if (webBase.canGoBack()) {
+            webBase.goBack();
+        } else {
+            if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+//                super.onBackPressed();
+                getActivity().finish();
+                return true;
+            } else {
+                Toast.makeText(getContext(), "再次点击返回键退出", Toast.LENGTH_SHORT).show();
+            }
+            mBackPressed = System.currentTimeMillis();
+        }
+        return false;
+    }
+    
 }

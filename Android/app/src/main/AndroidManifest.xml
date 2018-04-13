@@ -82,7 +82,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name="com.culturer.yoo_home.test.TestTreeViewActivity">
+        <activity android:name="com.culturer.yoo_home.test.TestTreeViewActivity"></activity>
+        <activity android:name="com.culturer.yoo_home.test.TestPerActivity">
 
         </activity>
     </application>

@@ -1,4 +1,5 @@
-package com.culturer.yoo_home.function.world.shows.show.pages;
+package com.culturer.yoo_home.function.world.shows.show.pages.pageThree;
+
 
 
 import android.os.Bundle;
@@ -10,7 +11,7 @@ import android.view.ViewGroup;
 import com.armour8.yooplus.yooplus.R;
 
 
-public class PageTwoFragment extends Fragment {
+public class PageThreeFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     private static final String ARG_PARAM1 = "param1";
@@ -20,12 +21,12 @@ public class PageTwoFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public PageTwoFragment() {
+    public PageThreeFragment() {
         // Required empty public constructor
     }
 
-    public static PageTwoFragment newInstance(String param1, String param2) {
-        PageTwoFragment fragment = new PageTwoFragment();
+    public static PageThreeFragment newInstance(String param1, String param2) {
+        PageThreeFragment fragment = new PageThreeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -46,7 +47,7 @@ public class PageTwoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_page_two, container, false);
+        return inflater.inflate(R.layout.fragment_page_three, container, false);
     }
 
 }
