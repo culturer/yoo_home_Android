@@ -12,53 +12,52 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.EditText;
+
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.armour8.yooplus.yooplus.R;
-import com.culturer.yoo_home.bean.Photo;
-import com.culturer.yoo_home.cahce.BaseMsg;
+
+
 import com.culturer.yoo_home.cahce.CacheData;
-import com.culturer.yoo_home.function.main.MainActivity;
+
 import com.culturer.yoo_home.service.MQTT.MQTTMsg;
-import com.culturer.yoo_home.test.TestPerActivity;
+
 import com.culturer.yoo_home.util.AudioUtil;
 import com.culturer.yoo_home.util.DirUtil;
-import com.culturer.yoo_home.util.ThreadUtil;
+
 import com.culturer.yoo_home.util.TimeUtil;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
 import com.google.gson.Gson;
-import com.kymjs.rxvolley.RxVolley;
-import com.kymjs.rxvolley.client.HttpCallback;
-import com.kymjs.rxvolley.client.HttpParams;
 import com.samanlan.lib_permisshelper.PermissionsListener;
 import com.samanlan.lib_permisshelper.PermissionsUtils;
-import com.vondear.rxtools.view.dialog.RxDialogChooseImage;
 import com.yanzhenjie.album.Action;
 import com.yanzhenjie.album.Album;
 import com.yanzhenjie.album.AlbumFile;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import io.github.rockerhieu.emojicon.EmojiconEditText;
+import io.github.rockerhieu.emojicon.EmojiconGridFragment;
+import io.github.rockerhieu.emojicon.EmojiconsFragment;
+import io.github.rockerhieu.emojicon.emoji.Emojicon;
+
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_DATA;
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_RECEIVER;
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_TYPE;
-import static com.culturer.yoo_home.config.Urls.FILES_URL;
-import static com.vondear.rxtools.view.dialog.RxDialogChooseImage.LayoutType.TITLE;
 
-public class ChatActivity extends AppCompatActivity implements IChatView {
+
+public class ChatActivity extends AppCompatActivity implements IChatView,
+        EmojiconGridFragment.OnEmojiconClickedListener,
+        EmojiconsFragment.OnEmojiconBackspaceClickedListener   {
 
     private static final String TAG = "ChatActivity";
     
@@ -73,13 +72,10 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
 
     private View contentViwe;
     private RecyclerView chat_list;
-    private EditText chat_edit;
-    private ImageButton chat_camera;
-    private ImageButton chat_emoji;
-    private ImageButton chat_tel;
-    private TextView chat_send;
-    private ImageButton chat_audio;
-    private LinearLayout chat_bottom_view;
+    private EmojiconEditText chat_edit;
+    
+    private FrameLayout emojicons;
+    private  EmojiconsFragment emojiconsFragment;
 
     private List<ChatMsg> chatMsgs = new LinkedList<>();
     private ChatAdapter chatAdapter;
@@ -98,6 +94,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         initGrant();
         initData();
         initView();
+        setEmojiconFragment();
     }
     
     //初始化EventBus
@@ -136,12 +133,13 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
     private void initData(){
         initConvertData();
         initListData();
+        initEmoji();
     }
 
     //初始化UI组件
     private void initView(){
         initBaseView();
-        initNavigation(contentViwe,"Yoo+","心若向阳，无畏悲伤");
+        initNavigation(contentViwe);
         initList();
     }
 
@@ -174,6 +172,10 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         chatAdapter = new ChatAdapter(chatMsgs,this);
     }
 
+    private void initEmoji(){
+        emojiconsFragment =EmojiconsFragment.newInstance(false);
+    }
+    
                                                                     //收发聊天数据//
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //接收消息
@@ -236,45 +238,41 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
     //初始化基础UI组件
     @SuppressLint("ClickableViewAccessibility")
     private void initBaseView(){
-
-        chat_bottom_view  = findViewById(R.id.chat_bottom_view);
+        
         chat_list = findViewById(R.id.chat_list);
         chat_edit = findViewById(R.id.chat_edit);
-        chat_camera = findViewById(R.id.chat_camera);
-        chat_emoji = findViewById(R.id.chat_emoji);
-        chat_tel = findViewById(R.id.chat_tel);
-        chat_audio = findViewById(R.id.chat_audio);
-        chat_send = findViewById(R.id.chat_send);
-
+        ImageButton chat_camera = findViewById(R.id.chat_camera);
+        ImageButton chat_emoji = findViewById(R.id.chat_emoji);
+        ImageButton chat_tel = findViewById(R.id.chat_tel);
+        ImageButton chat_audio = findViewById(R.id.chat_audio);
+        TextView chat_send = findViewById(R.id.chat_send);
+        emojicons = findViewById(R.id.emojicons);
+    
+        chat_edit.setOnClickListener(view -> emojicons.setVisibility(View.GONE));
+        
         //打开相机拍照
-        chat_camera.setOnClickListener(view -> initDialogChooseImage());
-
-        //表情包
-        chat_emoji.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
+        chat_camera.setOnClickListener(view -> {
+            initDialogChooseImage();
+            emojicons.setVisibility(View.GONE);
         });
 
+        //表情包
+        chat_emoji.setOnClickListener(view -> emojicons.setVisibility(View.VISIBLE));
+
         //语音/视频聊天，预留接口
-        chat_tel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            
-            }
+        chat_tel.setOnClickListener(view -> {
+            emojicons.setVisibility(View.GONE);
         });
 
         //发送语音，预留接口，暂时屏蔽
         chat_audio.setOnTouchListener((v, event) -> {
-
             switch (event.getAction()){
-
                 case MotionEvent.ACTION_DOWN:
                     //初始化录音设置
                     recordAudio();
                     //开始录音
                     audioUtil.startRecord();
+                    emojicons.setVisibility(View.GONE);
                     break;
                 case MotionEvent.ACTION_UP:
                     //结束录音（保存录音文件）
@@ -291,6 +289,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
             //3.MQTT将打包的数据发送出去
             String strMsg  = chat_edit.getText().toString();
             if (!strMsg.equals("")){
+                emojicons.setVisibility(View.GONE);
                 sendMsg(strMsg);
                 toLast();
                 clearText();
@@ -306,11 +305,11 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
     }
 
     //初始化导航条
-    private void initNavigation(View contentView,String topic,String title) {
+    private void initNavigation(View contentView) {
         LinearLayout topNavigation = contentView.findViewById(R.id.container);
         HomeNavigation.Builder builder = new HomeNavigation.Builder(this, topNavigation);
-        builder.setCenterHomeTopic(topic)
-                .setCenterHomeTitle(title)
+        builder.setCenterHomeTopic("Yoo+")
+                .setCenterHomeTitle("心若向阳，无畏悲伤")
                 .create().
                 build();
     }
@@ -379,11 +378,28 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         
     }
     
+    private void setEmojiconFragment() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.emojicons, emojiconsFragment)
+                .commit();
+    }
+    
+    @Override
+    public void onEmojiconClicked(Emojicon emojicon) {
+        EmojiconsFragment.input(chat_edit, emojicon);
+    }
+    
+    @Override
+    public void onEmojiconBackspaceClicked(View v) {
+        EmojiconsFragment.backspace(chat_edit);
+    }
+    
     @Override
     public void setPresenter(ChatPresenter presenter) {
         this.presenter = presenter;
     }
-
+    
     @Override
     public ChatPresenter createPresenter() {
         ChatPresenter presenter = new ChatPresenter(this,
@@ -394,5 +410,4 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
                 this);
         return presenter;
     }
-
 }
