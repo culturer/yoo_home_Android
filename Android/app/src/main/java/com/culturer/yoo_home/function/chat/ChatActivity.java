@@ -1,33 +1,53 @@
 package com.culturer.yoo_home.function.chat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.bean.Photo;
 import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.cahce.CacheData;
+import com.culturer.yoo_home.function.main.MainActivity;
 import com.culturer.yoo_home.service.MQTT.MQTTMsg;
+import com.culturer.yoo_home.test.TestPerActivity;
 import com.culturer.yoo_home.util.AudioUtil;
+import com.culturer.yoo_home.util.DirUtil;
+import com.culturer.yoo_home.util.ThreadUtil;
 import com.culturer.yoo_home.util.TimeUtil;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
 import com.google.gson.Gson;
+import com.kymjs.rxvolley.RxVolley;
+import com.kymjs.rxvolley.client.HttpCallback;
+import com.kymjs.rxvolley.client.HttpParams;
+import com.samanlan.lib_permisshelper.PermissionsListener;
+import com.samanlan.lib_permisshelper.PermissionsUtils;
 import com.vondear.rxtools.view.dialog.RxDialogChooseImage;
+import com.yanzhenjie.album.Action;
+import com.yanzhenjie.album.Album;
+import com.yanzhenjie.album.AlbumFile;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,6 +55,7 @@ import java.util.List;
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_DATA;
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_RECEIVER;
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_TYPE;
+import static com.culturer.yoo_home.config.Urls.FILES_URL;
 import static com.vondear.rxtools.view.dialog.RxDialogChooseImage.LayoutType.TITLE;
 
 public class ChatActivity extends AppCompatActivity implements IChatView {
@@ -74,6 +95,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
 
     private void init(){
         initEventBus();
+        initGrant();
         initData();
         initView();
     }
@@ -83,6 +105,33 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         EventBus.getDefault().register(this);
     }
 
+    //授权
+    private void initGrant(){
+       
+        PermissionsUtils   mPermissionsUtils = new PermissionsUtils();
+        mPermissionsUtils
+                .setPermissionsListener(new PermissionsListener() {
+                    @Override
+                    public void onDenied(String[] deniedPermissions) {
+                        for (int i = 0; i < deniedPermissions.length; i++) {
+                            Toast.makeText(ChatActivity.this, deniedPermissions[i] + " 权限被拒绝", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                
+                    @Override
+                    public void onGranted() {
+                        Toast.makeText(ChatActivity.this, "所有权限都被同意", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .withActivity(this)
+                .getPermissions(ChatActivity.this
+                        , 100
+                        , Manifest.permission.RECORD_AUDIO
+                        , Manifest.permission.READ_EXTERNAL_STORAGE
+                        , Manifest.permission.READ_CALENDAR
+                        , Manifest.permission.ACCESS_FINE_LOCATION);
+    }
+    
     //初始化数据
     private void initData(){
         initConvertData();
@@ -217,26 +266,23 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
         });
 
         //发送语音，预留接口，暂时屏蔽
-//        chat_audio.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//
-//                switch (event.getAction()){
-//
-//                    case MotionEvent.ACTION_DOWN:
-//                        //初始化录音设置
-//                        initAudio();
-//                        //开始录音
-//                        audioUtil.startRecord();
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        //结束录音（保存录音文件）
-//                        audioUtil.stopRecord();
-//                        break;
-//                }
-//                return true;
-//            }
-//        });
+        chat_audio.setOnTouchListener((v, event) -> {
+
+            switch (event.getAction()){
+
+                case MotionEvent.ACTION_DOWN:
+                    //初始化录音设置
+                    recordAudio();
+                    //开始录音
+                    audioUtil.startRecord();
+                    break;
+                case MotionEvent.ACTION_UP:
+                    //结束录音（保存录音文件）
+                    audioUtil.stopRecord();
+                    break;
+            }
+            return false;
+        });
 
         //发送聊天信息
         chat_send.setOnClickListener(view -> {
@@ -285,14 +331,32 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
     }
     
     private void initDialogChooseImage() {
-        RxDialogChooseImage dialogChooseImage = new RxDialogChooseImage(this, TITLE);
-        dialogChooseImage.show();
+        Album.image(this) // 选择图片。
+                .multipleChoice()
+                .requestCode(300)
+                .camera(true)
+                .columnCount(4)
+                .selectCount(1)
+                .checkedList(new ArrayList<AlbumFile>())
+                .filterSize(null)
+                .filterMimeType(null)
+                .afterFilterVisibility(false) // 显示被过滤掉的文件，但它们是不可用的。
+                .onResult(new Action<ArrayList<AlbumFile>>() {
+                    @Override
+                    public void onAction(int requestCode, @NonNull final ArrayList<AlbumFile> result) {
+                    
+                    }
+                
+                })
+                .onCancel((requestCode, result) -> {
+                })
+                .start();
     }
     
     //初始化录音工具
     //由于AudioUtil可能每次调用结束就会清理缓存，所以在录音时进行初始化
-    private void initAudio(){
-        audioUtil = new AudioUtil();
+    private void recordAudio(){
+        audioUtil = new AudioUtil(DirUtil.AUDIO_PATH);
         //录音回调
         audioUtil.setOnAudioStatusUpdateListener(new AudioUtil.OnAudioStatusUpdateListener() {
             @Override
@@ -300,13 +364,14 @@ public class ChatActivity extends AppCompatActivity implements IChatView {
 //               根据分贝值来设置录音时话筒图标的上下波动
 //               mImageView.getDrawable().setLevel((int) (3000 + 6000 * db / 100));
 //               mTextView.setText(TimeUtils.long2String(time));
+                Log.i(TAG, "onUpdate: Audio --- "+((int) (3000 + 6000 * db / 100)));
                 Log.i(TAG, "Audio --- onUpdate: time["+ TimeUtil.getDataToString(time)+"]"+" , db["+db+"]");
             }
             
             @Override
             public void onStop(String filePath) {
 
-//               Toast.makeText(MainActivity.this, "录音保存在：" + filePath, Toast.LENGTH_SHORT).show();
+               Toast.makeText(ChatActivity.this, "录音保存在：" + filePath, Toast.LENGTH_SHORT).show();
 //               mTextView.setText(TimeUtils.long2String(0));
                 Log.i(TAG, "Audio --- onStop: filePath["+filePath+"]");
             }

@@ -25,9 +25,8 @@ public class AudioUtil {
 	
 	private OnAudioStatusUpdateListener audioStatusUpdateListener;
 	
-	/**
-	 * 文件存储默认sdcard/record
-	 */
+	
+//	 文件存储默认sdcard/record
 	public AudioUtil(){
 		
 		//默认保存路径为/sdcard/record/下
@@ -93,7 +92,7 @@ public class AudioUtil {
 		if (mMediaRecorder == null)
 			return 0L;
 		endTime = System.currentTimeMillis();
-		
+		String mPath ;
 		//有一些网友反应在5.0以上在调用stop的时候会报错，翻阅了一下谷歌文档发现上面确实写的有可能会报错的情况，捕获异常清理一下就行了，感谢大家反馈！
 		try {
 			mMediaRecorder.stop();
@@ -102,6 +101,7 @@ public class AudioUtil {
 			mMediaRecorder = null;
 			
 			audioStatusUpdateListener.onStop(filePath);
+			mPath = filePath;
 			filePath = "";
 			
 		}catch (RuntimeException e){
@@ -183,12 +183,12 @@ public class AudioUtil {
 		 * @param db 当前声音分贝
 		 * @param time 录音时长
 		 */
-		public void onUpdate(double db,long time);
+		void onUpdate(double db, long time);
 		
 		/**
 		 * 停止录音
 		 * @param filePath 保存路径
 		 */
-		public void onStop(String filePath);
+		void onStop(String filePath);
 	}
 }
