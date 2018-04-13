@@ -1,4 +1,4 @@
-package com.culturer.yoo_home.function.world.shows.show.pages;
+package com.culturer.yoo_home.function.world.shows.show.pages.pageTwo;
 
 
 import android.os.Bundle;

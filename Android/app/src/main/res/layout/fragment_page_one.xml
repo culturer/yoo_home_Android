@@ -1,14 +1,11 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.culturer.yoo_home.function.world.shows.show.pages.PageOneFragment">
+    android:orientation="horizontal"
+    android:id="@+id/activity_web_view"
+    tools:context="com.culturer.yoo_home.function.world.shows.show.pages.pageOne.PageOneFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="这是一个内置的浏览器，允许商家嵌入自己的页面，如官网首页，电商页面等等..." />
+    <include layout="@layout/include_webview" />
 
-</FrameLayout>
+</LinearLayout>

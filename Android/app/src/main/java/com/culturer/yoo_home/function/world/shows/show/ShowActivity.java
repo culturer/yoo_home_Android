@@ -1,19 +1,18 @@
 package com.culturer.yoo_home.function.world.shows.show;
 
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.armour8.yooplus.yooplus.R;
-import com.culturer.yoo_home.function.world.shows.show.pages.PageOneFragment;
-import com.culturer.yoo_home.function.world.shows.show.pages.PageThreeFragment;
-import com.culturer.yoo_home.function.world.shows.show.pages.PageTwoFragment;
+import com.culturer.yoo_home.function.world.shows.show.pages.pageOne.BackHandlerHelper;
+import com.culturer.yoo_home.function.world.shows.show.pages.pageOne.PageOneFragment;
+import com.culturer.yoo_home.function.world.shows.show.pages.pageThree.PageThreeFragment;
+import com.culturer.yoo_home.function.world.shows.show.pages.pageTwo.PageTwoFragment;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
 
 import java.util.ArrayList;
@@ -69,23 +68,20 @@ public class ShowActivity extends AppCompatActivity {
 
     private void initBottomNavigation(){
          BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-                = new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.show_one_page:
-                        fragment_container.setCurrentItem(0);
-                        return true;
-                    case R.id.show_two_page:
-                        fragment_container.setCurrentItem(1);
-                        return true;
-                    case R.id.show_three_page:
-                        fragment_container.setCurrentItem(2);
-                        return true;
-                }
-                return false;
-            }
-        };
+                = item -> {
+                    switch (item.getItemId()) {
+                        case R.id.show_one_page:
+                            fragment_container.setCurrentItem(0);
+                            return true;
+                        case R.id.show_two_page:
+                            fragment_container.setCurrentItem(1);
+                            return true;
+                        case R.id.show_three_page:
+                            fragment_container.setCurrentItem(2);
+                            return true;
+                    }
+                    return false;
+                };
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
     }
@@ -131,4 +127,11 @@ public class ShowActivity extends AppCompatActivity {
         fragment_container.setAdapter(adapter);
         switchTab(0);
     }
+    @Override
+    public void onBackPressed() {
+        if (!BackHandlerHelper.handleBackPress(this)) {
+            super.onBackPressed();
+        }
+    }
+    
 }
