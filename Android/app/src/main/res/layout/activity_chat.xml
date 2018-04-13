@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -39,11 +39,12 @@
             android:layout_marginRight="@dimen/margin"
             android:layout_height="match_parent"
             android:layout_weight="1">
-            <EditText
+            <io.github.rockerhieu.emojicon.EmojiconEditText
                 android:padding="@dimen/pading"
                 android:layout_margin="@dimen/margin"
                 android:id="@+id/chat_edit"
                 android:gravity="center"
+                emojicon:emojiconSize="28sp"
                 android:hint="出来聊天啦~"
                 android:ems="10"
                 android:inputType="textMultiLine"
@@ -117,5 +118,12 @@
             android:layout_height="50dp" />
 
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/emojicons"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="200dp" />
 
 </LinearLayout>
