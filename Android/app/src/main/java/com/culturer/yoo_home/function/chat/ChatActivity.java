@@ -26,7 +26,7 @@ import com.culturer.yoo_home.cahce.CacheData;
 
 import com.culturer.yoo_home.service.MQTT.MQTTMsg;
 
-import com.culturer.yoo_home.util.AudioUtil;
+import com.culturer.yoo_home.util.AudioRecoder;
 import com.culturer.yoo_home.util.DirUtil;
 
 import com.culturer.yoo_home.util.TimeUtil;
@@ -63,7 +63,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView,
     
     ChatPresenter presenter;
     
-    AudioUtil audioUtil;
+    AudioRecoder audioRecoder;
     
     boolean chat_type;
     String username;
@@ -110,14 +110,14 @@ public class ChatActivity extends AppCompatActivity implements IChatView,
                 .setPermissionsListener(new PermissionsListener() {
                     @Override
                     public void onDenied(String[] deniedPermissions) {
-                        for (int i = 0; i < deniedPermissions.length; i++) {
-                            Toast.makeText(ChatActivity.this, deniedPermissions[i] + " 权限被拒绝", Toast.LENGTH_SHORT).show();
+                        for (String deniedPermission : deniedPermissions) {
+                            Log.i(TAG, "onDenied: "+deniedPermission + " 权限被拒绝");
                         }
                     }
                 
                     @Override
                     public void onGranted() {
-                        Toast.makeText(ChatActivity.this, "所有权限都被同意", Toast.LENGTH_SHORT).show();
+                        Log.i(TAG, "onGranted: 所有权限都被同意");
                     }
                 })
                 .withActivity(this)
@@ -271,12 +271,12 @@ public class ChatActivity extends AppCompatActivity implements IChatView,
                     //初始化录音设置
                     recordAudio();
                     //开始录音
-                    audioUtil.startRecord();
+                    audioRecoder.startRecord();
                     emojicons.setVisibility(View.GONE);
                     break;
                 case MotionEvent.ACTION_UP:
                     //结束录音（保存录音文件）
-                    audioUtil.stopRecord();
+                    audioRecoder.stopRecord();
                     break;
             }
             return false;
@@ -355,9 +355,9 @@ public class ChatActivity extends AppCompatActivity implements IChatView,
     //初始化录音工具
     //由于AudioUtil可能每次调用结束就会清理缓存，所以在录音时进行初始化
     private void recordAudio(){
-        audioUtil = new AudioUtil(DirUtil.AUDIO_PATH);
+        audioRecoder = new AudioRecoder(DirUtil.AUDIO_PATH);
         //录音回调
-        audioUtil.setOnAudioStatusUpdateListener(new AudioUtil.OnAudioStatusUpdateListener() {
+        audioRecoder.setOnAudioStatusUpdateListener(new AudioRecoder.OnAudioStatusUpdateListener() {
             @Override
             public void onUpdate(double db, long time) {
 //               根据分贝值来设置录音时话筒图标的上下波动
