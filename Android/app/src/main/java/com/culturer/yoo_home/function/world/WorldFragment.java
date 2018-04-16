@@ -12,6 +12,7 @@ import com.culturer.yoo_home.function.world.office.OfficeFragment;
 
 import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.function.world.recommend.RecommendFragment;
+import com.culturer.yoo_home.function.world.shop.ShopFragment;
 import com.culturer.yoo_home.function.world.shows.ShowsFragment;
 
 import java.util.ArrayList;
@@ -53,11 +54,13 @@ public class WorldFragment extends Fragment {
         fragmentList.add(OfficeFragment.newInstance("",""));
         fragmentList.add(ShowsFragment.newInstance("",""));
         fragmentList.add(new RecommendFragment());
-
+        fragmentList.add(ShopFragment.newInstance("",""));
+        
         List<String> pagerList = new ArrayList<>();
         pagerList.add("官方");
         pagerList.add("频道");
         pagerList.add("推荐");
+        pagerList.add("商城");
 
         //MODE_SCROLLABLE可滑动的展示
         //MODE_FIXED固定展示

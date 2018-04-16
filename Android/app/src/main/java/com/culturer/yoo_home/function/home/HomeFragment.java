@@ -42,11 +42,15 @@ public class HomeFragment extends Fragment {
             initData();
             initPager();
         }
+        
         ViewGroup parent = (ViewGroup) contentView.getParent();
+        
         if ( parent!=null ){
             parent.removeView(contentView);
         }
+        
         return contentView;
+        
     }
 
     //初始化ViewPager 滑动页面

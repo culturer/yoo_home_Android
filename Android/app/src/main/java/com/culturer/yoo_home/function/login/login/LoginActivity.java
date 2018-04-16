@@ -95,6 +95,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     }
 
     private void initBaseView(){
+        
         mLogo = contentView.findViewById(R.id.logo);
         mEtMobile = contentView.findViewById(R.id.et_mobile);
         mIvCleanPhone = contentView.findViewById(R.id.iv_clean_phone);
@@ -108,47 +109,28 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         mScrollView = contentView.findViewById(R.id.scrollView);
         mService = contentView.findViewById(R.id.service);
         mRoot = contentView.findViewById(R.id.root);
-
-        mIvCleanPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEtMobile.setText("");
+        
+        mIvCleanPhone.setOnClickListener(v -> mEtMobile.setText(""));
+        mCleanPassword.setOnClickListener(v -> mEtPassword.setText(""));
+        mIvShowPwd.setOnClickListener(v -> {
+            if (mEtPassword.getInputType() != InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
+                mEtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                mIvShowPwd.setImageResource(R.drawable.pass_visuable);
+            } else {
+                mEtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                mIvShowPwd.setImageResource(R.drawable.pass_gone);
             }
+            String pwd = mEtPassword.getText().toString();
+            if (!TextUtils.isEmpty(pwd))
+                mEtPassword.setSelection(pwd.length());
         });
-        mCleanPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEtPassword.setText("");
-            }
+        mRegist.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+            startActivity(intent);
         });
-        mIvShowPwd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mEtPassword.getInputType() != InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
-                    mEtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                    mIvShowPwd.setImageResource(R.drawable.pass_visuable);
-                } else {
-                    mEtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    mIvShowPwd.setImageResource(R.drawable.pass_gone);
-                }
-                String pwd = mEtPassword.getText().toString();
-                if (!TextUtils.isEmpty(pwd))
-                    mEtPassword.setSelection(pwd.length());
-            }
-        });
-        mRegist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
-        mForgetPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,ForgetActivity.class);
-                startActivity(intent);
-            }
+        mForgetPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this,ForgetActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -205,52 +187,41 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         /**
          * 禁止键盘弹起的时候可以滚动
          */
-        mScrollView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
-        mScrollView.addOnLayoutChangeListener(new ViewGroup.OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-              /* old是改变前的左上右下坐标点值，没有old的是改变后的左上右下坐标点值
-              现在认为只要控件将Activity向上推的高度超过了1/3屏幕高，就认为软键盘弹起*/
-                if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > keyHeight)) {
-                    Log.e("wenzhihao", "up------>" + (oldBottom - bottom));
-                    int dist = mContent.getBottom() - bottom;
-                    if (dist > 0) {
-                        ObjectAnimator mAnimatorTranslateY = ObjectAnimator.ofFloat(mContent, "translationY", 0.0f, -dist);
-                        mAnimatorTranslateY.setDuration(300);
-                        mAnimatorTranslateY.setInterpolator(new LinearInterpolator());
-                        mAnimatorTranslateY.start();
-                        RxAnimationTool.zoomIn(mLogo, 0.6f, dist);
-                    }
-                    mService.setVisibility(View.INVISIBLE);
-
-                } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > keyHeight)) {
-                    Log.e("wenzhihao", "down------>" + (bottom - oldBottom));
-                    if ((mContent.getBottom() - oldBottom) > 0) {
-                        ObjectAnimator mAnimatorTranslateY = ObjectAnimator.ofFloat(mContent, "translationY", mContent.getTranslationY(), 0);
-                        mAnimatorTranslateY.setDuration(300);
-                        mAnimatorTranslateY.setInterpolator(new LinearInterpolator());
-                        mAnimatorTranslateY.start();
-                        //键盘收回后，logo恢复原来大小，位置同样回到初始位置
-                        RxAnimationTool.zoomOut(mLogo, 0.6f);
-                    }
-                    mService.setVisibility(View.VISIBLE);
+        mScrollView.setOnTouchListener((v, event) -> true);
+        mScrollView.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+          /* old是改变前的左上右下坐标点值，没有old的是改变后的左上右下坐标点值
+          现在认为只要控件将Activity向上推的高度超过了1/3屏幕高，就认为软键盘弹起*/
+            if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > keyHeight)) {
+                Log.e("wenzhihao", "up------>" + (oldBottom - bottom));
+                int dist = mContent.getBottom() - bottom;
+                if (dist > 0) {
+                    ObjectAnimator mAnimatorTranslateY = ObjectAnimator.ofFloat(mContent, "translationY", 0.0f, -dist);
+                    mAnimatorTranslateY.setDuration(300);
+                    mAnimatorTranslateY.setInterpolator(new LinearInterpolator());
+                    mAnimatorTranslateY.start();
+                    RxAnimationTool.zoomIn(mLogo, 0.6f, dist);
                 }
+                mService.setVisibility(View.INVISIBLE);
+
+            } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > keyHeight)) {
+                Log.e("wenzhihao", "down------>" + (bottom - oldBottom));
+                if ((mContent.getBottom() - oldBottom) > 0) {
+                    ObjectAnimator mAnimatorTranslateY = ObjectAnimator.ofFloat(mContent, "translationY", mContent.getTranslationY(), 0);
+                    mAnimatorTranslateY.setDuration(300);
+                    mAnimatorTranslateY.setInterpolator(new LinearInterpolator());
+                    mAnimatorTranslateY.start();
+                    //键盘收回后，logo恢复原来大小，位置同样回到初始位置
+                    RxAnimationTool.zoomOut(mLogo, 0.6f);
+                }
+                mService.setVisibility(View.VISIBLE);
             }
         });
 
-        mBtnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RxKeyboardTool.hideSoftInput(LoginActivity.this);
-                String tel = mEtMobile.getText().toString();
-                String password = MD5Util.encrypt(mEtPassword.getText().toString().trim());
-                presenter.login(tel,password);
-            }
+        mBtnLogin.setOnClickListener(v -> {
+            RxKeyboardTool.hideSoftInput(LoginActivity.this);
+            String tel = mEtMobile.getText().toString();
+            String password = MD5Util.encrypt(mEtPassword.getText().toString().trim());
+            presenter.login(tel,password);
         });
     }
 

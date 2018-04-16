@@ -95,8 +95,7 @@ dependencies {
     //引入moji字体库
     compile 'io.github.rockerhieu:emojicon:1.4.2'
 
-    //数据库调试工具
-    implementation files('libs/SQLiteStudioRemote.jar')
+     implementation files('libs/SQLiteStudioRemote.jar')
     compile project(path: ':shimmer')
     compile project(path: ':rxvolley')
     compile project(path: ':okhttp3')

@@ -195,7 +195,8 @@ public class RightTreeLayoutManager implements TreeLayoutManager {
                 int bottomRight = 0;
                 int bottomBottom = 0;
 
-                if (r == 0) {//偶数
+                if (r == 0) {
+                    //偶数
                     for (int i = mid - 1; i >= 0; i--) {
                         NodeView topView = (NodeView) treeView.findNodeViewFromNodeModel(childNodes.get(i));
                         NodeView bottomView = (NodeView) treeView.findNodeViewFromNodeModel(childNodes.get(size - i - 1));
