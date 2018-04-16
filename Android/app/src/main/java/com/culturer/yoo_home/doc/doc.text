@@ -1,0 +1,10 @@
+doc
+补充说明文档：
+由于许多工具类已经由RxRool已经提供
+所以可以在后续的优化中移除
+例:
+    permisshelper模块
+    DirUtil
+    MD5Util
+    ThreadUtil
+    验证码的Base64解码
