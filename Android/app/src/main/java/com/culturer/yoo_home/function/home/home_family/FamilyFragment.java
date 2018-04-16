@@ -1,20 +1,17 @@
 package com.culturer.yoo_home.function.home.home_family;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
-import com.culturer.yoo_home.widget.treeView.RightTreeLayoutManager;
-import com.culturer.yoo_home.widget.treeView.TreeView;
-import com.culturer.yoo_home.widget.treeView.TreeViewItemClick;
-import com.culturer.yoo_home.widget.treeView.TreeViewItemLongClick;
-import com.culturer.yoo_home.widget.treeView.model.NodeModel;
+import com.culturer.yoo_home.function.home.home_family.family_picture.FamilyPictureActivity;
+import com.culturer.yoo_home.function.home.home_family.homecircle_list.HomecircleListActivity;
 import com.culturer.yoo_home.widget.treeView.model.TreeModel;
-import com.culturer.yoo_home.widget.treeView.util.DensityUtils;
 
 
 public class FamilyFragment extends Fragment {
@@ -28,7 +25,10 @@ public class FamilyFragment extends Fragment {
     private TreeModel<String> tree;
     
     private View contentView;
-    private TreeView treeView;
+    private TextView circle;
+    private TextView family_picture;
+    private TextView family_father;
+    private TextView family_mother;
 
     public FamilyFragment() {
         // Required empty public constructor
@@ -67,76 +67,41 @@ public class FamilyFragment extends Fragment {
     }
     
     private void initData(){
-        initTreeData();
+    
     }
     
     private void initView(){
         initBaseView();
-        initTreeView();
-    }
-    
-    private void initTreeData(){
-        final NodeModel<String> nodeA = new NodeModel<>("家庭A");
-        final NodeModel<String> nodeB = new NodeModel<>("家庭B");
-        final NodeModel<String> nodeC = new NodeModel<>("家庭C");
-        final NodeModel<String> nodeD = new NodeModel<>("家庭D");
-        final NodeModel<String> nodeE = new NodeModel<>("家庭E");
-        final NodeModel<String> nodeF = new NodeModel<>("家庭F");
-        final NodeModel<String> nodeG = new NodeModel<>("家庭G");
-        final NodeModel<String> nodeH = new NodeModel<>("家庭H");
-        final NodeModel<String> nodeI = new NodeModel<>("家庭I");
-        final NodeModel<String> nodeJ = new NodeModel<>("家庭J");
-        final NodeModel<String> nodeK = new NodeModel<>("家庭K");
-        final NodeModel<String> nodeL = new NodeModel<>("家庭L");
-        final NodeModel<String> nodeM = new NodeModel<>("家庭M");
-        final NodeModel<String> nodeN = new NodeModel<>("家庭N");
-        final NodeModel<String> nodeO = new NodeModel<>("家庭O");
-        final NodeModel<String> nodeP = new NodeModel<>("家庭P");
-        final NodeModel<String> nodeQ = new NodeModel<>("家庭Q");
-        final NodeModel<String> nodeR = new NodeModel<>("家庭R");
-        final NodeModel<String> nodeS = new NodeModel<>("家庭S");
-        final NodeModel<String> nodeT = new NodeModel<>("家庭T");
-        final NodeModel<String> nodeU = new NodeModel<>("家庭U");
-        final NodeModel<String> nodeV = new NodeModel<>("家庭V");
-        final NodeModel<String> nodeW = new NodeModel<>("家庭W");
-        final NodeModel<String> nodeX = new NodeModel<>("家庭X");
-        final NodeModel<String> nodeY = new NodeModel<>("家庭Y");
-        final NodeModel<String> nodeZ = new NodeModel<>("家庭Z");
-    
-    
-        tree = new TreeModel<>(nodeA);
-        tree.addNode(nodeA, nodeB, nodeC, nodeD);
-        tree.addNode(nodeC, nodeE, nodeF, nodeG, nodeH, nodeI);
-        tree.addNode(nodeB, nodeJ, nodeK, nodeL);
-        tree.addNode(nodeD, nodeM, nodeN, nodeO);
-        tree.addNode(nodeF, nodeP, nodeQ, nodeR, nodeS);
-        tree.addNode(nodeR, nodeT, nodeU, nodeV, nodeW, nodeX);
-        tree.addNode(nodeT, nodeY, nodeZ);
     }
     
     private void initBaseView(){
-        treeView = contentView.findViewById(R.id.treeView);
-    }
-    
-    private void initTreeView(){
-        int dx = DensityUtils.dp2px(getContext(), 20);
-        int dy = DensityUtils.dp2px(getContext(), 20);
-        int screenHeight = DensityUtils.dp2px(getContext(), 720);
-        treeView.setTreeLayoutManager(new RightTreeLayoutManager(dx, dy, screenHeight));
-        treeView.setTreeViewItemLongClick(new TreeViewItemLongClick() {
+        family_picture = contentView.findViewById(R.id.family_picture);
+        family_father = contentView.findViewById(R.id.family_father);
+        family_mother = contentView.findViewById(R.id.family_mother);
+        circle = contentView.findViewById(R.id.circle);
+        circle.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), HomecircleListActivity.class);
+            startActivity(intent);
+        });
+        family_picture.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onLongClick(View view) {
-
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),FamilyPictureActivity.class);
+                startActivity(intent);
             }
         });
-    
-        treeView.setTreeViewItemClick(new TreeViewItemClick() {
+        family_father.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(View item) {
-            
+            public void onClick(View view) {
+        
             }
         });
-        treeView.setTreeModel(tree);
+        family_mother.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+        
+            }
+        });
     }
     
 }

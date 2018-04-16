@@ -1,4 +1,4 @@
-package com.culturer.yoo_home.function.home.friends.homecircle_list;
+package com.culturer.yoo_home.function.home.home_family.homecircle_list;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

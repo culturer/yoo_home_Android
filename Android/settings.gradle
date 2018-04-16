@@ -1,1 +1,1 @@
-include ':app', ':shimmer', ':okhttp3', ':rxvolley', ':okhttp', ':lib_permisshelper'
+include ':app', ':shimmer', ':okhttp3', ':rxvolley', ':okhttp', ':lib_permisshelper', ':webrtc-client'

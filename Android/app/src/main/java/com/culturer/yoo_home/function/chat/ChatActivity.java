@@ -173,7 +173,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView,
     }
 
     private void initEmoji(){
-        emojiconsFragment =EmojiconsFragment.newInstance(false);
+        emojiconsFragment =EmojiconsFragment.newInstance(true);
     }
     
                                                                     //收发聊天数据//

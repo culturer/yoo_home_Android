@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/okhttp3" />
             <option value="$PROJECT_DIR$/rxvolley" />
             <option value="$PROJECT_DIR$/shimmer" />
+            <option value="$PROJECT_DIR$/webrtc-client" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

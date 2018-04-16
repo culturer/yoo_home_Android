@@ -1,24 +1,114 @@
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="@dimen/padding"
+    android:layout_margin="@dimen/margin"
     tools:context="com.culturer.yoo_home.function.home.home_family.FamilyFragment">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:clipChildren="false"
-        android:clipToPadding="false"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.culturer.yoo_home.widget.treeView.TreeView
-            android:id="@+id/treeView"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="10dp"
+            android:background="@color/grey"
+            android:layout_marginBottom="5dp"/>
 
-    </FrameLayout>
 
-</LinearLayout>
+        <TextView
+            android:text="亲友圈"
+            android:id="@+id/circle"
+            android:gravity="center_vertical"
+            android:layout_margin="@dimen/margin"
+            android:padding="10dp"
+            android:drawablePadding="10dp"
+            android:background="@drawable/btn_selected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_edit_black_24dp"
+            android:drawableStart="@drawable/ic_filter_tilt_shift_black_24dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/grey"
+            android:layout_marginBottom="5dp"/>
+        
+        <TextView
+            android:text="家族图谱"
+            android:id="@+id/family_picture"
+            android:gravity="center_vertical"
+            android:layout_margin="@dimen/margin"
+            android:padding="10dp"
+            android:drawablePadding="10dp"
+            android:background="@drawable/btn_selected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_edit_black_24dp"
+            android:drawableStart="@drawable/ic_filter_tilt_shift_black_24dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/grey"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:text="父系家族群聊"
+            android:id="@+id/family_father"
+            android:gravity="center_vertical"
+            android:layout_margin="@dimen/margin"
+            android:padding="10dp"
+            android:drawablePadding="10dp"
+            android:background="@drawable/btn_selected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_edit_black_24dp"
+            android:drawableStart="@drawable/ic_filter_tilt_shift_black_24dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/grey"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:text="母系家族群聊"
+            android:id="@+id/family_mother"
+            android:gravity="center_vertical"
+            android:layout_margin="@dimen/margin"
+            android:padding="10dp"
+            android:drawablePadding="10dp"
+            android:background="@drawable/btn_selected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_edit_black_24dp"
+            android:drawableStart="@drawable/ic_filter_tilt_shift_black_24dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/grey"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:text="母系家族群聊"
+            android:id="@+id/family_other"
+            android:gravity="center_vertical"
+            android:layout_margin="@dimen/margin"
+            android:padding="10dp"
+            android:drawablePadding="10dp"
+            android:background="@drawable/btn_selected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_edit_black_24dp"
+            android:drawableStart="@drawable/ic_filter_tilt_shift_black_24dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
