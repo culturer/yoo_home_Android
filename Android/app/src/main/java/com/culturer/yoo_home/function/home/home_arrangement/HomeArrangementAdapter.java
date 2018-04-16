@@ -20,7 +20,7 @@ import java.util.List;
 
 public class HomeArrangementAdapter extends BaseAdapter {
 
-    private static final String TAG = "HomeArrangementAdapter";
+    private static final String TAG = "HomecircleAdapter";
 
     private List<Arrangement> datas = new ArrayList<>();
     private Context context;

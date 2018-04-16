@@ -31,12 +31,8 @@
         <activity
             android:name="com.culturer.yoo_home.function.login.login.LoginActivity"
             android:resizeableActivity="true"
-            android:theme="@style/FullScreenTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/FullScreenTheme" >
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.culturer.yoo_home.test.TestActivity" />
         <activity android:name="com.culturer.yoo_home.function.login.guide.GuideActivity" />
@@ -75,12 +71,22 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name="com.culturer.yoo_home.function.mine.SettingActivity" />
         <activity android:name="com.culturer.yoo_home.test.TestEmojiActivity" />
-        <activity android:name="com.culturer.yoo_home.function.home.home_family.homecircle_list.HomecircleListActivity" />
+        <activity android:name="com.culturer.yoo_home.function.home.home_family.homecircle_list.HomecircleListActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name="com.culturer.yoo_home.test.TestTreeViewActivity" />
         <activity android:name="com.culturer.yoo_home.test.TestPerActivity" />
         <activity android:name="com.culturer.yoo_home.test.TestRTCActivity" />
-        <activity android:name="com.culturer.yoo_home.function.home.home_family.family_picture.FamilyPictureActivity"></activity>
-        <activity android:name="com.culturer.yoo_home.function.rtc.RtcActivity"></activity>
+        <activity android:name="com.culturer.yoo_home.function.home.home_family.family_picture.FamilyPictureActivity" />
+        <activity android:name="com.culturer.yoo_home.function.rtc.RtcActivity" />
+        <activity android:name="com.culturer.yoo_home.function.home.home_family.homecircle_list.HomecircleNtfActivity" />
+        <activity android:name="com.culturer.yoo_home.function.home.home_family.homecircle_list.HomecircleAddActivity">
+
+        </activity>
     </application>
 
 </manifest>
