@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:id="@+id/container"
     android:orientation="vertical"
-    tools:context="com.culturer.yoo_home.function.home.friends.homecircle_list.HomecircleListActivity">
+    tools:context="com.culturer.yoo_home.function.home.home_family.homecircle_list.HomecircleListActivity">
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

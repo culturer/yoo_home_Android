@@ -12,7 +12,7 @@ import java.io.IOException;
  * Created by Administrator on 2018/4/2 0002.
  */
 
-public class AudioUtil {
+public class AudioRecoder {
 	
 	//文件路径
 	private String filePath;
@@ -27,13 +27,13 @@ public class AudioUtil {
 	
 	
 //	 文件存储默认sdcard/record
-	public AudioUtil(){
+	public AudioRecoder(){
 		
 		//默认保存路径为/sdcard/record/下
 		this(Environment.getExternalStorageDirectory()+"/record/");
 	}
 	
-	public AudioUtil(String filePath) {
+	public AudioRecoder(String filePath) {
 		
 		File path = new File(filePath);
 		if(!path.exists())

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import com.armour8.yooplus.yooplus.R;
 
-
 public class OfficeFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";

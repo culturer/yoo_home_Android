@@ -109,4 +109,5 @@ dependencies {
     implementation files('libs/slf4j-log4j12.jar')
     compile project(path: ':lib_permisshelper')
     compile project(path: ':lib_permisshelper')
+    compile project(path: ':webrtc-client')
 }

@@ -74,15 +74,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name="com.culturer.yoo_home.function.mine.SettingActivity" />
-        <activity android:name="com.culturer.yoo_home.test.TestEmojiActivity" >
-
-        </activity>
-        <activity android:name="com.culturer.yoo_home.function.home.friends.homecircle_list.HomecircleListActivity" />
-
-        <activity android:name="com.culturer.yoo_home.test.TestTreeViewActivity"></activity>
-        <activity android:name="com.culturer.yoo_home.test.TestPerActivity">
-
-        </activity>
+        <activity android:name="com.culturer.yoo_home.test.TestEmojiActivity" />
+        <activity android:name="com.culturer.yoo_home.function.home.home_family.homecircle_list.HomecircleListActivity" />
+        <activity android:name="com.culturer.yoo_home.test.TestTreeViewActivity" />
+        <activity android:name="com.culturer.yoo_home.test.TestPerActivity" />
+        <activity android:name="com.culturer.yoo_home.test.TestRTCActivity" />
+        <activity android:name="com.culturer.yoo_home.function.home.home_family.family_picture.FamilyPictureActivity"></activity>
+        <activity android:name="com.culturer.yoo_home.function.rtc.RtcActivity"></activity>
     </application>
 
 </manifest>

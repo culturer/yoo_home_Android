@@ -1,4 +1,4 @@
-package com.culturer.yoo_home.function.home.friends.homecircle_list;
+package com.culturer.yoo_home.function.home.home_family.homecircle_list;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,11 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
-import com.culturer.yoo_home.bean.Arrangement;
-import com.culturer.yoo_home.function.home.home_arrangement.HomeArrangementAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,38 +1,26 @@
-package com.culturer.yoo_home.function.home.friends.homecircle_list;
+package com.culturer.yoo_home.function.home.home_family.homecircle_list;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
-import com.bumptech.glide.Priority;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.bumptech.glide.request.RequestOptions;
-import com.culturer.yoo_home.base.GlideApp;
 import com.culturer.yoo_home.bean.Article;
 import com.culturer.yoo_home.bean.Comment;
 import com.culturer.yoo_home.bean.Photo;
 import com.culturer.yoo_home.bean.User;
-import com.culturer.yoo_home.cahce.BaseMsg;
-import com.culturer.yoo_home.util.TimeUtil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class HomecircleAdapter extends   RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 

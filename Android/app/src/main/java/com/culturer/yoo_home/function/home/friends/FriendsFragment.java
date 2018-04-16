@@ -1,6 +1,5 @@
 package com.culturer.yoo_home.function.home.friends;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,7 +9,7 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
-import com.culturer.yoo_home.function.home.friends.homecircle_list.HomecircleListActivity;
+import com.culturer.yoo_home.function.home.home_family.homecircle_list.HomecircleListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +51,7 @@ public class FriendsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        initData();
     }
 
     @Override
@@ -64,7 +64,6 @@ public class FriendsFragment extends Fragment {
     }
 
     private void init(){
-        initData();
         initView();
     }
 
@@ -99,11 +98,6 @@ public class FriendsFragment extends Fragment {
     }
     
     private void initBaseView(){
-        circle = convertView.findViewById(R.id.circle);
-        circle.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), HomecircleListActivity.class);
-            startActivity(intent);
-        });
         friends = convertView.findViewById(R.id.friends);
     }
     
