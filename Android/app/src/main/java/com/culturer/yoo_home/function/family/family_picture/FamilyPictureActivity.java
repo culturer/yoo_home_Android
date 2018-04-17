@@ -1,4 +1,4 @@
-package com.culturer.yoo_home.function.home.home_family.family_picture;
+package com.culturer.yoo_home.function.family.family_picture;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

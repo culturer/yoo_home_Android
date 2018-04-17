@@ -1,4 +1,4 @@
-package com.culturer.yoo_home.function.home.home_family;
+package com.culturer.yoo_home.function.family;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
-import com.culturer.yoo_home.function.home.home_family.family_picture.FamilyPictureActivity;
-import com.culturer.yoo_home.function.home.home_family.homecircle_list.HomecircleListActivity;
+import com.culturer.yoo_home.function.family.family_picture.FamilyPictureActivity;
+import com.culturer.yoo_home.function.family.homecircle_list.HomecircleListActivity;
 import com.culturer.yoo_home.widget.treeView.model.TreeModel;
 
 
@@ -29,6 +29,7 @@ public class FamilyFragment extends Fragment {
     private TextView family_picture;
     private TextView family_father;
     private TextView family_mother;
+    private TextView family_other;
 
     public FamilyFragment() {
         // Required empty public constructor
@@ -78,6 +79,7 @@ public class FamilyFragment extends Fragment {
         family_picture = contentView.findViewById(R.id.family_picture);
         family_father = contentView.findViewById(R.id.family_father);
         family_mother = contentView.findViewById(R.id.family_mother);
+        family_other = contentView.findViewById(R.id.family_other);
         circle = contentView.findViewById(R.id.circle);
         circle.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), HomecircleListActivity.class);
@@ -97,6 +99,12 @@ public class FamilyFragment extends Fragment {
             }
         });
         family_mother.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+        
+            }
+        });
+        family_other.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
         

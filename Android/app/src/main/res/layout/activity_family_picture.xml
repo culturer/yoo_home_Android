@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.culturer.yoo_home.function.home.home_family.family_picture.FamilyPictureActivity">
+    tools:context="com.culturer.yoo_home.function.family.family_picture.FamilyPictureActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

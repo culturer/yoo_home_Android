@@ -1,4 +1,4 @@
-package com.culturer.yoo_home.function.home.home_family.homecircle_list;
+package com.culturer.yoo_home.function.family.homecircle_list;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +22,12 @@ import com.culturer.yoo_home.bean.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomecircleAdapter extends   RecyclerView.Adapter<RecyclerView.ViewHolder>  {
+
+//太复杂
+//需要废弃掉
+//等旧代码移植成功后该代码就将废弃
+
+public class HomecircleAdaptera extends   RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
     private List<Article> articles  = new ArrayList<>();
     private List<Comment> comments = new ArrayList<>();
@@ -31,7 +36,7 @@ public class HomecircleAdapter extends   RecyclerView.Adapter<RecyclerView.ViewH
     private Context context;
     private LayoutInflater inflater;
 
-    HomecircleAdapter(List<Article> articles,List<Comment> comments ,List<Photo> photos ,List<User> familyUsers, Context context) {
+    HomecircleAdaptera(List<Article> articles, List<Comment> comments , List<Photo> photos , List<User> familyUsers, Context context) {
         this.articles = articles;
         this.comments = comments;
         this.photos = photos;

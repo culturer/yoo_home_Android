@@ -1,4 +1,4 @@
-package com.culturer.yoo_home.function.home.home_family.homecircle_list;
+package com.culturer.yoo_home.function.family.homecircle_list;
 
 import android.content.Context;
 import android.util.Log;

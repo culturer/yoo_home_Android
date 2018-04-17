@@ -1,13 +1,13 @@
-package com.culturer.yoo_home.function.home.home_family.homecircle_list;
+package com.culturer.yoo_home.function.family.homecircle_list;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
@@ -26,7 +26,7 @@ public class HomecircleListActivity extends AppCompatActivity {
 	private View contentView;
 	private TextView homecircle_ntf;
 	private ImageView homecircle_add;
-	private RecyclerView homecircle_list;
+	private ListView homecircle_list;
 	
 	private List<Article> articles = new ArrayList<>();
 	private List<Comment> comments = new ArrayList<>();
@@ -34,6 +34,7 @@ public class HomecircleListActivity extends AppCompatActivity {
 	private List<Photo> photos = new ArrayList<>();
 	
 	HomecircleAdapter adapter ;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,6 +52,9 @@ public class HomecircleListActivity extends AppCompatActivity {
 		comments = CacheData.comments;
 		familyUsers = CacheData.familyUsers;
 		photos = CacheData.photos;
+		for (int i=0 ;i<20 ;i++){
+			articles.add(new Article(0L,0L,"","dsf"));
+		}
 		adapter = new HomecircleAdapter(articles,comments,photos,familyUsers,this);
 	}
 	
@@ -64,14 +68,23 @@ public class HomecircleListActivity extends AppCompatActivity {
 		homecircle_ntf = findViewById(R.id.homecircle_ntf);
 		homecircle_add = findViewById(R.id.homecircle_add);
 		homecircle_list = findViewById(R.id.homecircle_list);
+		//消息通知栏
+		homecircle_ntf.setOnClickListener(view -> {
+			Intent intent = new Intent(HomecircleListActivity.this,HomecircleNtfActivity.class);
+			startActivity(intent);
+		});
+		//发布动态
+		homecircle_add.setOnClickListener(view -> {
+			Intent intent = new Intent(HomecircleListActivity.this,HomecircleAddActivity.class);
+			startActivity(intent);
+		});
 	}
 	
 	private void initListView(){
 		homecircle_list.setAdapter(adapter);
-		homecircle_list.setLayoutManager(new LinearLayoutManager(this));
 	}
 	
-	private void initNavigation(View contentView) {
+	private void initNavigation(View contentView)         {
 		LinearLayout topNavigation = contentView.findViewById(R.id.container);
 		HomeNavigation.Builder builder = new HomeNavigation.Builder(this, topNavigation);
 		builder.setCenterHomeTopic("Yoo+")
