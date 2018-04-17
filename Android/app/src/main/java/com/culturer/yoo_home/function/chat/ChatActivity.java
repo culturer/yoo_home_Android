@@ -101,7 +101,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
                             Log.i(TAG, "onDenied: "+deniedPermission + " 权限被拒绝");
                         }
                     }
-                
                     @Override
                     public void onGranted() {
                         Log.i(TAG, "onGranted: 所有权限都被同意");
@@ -114,6 +113,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
                         , Manifest.permission.READ_EXTERNAL_STORAGE
                         , Manifest.permission.READ_CALENDAR
                         , Manifest.permission.ACCESS_FINE_LOCATION);
+        
     }
     
     //初始化数据

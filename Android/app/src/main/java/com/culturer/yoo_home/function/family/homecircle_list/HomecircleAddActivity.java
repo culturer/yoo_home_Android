@@ -40,7 +40,6 @@ public class HomecircleAddActivity extends AppCompatActivity {
 	
 	}
 	
-	
 	//初始化导航条
 	private void initNavigation(View contentView) {
 		LinearLayout topNavigation = contentView.findViewById(R.id.container);
