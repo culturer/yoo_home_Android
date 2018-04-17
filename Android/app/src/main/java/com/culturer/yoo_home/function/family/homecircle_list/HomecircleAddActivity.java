@@ -1,4 +1,4 @@
-package com.culturer.yoo_home.function.home.home_family.homecircle_list;
+package com.culturer.yoo_home.function.family.homecircle_list;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,7 +46,7 @@ public class HomecircleAddActivity extends AppCompatActivity {
 		LinearLayout topNavigation = contentView.findViewById(R.id.container);
 		HomeNavigation.Builder builder = new HomeNavigation.Builder(this, topNavigation);
 		builder.setCenterHomeTopic("Yoo+")
-				.setCenterHomeTitle("添加动态")
+				.setCenterHomeTitle("心若向阳，无畏悲伤")
 				.create().
 				build();
 	}

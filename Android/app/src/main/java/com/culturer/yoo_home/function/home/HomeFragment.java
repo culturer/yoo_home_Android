@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.function.family.FamilyFragment;
 import com.culturer.yoo_home.function.home.friends.FriendsFragment;
 import com.culturer.yoo_home.function.home.home_main.HomeMainFragment;
-import com.culturer.yoo_home.function.home.home_family.FamilyFragment;
 import com.culturer.yoo_home.function.home.home_smart.SmartFragment;
 
 import java.util.ArrayList;

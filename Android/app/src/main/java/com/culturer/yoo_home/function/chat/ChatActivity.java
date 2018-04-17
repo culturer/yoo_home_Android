@@ -13,7 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 
-import android.widget.FrameLayout;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,14 +21,10 @@ import android.widget.Toast;
 
 import com.armour8.yooplus.yooplus.R;
 
-
 import com.culturer.yoo_home.cahce.CacheData;
-
 import com.culturer.yoo_home.service.MQTT.MQTTMsg;
-
 import com.culturer.yoo_home.util.AudioRecoder;
 import com.culturer.yoo_home.util.DirUtil;
-
 import com.culturer.yoo_home.util.TimeUtil;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
 import com.google.gson.Gson;
@@ -45,19 +41,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import io.github.rockerhieu.emojicon.EmojiconEditText;
-import io.github.rockerhieu.emojicon.EmojiconGridFragment;
-import io.github.rockerhieu.emojicon.EmojiconsFragment;
-import io.github.rockerhieu.emojicon.emoji.Emojicon;
 
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_DATA;
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_RECEIVER;
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_TYPE;
 
 
-public class ChatActivity extends AppCompatActivity implements IChatView,
-        EmojiconGridFragment.OnEmojiconClickedListener,
-        EmojiconsFragment.OnEmojiconBackspaceClickedListener   {
+public class ChatActivity extends AppCompatActivity implements IChatView{
 
     private static final String TAG = "ChatActivity";
     
@@ -72,10 +62,8 @@ public class ChatActivity extends AppCompatActivity implements IChatView,
 
     private View contentViwe;
     private RecyclerView chat_list;
-    private EmojiconEditText chat_edit;
+    private EditText chat_edit;
     
-    private FrameLayout emojicons;
-    private  EmojiconsFragment emojiconsFragment;
 
     private List<ChatMsg> chatMsgs = new LinkedList<>();
     private ChatAdapter chatAdapter;
@@ -94,7 +82,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView,
         initGrant();
         initData();
         initView();
-        setEmojiconFragment();
     }
     
     //初始化EventBus
@@ -133,7 +120,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView,
     private void initData(){
         initConvertData();
         initListData();
-        initEmoji();
     }
 
     //初始化UI组件
@@ -172,9 +158,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView,
         chatAdapter = new ChatAdapter(chatMsgs,this);
     }
 
-    private void initEmoji(){
-        emojiconsFragment =EmojiconsFragment.newInstance(true);
-    }
     
                                                                     //收发聊天数据//
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -220,7 +203,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView,
                 }
             }
         }
-        
     }
 
     //发送消息
@@ -242,26 +224,17 @@ public class ChatActivity extends AppCompatActivity implements IChatView,
         chat_list = findViewById(R.id.chat_list);
         chat_edit = findViewById(R.id.chat_edit);
         ImageButton chat_camera = findViewById(R.id.chat_camera);
-        ImageButton chat_emoji = findViewById(R.id.chat_emoji);
         ImageButton chat_tel = findViewById(R.id.chat_tel);
         ImageButton chat_audio = findViewById(R.id.chat_audio);
         TextView chat_send = findViewById(R.id.chat_send);
-        emojicons = findViewById(R.id.emojicons);
-    
-        chat_edit.setOnClickListener(view -> emojicons.setVisibility(View.GONE));
         
         //打开相机拍照
         chat_camera.setOnClickListener(view -> {
             initDialogChooseImage();
-            emojicons.setVisibility(View.GONE);
         });
-
-        //表情包
-        chat_emoji.setOnClickListener(view -> emojicons.setVisibility(View.VISIBLE));
 
         //语音/视频聊天，预留接口
         chat_tel.setOnClickListener(view -> {
-            emojicons.setVisibility(View.GONE);
         });
 
         //发送语音，预留接口，暂时屏蔽
@@ -272,7 +245,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView,
                     recordAudio();
                     //开始录音
                     audioRecoder.startRecord();
-                    emojicons.setVisibility(View.GONE);
                     break;
                 case MotionEvent.ACTION_UP:
                     //结束录音（保存录音文件）
@@ -289,7 +261,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView,
             //3.MQTT将打包的数据发送出去
             String strMsg  = chat_edit.getText().toString();
             if (!strMsg.equals("")){
-                emojicons.setVisibility(View.GONE);
                 sendMsg(strMsg);
                 toLast();
                 clearText();
@@ -369,30 +340,12 @@ public class ChatActivity extends AppCompatActivity implements IChatView,
             
             @Override
             public void onStop(String filePath) {
-
                Toast.makeText(ChatActivity.this, "录音保存在：" + filePath, Toast.LENGTH_SHORT).show();
 //               mTextView.setText(TimeUtils.long2String(0));
                 Log.i(TAG, "Audio --- onStop: filePath["+filePath+"]");
             }
         });
         
-    }
-    
-    private void setEmojiconFragment() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.emojicons, emojiconsFragment)
-                .commit();
-    }
-    
-    @Override
-    public void onEmojiconClicked(Emojicon emojicon) {
-        EmojiconsFragment.input(chat_edit, emojicon);
-    }
-    
-    @Override
-    public void onEmojiconBackspaceClicked(View v) {
-        EmojiconsFragment.backspace(chat_edit);
     }
     
     @Override

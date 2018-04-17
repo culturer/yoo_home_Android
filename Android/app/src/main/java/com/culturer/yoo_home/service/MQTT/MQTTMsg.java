@@ -12,8 +12,10 @@ import com.culturer.yoo_home.service.handler.base_handler.BaseHandleMsg;
         }
 }*/
 public class MQTTMsg extends BaseHandleMsg {
-    
+    //聊天消息
     public static final int CHAT_MSG = 0;
+    //单点登录消息
+    public static final int LOGIN_MSG = 1;
     
     //标志位，代表该消息是否是自己向服务器发出
     boolean isSend;

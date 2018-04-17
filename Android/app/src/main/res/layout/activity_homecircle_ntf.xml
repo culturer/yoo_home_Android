@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.culturer.yoo_home.function.home.home_family.homecircle_list.HomecircleNtfActivity">
+    tools:context="com.culturer.yoo_home.function.family.homecircle_list.HomecircleNtfActivity">
 
 </android.support.constraint.ConstraintLayout>

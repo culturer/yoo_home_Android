@@ -1,4 +1,4 @@
-package com.culturer.yoo_home.function.home.home_family.homecircle_list;
+package com.culturer.yoo_home.function.family.homecircle_list;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,7 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.armour8.yooplus.yooplus.R;
-import com.culturer.yoo_home.bean.Arrangement;
 import com.culturer.yoo_home.bean.Article;
 import com.culturer.yoo_home.bean.Comment;
 import com.culturer.yoo_home.bean.Photo;
