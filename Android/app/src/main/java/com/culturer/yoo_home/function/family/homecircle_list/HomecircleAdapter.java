@@ -23,7 +23,7 @@ import java.util.List;
 
 public class HomecircleAdapter extends BaseAdapter {
 
-    private static final String TAG = "HomecircleAdapter";
+    private static final String TAG = "MenuAdapter";
     
     private List<Article> articles  = new ArrayList<>();
     private List<Comment> comments = new ArrayList<>();

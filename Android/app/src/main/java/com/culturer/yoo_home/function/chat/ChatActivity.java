@@ -51,8 +51,11 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
 
     private static final String TAG = "ChatActivity";
     
-    ChatPresenter presenter;
+    public static final String CHAT_TYPE = "chat_type";
+    public static final boolean CHAT_TYPE_FAMILY = true;
+    public static final boolean CHAT_TYPE_USER = false;
     
+    ChatPresenter presenter;
     AudioRecoder audioRecoder;
     
     boolean chat_type;
@@ -64,7 +67,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
     private RecyclerView chat_list;
     private EditText chat_edit;
     
-
     private List<ChatMsg> chatMsgs = new LinkedList<>();
     private ChatAdapter chatAdapter;
 
@@ -101,7 +103,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
                             Log.i(TAG, "onDenied: "+deniedPermission + " 权限被拒绝");
                         }
                     }
-                
                     @Override
                     public void onGranted() {
                         Log.i(TAG, "onGranted: 所有权限都被同意");
@@ -114,6 +115,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
                         , Manifest.permission.READ_EXTERNAL_STORAGE
                         , Manifest.permission.READ_CALENDAR
                         , Manifest.permission.ACCESS_FINE_LOCATION);
+        
     }
     
     //初始化数据
@@ -213,7 +215,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
         chatAdapter.setDataAndupdate(chatMsgs);
     }
     
-
                                                                     //初始UI组件//
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

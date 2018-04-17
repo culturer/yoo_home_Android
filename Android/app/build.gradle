@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'org.greenrobot.greendao' // apply plugin
-
+apply plugin: 'io.objectbox'
 
 android {
     compileSdkVersion 26
@@ -67,8 +66,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:27.0.2'
     //添加Gson依赖
     compile 'com.google.code.gson:gson:2.8.2'
-    //添加greenDao依赖
-    compile 'org.greenrobot:greendao:3.2.2'
     // add library
     compile 'net.zetetic:android-database-sqlcipher:3.5.7'
     //添加Mqtt依赖
@@ -92,7 +89,6 @@ dependencies {
     compile 'com.yalantis:ucrop:2.2.0'
     //动画库
     compile 'com.nineoldandroids:library:2.4.0'
-
     implementation files('libs/SQLiteStudioRemote.jar')
     compile project(path: ':shimmer')
     compile project(path: ':rxvolley')

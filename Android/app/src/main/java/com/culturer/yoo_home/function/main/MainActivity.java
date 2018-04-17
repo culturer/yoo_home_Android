@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout topNavigation = contentView.findViewById(R.id.container);
         HomeNavigation.Builder builder = new HomeNavigation.Builder(this, topNavigation);
         builder.setCenterHomeTopic("Yoo+")
-                .setCenterHomeTitle("心若向阳,无畏悲伤")
+                .setCenterHomeTitle("心若向阳，无畏悲伤")
                 .create().
                 build();
     }

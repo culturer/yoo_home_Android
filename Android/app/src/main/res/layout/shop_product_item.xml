@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@null"
+    android:padding="10dp" >
+    <ImageView
+        android:id="@+id/product_picture"
+        android:src="@mipmap/ic_launcher"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/product_title"
+        android:padding="@dimen/padding"
+        android:text="商品一"
+        android:textSize="@dimen/textSize"
+        android:textColor="@color/text_grey"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
