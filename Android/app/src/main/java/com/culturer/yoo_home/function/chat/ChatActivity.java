@@ -51,8 +51,11 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
 
     private static final String TAG = "ChatActivity";
     
-    ChatPresenter presenter;
+    public static final String CHAT_TYPE = "chat_type";
+    public static final boolean CHAT_TYPE_FAMILY = true;
+    public static final boolean CHAT_TYPE_USER = false;
     
+    ChatPresenter presenter;
     AudioRecoder audioRecoder;
     
     boolean chat_type;
@@ -64,7 +67,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
     private RecyclerView chat_list;
     private EditText chat_edit;
     
-
     private List<ChatMsg> chatMsgs = new LinkedList<>();
     private ChatAdapter chatAdapter;
 
@@ -213,7 +215,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
         chatAdapter.setDataAndupdate(chatMsgs);
     }
     
-
                                                                     //初始UI组件//
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

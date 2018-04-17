@@ -17,10 +17,6 @@ import com.culturer.yoo_home.bean.User;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/12/5.
- */
-
 public class MenuAdapter extends BaseAdapter {
 
     private static final String TAG = "MenuAdapter";
@@ -56,7 +52,7 @@ public class MenuAdapter extends BaseAdapter {
         ViewHolder viewHolder;
 
         if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.homecircle_item, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.shop_menu_item, null);
             viewHolder = new ViewHolder();
             viewHolder.initViewHolder(convertView);
             convertView.setTag(viewHolder);
@@ -82,8 +78,7 @@ public class MenuAdapter extends BaseAdapter {
     //用来更新指定日程内容
     public void setItem(ViewHolder holder,String data){
         if (!data.equals("")){
-//            holder.home_arrangement_desc.setText(data.getDesc());
-//            holder.home_arrangement_time.setText(data.getCreateTime());
+            holder.tv_shop_menu.setText(data);
         }else {
             Log.i(TAG, "setItem: data is null !!!");
         }
@@ -91,13 +86,13 @@ public class MenuAdapter extends BaseAdapter {
 
     private class ViewHolder{
 
-        public TextView home_arrangement_desc;
+        public TextView tv_shop_menu;
 
 
         public ViewHolder() {}
 
         public void initViewHolder(View view){
-            home_arrangement_desc = (TextView) view.findViewById(R.id.home_arrangement_desc);
+            tv_shop_menu = (TextView) view.findViewById(R.id.tv_shop_menu);
         }
 
     }

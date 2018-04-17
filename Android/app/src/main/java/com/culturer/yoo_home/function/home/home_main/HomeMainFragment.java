@@ -44,11 +44,15 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.culturer.yoo_home.function.chat.ChatActivity.CHAT_TYPE;
+import static com.culturer.yoo_home.function.chat.ChatActivity.CHAT_TYPE_FAMILY;
+import static com.culturer.yoo_home.function.chat.ChatActivity.CHAT_TYPE_USER;
+
 
 public class HomeMainFragment extends Fragment implements IHomeMainView {
 
     private static final String TAG = "HomeMainFragment";
-
+    
     public HomeMainFragment() {
         // Required empty public constructor
     }
@@ -222,6 +226,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             mStrs.add("测试用户["+i+"]");
             listeners.add(v -> {
                 Intent intent = new Intent(getContext(),ChatActivity.class);
+                intent.putExtra("chat_type",CHAT_TYPE_USER);
                 startActivity(intent);
             });
         }
@@ -259,6 +264,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         homemain_circleview.setDatas(icons,mStrs,listeners);
         homemain_family.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(),ChatActivity.class);
+            intent.putExtra(CHAT_TYPE,CHAT_TYPE_FAMILY);
             startActivity(intent);
         });
     }

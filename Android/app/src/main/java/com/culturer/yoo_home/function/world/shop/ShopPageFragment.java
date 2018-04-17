@@ -1,14 +1,23 @@
 package com.culturer.yoo_home.function.world.shop;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.SimpleAdapter;
 
 import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.function.main.MainActivity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ShopPageFragment extends Fragment {
 
@@ -21,6 +30,10 @@ public class ShopPageFragment extends Fragment {
 	
 	private View contentView;
 	private GridView products;
+	
+	List<Map<String,Object>> dataList;
+	private SimpleAdapter adapter;
+	
 	
 	public ShopPageFragment() {
 		// Required empty public constructor
@@ -57,15 +70,50 @@ public class ShopPageFragment extends Fragment {
 	}
 	
 	private void initData(){
-	
+		initGridData();
 	}
 	
 	private void initView(){
 		initBaseView();
+		initGridView();
+	}
+	
+	private void initGridData(){
+		//图标
+		int icno[] = { R.mipmap.ic_launcher, R.mipmap.ic_launcher,  R.mipmap.ic_launcher,
+				R.mipmap.ic_launcher,  R.mipmap.ic_launcher,  R.mipmap.ic_launcher,  R.mipmap.ic_launcher,
+				R.mipmap.ic_launcher,  R.mipmap.ic_launcher, R.mipmap.ic_launcher,  R.mipmap.ic_launcher,  R.mipmap.ic_launcher
+				,  R.mipmap.ic_launcher ,  R.mipmap.ic_launcher ,  R.mipmap.ic_launcher ,  R.mipmap.ic_launcher };
+		//图标下的文字
+		String name[]={"时钟","信号","宝箱","秒钟","大象","FF","记事本","书签","印象","商店","主题","迅雷","嘻嘻","哈哈","一二三","四五六"};
+		dataList = new ArrayList<Map<String, Object>>();
+		for (int i = 0; i <icno.length; i++) {
+			Map<String, Object> map=new HashMap<String, Object>();
+			map.put("img", icno[i]);
+			map.put("text",name[i]);
+			dataList.add(map);
+		}
+		
+		
+		String[] from={"img","text"};
+		int[] to={R.id.product_picture,R.id.product_title};
+		adapter=new SimpleAdapter(getContext(), dataList, R.layout.shop_product_item, from, to);
+		
 	}
 	
 	private void initBaseView(){
 		products = contentView.findViewById(R.id.products);
 	}
-	
+	private void initGridView(){
+		products.setAdapter(adapter);
+		
+		products.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+			                        long arg3) {
+				AlertDialog.Builder builder= new AlertDialog.Builder(getContext());
+				builder.setTitle("提示").setMessage(dataList.get(arg2).get("text").toString()).create().show();
+			}
+		});
+	}
 }

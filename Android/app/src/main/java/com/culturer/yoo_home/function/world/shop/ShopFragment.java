@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.armour8.yooplus.yooplus.R;
-import com.culturer.yoo_home.function.mine.*;
 import com.culturer.yoo_home.widget.directionViewPager.DirectionalViewPager;
 
 import java.util.ArrayList;
@@ -57,8 +56,7 @@ public class ShopFragment extends Fragment {
 	}
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		contentView =  inflater.inflate(R.layout.fragment_shop, container, false);
 		init();
@@ -83,8 +81,8 @@ public class ShopFragment extends Fragment {
 	
 	private void initMenuData(){
 		menus = new ArrayList<>();
-		for (int i=0 ;i<5 ;i++){
-			menus.add("testMenu_"+i);
+		for (int i=0 ;i<10 ;i++){
+			menus.add("商品项["+i+"]");
 		}
 		menuAdapter = new MenuAdapter(menus,getContext());
 	}
@@ -104,6 +102,7 @@ public class ShopFragment extends Fragment {
 	
  	private void initMenuView(){
 	    shop_menu.setAdapter(menuAdapter);
+	    shop_menu.setDivider(null);
 	    shop_menu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 		    @Override
 		    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
