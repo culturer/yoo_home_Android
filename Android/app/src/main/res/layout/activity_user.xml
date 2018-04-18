@@ -41,7 +41,7 @@ tools:context="com.culturer.yoo_home.function.mine.UserActivity">
             android:layout_marginRight="5dp"
             android:background="@drawable/shape_circle_blue"
             android:padding="3dp"
-            android:src="@drawable/logo_black"/>
+            android:src="@drawable/ic_person_black_24dp"/>
 
     </LinearLayout>
 

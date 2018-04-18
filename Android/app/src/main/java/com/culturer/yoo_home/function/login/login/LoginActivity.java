@@ -251,6 +251,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     @Override
     public void loginSuccess() {
         startActivity(new Intent(LoginActivity.this,LoadActivity.class));
+        finish();
     }
 
     @Override

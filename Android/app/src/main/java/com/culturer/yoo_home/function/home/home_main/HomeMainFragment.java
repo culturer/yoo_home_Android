@@ -221,7 +221,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
             familyUsers.add(new User());
         }
         for (int i=0;i<familyUsers.size();i++){
-            icons.add(R.drawable.logo_black);
+            icons.add(R.drawable.ic_person_black_24dp);
 //            mStrs.add(familyUsers.get(i).getUsername());
             mStrs.add("测试用户["+i+"]");
             listeners.add(v -> {

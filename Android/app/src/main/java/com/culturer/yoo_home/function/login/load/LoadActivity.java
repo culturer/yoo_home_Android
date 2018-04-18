@@ -79,7 +79,7 @@ public class LoadActivity extends AppCompatActivity implements ILoadView {
         //页面跳转
         Intent intent = new Intent(LoadActivity.this, MainActivity.class);
         startActivity(intent);
-//        this.finish();
+        this.finish();
     }
 
     //初始化Service

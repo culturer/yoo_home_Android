@@ -247,10 +247,10 @@ public class UserActivity extends AppCompatActivity {
                 diskCacheStrategy(DiskCacheStrategy.RESOURCE).
                 apply(RequestOptions.bitmapTransform(new CircleCrop())).
                 thumbnail(0.5f).
-                placeholder(R.drawable.logo_black).
+                placeholder(R.drawable.ic_person_black_24dp).
                 priority(Priority.LOW).
-                error(R.drawable.logo_black).
-                fallback(R.drawable.logo_black).
+                error(R.drawable.ic_person_black_24dp).
+                fallback(R.drawable.ic_person_black_24dp).
                 into(imageView);
 
         return (new File(RxPhotoTool.getImageAbsolutePath(this, uri)));
