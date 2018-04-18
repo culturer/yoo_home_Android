@@ -4,8 +4,12 @@ import android.app.ActivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,10 +24,9 @@ import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
 
     private View contentView;
-
     private List<Fragment> fragments;
     BottomNavigationView navigation;
     private ViewPager fragment_container;
@@ -51,17 +54,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        contentView = getLayoutInflater().inflate(R.layout.activity_main,null);
-        setContentView(contentView);
+        setContentView(R.layout.activity_main);
+        init();
+    }
+
+    private void init(){
         initData();
         initView();
     }
-
+    
     private void initData(){
         initFragments();
         adapter = new MainPagerAdapter(getSupportFragmentManager(),fragments);
     }
     private void initView(){
+        contentView = findViewById(R.id.container);
         fragment_container = findViewById(R.id.fragment_container);
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -87,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         fragment_container.setAdapter(adapter);
         switchTab(2);
         initNavigation(contentView);
+        initDrawer();
     }
 
     private void initNavigation(View contentView) {
@@ -96,6 +104,14 @@ public class MainActivity extends AppCompatActivity {
                 .setCenterHomeTitle("心若向阳，无畏悲伤")
                 .create().
                 build();
+    }
+    
+    private void initDrawer(){
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
     private void initFragments(){
@@ -119,5 +135,41 @@ public class MainActivity extends AppCompatActivity {
             navigation.setSelectedItemId(R.id.navigation_notifications);
         }
     }
-
+    
+    
+    
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+    
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+        
+        } else if (id == R.id.nav_slideshow) {
+        
+        } else if (id == R.id.nav_manage) {
+        
+        } else if (id == R.id.nav_share) {
+        
+        } else if (id == R.id.nav_send) {
+        
+        }
+    
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+        
+    }
+    
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

@@ -10,12 +10,8 @@
         android:id="@+id/shop_menu"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="match_parent"/>
-
-    <View
-        android:layout_width="2px"
         android:layout_height="match_parent"
-        android:background="@color/text_grey"/>
+        android:scrollbars="none"/>
 
     <com.culturer.yoo_home.widget.directionViewPager.DirectionalViewPager
         android:id="@+id/shop_page"

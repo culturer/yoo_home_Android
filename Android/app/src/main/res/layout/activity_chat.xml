@@ -17,10 +17,15 @@
         <com.scwang.smartrefresh.layout.header.FalsifyHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/chat_list"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/chat_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
         <com.scwang.smartrefresh.layout.footer.FalsifyFooter
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

@@ -210,7 +210,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
     //发送消息
     private void sendMsg(String strMsg){
         ChatMsg chatMsg = presenter.sendTextMsg(strMsg);
-        CacheData.chatMsgs.add(chatMsg);
         chatMsgs.add(chatMsg);
         chatAdapter.setDataAndupdate(chatMsgs);
     }

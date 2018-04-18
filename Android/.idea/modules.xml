@@ -3,21 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Android.iml" filepath="$PROJECT_DIR$/Android.iml" />
-      <module fileurl="file://D:\yoo_home_Android\Android\Android.iml" filepath="D:\yoo_home_Android\Android\Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\yoo_home_Android\Android\app\app.iml" filepath="D:\yoo_home_Android\Android\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_permisshelper/lib_permisshelper.iml" filepath="$PROJECT_DIR$/lib_permisshelper/lib_permisshelper.iml" />
-      <module fileurl="file://D:\yoo_home_Android\Android\lib_permisshelper\lib_permisshelper.iml" filepath="D:\yoo_home_Android\Android\lib_permisshelper\lib_permisshelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/okhttp/okhttp.iml" filepath="$PROJECT_DIR$/okhttp/okhttp.iml" />
-      <module fileurl="file://D:\yoo_home_Android\Android\okhttp\okhttp.iml" filepath="D:\yoo_home_Android\Android\okhttp\okhttp.iml" />
       <module fileurl="file://$PROJECT_DIR$/okhttp3/okhttp3.iml" filepath="$PROJECT_DIR$/okhttp3/okhttp3.iml" />
-      <module fileurl="file://D:\yoo_home_Android\Android\okhttp3\okhttp3.iml" filepath="D:\yoo_home_Android\Android\okhttp3\okhttp3.iml" />
       <module fileurl="file://$PROJECT_DIR$/rxvolley/rxvolley.iml" filepath="$PROJECT_DIR$/rxvolley/rxvolley.iml" />
-      <module fileurl="file://D:\yoo_home_Android\Android\rxvolley\rxvolley.iml" filepath="D:\yoo_home_Android\Android\rxvolley\rxvolley.iml" />
       <module fileurl="file://$PROJECT_DIR$/shimmer/shimmer.iml" filepath="$PROJECT_DIR$/shimmer/shimmer.iml" />
-      <module fileurl="file://D:\yoo_home_Android\Android\shimmer\shimmer.iml" filepath="D:\yoo_home_Android\Android\shimmer\shimmer.iml" />
       <module fileurl="file://$PROJECT_DIR$/webrtc-client/webrtc-client.iml" filepath="$PROJECT_DIR$/webrtc-client/webrtc-client.iml" />
-      <module fileurl="file://D:\yoo_home_Android\Android\webrtc-client\webrtc-client.iml" filepath="D:\yoo_home_Android\Android\webrtc-client\webrtc-client.iml" />
     </modules>
   </component>
 </project>

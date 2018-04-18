@@ -41,4 +41,5 @@
     <string name="on7_image_url">https://rukminim1.flixcart.com/image/832/832/mobile/c/n/y/samsung-galaxy-on7-sm-g600f-original-imaecqkgfgtmaw2y.jpeg</string>
     <string name="on7_subtext">&#8377;1,200 Off</string>
     <string name="on7_summarytext">Now &#8377;8990</string>
+    <string name="title_activity_test_draw">TestDrawActivity</string>
 </resources>

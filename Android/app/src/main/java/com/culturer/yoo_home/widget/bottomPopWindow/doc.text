@@ -1,0 +1,32 @@
+doc
+
+使用方法:
+ private void showFeedBackItemPop() {
+        feedBackItemPop = new BottomPopupWindow2(this, feedback_types);
+        feedBackItemPop.
+                showAtLocation(findViewById(R.id.lay_feedback_root),
+                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        feedBackItemPop.setOnItemClickListner2(new BottomPopupWindow2.OnItemClickListener2() {
+            @Override
+            public void setOnItemClick2(View v, int position) {
+//                Toast.makeText(FeedBackActivity.this, "弹出类型反馈position:" + position, Toast.LENGTH_SHORT).show();
+                tv_feedback_type.setText(feedback_types[position]);
+                //根据posioion设置保存类型
+                switch (position) {
+                    case 0:
+                        selectfeedBackType = Constants.FeedBackType.NORMAL_FEEDBACK;
+                        break;
+                    case 1:
+                        selectfeedBackType = Constants.FeedBackType.ASKFORSUPPORT_FEEDBACK;
+                        break;
+                    case 2:
+                        selectfeedBackType = Constants.FeedBackType.END_FEEDBACK;
+                        break;
+                    case 3:
+//                        selectfeedBackType = Constants.FeedBackType.END_FEEDBACK;
+                        break;
+                }
+                feedBackItemPop.dismiss();
+            }
+        });
+    }

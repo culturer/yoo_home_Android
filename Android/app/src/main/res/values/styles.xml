@@ -21,6 +21,21 @@
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!--按钮水波纹效果-->
-    <style name="ButtonStyle" parent="ThemeOverlay.AppCompat"/>
+    <style name="ButtonStyle" parent="ThemeOverlay.AppCompat" />
+
+    <!--pop进出动画-->
+    <style name="pop_Anim">
+        <item name="android:windowEnterAnimation">@animator/in_anim</item>
+        <item name="android:windowExitAnimation">@animator/out_anim</item>
+    </style>
+
+    <style name="txt_pop_item_blue2black">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/size50dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@drawable/sel_text_blue2black</item>
+        <item name="android:textSize">@dimen/txtsize16sp</item>
+
+    </style>
 
 </resources>
