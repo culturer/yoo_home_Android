@@ -1,6 +1,8 @@
 package com.culturer.yoo_home.function.main;
 
 import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -20,6 +22,10 @@ import android.widget.Toast;
 import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.function.home.HomeFragment;
 import com.culturer.yoo_home.function.mine.MineFragment;
+import com.culturer.yoo_home.function.setting.FamilyManagerActivity;
+import com.culturer.yoo_home.function.setting.HomeManagerActivity;
+import com.culturer.yoo_home.function.setting.PrivacySettingActivity;
+import com.culturer.yoo_home.function.setting.SafeSettingActivity;
 import com.culturer.yoo_home.function.world.WorldFragment;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
 
@@ -109,11 +115,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     
     private void initDrawer(){
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     private void initFragments(){
@@ -144,22 +152,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-    
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-        
-        } else if (id == R.id.nav_slideshow) {
-        
-        } else if (id == R.id.nav_manage) {
-        
-        } else if (id == R.id.nav_share) {
-        
-        } else if (id == R.id.nav_send) {
-        
+        Intent intent = null;
+        if (id == R.id.home_manager) {
+           intent = new Intent(this, HomeManagerActivity.class);
+        } else if (id == R.id.family_manager) {
+            intent = new Intent(this, FamilyManagerActivity.class);
+        } else if (id == R.id.privacy_setting) {
+            intent = new Intent(this, PrivacySettingActivity.class);
+        } else if (id == R.id.safe_setting) {
+            intent = new Intent(this, SafeSettingActivity.class);
         }
+        if (intent!=null) startActivity(intent);
+        
+        
+        if (id == R.id.add_friend) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("添加朋友")
+//                    .setView()
+            .create().show();
+        } else if (id == R.id.add_group) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("群组")
+//                    .setView()
+                    .create().show();
+        }
+        
     
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
         

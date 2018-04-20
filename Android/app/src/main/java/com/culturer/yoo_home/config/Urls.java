@@ -32,6 +32,6 @@ public interface Urls {
     //附件上传接口
     String FILES_URL = HEADER + BASE_URL + "/files";
     //即时通信接口
-    String MQ_URL = "tcp://" + HOST +":"+MQTT_PORT;
+    String MQ_URL = "tcp://" + "120.78.153.27" +":"+MQTT_PORT;
 
 }

@@ -68,6 +68,7 @@ public class ChatAdapter extends   RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (holder instanceof ViewHolder1 ){
             ((ViewHolder1) holder).chat_item_desc.setText(items.get(position).getMsg());
             ((ViewHolder1) holder).chat_item_status.setText(ChatMsg.getRelStatus(items.get(position)));
+            ((ViewHolder1) holder).chat_item_time.setText(items.get(position).getCreateTime());
 //            ((ViewHolder1) holder).chat_item_status.setBackground(context.getDrawable(ChatMsg.getBackground(items.get(position))));
 //            ((ViewHolder1) holder).chat_item_icon.setImageResource(items.get(position).getUserIcon());
         }
@@ -90,7 +91,8 @@ public class ChatAdapter extends   RecyclerView.Adapter<RecyclerView.ViewHolder>
         ImageView chat_item_icon;
         TextView chat_item_desc;
         TextView chat_item_status;
-
+        TextView chat_item_time;
+        
         ViewHolder1(View itemView) {
             super(itemView);
             this.itemView = itemView;
@@ -101,6 +103,8 @@ public class ChatAdapter extends   RecyclerView.Adapter<RecyclerView.ViewHolder>
             chat_item_icon = itemView.findViewById(R.id.chat_item_icon);
             chat_item_desc = itemView.findViewById(R.id.chat_item_desc);
             chat_item_status = itemView.findViewById(R.id.chat_item_status);
+            chat_item_time = itemView.findViewById(R.id.chat_item_time);
+            
         }
 
     }

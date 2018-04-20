@@ -17,6 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.armour8.yooplus.yooplus.R;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
+import com.culturer.yoo_home.base.GlideApp;
 import com.culturer.yoo_home.bean.Activity;
 import com.culturer.yoo_home.bean.ActivityItem;
 import com.culturer.yoo_home.bean.Arrangement;
@@ -33,9 +38,11 @@ import com.culturer.yoo_home.function.home.home_activity.HomeActiviesActivity;
 import com.culturer.yoo_home.function.home.home_activity.HomeActivitiesDetailAdapter;
 import com.culturer.yoo_home.function.home.home_album.HomeAlbumActivity;
 import com.culturer.yoo_home.function.home.home_arrangement.HomeArrangementActivity;
+import com.culturer.yoo_home.function.mine.UserActivity;
 import com.culturer.yoo_home.util.StringUtil;
 import com.culturer.yoo_home.util.TimeUtil;
 import com.culturer.yoo_home.widget.circleMenu.CircleMenu;
+import com.vondear.rxtools.RxPhotoTool;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -240,6 +247,17 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         homemain_circleview = contentView.findViewById(R.id.homemain_circleview);
         //初始化转盘中间图标
         homemain_family = contentView.findViewById(R.id.homemain_family);
+        GlideApp.with(getActivity()).
+                load(RxPhotoTool.cropImageUri).
+                diskCacheStrategy(DiskCacheStrategy.RESOURCE).
+                apply(RequestOptions.bitmapTransform(new CircleCrop())).
+                thumbnail(0.5f).
+                placeholder(R.drawable.ic_supervisor_account_black_24dp).
+                priority(Priority.LOW).
+                error(R.drawable.ic_supervisor_account_black_24dp).
+                fallback(R.drawable.ic_supervisor_account_black_24dp).
+                into(homemain_family);
+                
         //初始化四角的标签
         homemain_notify = contentView.findViewById(R.id.homemain_notify);
         homemain_activity = contentView.findViewById(R.id.homemain_activity);

@@ -5,33 +5,33 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/home_manager"
+            android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_camera"
-            android:title="家庭管理" />
+            android:title="Import" />
         <item
-            android:id="@+id/family_manager"
+            android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="家族管理" />
+            android:title="Gallery" />
         <item
-            android:id="@+id/privacy_setting"
+            android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="隐私设置" />
+            android:title="Slideshow" />
         <item
-            android:id="@+id/safe_setting"
+            android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="安全设置" />
+            android:title="Tools" />
     </group>
 
-    <item android:title="交流">
+    <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/add_friend"
+                android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="添加好友" />
+                android:title="Share" />
             <item
-                android:id="@+id/add_group"
+                android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="添加群聊" />
+                android:title="Send" />
         </menu>
     </item>
 

@@ -15,13 +15,13 @@ import android.view.MenuItem;
 
 import com.armour8.yooplus.yooplus.R;
 
-public class TestDrawActivity extends AppCompatActivity
+public class TestNavActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_test_draw);
+		setContentView(R.layout.activity_test_nav);
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 		
@@ -57,7 +57,7 @@ public class TestDrawActivity extends AppCompatActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.test_draw, menu);
+		getMenuInflater().inflate(R.menu.test_nav, menu);
 		return true;
 	}
 	
@@ -82,6 +82,19 @@ public class TestDrawActivity extends AppCompatActivity
 		// Handle navigation view item clicks here.
 		int id = item.getItemId();
 		
+		if (id == R.id.nav_camera) {
+			// Handle the camera action
+		} else if (id == R.id.nav_gallery) {
+		
+		} else if (id == R.id.nav_slideshow) {
+		
+		} else if (id == R.id.nav_manage) {
+		
+		} else if (id == R.id.nav_share) {
+		
+		} else if (id == R.id.nav_send) {
+		
+		}
 		
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawer.closeDrawer(GravityCompat.START);

@@ -44,7 +44,7 @@ import java.util.List;
 
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_DATA;
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_RECEIVER;
-import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_TYPE;
+
 
 
 public class ChatActivity extends AppCompatActivity implements IChatView{
@@ -93,10 +93,8 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
 
     //授权
     private void initGrant(){
-       
-        PermissionsUtils   mPermissionsUtils = new PermissionsUtils();
-        mPermissionsUtils
-                .setPermissionsListener(new PermissionsListener() {
+        PermissionsUtils  mPermissionsUtils = new PermissionsUtils();
+        mPermissionsUtils.setPermissionsListener(new PermissionsListener() {
                     @Override
                     public void onDenied(String[] deniedPermissions) {
                         for (String deniedPermission : deniedPermissions) {
@@ -115,7 +113,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
                         , Manifest.permission.READ_EXTERNAL_STORAGE
                         , Manifest.permission.READ_CALENDAR
                         , Manifest.permission.ACCESS_FINE_LOCATION);
-        
     }
     
     //初始化数据
@@ -159,7 +156,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
         }
         chatAdapter = new ChatAdapter(chatMsgs,this);
     }
-
     
                                                                     //收发聊天数据//
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

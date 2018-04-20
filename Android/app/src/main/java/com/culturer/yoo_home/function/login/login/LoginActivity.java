@@ -33,6 +33,7 @@ import com.culturer.yoo_home.function.login.forget.ForgetActivity;
 import com.culturer.yoo_home.function.login.load.LoadActivity;
 import com.culturer.yoo_home.function.login.register.RegisterActivity;
 import com.culturer.yoo_home.util.MD5Util;
+import com.culturer.yoo_home.util.PreferenceUtil;
 import com.vondear.rxtools.RxAnimationTool;
 import com.vondear.rxtools.RxKeyboardTool;
 import com.vondear.rxtools.activity.AndroidBug5497Workaround;
@@ -63,7 +64,10 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     private int keyHeight = 0; //软件盘弹起后所占高度
     private float scale = 0.6f; //logo缩放比例
     private int height = 0;
-
+    
+    String tel;
+    String password;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +113,8 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         mScrollView = contentView.findViewById(R.id.scrollView);
         mService = contentView.findViewById(R.id.service);
         mRoot = contentView.findViewById(R.id.root);
+    
+        mEtMobile.setText(PreferenceUtil.getString("tel",""));
         
         mIvCleanPhone.setOnClickListener(v -> mEtMobile.setText(""));
         mCleanPassword.setOnClickListener(v -> mEtPassword.setText(""));
@@ -219,8 +225,8 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
         mBtnLogin.setOnClickListener(v -> {
             RxKeyboardTool.hideSoftInput(LoginActivity.this);
-            String tel = mEtMobile.getText().toString();
-            String password = MD5Util.encrypt(mEtPassword.getText().toString().trim());
+            tel = mEtMobile.getText().toString();
+            password = MD5Util.encrypt(mEtPassword.getText().toString().trim());
             presenter.login(tel,password);
         });
     }
@@ -250,6 +256,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
     @Override
     public void loginSuccess() {
+        PreferenceUtil.commitString("tel",tel);
         startActivity(new Intent(LoginActivity.this,LoadActivity.class));
         finish();
     }

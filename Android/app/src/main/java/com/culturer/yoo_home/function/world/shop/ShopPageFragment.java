@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.function.main.MainActivity;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import csy.menu.satellitemenulib.view.SatelliteMenu;
 
 public class ShopPageFragment extends Fragment {
 
@@ -30,6 +33,8 @@ public class ShopPageFragment extends Fragment {
 	
 	private View contentView;
 	private GridView products;
+	
+	private SatelliteMenu satelliteMenu;
 	
 	List<Map<String,Object>> dataList;
 	private SimpleAdapter adapter;
@@ -75,6 +80,7 @@ public class ShopPageFragment extends Fragment {
 	
 	private void initView(){
 		initBaseView();
+		initMenu();
 		initGridView();
 	}
 	
@@ -102,7 +108,30 @@ public class ShopPageFragment extends Fragment {
 	}
 	
 	private void initBaseView(){
+		satelliteMenu = contentView.findViewById(R.id.satelliteMenu);
 		products = contentView.findViewById(R.id.products);
+	}
+	private void initMenu(){
+		
+		List<Integer> menus = new ArrayList<>();
+		for (int i=0 ; i<5;i++){
+			menus.add(R.drawable.logo_black);
+		}
+		List<String> menuTitle = new ArrayList<>();
+		for (int i=0;i<menus.size();i++){
+			menuTitle.add("第["+i+"]个菜单");
+		}
+		
+		satelliteMenu.getmBuilder()
+				.setMenuImage(R.drawable.logo_black)
+				.setMenuItemImageResource(menus)
+				.setMenuItemNameTexts(menuTitle)
+				.setOnMenuItemClickListener(new SatelliteMenu.OnMenuItemClickListener() {
+					@Override
+					public void onClick(View view, int postion) {
+						Toast.makeText(getContext(),"菜单["+postion+"] 被点击了！",Toast.LENGTH_LONG).show();
+					}
+				}).creat();
 	}
 	private void initGridView(){
 		products.setAdapter(adapter);

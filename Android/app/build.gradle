@@ -89,6 +89,9 @@ dependencies {
     compile 'com.yalantis:ucrop:2.2.0'
     //动画库
     compile 'com.nineoldandroids:library:2.4.0'
+    //圆形菜单
+    compile 'csy.menu.satellitemenulib:SatelliteMenu:1.0.3'
+
     implementation files('libs/SQLiteStudioRemote.jar')
     compile project(path: ':shimmer')
     compile project(path: ':rxvolley')

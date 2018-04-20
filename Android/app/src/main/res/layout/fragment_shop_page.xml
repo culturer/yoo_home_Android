@@ -1,9 +1,23 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.culturer.yoo_home.function.world.shop.ShopPageFragment">
+    <TextView
+        android:text="ShopPageFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <csy.menu.satellitemenulib.view.SatelliteMenu
+        android:id="@+id/satelliteMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:menu_postion="left_bottom"
+        app:radius="150dp"
+        android:padding="10dp"
+        app:menu_image_width="50dp"
+        app:menu_item_image_width="35dp" />
+
     <GridView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -11,5 +25,5 @@
         android:stretchMode="spacingWidthUniform"
         android:numColumns="3"
         android:id="@+id/products" />
-</LinearLayout>
+</RelativeLayout>
 

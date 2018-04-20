@@ -87,9 +87,16 @@
         <activity
             android:name="com.culturer.yoo_home.test.TestDrawActivity"
             android:label="@string/title_activity_test_draw"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name="com.culturer.yoo_home.test.TestMenuActivity" />
+        <activity android:name="com.culturer.yoo_home.function.setting.HomeManagerActivity" />
+        <activity android:name="com.culturer.yoo_home.function.setting.FamilyManagerActivity" />
+        <activity android:name="com.culturer.yoo_home.function.setting.SafeSettingActivity" />
+        <activity android:name="com.culturer.yoo_home.function.setting.PrivacySettingActivity" />
+        <activity
+            android:name="com.culturer.yoo_home.test.TestNavActivity"
+            android:label="@string/title_activity_test_nav"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

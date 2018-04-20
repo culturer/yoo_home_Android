@@ -55,6 +55,7 @@ public class HomeFragment extends Fragment {
 
     //初始化ViewPager 滑动页面
     private void initPager(){
+        
         TabLayout home_tab = (TabLayout) findViewById(R.id.home_tab);
         ViewPager home_pager = (ViewPager) findViewById(R.id.home_pager);
         //MODE_SCROLLABLE可滑动的展示
@@ -67,6 +68,7 @@ public class HomeFragment extends Fragment {
         HomePagerAdapter pagerAdapter = new HomePagerAdapter(getActivity().getSupportFragmentManager(), fragmentList, pagerList);
         home_pager.setAdapter(pagerAdapter);
         home_tab.setupWithViewPager(home_pager);
+        
     }
 
     private void initData(){

@@ -82,10 +82,10 @@ public class OfficeFragment extends Fragment implements FragmentBackHandler {
 //        webPath = getIntent().getStringExtra("URL");
         webPath = RxConstants.URL_BAIDU_SEARCH;//加载的URL
         if (webPath.equals("")) {
+            //设置默认URL
             webPath = "http://demo.cssmoban.com/cssthemes3/ft5_48_glow/index.html";
         }
-        //测试
-        webPath = "http://demo.cssmoban.com/cssthemes3/ft5_48_glow/index.html";
+
     
         WebSettings webSettings = webBase.getSettings();
         if (Build.VERSION.SDK_INT >= 19) {
@@ -188,6 +188,7 @@ public class OfficeFragment extends Fragment implements FragmentBackHandler {
     }
     
     public void onConfigurationChanged(Configuration newConfig) {
+        
         try {
             super.onConfigurationChanged(newConfig);
             if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
