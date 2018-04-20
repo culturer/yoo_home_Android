@@ -1,6 +1,7 @@
 package com.culturer.yoo_home.function.chat;
 
 import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.util.TimeUtil;
 
 import java.util.List;
 import java.util.UUID;
@@ -52,6 +53,9 @@ public class ChatMsg {
 	private String msg;
 	//附件链接
 	private String url;
+	
+	private String createTime;
+	
 	//接收消息的用户Id
 	private List<Integer> users;
 	
@@ -75,6 +79,7 @@ public class ChatMsg {
 		this.msg = msg;
 		this.url = url;
 		this.users = users;
+		this.createTime = TimeUtil.getCurrentTime();
 	}
 	
 	//生成id
@@ -150,6 +155,14 @@ public class ChatMsg {
 	
 	public void setUsers(List<Integer> users) {
 		this.users = users;
+	}
+	
+	public String getCreateTime() {
+		return createTime;
+	}
+	
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
 	}
 	
 	static String getRelStatus(ChatMsg msg){

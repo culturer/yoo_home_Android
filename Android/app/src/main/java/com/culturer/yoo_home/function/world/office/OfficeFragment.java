@@ -82,8 +82,11 @@ public class OfficeFragment extends Fragment implements FragmentBackHandler {
 //        webPath = getIntent().getStringExtra("URL");
         webPath = RxConstants.URL_BAIDU_SEARCH;//加载的URL
         if (webPath.equals("")) {
-            webPath = "http://www.baidu.com";
+            //设置默认URL
+            webPath = "http://demo.cssmoban.com/cssthemes3/ft5_48_glow/index.html";
         }
+
+    
         WebSettings webSettings = webBase.getSettings();
         if (Build.VERSION.SDK_INT >= 19) {
             webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//加载缓存否则网络
@@ -185,6 +188,7 @@ public class OfficeFragment extends Fragment implements FragmentBackHandler {
     }
     
     public void onConfigurationChanged(Configuration newConfig) {
+        
         try {
             super.onConfigurationChanged(newConfig);
             if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -201,18 +205,9 @@ public class OfficeFragment extends Fragment implements FragmentBackHandler {
     public boolean onBackPressed() {
         if (webBase.canGoBack()) {
             webBase.goBack();
-        } else {
-            if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
-//                super.onBackPressed();
-                getActivity().finish();
-                return true;
-            } else {
-                Toast.makeText(getContext(), "再次点击返回键退出", Toast.LENGTH_SHORT).show();
-            }
-            mBackPressed = System.currentTimeMillis();
+            return true;
         }
         return false;
     }
-    
     
 }

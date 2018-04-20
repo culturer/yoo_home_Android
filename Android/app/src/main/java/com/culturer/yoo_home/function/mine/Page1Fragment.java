@@ -84,10 +84,10 @@ public class Page1Fragment extends Fragment {
                 apply(RequestOptions.bitmapTransform(new CircleCrop())).
 //                        bitmapTransform(new CropCircleTransformation(mContext)).
                 thumbnail(0.5f).
-                placeholder(R.drawable.logo_black).
+                placeholder(R.drawable.ic_person_black_24dp).
                 priority(Priority.LOW).
-                error(R.drawable.logo_black).
-                fallback(R.drawable.logo_black).
+                error(R.drawable.ic_person_black_24dp).
+                fallback(R.drawable.ic_person_black_24dp).
                 into(user_icon);
         //点击用户头像,切换到用户信息页面
         user_icon.setOnClickListener(new View.OnClickListener() {

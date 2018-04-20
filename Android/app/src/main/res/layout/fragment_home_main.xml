@@ -21,7 +21,9 @@
             app:layout_constraintRight_toRightOf="parent"/>
     <ImageView
         android:id="@+id/homemain_family"
-        android:src="@drawable/logo_black"
+        android:src="@drawable/ic_supervisor_account_black_24dp"
+        android:background="@drawable/shape_circle_blue"
+        android:padding="12dp"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintTop_toTopOf="@+id/homemain_circleview"

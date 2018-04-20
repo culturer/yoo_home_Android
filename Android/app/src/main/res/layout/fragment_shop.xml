@@ -1,25 +1,15 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:visibility="gone"
     tools:context="com.culturer.yoo_home.function.world.shop.ShopFragment">
-
-    <ListView
-        android:id="@+id/shop_menu"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"/>
-
-    <View
-        android:layout_width="2px"
-        android:layout_height="match_parent"
-        android:background="@color/text_grey"/>
 
     <com.culturer.yoo_home.widget.directionViewPager.DirectionalViewPager
         android:id="@+id/shop_page"
-        android:layout_width="0dp"
-        android:layout_weight="3"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 </LinearLayout>

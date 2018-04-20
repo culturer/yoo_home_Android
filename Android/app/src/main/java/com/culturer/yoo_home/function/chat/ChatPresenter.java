@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.culturer.yoo_home.base.mvpbase.BasePresenter;
 import com.culturer.yoo_home.cahce.BaseMsg;
+import com.culturer.yoo_home.cahce.CacheData;
 import com.culturer.yoo_home.service.MQTT.MQTTMsg;
 import com.google.gson.Gson;
 
@@ -27,6 +28,21 @@ public class ChatPresenter extends BasePresenter<IChatView,ChatRespository> {
         ChatMsg chatMsg = new ChatMsg(ChatMsg.Chat_Msg_Sending,ChatMsg.Chat_Msg_Text, BaseMsg.getUser().getId(), BaseMsg.getUser().getUsername(),BaseMsg.getUser().getIcon(),strMsg,"",null);
         String strChatMsg = new Gson().toJson(chatMsg,ChatMsg.class);
         EventBus.getDefault().post(new MQTTMsg(true,MQTTMsg.CHAT_MSG,strChatMsg));
+        CacheData.chatMsgs.add(chatMsg);
         return chatMsg;
     }
+    
+    ChatMsg sendImg(String url){
+        
+        return null;
+    }
+    
+    ChatMsg sendAudio(){
+        return null;
+    }
+    
+    void call(){
+    
+    }
+    
 }

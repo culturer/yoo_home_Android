@@ -19,7 +19,7 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/setting_top_background"
-                android:src="@drawable/logo_black"
+                android:src="@drawable/ic_person_black_24dp"
                 android:layout_width="match_parent"
                 android:layout_height="100dp" />
             <TextView

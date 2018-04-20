@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home_manager"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="家庭管理" />
+        <item
+            android:id="@+id/family_manager"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="家族管理" />
+        <item
+            android:id="@+id/privacy_setting"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="隐私设置" />
+        <item
+            android:id="@+id/safe_setting"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="安全设置" />
+    </group>
+
+    <item android:title="交流">
+        <menu>
+            <item
+                android:id="@+id/add_friend"
+                android:icon="@drawable/ic_menu_share"
+                android:title="添加好友" />
+            <item
+                android:id="@+id/add_group"
+                android:icon="@drawable/ic_menu_send"
+                android:title="添加群聊" />
+        </menu>
+    </item>
+
+</menu>

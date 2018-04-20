@@ -31,7 +31,7 @@
         <activity
             android:name="com.culturer.yoo_home.function.login.login.LoginActivity"
             android:resizeableActivity="true"
-            android:theme="@style/FullScreenTheme" >
+            android:theme="@style/FullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -74,18 +74,29 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name="com.culturer.yoo_home.function.mine.SettingActivity" />
-        <activity android:name="com.culturer.yoo_home.function.family.homecircle_list.HomecircleListActivity">
-
-        </activity>
+        <activity android:name="com.culturer.yoo_home.function.family.homecircle_list.HomecircleListActivity" />
         <activity android:name="com.culturer.yoo_home.test.TestTreeViewActivity" />
         <activity android:name="com.culturer.yoo_home.test.TestPerActivity" />
         <activity android:name="com.culturer.yoo_home.test.TestRTCActivity" />
         <activity android:name="com.culturer.yoo_home.function.family.family_picture.FamilyPictureActivity" />
         <activity android:name="com.culturer.yoo_home.function.rtc.RtcActivity" />
         <activity android:name="com.culturer.yoo_home.function.family.homecircle_list.HomecircleNtfActivity" />
-        <activity android:name="com.culturer.yoo_home.function.family.homecircle_list.HomecircleAddActivity">
-
-        </activity>
+        <activity android:name="com.culturer.yoo_home.function.family.homecircle_list.HomecircleAddActivity" />
+        <activity android:name="com.culturer.yoo_home.function.chat.Audio.TelAudioActivity" />
+        <activity android:name="com.culturer.yoo_home.function.chat.Video.TelVideoActivity" />
+        <activity
+            android:name="com.culturer.yoo_home.test.TestDrawActivity"
+            android:label="@string/title_activity_test_draw"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name="com.culturer.yoo_home.test.TestMenuActivity" />
+        <activity android:name="com.culturer.yoo_home.function.setting.HomeManagerActivity" />
+        <activity android:name="com.culturer.yoo_home.function.setting.FamilyManagerActivity" />
+        <activity android:name="com.culturer.yoo_home.function.setting.SafeSettingActivity" />
+        <activity android:name="com.culturer.yoo_home.function.setting.PrivacySettingActivity" />
+        <activity
+            android:name="com.culturer.yoo_home.test.TestNavActivity"
+            android:label="@string/title_activity_test_nav"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>
