@@ -8,9 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.function.world.office.OfficeFragment;
 
-import com.armour8.yooplus.yooplus.R;
 import com.culturer.yoo_home.function.world.recommend.RecommendFragment;
 import com.culturer.yoo_home.function.world.shop.ShopFragment;
 import com.culturer.yoo_home.function.world.shows.ShowsFragment;

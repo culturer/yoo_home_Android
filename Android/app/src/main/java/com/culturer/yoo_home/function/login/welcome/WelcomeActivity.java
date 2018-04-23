@@ -3,7 +3,8 @@ package com.culturer.yoo_home.function.login.welcome;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
+
 
 public class WelcomeActivity extends AppCompatActivity {
 

@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.bean.Arrangement;
 import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.cahce.CacheData;

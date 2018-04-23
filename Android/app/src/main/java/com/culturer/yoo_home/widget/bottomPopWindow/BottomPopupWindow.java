@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.util.DisplayUtil;
 
 /**

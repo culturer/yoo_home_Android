@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.function.world.shows.show.ShowActivity;
 
 

@@ -3,7 +3,7 @@ package com.culturer.yoo_home.test;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.widget.treeView.RightTreeLayoutManager;
 import com.culturer.yoo_home.widget.treeView.TreeView;
 import com.culturer.yoo_home.widget.treeView.model.NodeModel;

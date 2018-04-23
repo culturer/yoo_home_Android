@@ -3,7 +3,7 @@ package com.culturer.yoo_home.widget.navigation.base;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 
 
 public abstract class DefaultNavigation<P extends AbsNavigation.NavigationParams> extends AbsNavigation<P>{

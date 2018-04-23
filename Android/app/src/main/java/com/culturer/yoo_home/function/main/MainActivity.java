@@ -19,7 +19,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.function.home.HomeFragment;
 import com.culturer.yoo_home.function.mine.MineFragment;
 import com.culturer.yoo_home.function.setting.FamilyManagerActivity;
@@ -178,8 +178,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         
     
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
         return true;
         
     }

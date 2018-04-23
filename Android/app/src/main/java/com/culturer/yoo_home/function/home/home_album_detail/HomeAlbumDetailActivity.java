@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.bean.Photo;
 import com.culturer.yoo_home.cahce.CacheData;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;

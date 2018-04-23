@@ -22,7 +22,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 
 import java.util.ArrayList;
 import java.util.List;

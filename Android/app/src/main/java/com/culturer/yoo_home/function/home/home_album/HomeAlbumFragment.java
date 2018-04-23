@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.bean.Album;
 import com.culturer.yoo_home.cahce.CacheData;
 import com.culturer.yoo_home.config.Config;

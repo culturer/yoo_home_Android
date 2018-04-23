@@ -9,7 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.armour8.yooplus.yooplus.R;
+
+import com.culturer.yoo_home.R;
 
 import org.json.JSONException;
 import org.webrtc.MediaStream;

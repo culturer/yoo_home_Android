@@ -1,35 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.armour8.yooplus.yooplus">
+    package="com.culturer.yoo_home">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <!-- 允许程序打开网络套接字 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 允许程序设置内置sd卡的写权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- 允许程序获取网络状态 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <!-- 录音权限 -->
+
+    <!-- 权限声明 -->
+    <!-- 访问网络状态 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 控制呼吸灯，振动器等，用于新消息提醒 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 外置存储存取权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- 多媒体相关 -->
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- 如果需要实时音视频通话模块，下面的权限也是必须的。否则，可以不加 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <!-- SDK 权限申明, 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
+    <permission
+        android:name="com.culturer.yoo_home.permission.RECEIVE_MSG"
+        android:protectionLevel="signature" />
+    <!-- 接收 SDK 消息广播权限， 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
+    <uses-permission android:name="com.culturer.yoo_home.permission.RECEIVE_MSG" />
 
     <application
-        android:name="com.culturer.yoo_home.base.BaseApplication"
+        android:name=".base.BaseApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo_black"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        <!--
+        APP key, 可以在这里设置，也可以在 SDKOptions 中提供。
+        如果 SDKOptions 中提供了，取 SDKOptions 中的值。
+        -->
+        <!-- <meta-data -->
+        <!-- android:name="com.netease.nim.appKey" -->
+        <!-- android:value="1bb52e6d39346c535ca7194474a0f511" /> -->
+
+
+        <!-- &lt;!&ndash; 云信后台服务，请使用独立进程。 &ndash;&gt; -->
+        <!-- <service -->
+        <!-- android:name="com.netease.nimlib.service.NimService" -->
+        <!-- android:process=":core" /> -->
+
+
+        <!-- &lt;!&ndash; 云信后台辅助服务 &ndash;&gt; -->
+        <!-- <service -->
+        <!-- android:name="com.netease.nimlib.service.NimService$Aux" -->
+        <!-- android:process=":core" /> -->
+
+
+        <!-- &lt;!&ndash; 云信后台辅助服务 &ndash;&gt; -->
+        <!-- <service -->
+        <!-- android:name="com.netease.nimlib.job.NIMJobService" -->
+        <!-- android:exported="true" -->
+        <!-- android:permission="android.permission.BIND_JOB_SERVICE" -->
+        <!-- android:process=":core" /> -->
+
+
+        <!-- &lt;!&ndash; 云信监视系统启动和网络变化的广播接收器，保持和 NimService 同一进程 &ndash;&gt; -->
+        <!-- <receiver -->
+        <!-- android:name="com.netease.nimlib.service.NimReceiver" -->
+        <!-- android:exported="false" -->
+        <!-- android:process=":core"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.BOOT_COMPLETED" /> -->
+        <!-- <action android:name="android.net.conn.CONNECTIVITY_CHANGE" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+
+
+        <!-- &lt;!&ndash; 云信进程间通信 Receiver &ndash;&gt; -->
+        <!-- <receiver android:name="com.netease.nimlib.service.ResponseReceiver" /> -->
+
+
+        <!-- &lt;!&ndash; 云信进程间通信service &ndash;&gt; -->
+        <!-- <service android:name="com.netease.nimlib.service.ResponseService" /> -->
+
+
+        <!-- &lt;!&ndash; 云信进程间通信provider &ndash;&gt; -->
+        <!-- &lt;!&ndash; android:authorities="{包名}.ipc.provider", 请将com.netease.nim.demo替换为自己的包名 &ndash;&gt; -->
+        <!-- <provider -->
+        <!-- android:name="com.netease.nimlib.ipc.NIMContentProvider" -->
+        <!-- android:authorities="com.netease.nim.demo.ipc.provider" -->
+        <!-- android:exported="false" -->
+        <!-- android:process=":core" /> -->
+
         <activity
-            android:name="com.culturer.yoo_home.function.login.login.LoginActivity"
+            android:name=".function.login.login.LoginActivity"
             android:resizeableActivity="true"
             android:theme="@style/FullScreenTheme">
             <intent-filter>
@@ -38,65 +122,67 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.culturer.yoo_home.test.TestActivity" />
-        <activity android:name="com.culturer.yoo_home.function.login.guide.GuideActivity" />
-        <activity android:name="com.culturer.yoo_home.function.login.welcome.WelcomeActivity" />
+        <activity android:name=".test.TestActivity" />
+        <activity android:name=".function.login.guide.GuideActivity" />
+        <activity android:name=".function.login.welcome.WelcomeActivity" />
         <activity
-            android:name="com.culturer.yoo_home.function.main.MainActivity"
+            android:name=".function.main.MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.culturer.yoo_home.function.login.register.RegisterActivity"
+            android:name=".function.login.register.RegisterActivity"
             android:resizeableActivity="true"
             android:theme="@style/FullScreenTheme" />
-        <activity android:name="com.culturer.yoo_home.function.home.home_album.HomeAlbumActivity" />
-        <activity android:name="com.culturer.yoo_home.function.home.home_arrangement.HomeArrangementActivity" />
-        <activity android:name="com.culturer.yoo_home.function.home.home_activity.HomeActiviesActivity" />
-        <activity android:name="com.culturer.yoo_home.function.home.family_activity.FamilyActivityActivity" />
-        <activity android:name="com.culturer.yoo_home.function.home.home_activity.HomeActivitesAddActivity" />
-        <activity android:name="com.culturer.yoo_home.function.home.home_album_detail.HomeAlbumDetailActivity" />
-        <activity android:name="com.culturer.yoo_home.function.chat.ChatActivity" />
+        <activity android:name=".function.home.home_album.HomeAlbumActivity" />
+        <activity android:name=".function.home.home_arrangement.HomeArrangementActivity" />
+        <activity android:name=".function.home.home_activity.HomeActiviesActivity" />
+        <activity android:name=".function.home.family_activity.FamilyActivityActivity" />
+        <activity android:name=".function.home.home_activity.HomeActivitesAddActivity" />
+        <activity android:name=".function.home.home_album_detail.HomeAlbumDetailActivity" />
+        <activity android:name=".function.chat.ChatActivity" />
         <!-- Mqtt Service -->
         <service android:name="org.eclipse.paho.android.service.MqttService" />
-        <service android:name="com.culturer.yoo_home.service.MQTT.MQTTService" />
+        <service android:name=".service.MQTT.MQTTService" />
 
-        <activity android:name="com.culturer.yoo_home.function.login.forget.ForgetActivity" />
+        <activity android:name=".function.login.forget.ForgetActivity" />
         <activity
-            android:name="com.culturer.yoo_home.function.login.load.LoadActivity"
+            android:name=".function.login.load.LoadActivity"
             android:resizeableActivity="true"
             android:theme="@style/FullScreenTheme"
             tools:targetApi="n" />
-        <activity android:name="com.culturer.yoo_home.function.world.recommend.DetailActivity" />
-        <activity android:name="com.culturer.yoo_home.function.mine.MineActivity" />
-        <activity android:name="com.culturer.yoo_home.function.world.shows.show.ShowActivity" />
-        <activity android:name="com.culturer.yoo_home.function.mine.UserActivity" />
+        <activity android:name=".function.world.recommend.DetailActivity" />
+        <activity android:name=".function.mine.MineActivity" />
+        <activity android:name=".function.world.shows.show.ShowActivity" />
+        <activity android:name=".function.mine.UserActivity" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name="com.culturer.yoo_home.function.mine.SettingActivity" />
-        <activity android:name="com.culturer.yoo_home.function.family.homecircle_list.HomecircleListActivity" />
-        <activity android:name="com.culturer.yoo_home.test.TestTreeViewActivity" />
-        <activity android:name="com.culturer.yoo_home.test.TestPerActivity" />
-        <activity android:name="com.culturer.yoo_home.test.TestRTCActivity" />
-        <activity android:name="com.culturer.yoo_home.function.family.family_picture.FamilyPictureActivity" />
-        <activity android:name="com.culturer.yoo_home.function.rtc.RtcActivity" />
-        <activity android:name="com.culturer.yoo_home.function.family.homecircle_list.HomecircleNtfActivity" />
-        <activity android:name="com.culturer.yoo_home.function.family.homecircle_list.HomecircleAddActivity" />
-        <activity android:name="com.culturer.yoo_home.function.chat.Audio.TelAudioActivity" />
-        <activity android:name="com.culturer.yoo_home.function.chat.Video.TelVideoActivity" />
+        <activity android:name=".function.mine.SettingActivity" />
+        <activity android:name=".function.family.homecircle_list.HomecircleListActivity" />
+        <activity android:name=".test.TestTreeViewActivity" />
+        <activity android:name=".test.TestPerActivity" />
+        <activity android:name=".test.TestRTCActivity" />
+        <activity android:name=".function.family.family_picture.FamilyPictureActivity" />
+        <activity android:name=".function.rtc.RtcActivity" />
+        <activity android:name=".function.family.homecircle_list.HomecircleNtfActivity" />
+        <activity android:name=".function.family.homecircle_list.HomecircleAddActivity" />
+        <activity android:name=".function.chat.Audio.TelAudioActivity" />
+        <activity android:name=".function.chat.Video.TelVideoActivity" />
         <activity
-            android:name="com.culturer.yoo_home.test.TestDrawActivity"
+            android:name=".test.TestDrawActivity"
             android:label="@string/title_activity_test_draw"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name="com.culturer.yoo_home.test.TestMenuActivity" />
-        <activity android:name="com.culturer.yoo_home.function.setting.HomeManagerActivity" />
-        <activity android:name="com.culturer.yoo_home.function.setting.FamilyManagerActivity" />
-        <activity android:name="com.culturer.yoo_home.function.setting.SafeSettingActivity" />
-        <activity android:name="com.culturer.yoo_home.function.setting.PrivacySettingActivity" />
+        <activity android:name=".test.TestMenuActivity" />
+        <activity android:name=".function.setting.HomeManagerActivity" />
+        <activity android:name=".function.setting.FamilyManagerActivity" />
+        <activity android:name=".function.setting.SafeSettingActivity" />
+        <activity android:name=".function.setting.PrivacySettingActivity" />
         <activity
-            android:name="com.culturer.yoo_home.test.TestNavActivity"
+            android:name=".test.TestNavActivity"
             android:label="@string/title_activity_test_nav"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".test.TestChatActivity" />
+        <activity android:name=".function.setting.CreateHomeActivity"></activity>
     </application>
 
 </manifest>

@@ -19,7 +19,7 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.function.world.shows.show.pages.pageOne.FragmentBackHandler;
 import com.vondear.rxtools.RxConstants;
 

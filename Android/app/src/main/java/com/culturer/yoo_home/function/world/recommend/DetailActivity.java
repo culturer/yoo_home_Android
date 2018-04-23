@@ -7,7 +7,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
 
 public class DetailActivity extends AppCompatActivity {

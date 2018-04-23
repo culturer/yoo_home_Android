@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
 import com.culturer.yoo_home.widget.treeView.RightTreeLayoutManager;
 import com.culturer.yoo_home.widget.treeView.TreeView;

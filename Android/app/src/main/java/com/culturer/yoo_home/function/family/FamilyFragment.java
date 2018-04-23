@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.function.family.family_picture.FamilyPictureActivity;
 import com.culturer.yoo_home.function.family.homecircle_list.HomecircleListActivity;
 import com.culturer.yoo_home.widget.treeView.model.TreeModel;

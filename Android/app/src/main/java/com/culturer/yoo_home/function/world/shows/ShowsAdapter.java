@@ -6,7 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
+
 
 /**
  * Created by Administrator on 2018/3/7 0007.

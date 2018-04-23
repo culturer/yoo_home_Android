@@ -8,7 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
+
 
 public class TelAudioActivity extends AppCompatActivity {
 	

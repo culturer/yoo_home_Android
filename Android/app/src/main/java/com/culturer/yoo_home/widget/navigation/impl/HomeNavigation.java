@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.widget.navigation.base.AbsNavigation;
 import com.culturer.yoo_home.widget.navigation.base.DefaultNavigation;
 import com.culturer.yoo_home.widget.navigation.base.INavigation;
