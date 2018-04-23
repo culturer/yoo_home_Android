@@ -9,8 +9,24 @@ import com.culturer.yoo_home.config.ParamConfig;
 import com.kymjs.rxvolley.client.HttpCallback;
 
 
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import pl.com.salsoft.sqlitestudioremote.internal.AuthService;
 
 /**
  * Created by Administrator on 2017/11/16.
@@ -38,6 +54,7 @@ public class LoginPresenter extends BasePresenter<ILoginView,LoginRespository> {
      * @param password
      */
     public void login(final String tel , final String password){
+        
         view.logining();
         HttpCallback callback = new HttpCallback() {
             @Override
@@ -59,6 +76,8 @@ public class LoginPresenter extends BasePresenter<ILoginView,LoginRespository> {
             }
         };
         respository.login(tel,password,callback);
+//        doLogin(tel,password);
+        
     }
 
     /**
@@ -102,5 +121,77 @@ public class LoginPresenter extends BasePresenter<ILoginView,LoginRespository> {
         }
         view.loginSuccess();
     }
-
+    
+//    public void doLogin(String tel,String pwd) {
+//        LoginInfo info = new LoginInfo(tel,pwd); // config...
+//        RequestCallback<LoginInfo> callback =
+//                new RequestCallback<LoginInfo>() {
+//                    @Override
+//                    public void onSuccess(LoginInfo param) {
+//                        Log.i(TAG, "IM登录成功 onSuccess: "+param.toString());
+//                    }
+//
+//                    @Override
+//                    public void onFailed(int code) {
+//                        Log.i(TAG, "IM登录失败 onFailed: "+code);
+//                    }
+//
+//                    @Override
+//                    public void onException(Throwable exception) {
+//                        Log.i(TAG, "IM登录异常 onException: "+exception.getMessage());
+//                    }
+//                    // 可以在此保存LoginInfo到本地，下次启动APP做自动登录用
+//                };
+//        NIMClient.getService(AuthService.class).login(info)
+//                .setCallback(callback);
+//        //自动登录
+//        // 在初始化SDK的时候，传入 loginInfo()， 其中包含用户信息，用以自动登录
+////        NIMClient.init(this, loginInfo(), options());
+//    }
+    
+    
+    public void register(){
+        DefaultHttpClient httpClient = new DefaultHttpClient();
+        String url = "https://api.netease.im/nimserver/user/create.action";
+        HttpPost httpPost = new HttpPost(url);
+        
+        String appKey = "1bb52e6d39346c535ca7194474a0f511";
+        String appSecret = "123456789012";
+        String nonce =  "12345";
+        String curTime = String.valueOf((new Date()).getTime() / 1000L);
+//        String checkSum = CheckSumBuilder.getCheckSum(appSecret, nonce ,curTime);//参考 计算CheckSum的java代码
+        String checkSum = appSecret+nonce +curTime;//参考 计算CheckSum的java代码
+        
+        // 设置请求的header
+        httpPost.addHeader("AppKey", appKey);
+        httpPost.addHeader("Nonce", nonce);
+        httpPost.addHeader("CurTime", curTime);
+        httpPost.addHeader("CheckSum", checkSum);
+        httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+        
+        // 设置请求的参数
+        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+        nvps.add(new BasicNameValuePair("accid", "helloworld"));
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nvps, "utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        
+        // 执行请求
+        HttpResponse response = null;
+        try {
+            response = httpClient.execute(httpPost);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        // 打印执行结果
+        try {
+            System.out.println(EntityUtils.toString(response.getEntity(), "utf-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 }

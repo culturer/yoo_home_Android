@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.function.world.shows.show.pages.pageOne.BackHandlerHelper;
 import com.culturer.yoo_home.function.world.shows.show.pages.pageOne.PageOneFragment;
 import com.culturer.yoo_home.function.world.shows.show.pages.pageThree.PageThreeFragment;

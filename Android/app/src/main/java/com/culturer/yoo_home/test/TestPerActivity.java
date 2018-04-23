@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.samanlan.lib_permisshelper.PermissionsListener;
 import com.samanlan.lib_permisshelper.PermissionsUtils;
 

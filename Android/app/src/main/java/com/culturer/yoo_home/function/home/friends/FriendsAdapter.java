@@ -7,7 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import com.armour8.yooplus.yooplus.R;
+
+import com.culturer.yoo_home.R;
 
 import java.util.ArrayList;
 import java.util.List;

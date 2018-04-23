@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.widget.line.EaseCubicInterpolator;
 import com.culturer.yoo_home.widget.treeView.control.MoveAndScaleHandler;
 import com.culturer.yoo_home.widget.treeView.model.NodeModel;

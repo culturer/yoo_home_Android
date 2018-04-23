@@ -28,7 +28,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.function.login.forget.ForgetActivity;
 import com.culturer.yoo_home.function.login.load.LoadActivity;
 import com.culturer.yoo_home.function.login.register.RegisterActivity;

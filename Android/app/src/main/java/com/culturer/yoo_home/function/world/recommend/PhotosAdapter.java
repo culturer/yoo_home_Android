@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import com.armour8.yooplus.yooplus.R;
 import com.bumptech.glide.Glide;
+import com.culturer.yoo_home.R;
 
 import java.util.List;
 

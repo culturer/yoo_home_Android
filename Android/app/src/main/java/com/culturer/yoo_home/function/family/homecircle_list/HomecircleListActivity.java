@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.bean.Article;
 import com.culturer.yoo_home.bean.Comment;
 import com.culturer.yoo_home.bean.Photo;

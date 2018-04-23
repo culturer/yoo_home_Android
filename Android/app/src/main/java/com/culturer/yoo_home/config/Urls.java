@@ -3,7 +3,8 @@ package com.culturer.yoo_home.config;
 public interface Urls {
 
     String HEADER = "http://";
-    String HOST = "192.168.0.144";
+//    String HOST = "192.168.0.144";
+    String HOST = "192.168.10.237";
 
     String PORT = "8080";
     String MQTT_PORT = "1883";

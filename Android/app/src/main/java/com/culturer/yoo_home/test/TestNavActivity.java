@@ -13,7 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
+
 
 public class TestNavActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {

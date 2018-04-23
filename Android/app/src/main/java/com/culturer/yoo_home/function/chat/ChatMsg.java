@@ -1,6 +1,7 @@
 package com.culturer.yoo_home.function.chat;
 
-import com.armour8.yooplus.yooplus.R;
+
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.util.TimeUtil;
 
 import java.util.List;

@@ -7,5 +7,114 @@
     android:id="@+id/container"
     android:orientation="vertical"
     tools:context="com.culturer.yoo_home.function.setting.HomeManagerActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/grey"/>
+
+            <TextView
+                android:id="@+id/home_mdfy_name"
+                android:text="修改名称"
+                android:gravity="center_vertical"
+                android:layout_margin="@dimen/margin"
+                android:padding="10dp"
+                android:drawablePadding="10dp"
+                android:background="@drawable/btn_selected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_familyactivity_t"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/grey"/>
+
+            <TextView
+                android:id="@+id/home_add_person"
+                android:text="添加成员"
+                android:gravity="center_vertical"
+                android:layout_margin="@dimen/margin"
+                android:padding="10dp"
+                android:drawablePadding="10dp"
+                android:background="@drawable/btn_selected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_familyactivity_t"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/grey"/>
+
+            <TextView
+                android:id="@+id/home_remove_person"
+                android:text="移除成员"
+                android:gravity="center_vertical"
+                android:layout_margin="@dimen/margin"
+                android:padding="10dp"
+                android:drawablePadding="10dp"
+                android:background="@drawable/btn_selected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_familyactivity_t"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/grey"/>
+
+            <TextView
+                android:id="@+id/home_create"
+                android:text="成家立业"
+                android:gravity="center_vertical"
+                android:layout_margin="@dimen/margin"
+                android:padding="10dp"
+                android:drawablePadding="10dp"
+                android:background="@drawable/btn_selected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_familyactivity_t"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/grey"/>
+
+            <TextView
+                android:id="@+id/home_change"
+                android:text="更换家庭"
+                android:gravity="center_vertical"
+                android:layout_margin="@dimen/margin"
+                android:padding="10dp"
+                android:drawablePadding="10dp"
+                android:background="@drawable/btn_selected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_familyactivity_t"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/grey"/>
+
+            <TextView
+                android:id="@+id/home_grant"
+                android:text="权限管理"
+                android:gravity="center_vertical"
+                android:layout_margin="@dimen/margin"
+                android:padding="10dp"
+                android:drawablePadding="10dp"
+                android:background="@drawable/btn_selected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_familyactivity_t"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

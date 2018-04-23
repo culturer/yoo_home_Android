@@ -7,7 +7,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.armour8.yooplus.yooplus.R;
+import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.function.login.login.LoginActivity;
 import com.culturer.yoo_home.function.main.MainActivity;
 import com.culturer.yoo_home.service.MQTT.MQTTService;
