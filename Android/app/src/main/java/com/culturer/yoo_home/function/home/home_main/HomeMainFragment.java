@@ -51,6 +51,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_DATA;
 import static com.culturer.yoo_home.function.chat.ChatActivity.CHAT_TYPE;
 import static com.culturer.yoo_home.function.chat.ChatActivity.CHAT_TYPE_FAMILY;
 import static com.culturer.yoo_home.function.chat.ChatActivity.CHAT_TYPE_USER;
@@ -223,19 +224,22 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
 
     //初始化中间转盘的数据
     private void initCircleData(){
-//        familyUsers = CacheData.familyUsers;
-        for (int i=0 ;i<5;i++){
-            familyUsers.add(new User());
-        }
+        familyUsers = CacheData.familyUsers;
+
         for (int i=0;i<familyUsers.size();i++){
             icons.add(R.drawable.ic_person_black_24dp);
-//            mStrs.add(familyUsers.get(i).getUsername());
-            mStrs.add("测试用户["+i+"]");
+            mStrs.add(familyUsers.get(i).getUsername());
+    
+            int finalI = i;
             listeners.add(v -> {
                 Intent intent = new Intent(getContext(),ChatActivity.class);
-                intent.putExtra("chat_type",CHAT_TYPE_USER);
+                Bundle data = new Bundle();
+                data.putBoolean("chat_type",CHAT_TYPE_USER);
+                data.putString("username",familyUsers.get(finalI).getUsername());
+                intent.putExtra("data",data);
                 startActivity(intent);
             });
+            
         }
     }
 
@@ -282,7 +286,9 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
         homemain_circleview.setDatas(icons,mStrs,listeners);
         homemain_family.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(),ChatActivity.class);
-            intent.putExtra(CHAT_TYPE,CHAT_TYPE_FAMILY);
+            Bundle data = new Bundle();
+            data.putBoolean(CHAT_TYPE,CHAT_TYPE_FAMILY);
+            intent.putExtra(CHAT_DATA,data);
             startActivity(intent);
         });
     }

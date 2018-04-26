@@ -1,4 +1,4 @@
-package com.culturer.yoo_home.function.setting;
+package com.culturer.yoo_home.function.setting.create_home;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

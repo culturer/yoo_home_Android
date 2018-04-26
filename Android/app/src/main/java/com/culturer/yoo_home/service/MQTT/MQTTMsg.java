@@ -16,6 +16,8 @@ public class MQTTMsg extends BaseHandleMsg {
     public static final int CHAT_MSG = 0;
     //单点登录消息
     public static final int LOGIN_MSG = 1;
+    //家庭管理信息
+    public static final int HOME_MSG = 2;
     
     //标志位，代表该消息是否是自己向服务器发出
     boolean isSend;

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/container"
     android:orientation="vertical"
-    tools:context="com.culturer.yoo_home.function.setting.HomeManagerActivity">
+    tools:context="com.culturer.yoo_home.function.setting.home_manager.HomeManagerActivity">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
