@@ -173,16 +173,16 @@
             android:label="@string/title_activity_test_draw"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".test.TestMenuActivity" />
-        <activity android:name=".function.setting.HomeManagerActivity" />
-        <activity android:name=".function.setting.FamilyManagerActivity" />
-        <activity android:name=".function.setting.SafeSettingActivity" />
-        <activity android:name=".function.setting.PrivacySettingActivity" />
+        <activity android:name=".function.setting.home_manager.HomeManagerActivity" />
+        <activity android:name=".function.setting.family_manager.FamilyManagerActivity" />
+        <activity android:name=".function.setting.safe_setting.SafeSettingActivity" />
+        <activity android:name=".function.setting.privacy_setting.PrivacySettingActivity" />
         <activity
             android:name=".test.TestNavActivity"
             android:label="@string/title_activity_test_nav"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".test.TestChatActivity" />
-        <activity android:name=".function.setting.CreateHomeActivity"></activity>
+        <activity android:name=".function.setting.create_home.CreateHomeActivity"></activity>
     </application>
 
 </manifest>

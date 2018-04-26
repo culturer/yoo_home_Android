@@ -1,6 +1,5 @@
 package com.culturer.yoo_home.function.main;
 
-import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,10 +21,10 @@ import android.widget.Toast;
 import com.culturer.yoo_home.R;
 import com.culturer.yoo_home.function.home.HomeFragment;
 import com.culturer.yoo_home.function.mine.MineFragment;
-import com.culturer.yoo_home.function.setting.FamilyManagerActivity;
-import com.culturer.yoo_home.function.setting.HomeManagerActivity;
-import com.culturer.yoo_home.function.setting.PrivacySettingActivity;
-import com.culturer.yoo_home.function.setting.SafeSettingActivity;
+import com.culturer.yoo_home.function.setting.family_manager.FamilyManagerActivity;
+import com.culturer.yoo_home.function.setting.home_manager.HomeManagerActivity;
+import com.culturer.yoo_home.function.setting.privacy_setting.PrivacySettingActivity;
+import com.culturer.yoo_home.function.setting.safe_setting.SafeSettingActivity;
 import com.culturer.yoo_home.function.world.WorldFragment;
 import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
 

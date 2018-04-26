@@ -1,11 +1,9 @@
-package com.culturer.yoo_home.function.setting;
+package com.culturer.yoo_home.function.setting.home_manager;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -18,6 +16,8 @@ import com.culturer.yoo_home.widget.navigation.impl.HomeNavigation;
 public class HomeManagerActivity extends AppCompatActivity {
 	
 	private static final String TAG = "HomeManagerActivity" ;
+	
+	private HomeManagerHandler handler;
 	
 	private TextView home_mdfy_name;
 	private TextView home_add_person;
@@ -39,7 +39,7 @@ public class HomeManagerActivity extends AppCompatActivity {
 	}
 	
 	private void initData(){
-	
+		handler = new HomeManagerHandler();
 	}
 	
 	private void initView(){
@@ -83,7 +83,7 @@ public class HomeManagerActivity extends AppCompatActivity {
 						public void onClick(DialogInterface dialogInterface, int i) {
 							EditText home_name = contenView.findViewById(R.id.home_name);
 							String strName = home_name.getText().toString();
-							Log.i(TAG, "onClick: ");
+							handler.mdfyHomeName(strName);
 						}
 					});
 			builder.create().show();
@@ -92,13 +92,16 @@ public class HomeManagerActivity extends AppCompatActivity {
 	
 	private void addPerson(){
 		home_add_person.setOnClickListener(view -> {
+			View contenView = LayoutInflater.from(HomeManagerActivity.this).inflate(R.layout.home_manager_addperson,null);
 			AlertDialog.Builder  builder = new AlertDialog.Builder(HomeManagerActivity.this)
 					.setTitle("添加家庭成员")
-					.setView(R.layout.home_manager_addperson)
+					.setView(contenView)
 					.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialogInterface, int i) {
-						
+							EditText home_tel = contenView.findViewById(R.id.home_tel);
+							String tel = home_tel.getText().toString();
+							handler.addPerson(tel);
 						}
 					});
 			builder.create().show();
@@ -107,15 +110,18 @@ public class HomeManagerActivity extends AppCompatActivity {
 	
 	private void removePerson(){
 		home_remove_person.setOnClickListener(new View.OnClickListener() {
+			View contenView = LayoutInflater.from(HomeManagerActivity.this).inflate(R.layout.home_manager_removeperson,null);
 			@Override
 			public void onClick(View view) {
 				AlertDialog.Builder  builder = new AlertDialog.Builder(HomeManagerActivity.this)
 						.setTitle("移除家庭成员")
-						.setView(R.layout.home_manager_removeperson)
+						.setView(contenView)
 						.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialogInterface, int i) {
-							
+								EditText home_tel = contenView.findViewById(R.id.home_tel);
+								String tel = home_tel.getText().toString();
+								handler.removePerson(tel);
 							}
 						});
 				builder.create().show();
@@ -127,8 +133,7 @@ public class HomeManagerActivity extends AppCompatActivity {
 		home_create.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(HomeManagerActivity.this,CreateHomeActivity.class);
-				startActivity(intent);
+				handler.createHome(HomeManagerActivity.this);
 			}
 		});
 	}
@@ -137,13 +142,16 @@ public class HomeManagerActivity extends AppCompatActivity {
 		home_change.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				View contenView = LayoutInflater.from(HomeManagerActivity.this).inflate(R.layout.home_manager_change,null);
 				AlertDialog.Builder  builder = new AlertDialog.Builder(HomeManagerActivity.this)
-						.setTitle("移除家庭成员")
-						.setView(R.layout.home_manager_change)
+						.setTitle("加入新的家庭~")
+						.setView(contenView)
 						.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialogInterface, int i) {
-							
+								EditText home_id = contenView.findViewById(R.id.home_id);
+								String homeId = home_id.getText().toString();
+								handler.changeHome(homeId);
 							}
 						});
 				builder.create().show();

@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 
 import com.culturer.yoo_home.R;
+import com.culturer.yoo_home.cahce.BaseMsg;
 import com.culturer.yoo_home.cahce.CacheData;
 import com.culturer.yoo_home.service.MQTT.MQTTMsg;
 import com.culturer.yoo_home.util.AudioRecoder;
@@ -45,8 +46,6 @@ import java.util.List;
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_DATA;
 import static com.culturer.yoo_home.config.HomeMainConfig.CHAT_RECEIVER;
 
-
-
 public class ChatActivity extends AppCompatActivity implements IChatView{
 
     private static final String TAG = "ChatActivity";
@@ -54,6 +53,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
     public static final String CHAT_TYPE = "chat_type";
     public static final boolean CHAT_TYPE_FAMILY = true;
     public static final boolean CHAT_TYPE_USER = false;
+    public static final String CHAT_USER = "username";
     
     ChatPresenter presenter;
     AudioRecoder audioRecoder;
@@ -137,6 +137,9 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
         Bundle data = convertIntent.getBundleExtra(CHAT_DATA);
         if (data!=null && data.getString(CHAT_RECEIVER)!=null){
             chat_type = data.getBoolean(CHAT_TYPE);
+        }
+        if (chat_type == CHAT_TYPE_USER){
+            username = data.getString(CHAT_USER);
         }
     }
 
@@ -275,10 +278,14 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
     private void initNavigation(View contentView) {
         LinearLayout topNavigation = contentView.findViewById(R.id.container);
         HomeNavigation.Builder builder = new HomeNavigation.Builder(this, topNavigation);
-        builder.setCenterHomeTopic("Yoo+")
-                .setCenterHomeTitle("心若向阳，无畏悲伤")
-                .create().
-                build();
+        builder.setCenterHomeTopic("Yoo+");
+        if (chat_type == CHAT_TYPE_FAMILY){
+            builder.setCenterHomeTitle(BaseMsg.getFamily().getFamilyName());
+        }
+        if (chat_type == CHAT_TYPE_USER){
+            builder.setCenterHomeTitle(username);
+        }
+        builder.create().build();
     }
 
     @Override
@@ -301,7 +308,7 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
                 .multipleChoice()
                 .requestCode(300)
                 .camera(true)
-                .columnCount(4)
+                .columnCount(2)
                 .selectCount(1)
                 .checkedList(new ArrayList<AlbumFile>())
                 .filterSize(null)

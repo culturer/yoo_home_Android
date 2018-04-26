@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import pl.com.salsoft.sqlitestudioremote.internal.AuthService;
+
 
 /**
  * Created by Administrator on 2017/11/16.
@@ -122,33 +122,7 @@ public class LoginPresenter extends BasePresenter<ILoginView,LoginRespository> {
         view.loginSuccess();
     }
     
-//    public void doLogin(String tel,String pwd) {
-//        LoginInfo info = new LoginInfo(tel,pwd); // config...
-//        RequestCallback<LoginInfo> callback =
-//                new RequestCallback<LoginInfo>() {
-//                    @Override
-//                    public void onSuccess(LoginInfo param) {
-//                        Log.i(TAG, "IM登录成功 onSuccess: "+param.toString());
-//                    }
-//
-//                    @Override
-//                    public void onFailed(int code) {
-//                        Log.i(TAG, "IM登录失败 onFailed: "+code);
-//                    }
-//
-//                    @Override
-//                    public void onException(Throwable exception) {
-//                        Log.i(TAG, "IM登录异常 onException: "+exception.getMessage());
-//                    }
-//                    // 可以在此保存LoginInfo到本地，下次启动APP做自动登录用
-//                };
-//        NIMClient.getService(AuthService.class).login(info)
-//                .setCallback(callback);
-//        //自动登录
-//        // 在初始化SDK的时候，传入 loginInfo()， 其中包含用户信息，用以自动登录
-////        NIMClient.init(this, loginInfo(), options());
-//    }
-    
+
     
     public void register(){
         DefaultHttpClient httpClient = new DefaultHttpClient();

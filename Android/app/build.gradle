@@ -92,20 +92,6 @@ dependencies {
     //圆形菜单
     compile 'csy.menu.satellitemenulib:SatelliteMenu:1.0.3'
 
-    //IM
-    // 基础功能 (必需)
-//    compile 'com.netease.nimlib:basesdk:4.4.0'
-//    // 音视频和互动白板服务需要
-//    compile 'com.netease.nimlib:nrtc:4.4.0'
-//    // 音视频需要
-//    compile 'com.netease.nimlib:avchat:4.4.0'
-//    // 聊天室需要
-//    compile 'com.netease.nimlib:chatroom:4.4.0'
-//    // 互动白板服务需要
-//    compile 'com.netease.nimlib:rts:4.4.0'
-//    // 全文检索服务需要
-//    compile 'com.netease.nimlib:lucene:4.4.0'
-
     implementation files('libs/SQLiteStudioRemote.jar')
     compile project(path: ':shimmer')
     compile project(path: ':rxvolley')

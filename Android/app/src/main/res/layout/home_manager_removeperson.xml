@@ -11,7 +11,7 @@
         android:textSize="@dimen/content_textSize"
         android:hint="请输入移除成员的手机号"
         android:gravity="center_horizontal"
-        android:id="@+id/homemain_notify_title"
+        android:id="@+id/home_tel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

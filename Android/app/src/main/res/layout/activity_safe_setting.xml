@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/container"
-    tools:context="com.culturer.yoo_home.function.setting.SafeSettingActivity">
+    tools:context="com.culturer.yoo_home.function.setting.safe_setting.SafeSettingActivity">
 
 
 
