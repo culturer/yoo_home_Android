@@ -366,4 +366,5 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
                 this);
         return presenter;
     }
+    
 }

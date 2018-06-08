@@ -42,8 +42,8 @@ public class MQTTService extends Service implements IMQTTService {
     private String host = MQ_URL;
     private String userName = BaseMsg.getUser().getUsername();
     private String passWord = BaseMsg.getUser().getUsername();
-//    private String myTopic = "yoo_home/family"+BaseMsg.getFamily().getId();
-    private String myTopic = "test";
+    private String myTopic = "yoo_home/family/"+BaseMsg.getFamily().getId();
+//    private String myTopic = "test";
     private String clientId = "yoo_home_" + BaseMsg.getUser().getId();
 
     @Override

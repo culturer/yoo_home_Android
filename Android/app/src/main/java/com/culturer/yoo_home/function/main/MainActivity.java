@@ -1,6 +1,7 @@
 package com.culturer.yoo_home.function.main;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
         fragment_container.setAdapter(adapter);
-        switchTab(2);
+        switchTab(0);
         initNavigation(contentView);
         initDrawer();
     }
@@ -166,13 +168,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         
         if (id == R.id.add_friend) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            View add_friend  = LayoutInflater.from(MainActivity.this).inflate(R.layout.add_friend,null);
             builder.setTitle("添加朋友")
-//                    .setView()
+                    .setView(add_friend)
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+        
+                        }
+                    })
             .create().show();
         } else if (id == R.id.add_group) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("群组")
-//                    .setView()
+            View add_group  = LayoutInflater.from(MainActivity.this).inflate(R.layout.add_group,null);
+            builder.setTitle("加入群聊")
+                    .setView(add_group)
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+        
+                        }
+                    })
                     .create().show();
         }
         
