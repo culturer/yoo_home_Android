@@ -3,10 +3,12 @@ package com.culturer.yoo_home.config;
 public interface Urls {
 
     String HEADER = "http://";
-    String HOST = "192.168.3.28";
+//    String HOST = "192.168.0.101";
+    String HOST = "47.106.149.101";
 //    String HOST = "192.168.10.237";
+    String MQHOST = "120.78.153.27";
 
-    String PORT = "8080";
+    String PORT = "80";
     String MQTT_PORT = "1883";
     String BASE_URL = HOST+":"+PORT;
 
@@ -33,6 +35,6 @@ public interface Urls {
     //附件上传接口
     String FILES_URL = HEADER + BASE_URL + "/files";
     //即时通信接口
-    String MQ_URL = "tcp://" + "120.78.153.27" +":"+MQTT_PORT;
+    String MQ_URL = "tcp://" + MQHOST +":"+MQTT_PORT;
 
 }

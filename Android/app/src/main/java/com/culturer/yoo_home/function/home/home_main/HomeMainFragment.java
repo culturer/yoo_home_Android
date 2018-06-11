@@ -166,6 +166,22 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
                 homemain_activity.setText(desc);
             }
         }
+        //初始化home_activity弹窗内部内容
+        if (CacheData.homeActivityItems!=null && CacheData.homeActivityItems.size()>0 ){
+            activityItems = new ArrayList<>();
+            for (int i=0 ;i<CacheData.homeActivityItems.size();i++){
+                ActivityItem activityItem = CacheData.homeActivityItems.get(i);
+                if (activityItem!=null && activityItem.getActivityId() == homeActivity.getId()){
+                    activityItems.add(activityItem);
+                }
+                activityItems.sort((o1, o2) -> {
+                    if (o1.getNum()<=o2.getNum()){
+                        return 1;
+                    }
+                    return 0;
+                });
+            }
+        }
     }
 
     //初始化数据
@@ -200,6 +216,7 @@ public class HomeMainFragment extends Fragment implements IHomeMainView {
 
         //初始化home_activity弹窗内部内容
         if (CacheData.homeActivityItems!=null && CacheData.homeActivityItems.size()>0 ){
+            activityItems = new ArrayList<>();
             for (int i=0 ;i<CacheData.homeActivityItems.size();i++){
                 ActivityItem activityItem = CacheData.homeActivityItems.get(i);
                 if (activityItem!=null && activityItem.getActivityId() == homeActivity.getId()){

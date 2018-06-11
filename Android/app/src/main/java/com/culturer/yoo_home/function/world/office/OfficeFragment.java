@@ -80,11 +80,12 @@ public class OfficeFragment extends Fragment implements FragmentBackHandler {
     private void initData(){
         pbWebBase.setMax(100);//设置加载进度最大值
 //        webPath = getIntent().getStringExtra("URL");
-        webPath = RxConstants.URL_BAIDU_SEARCH;//加载的URL
+//        webPath = RxConstants.URL_BAIDU_SEARCH;//加载的URL
         if (webPath.equals("")) {
             //设置默认URL
             webPath = "http://demo.cssmoban.com/cssthemes3/ft5_48_glow/index.html";
         }
+        webPath = "https://www.toutiao.com/news_history/";
 
     
         WebSettings webSettings = webBase.getSettings();
