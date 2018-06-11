@@ -108,22 +108,6 @@ public class SettingActivity extends AppCompatActivity {
 		setting_email = contentView.findViewById(R.id.setting_email);
 		//邮箱显示
 		setting_tv_email = contentView.findViewById(R.id.setting_tv_email);
-		//家庭管理
-		setting_manage_home = contentView.findViewById(R.id.setting_manage_home);
-		//家族管理
-		setting_manage_family = contentView.findViewById(R.id.setting_manage_family);
-		//更换伴侣
-		setting_manage_mate = contentView.findViewById(R.id.setting_manage_mate);
-		//隐私设置
-		setting_manage_self = contentView.findViewById(R.id.setting_manage_self);
-		//安全设置
-		setting_manage_safe = contentView.findViewById(R.id.setting_manage_safe);
-		//修改密码
-		setting_manage_password = contentView.findViewById(R.id.setting_manage_password);
-		//修改电话
-		setting_manage_tel = contentView.findViewById(R.id.setting_manage_tel);
-		//修改邮箱
-		setting_manage_email = contentView.findViewById(R.id.setting_manage_email);
 	}
 	
 }

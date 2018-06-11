@@ -1,4 +1,4 @@
-                package com.culturer.yoo_home.function.world.recommend;
+package com.culturer.yoo_home.function.world.recommend;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

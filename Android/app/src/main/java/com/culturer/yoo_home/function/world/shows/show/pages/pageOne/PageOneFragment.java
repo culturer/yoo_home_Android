@@ -206,6 +206,7 @@ public class PageOneFragment extends Fragment implements FragmentBackHandler {
         }
     }
     
+    
     @Override
     public boolean onBackPressed() {
         if (webBase.canGoBack()) {
@@ -220,7 +221,7 @@ public class PageOneFragment extends Fragment implements FragmentBackHandler {
             }
             mBackPressed = System.currentTimeMillis();
         }
-        return false;
+        return true;
     }
     
 }

@@ -29,5 +29,4 @@ public class CreateHomeActivity extends AppCompatActivity {
 				build();
 	}
 	
-	
 }

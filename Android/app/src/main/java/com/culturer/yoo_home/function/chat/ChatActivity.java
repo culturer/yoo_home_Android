@@ -81,7 +81,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
 
     private void init(){
         initEventBus();
-        initGrant();
         initData();
         initView();
     }
@@ -89,30 +88,6 @@ public class ChatActivity extends AppCompatActivity implements IChatView{
     //初始化EventBus
     private void initEventBus(){
         EventBus.getDefault().register(this);
-    }
-
-    //授权
-    private void initGrant(){
-        PermissionsUtils  mPermissionsUtils = new PermissionsUtils();
-        mPermissionsUtils.setPermissionsListener(new PermissionsListener() {
-                    @Override
-                    public void onDenied(String[] deniedPermissions) {
-                        for (String deniedPermission : deniedPermissions) {
-                            Log.i(TAG, "onDenied: "+deniedPermission + " 权限被拒绝");
-                        }
-                    }
-                    @Override
-                    public void onGranted() {
-                        Log.i(TAG, "onGranted: 所有权限都被同意");
-                    }
-                })
-                .withActivity(this)
-                .getPermissions(ChatActivity.this
-                        , 100
-                        , Manifest.permission.RECORD_AUDIO
-                        , Manifest.permission.READ_EXTERNAL_STORAGE
-                        , Manifest.permission.READ_CALENDAR
-                        , Manifest.permission.ACCESS_FINE_LOCATION);
     }
     
     //初始化数据

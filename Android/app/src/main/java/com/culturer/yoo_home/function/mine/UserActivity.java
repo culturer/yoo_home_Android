@@ -151,7 +151,7 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View view) {
                 RxDialogScaleView rxDialogScaleView = new RxDialogScaleView(context);
-                rxDialogScaleView.setImageUri(resultUri);
+                rxDialogScaleView.setImage(resultUri);
                 rxDialogScaleView.show();
                 return false;
             }

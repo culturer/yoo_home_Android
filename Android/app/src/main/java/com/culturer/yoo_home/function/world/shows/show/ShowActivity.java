@@ -127,11 +127,5 @@ public class ShowActivity extends AppCompatActivity {
         fragment_container.setAdapter(adapter);
         switchTab(0);
     }
-    @Override
-    public void onBackPressed() {
-        if (!BackHandlerHelper.handleBackPress(this)) {
-            super.onBackPressed();
-        }
-    }
     
 }

@@ -55,63 +55,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-        <!--
-        APP key, 可以在这里设置，也可以在 SDKOptions 中提供。
-        如果 SDKOptions 中提供了，取 SDKOptions 中的值。
-        -->
-        <!-- <meta-data -->
-        <!-- android:name="com.netease.nim.appKey" -->
-        <!-- android:value="1bb52e6d39346c535ca7194474a0f511" /> -->
-
-
-        <!-- &lt;!&ndash; 云信后台服务，请使用独立进程。 &ndash;&gt; -->
-        <!-- <service -->
-        <!-- android:name="com.netease.nimlib.service.NimService" -->
-        <!-- android:process=":core" /> -->
-
-
-        <!-- &lt;!&ndash; 云信后台辅助服务 &ndash;&gt; -->
-        <!-- <service -->
-        <!-- android:name="com.netease.nimlib.service.NimService$Aux" -->
-        <!-- android:process=":core" /> -->
-
-
-        <!-- &lt;!&ndash; 云信后台辅助服务 &ndash;&gt; -->
-        <!-- <service -->
-        <!-- android:name="com.netease.nimlib.job.NIMJobService" -->
-        <!-- android:exported="true" -->
-        <!-- android:permission="android.permission.BIND_JOB_SERVICE" -->
-        <!-- android:process=":core" /> -->
-
-
-        <!-- &lt;!&ndash; 云信监视系统启动和网络变化的广播接收器，保持和 NimService 同一进程 &ndash;&gt; -->
-        <!-- <receiver -->
-        <!-- android:name="com.netease.nimlib.service.NimReceiver" -->
-        <!-- android:exported="false" -->
-        <!-- android:process=":core"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.BOOT_COMPLETED" /> -->
-        <!-- <action android:name="android.net.conn.CONNECTIVITY_CHANGE" /> -->
-        <!-- </intent-filter> -->
-        <!-- </receiver> -->
-
-
-        <!-- &lt;!&ndash; 云信进程间通信 Receiver &ndash;&gt; -->
-        <!-- <receiver android:name="com.netease.nimlib.service.ResponseReceiver" /> -->
-
-
-        <!-- &lt;!&ndash; 云信进程间通信service &ndash;&gt; -->
-        <!-- <service android:name="com.netease.nimlib.service.ResponseService" /> -->
-
-
-        <!-- &lt;!&ndash; 云信进程间通信provider &ndash;&gt; -->
-        <!-- &lt;!&ndash; android:authorities="{包名}.ipc.provider", 请将com.netease.nim.demo替换为自己的包名 &ndash;&gt; -->
-        <!-- <provider -->
-        <!-- android:name="com.netease.nimlib.ipc.NIMContentProvider" -->
-        <!-- android:authorities="com.netease.nim.demo.ipc.provider" -->
-        <!-- android:exported="false" -->
-        <!-- android:process=":core" /> -->
-
         <activity
             android:name=".function.login.login.LoginActivity"
             android:resizeableActivity="true"
@@ -182,7 +125,9 @@
             android:label="@string/title_activity_test_nav"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".test.TestChatActivity" />
-        <activity android:name=".function.setting.create_home.CreateHomeActivity"></activity>
+        <activity android:name=".function.setting.create_home.CreateHomeActivity">
+
+        </activity>
     </application>
 
 </manifest>
